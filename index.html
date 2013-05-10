@@ -9,7 +9,7 @@
 
 <body>
 
-  <div class="container" onselectstart="return false;">
+  <div class="container">
     <img id="logo" src="assets/img/bama_logo.png" />
     <div id="parallax">
       <div class="panel">    
@@ -32,7 +32,7 @@
     </div>
   </div> 
 
-  <div class="container" onselectstart="return false;">
+  <div class="container">
     <div id="layer1">
       <div class="panel">
         <div id="level1"></div>
@@ -42,45 +42,40 @@
     </div>
   </div>
 
-  <div class="container" onselectstart="return false;">
+  <div class="container">
     <div id="layer2"> <!-- bg_sky.png layer -->
       <div class="panel"></div>
     </div>
   </div>
 
-  <div class="container" onselectstart="return false;">
+  <div class="container">
     <div id="layer3"> <!-- bg_landscape.png layer -->
       <div class="panel"></div>
     </div>
   </div>
 
-  <div class="container" onselectstart="return false;">
+  <div class="container">
     <div id="layer4"> <!-- fg_landscape.png layer -->
       <div class="panel"></div>
     </div>
   </div>
 
 
-  <div class="container" onselectstart="return false;">
+  <div class="container">
     <div id="layer5"> <!-- fg_road.png layer -->
       <div class="panel"></div>
     </div>
   </div>
-
-  <div class="container interactive" onclick="console.log('clicked player layer!');">
-    <div id="layer_player"> <!-- player layer -->
-      <div class="panel"></div>
-      <div class="panel"> 
-        <div class="content interactive">
-          <video id="video1" width="320" height="180" no-controls poster="assets/img/video1_poster.png">
-            <source src="assets/video/video1.mp4" type="video/mp4">
-            <source src="assets/video/video1.webm" type="video/webm">
-            Your browser does not support the video tag. 
-            You're using Internet Explorer, aren't you?
-          </video>
-        </div>
+  <div class="container">
+    <div id="layer_player">
+      <div id="video1_container">
+        <video id="video1" class="video" width="320" height="180" controls poster="assets/img/video1_poster.png">
+          <source src="assets/video/video1.webm" type="video/webm">
+          <source src="assets/video/video1.mp4" type="video/mp4">
+          Your browser does not support the video tag. 
+          You're using Internet Explorer, probably.
+        </video>
       </div>
-
     </div>
   </div>
 

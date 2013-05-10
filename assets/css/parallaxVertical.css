@@ -41,7 +41,17 @@ p {
   overflow          : hidden;
 }
 
-.container.interactive {
+.box {
+  position          : absolute;
+  margin            : 0px auto 0px auto; 
+  padding           : 0px;
+  top               : 0px;
+  overflow          : hidden;
+  display           : inline; 
+}
+
+
+.box.interactive {
   cursor               : pointer;
 }
 
@@ -52,7 +62,7 @@ p {
 	color                : black;
   height               : 500px;
 	background-color     : transparent;
-	cursor               : move;
+	cursor               : wait;
   z-index              : 99;
 }
 
@@ -128,7 +138,7 @@ p {
 
 }
 
-#player {
+#layer_player {
   -webkit-user-select  : none;
   -moz-user-select     : none;
   position             : absolute;
@@ -137,8 +147,36 @@ p {
   background           : transparent;
   background-position  : bottom left;
   background-origin    : content-box;
-  cursor               : move;   
-  z-index              : 99;
+  pointer-events       : all;
+  z-index              : 100;
+}
+
+#video1_container {
+  display           : inline; 
+  margin            : 0px auto 0px auto; 
+  padding           : 0px;
+  top               : 0px;
+  overflow          : hidden;
+  background        : transparent;  
+  z-index           : 101;
+  cursor: pointer;
+}
+
+#video1 {
+  cursor: pointer;
+}
+
+
+#player {
+  -webkit-user-select  : none;
+  -moz-user-select     : none;
+  position             : absolute;
+  color                : black;
+  /*height               : 500px;*/
+  background           : transparent;
+  background-position  : bottom left;
+  background-origin    : content-box;
+  z-index              : 100;
 
 }
 
