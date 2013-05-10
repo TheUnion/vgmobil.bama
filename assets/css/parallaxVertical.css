@@ -1,187 +1,240 @@
-﻿body {
-  margin: 0px;
-  padding: 0px;
-	background: rgb(230, 250, 250);
-	color: black;
-	line-height: 1.5;
-	font-family: Ubuntu,Helvetica,sans-serif;
-  font-weight: 700;
-	font-size: 14px;
+body {
+  margin       : 0;
+  padding      : 0;
+	background   : rgb(230, 250, 250);
+	color        : black;
+	line-height  : 1.5;
+	font-family  : Ubuntu,Helvetica,sans-serif;
+  font-weight  : 700;
+	font-size    : 14px;
 }
 
+h1 {
+  position     : relative;
+  width        : 300px;
+  margin       : 20px 0px 20px 50px;
+  font-family  : Georgia, serif;
+  font-size    : 60px;
+  line-height  : 65px;
+  font-weight  : 700;
+  color        : rgb(33, 169, 126);
+}
+
+p {
+  position : relative;
+  width    : 280px;
+  padding  : 10px;
+}
+
+
 .container {
-  position: absolute;
-  left: 0px; 
-  right: 0px; 
-  margin: 0px auto 0px auto; 
-  padding: 0px;
-  top: 0px;
-  width: 580px;
-  height: 500px;
-	color: black;
-	background-color: rgb(230, 230, 230);
-  overflow: hidden;
+  position          : absolute;
+  left              : 0px; 
+  right             : 0px; 
+  margin            : 0px auto 0px auto; 
+  padding           : 0px;
+  top               : 0px;
+  width             : 580px;
+  height            : 500px;
+	color             : black;
+	background-color  : rgb(230, 230, 230);
+  overflow          : hidden;
+}
+
+.container.interactive {
+  cursor               : pointer;
 }
 
 #parallax {
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	position: absolute;
-	color: black;
-  height: 500px;
-	background-color: transparent;
-	cursor: move;
-  z-index: 99;
-}
-
-#road {
-  background-position: bottom left;
-  background-repeat: repeat-x;
-  background: url('../img/road.png');
+	-webkit-user-select  : none;
+	-moz-user-select     : none;
+	position             : absolute;
+	color                : black;
+  height               : 500px;
+	background-color     : transparent;
+	cursor               : move;
+  z-index              : 99;
 }
 
 #layer1 {
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	position: absolute;
-	color: black;
-  height: 500px;
-	background-color: transparent;
-  background: transparent url('../img/sky_bg.png') repeat-x;
-	cursor: move;
-  z-index: 1;
+	-webkit-user-select  : none;
+	-moz-user-select     : none;
+	position             : absolute;
+	color                : black;
+  height               : 500px;
+	background-color     : transparent;
+  background           : transparent url('../img/sky_bg.jpg') repeat-x;
+  background-position  : bottom left;
+  background-origin    : content-box;
+	cursor               : move;
+  z-index              : 1;
 }
 
 #layer2 {
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	position: absolute;
-	color: black;
-  height: 500px;
-	background: transparent url('../img/landscape_bg.png') repeat-x;
-	cursor: move;
-  z-index: 2;
+	-webkit-user-select  : none;
+	-moz-user-select     : none;
+	position             : absolute;
+	color                : black;
+  height               : 500px;
+	background           : transparent url('../img/landscape.bg.optimized.png') repeat-x;
+  background-position  : bottom left;
+  background-origin    : content-box;
+	cursor               : move;
+  z-index              : 2;
+
 }
 
 #layer3 {
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	position: absolute;
-	color: black;
-  height: 500px;
-  background: transparent url('../img/landscape_fg.png') repeat-x;
-	cursor: move;
-  z-index: 3;
+  -webkit-user-select  : none;
+  -moz-user-select     : none;
+  position             : absolute;
+  color                : black;
+  height               : 500px;
+  background           : transparent url('../img/landscape_fg.png') repeat-x;
+  background-position  : bottom left;
+  background-origin    : content-box;
+  cursor               : move;
+  z-index              : 3;
+
 }
 
 #layer4 {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  position: absolute;
-  color: black;
-  height: 500px;
-  background: transparent url('../img/landscape_road.png') repeat-x;
-  cursor: move;
-  z-index: 4;
+  -webkit-user-select  : none;
+  -webkit-user-select  : none;
+  -moz-user-select     : none;
+  position             : absolute;
+  color                : black;
+  height               : 500px;
+  background           : transparent url('../img/landscape_road.png') repeat-x;
+  background-position  : bottom left;
+  background-origin    : content-box;
+  cursor               : move;
+  z-index              : 4;
+
 }
 
 
 #layer5 {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  position: absolute;
-  color: black;
-  height: 500px;
-  background: transparent;
-  cursor: move;
-  z-index: 5;
+  -webkit-user-select  : none;
+  -moz-user-select     : none;
+  position             : absolute;
+  color                : black;
+  height               : 500px;
+  background           : transparent;
+  background-position  : bottom left;
+  background-origin    : content-box;
+  cursor               : move;
+  z-index              : 5;
+
 }
 
+#player {
+  -webkit-user-select  : none;
+  -moz-user-select     : none;
+  position             : absolute;
+  color                : black;
+  height               : 500px;
+  background           : transparent;
+  background-position  : bottom left;
+  background-origin    : content-box;
+  cursor               : move;   
+  z-index              : 99;
+
+}
+
+
+#HUD {
+  -webkit-user-select  : none;
+  -moz-user-select     : none;
+  position             : relative;
+  color                : black;
+  width                : 580px;
+  height               : 500px;
+  z-index              : 90;
+  padding              : 16px;
+  pointer-events       : none;  
+}
+
+
+#logo {
+  position             : absolute;
+  width                : 85px;
+  height               : 30px;
+  left                 : 448px;
+  top                  : 0;
+  z-index              : 90;
+  margin              : 16px;
+  pointer-events       : none;  
+}
+
+
+
+#birds {
+  position  : absolute;
+  top       : 96px;
+  left      : 128px;
+
+}
 
 
 .panel {
-  float: left;
-	margin: 0px;
-  padding: 0px;
-	width: 900px;
-	background-color: transparent;
+  float            : left;
+	margin           : 0px;
+  padding          : 0px;
+	width            : 900px;
+	background-color : transparent;
 }
 
-h1 {
-	position: relative;
-	width: 300px;
-  margin: 20px 0px 20px 50px;
-	font-family: Georgia, serif;
-	font-size: 60px;
-  line-height: 65px;
-  font-weight: normal;
-  color: rgb(33, 169, 126);
-}
-
-p {
-	position: relative;
-	width: 280px;
-	padding: 10px;
-}
 
 .content {
-  position: relative;
-  float: left;
-  left: 50px;
-  width: 580px;
-  height: 500px;
-/*
-
-  webkit-border-radius: 20px; 
-  -moz-border-radius: 20px; 
-  border-radius: 20px;
-  -webkit-box-shadow: 1px 1px 30px rgba(0, 0, 0, 1);
- -moz-box-shadow: 1px 1px 30px rgba(0, 0, 0, 1);
-  box-shadow: 1px 1px 30px rgba(0, 0, 0, 1);
-  -moz-opacity: 0.7;
-  opacity: 0.7;
- */  
-  background: transparent;
+  position    : relative;
+  float       : left;
+  left        : 50px;
+  width       : 580px;
+  height      : 500px;
+  background  : transparent;
 }
 
 #level1 {
-  position: absolute;
-  top: -20px;
-  left: 400px;
-  width: 580px;
-  height: 500px;
-  pointer-events: none;
-  background: transparent url('../img/level1.png') no-repeat; 
+  position        : absolute;
+  top             : -20px;
+  left            : 400px;
+  width           : 580px;
+  height          : 500px;
+  pointer-events  : none;
+  background      : transparent url('../img/level1.png') no-repeat; 
 }
 
 #level2 {
-  position: absolute;
-  top: 10px;
-  left: 1400px;
-  width: 580px;
-  height: 500px;
-  pointer-events: none;
-  background: transparent url('../img/level2.png') no-repeat; 
+  position        : absolute;
+  top             : 10px;
+  left            : 1400px;
+  width           : 580px;
+  height          : 500px;
+  pointer-events  : none;
+  background      : transparent url('../img/level2.png') no-repeat; 
 }
+
 
 #level3 {
-  position: absolute;
-  top: 10px;
-  left: 2700px;
-  width: 580px;
-  height: 500px;
+  position      : absolute;
+  top           : 10px;
+  left          : 2700px;
+  width         : 580px;
+  height        : 500px;
   pointer-events: none;
-/*  background: transparent url('../img/level3.png') no-repeat; 
-*/
+  background    : transparent url('../img/level3.jpg') no-repeat; 
+
 }
 
+
 #level4 {
-  position: absolute;
-  top: 10px;
-  left: 3500px;
-  width: 580px;
-  height: 500px;
+  position      : absolute;
+  top           : 10px;
+  left          : 3500px;
+  width         : 580px;
+  height        : 500px;
   pointer-events: none;
-  background: transparent url('../img/level4.png') no-repeat; 
+  background    : transparent url('../img/level4.png') no-repeat; 
 }
 

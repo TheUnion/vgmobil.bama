@@ -4,12 +4,20 @@
 		"selected_items":
 		[
 			[
-				"app",
-				"appVersion"
+				"no",
+				"no-repeat"
 			],
 			[
-				"no",
-				"noop	noop"
+				"cont",
+				"content-box"
+			],
+			[
+				"backgrou",
+				"background-origin"
+			],
+			[
+				"app",
+				"appVersion"
 			],
 			[
 				"sub",
@@ -70,10 +78,6 @@
 			[
 				"transpa",
 				"transparent"
-			],
-			[
-				"cont",
-				"container"
 			],
 			[
 				"pos",
@@ -315,15 +319,23 @@
 			"file": "assets/css/parallaxVertical.css",
 			"settings":
 			{
-				"buffer_size": 3294,
+				"buffer_size": 5374,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/ballefrans/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+			"settings":
+			{
+				"buffer_size": 13147,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 4488,
+				"buffer_size": 4553,
 				"line_ending": "Windows"
 			}
 		},
@@ -531,6 +543,10 @@
 		"find_history":
 		[
 			"svg",
+			"caret",
+			"left:",
+			"position:",
+			"svg",
 			"_π",
 			"VgAds",
 			"has",
@@ -643,7 +659,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -651,15 +667,15 @@
 					"file": "assets/css/parallaxVertical.css",
 					"settings":
 					{
-						"buffer_size": 3294,
+						"buffer_size": 5374,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								756,
-								756
+								3927,
+								3927
 							]
 						],
 						"settings":
@@ -669,25 +685,53 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2262.0,
+						"translation.y": 4031.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "index.html",
+					"file": "/C/Users/ballefrans/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
 					"settings":
 					{
-						"buffer_size": 4488,
+						"buffer_size": 13147,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1552,
-								1552
+								1985,
+								1985
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1474.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "index.html",
+					"settings":
+					{
+						"buffer_size": 4553,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1848,
+								1848
 							]
 						],
 						"settings":
@@ -697,13 +741,13 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 696.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 3,
 					"file": "/D/Work/VG Mobil/ads.utilities/common/assets/js/lib/π.core.background-worker.js",
 					"settings":
 					{
@@ -731,7 +775,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": "assets/js/lib/jquery.parallaxSwipe.js",
 					"settings":
 					{
@@ -742,8 +786,8 @@
 						"selection":
 						[
 							[
-								5250,
-								5250
+								2384,
+								2384
 							]
 						],
 						"settings":
@@ -753,7 +797,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1566.0,
+						"translation.y": 323.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
