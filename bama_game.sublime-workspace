@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"font",
+				"font-size"
+			],
+			[
+				"fon",
+				"font-weight"
+			],
+			[
+				"bac",
+				"background"
+			],
+			[
+				"lo",
+				"log"
+			],
+			[
 				"no",
 				"no-repeat"
 			],
@@ -94,10 +110,6 @@
 			[
 				"di",
 				"display"
-			],
-			[
-				"bac",
-				"background-color"
 			],
 			[
 				"show",
@@ -319,39 +331,31 @@
 			"file": "assets/css/parallaxVertical.css",
 			"settings":
 			{
-				"buffer_size": 5374,
+				"buffer_size": 6633,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/ballefrans/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
-			"settings":
-			{
-				"buffer_size": 13147,
-				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 4553,
+				"buffer_size": 2742,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/D/Work/VG Mobil/ads.utilities/common/assets/js/lib/π.core.background-worker.js",
+			"file": "assets/js/bama.game.js",
 			"settings":
 			{
-				"buffer_size": 2220,
+				"buffer_size": 811,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "assets/js/lib/jquery.parallaxSwipe.js",
+			"file": "/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/pi/srv/php/pi.util.file.highlight.php",
 			"settings":
 			{
-				"buffer_size": 5261,
+				"buffer_size": 1127,
 				"line_ending": "Windows"
 			}
 		}
@@ -392,11 +396,15 @@
 	},
 	"file_history":
 	[
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/pi/π.sublime-workspace",
 		"/D/Work/VG Mobil/ads.utilities/common/assets/js/lib/π.utilities.scroll-listener.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/pi/README.md",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/assets/js/lib/jquery.parallaxSwipe.js",
+		"/C/Users/ballefrans/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/D/Work/VG Mobil/ads.utilities/common/assets/js/lib/π.core.background-worker.js",
 		"/D/Work/VG Mobil/ads.utilities/common/assets/js/lib/π.core.main.js",
 		"/D/Work/VG Mobil/ads.utilities/common/assets/js/lib/ads.utilities.scroll-listener.js",
 		"/C/util/loadaliases.cmd",
-		"/C/Users/ballefrans/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
 		"/C/Users/ballefrans/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/C/Users/ballefrans/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
 		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/parallax/parallax.html",
@@ -515,11 +523,7 @@
 		"/D/install/dev/salt-0.12.1/requirements.txt",
 		"/D/dev/ZeroMQ/delphizmq/zmq.inc",
 		"/C/Program Files/ZeroMQ 3.2.2/README.txt",
-		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/scripts/kromaviews/doc/kromaviews.appserver.interface.doc",
-		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/scripts/kromaviews/php/public/assets/js/lib/jquery.kromaviews.widget.gauge.js",
-		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/scripts/kromaviews/php/server/workers/kromaviews.spawn.worker.php",
-		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/scripts/kromaviews/php/public/views-report.php",
-		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/scripts/kromaviews/php/public/assets/inc/header-main.html"
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/scripts/kromaviews/doc/kromaviews.appserver.interface.doc"
 	],
 	"find":
 	{
@@ -530,6 +534,8 @@
 		"height": 0.0,
 		"where_history":
 		[
+			"D:\\Work\\KROMA\\KromaViews\\dev-server\\home\\kroma\\dev\\pi\\*js,D:\\Work\\KROMA\\KromaViews\\dev-server\\home\\kroma\\dev\\www\\pi",
+			"D:\\Work\\KROMA\\KromaViews\\dev-server\\home\\kroma\\dev\\pi\\",
 			"D:\\Work\\KROMA\\KromaViews\\dev-server\\home\\kroma\\scripts\\kromaviews\\php\\server\\",
 			"D:\\Work\\KROMA\\KromaViews\\dev-server\\home\\kroma\\scripts\\kromaviews\\php\\server\\*.php",
 			"D:\\Work\\KROMA\\KromaViews\\dev-server\\home\\kroma\\scripts\\kromaviews\\php\\server",
@@ -542,6 +548,17 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"/>\n",
+			"span",
+			"	color                : black;",
+			"	color                : black;\n",
+			"\n	",
+			"900",
+			"/src/",
+			"video",
+			" onselectstart=\"return false;\"",
+			");\">\n",
+			"//static background but need to add a width.",
 			"svg",
 			"caret",
 			"left:",
@@ -649,6 +666,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"/cli/"
 		],
 		"reverse": false,
 		"show_context": false,
@@ -659,7 +677,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -667,15 +685,15 @@
 					"file": "assets/css/parallaxVertical.css",
 					"settings":
 					{
-						"buffer_size": 5374,
+						"buffer_size": 6633,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3927,
-								3927
+								649,
+								649
 							]
 						],
 						"settings":
@@ -685,53 +703,25 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 4031.0,
+						"translation.y": 812.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/C/Users/ballefrans/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
-					"settings":
-					{
-						"buffer_size": 13147,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1985,
-								1985
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1474.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
 					"file": "index.html",
 					"settings":
 					{
-						"buffer_size": 4553,
+						"buffer_size": 2742,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1848,
-								1848
+								2726,
+								2726
 							]
 						],
 						"settings":
@@ -741,31 +731,31 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 696.0,
+						"translation.y": 1885.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "/D/Work/VG Mobil/ads.utilities/common/assets/js/lib/π.core.background-worker.js",
+					"buffer": 2,
+					"file": "assets/js/bama.game.js",
 					"settings":
 					{
-						"buffer_size": 2220,
+						"buffer_size": 811,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								811,
+								811
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
@@ -775,29 +765,29 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "assets/js/lib/jquery.parallaxSwipe.js",
+					"buffer": 3,
+					"file": "/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/pi/srv/php/pi.util.file.highlight.php",
 					"settings":
 					{
-						"buffer_size": 5261,
+						"buffer_size": 1127,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2384,
-								2384
+								586,
+								586
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/PHP/PHP.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 323.0,
+						"translation.y": 1044.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1016,7 +1006,7 @@
 		[
 			[
 				"",
-				"/D/Work/KROMA/KromaViews/dev-server/home/kroma/scripts/kromaviews/KromaViews.AppServerWebSocketProtocol.sublime-project"
+				"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/pi/π.sublime-project"
 			]
 		],
 		"width": 380.0

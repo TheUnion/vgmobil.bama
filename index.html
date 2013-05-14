@@ -4,19 +4,19 @@
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
   <meta name="viewport" content="width=device-width, initial-scale=.5, maximum-scale=1.0" />  
   <title>parallaxSwipe</title>
+  <link href='http://fonts.googleapis.com/css?family=Cabin:400,700' rel='stylesheet' type='text/css'>  
   <link href="assets/css/parallaxVertical.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
 
-  <div class="container">
+  <div class="container" onselectstart="return false;">
+
     <img id="logo" src="assets/img/bama_logo.png" />
     <div id="parallax">
       <div class="panel">    
         <div class="content">
-        <p>
-          
-        </p></div>
+        </div>
       </div>
       
       <div class="panel"> 
@@ -29,45 +29,51 @@
         <div class="content">
         </div>
       </div>
+
     </div>
   </div> 
 
-  <div class="container">
+  <div class="container" onselectstart="return false;">
     <div id="layer1">
       <div class="panel">
-        <div id="level1"></div>
-        <div id="level2"></div>
-        <div id="level3"></div>
+      Layer 1;
       </div>
     </div>
   </div>
 
-  <div class="container">
+  <div class="container" onselectstart="return false;">
     <div id="layer2"> <!-- bg_sky.png layer -->
-      <div class="panel"></div>
+      <div class="panel">Layer 2;
+      </div>
     </div>
   </div>
 
-  <div class="container">
+  <div class="container" onselectstart="return false;">
     <div id="layer3"> <!-- bg_landscape.png layer -->
-      <div class="panel"></div>
+      <div class="panel">Layer 3;
+      </div>
     </div>
   </div>
 
-  <div class="container">
+  <div class="container" onselectstart="return false;">
     <div id="layer4"> <!-- fg_landscape.png layer -->
-      <div class="panel"></div>
+      <div class="panel">
+        <div id="level1">
+          <span class="big bold">Nå kommer de<br />norske jordbærene!</span>
+          
+          <p class="medium regular"><span class="big bold red">Swipe</span> og opplev de flotte<br />jordbærene fra Akershus.</p>
+        </div>
+        <div id="level2"></div>
+        <div id="level3"></div>
+
+      </div>
     </div>
   </div>
 
 
-  <div class="container">
+  <div class="container" onselectstart="return false;">
     <div id="layer5"> <!-- fg_road.png layer -->
       <div class="panel"></div>
-    </div>
-  </div>
-  <div class="container">
-    <div id="layer_player">
       <div id="video1_container">
         <video id="video1" class="video" width="320" height="180" controls poster="assets/img/video1_poster.png">
           <source src="assets/video/video1.webm" type="video/webm">
@@ -79,19 +85,18 @@
     </div>
   </div>
 
+  <div class="container">
+    <div id="layer_player interactive" onclick="console.log('clicked player layer!');">
+      <img id="car" src="assets/img/car.png" width="283" height="126" />
+    </div>
+  </div>
 
-  <script defer src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script defer src="assets/js/lib/gsap/jquery.gsap.min.js"></script>
-  <script defer src="assets/js/lib/jquery.parallaxSwipe.js"></script>
-  <script defer src="assets/js/bama.game.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>  
+  <script src="assets/js/lib/jquery.parallaxSwipe.js"></script>
+  <script src="assets/js/bama.game.js"></script>
 
-  <!--script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.9.5/TweenMax.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.9.5/jquery.gsap.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.9.5/plugins/CSSRulePlugin.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.9.5/plugins/RaphaelPlugin.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.9.5/plugins/ColorPropsPlugin.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.9.5/plugins/EaselPlugin.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.9.5/plugins/TextPlugin.min.js"></script-->
+  <!-- GreenSock's replacement for jQuery.animate() -->
+  <!--script async defer src="assets/js/lib/gsap/jquery.gsap.min.js"></script -->
 
 </body>
 </html>
