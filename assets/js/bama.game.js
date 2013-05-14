@@ -13,14 +13,6 @@
 
 
 
-        // $('.bama.container').each(function(idx, el) {
-        //     el.addEventListener("selectstart", function(e){ return false;});   
-        // });
-
-        // $('.bama.container').each(function(idx, obj){
-        //     console.log(idx + ": ", obj);
-        // });
-
         $('#layer2').css('width',layerWidth); //add some more width for fast moving layers.
         $('#layer3').css('width',layerWidth); 
         $('#layer4').css('width',layerWidth); 
