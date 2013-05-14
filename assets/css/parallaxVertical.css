@@ -65,7 +65,7 @@ h1 {
   background-color : transparent;
 }
 
-
+/*
 .content {
   position    : relative;
   float       : left;
@@ -74,6 +74,7 @@ h1 {
   height      : 500px;
   background  : transparent;
 }
+*/
 
 .big {
   font-size: 32px;
@@ -161,7 +162,7 @@ h1 {
   position             : absolute;
   height               : 500px;
   background           : transparent url('../img/hill_front1.png') repeat-x;
-  background-position  : bottom left;
+  background-position  : 0px 193px;
   background-origin    : content-box;
   cursor               : move;
   z-index              : 4;
@@ -171,49 +172,85 @@ h1 {
 
 #layer5 {
 
-  -webkit-user-select  : none;
-  -moz-user-select     : none;
-  position             : absolute;
-  top           : 10px;
-  left          : 900px;
-  width         : 580px;
-  height        : 500px;
-  pointer-events: none;
-
-  background           : transparent;
-  background-position  : bottom left;
-  background-origin    : content-box;
-  cursor               : move;
-  z-index              : 5;
+  -webkit-user-select : none;
+  -moz-user-select    : none;
+  position            : absolute;
+  top                 : 10px;
+  left                : 900px;
+  width               : 580px;
+  height              : 500px;
+  pointer-events      : auto;
+  cursor              : auto;
+  z-index             : 5;
 
 }
+
+
+#road {
+  position             : absolute; 
+  -webkit-user-select  : none;
+  -moz-user-select     : none;
+
+  background           : transparent url('../img/road.png') repeat-x;
+  background-position  : 0px 0px;
+  top                  : 428px; 
+  height               : 72px;
+  width                : 625px;
+
+  pointer-events       : none;
+  z-index              : 91;
+}
+
+
+.scroll-left {
+  -webkit-animation    : slide 0.2s linear infinite;
+     -moz-animation    : slide 0.2s linear infinite;
+          animation    : slide 0.2s linear infinite;
+}
+
+
+@-webkit-keyframes slide {
+    0%   {background-position: 0 0;}
+    100% {background-position: -24px 0;}
+}
+​
+@-moz-keyframes slide {
+    0%   {background-position: 0 0;}
+    100% {background-position: -24px 0;}
+}
+
+@keyframes slide {
+    0%   {background-position: 0 0;}
+    100% {background-position: -24px 0;}
+}
+
+
+
 
 #layer_player {
   -webkit-user-select  : none;
   -moz-user-select     : none;
   position             : absolute;
   height               : 500px;
-  background           : transparent;
-  background-position  : bottom left;
-  background-origin    : content-box;
+
   pointer-events       : none;
   z-index              : 100;
 }
 
 #video1_container {
-  display           : inline; 
+  /*display           : inline; */
   margin            : 0px auto 0px auto; 
   padding           : 0px;
   top               : 0px;
   overflow          : hidden;
   background        : transparent;  
   z-index           : 190;
-  cursor            : pointer;
+  cursor            : auto;
 }
 
 #video1 {
   z-index           : 201;
-  cursor: pointer;
+  cursor            : auto;
 }
 
 
@@ -282,7 +319,7 @@ h1 {
   top             : 200px;
   left            : 400px;
   width           : 580px;
-  height          : 500px;
+  height          : 428px;
   pointer-events  : none;
   background      : transparent; 
 }
@@ -320,3 +357,7 @@ h1 {
   background    : transparent url('../img/level4.png') no-repeat; 
 }
 
+
+
+
+​

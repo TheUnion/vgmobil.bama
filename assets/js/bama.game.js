@@ -12,11 +12,12 @@
         var layerWidth = $('#parallax').parallaxSwipe.getSize();
 
 
-
-        $('#layer2').css('width',layerWidth); //add some more width for fast moving layers.
-        $('#layer3').css('width',layerWidth); 
-        $('#layer4').css('width',layerWidth); 
-        $('#layer5').css('width',layerWidth); 
+        $('#layer_bg').css('width',layerWidth); //add some more width for fast moving layers.
+        $('#layer_middle2').css('width',layerWidth); //add some more width for fast moving layers.
+        $('#layer_middle1').css('width',layerWidth); //add some more width for fast moving layers.
+        $('#layer_front2').css('width',layerWidth); 
+        $('#layer_front1').css('width',layerWidth); 
+        $('#layer_top').css('width',layerWidth); 
         $('#layer_player').css('width',layerWidth); 
 
       });

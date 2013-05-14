@@ -8,11 +8,11 @@
   <link href="assets/css/parallaxVertical.css" rel="stylesheet" type="text/css" />
 </head>
 
-<body onselectstart="return false;">
+<body>
 
   <div class="container" onselectstart="return false;">
 
-    <img id="logo" src="assets/img/bama_logo.png" />
+    <img id="logo" src="assets/img/bama_logo.svg" />
     <div id="parallax">
       <div class="panel">    
         <div class="content">
@@ -36,21 +36,21 @@
   <div class="container" onselectstart="return false;">
     <div id="layer1">
       <div class="panel">
-      Layer 1;
+      
       </div>
     </div>
   </div>
 
   <div class="container" onselectstart="return false;">
     <div id="layer2"> <!-- bg_sky.png layer -->
-      <div class="panel">Layer 2;
+      <div class="panel">
       </div>
     </div>
   </div>
 
   <div class="container" onselectstart="return false;">
     <div id="layer3"> <!-- bg_landscape.png layer -->
-      <div class="panel">Layer 3;
+      <div class="panel">
       </div>
     </div>
   </div>
@@ -63,8 +63,7 @@
           
           <p class="medium regular"><span class="big bold red">Swipe</span> og opplev de flotte<br />jordbærene fra Akershus.</p>
         </div>
-        <div id="level2"></div>
-        <div id="level3"></div>
+        <div id="road"></div>
 
       </div>
     </div>
@@ -76,8 +75,8 @@
       <div class="panel"></div>
       <div id="video1_container">
         <video id="video1" class="video" width="320" height="180" controls poster="assets/img/video1_poster.png">
-          <source src="assets/video/video1.webm" type="video/webm">
-          <source src="assets/video/video1.mp4" type="video/mp4">
+          <source src="http://kromaviews.no:80/dev/games/bama/assets/video/video1.webm" type="video/webm">
+          <source src="http://kromaviews.no:80/dev/games/bama/assets/video/video1.mp4" type="video/mp4">
           Your browser does not support the video tag. 
           You're using Internet Explorer, probably.
         </video>
@@ -88,15 +87,19 @@
   <div class="container" onselectstart="return false;">
     <div id="layer_player interactive" onclick="console.log('clicked player layer!');">
       <img id="car" src="assets/img/car.png" width="283" height="126" />
+      <div id="road">
+        
+      </div>
     </div>
   </div>
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>  
   <script src="assets/js/lib/jquery.parallaxSwipe.js"></script>
-  <script src="assets/js/bama.game.js"></script>
+  <script async defer src="assets/js/bama.game.js"></script>
 
-  <!-- GreenSock's replacement for jQuery.animate() -->
-  <!--script async defer src="assets/js/lib/gsap/jquery.gsap.min.js"></script -->
+  <!-- GreenSock's replacement for jQuery.animate() 
+  <script async defer src="assets/js/lib/gsap/jquery.gsap.min.js"></script>
+  -->
 
 </body>
 </html>
