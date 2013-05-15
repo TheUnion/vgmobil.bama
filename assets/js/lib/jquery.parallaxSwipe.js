@@ -1,7 +1,7 @@
 /*copyright 2012 robert w. stewart torontographic.com*/
 ;(function($) {
 $.fn.parallaxSwipe = function(options) {
-var defaults = {DECAY:0.9, MOUSEDOWN_DECAY:0.5, SPEED_SPRING:0.5, BOUNCE_SPRING:0.08,
+var defaults = {DECAY:0.95, MOUSEDOWN_DECAY:0.5, SPEED_SPRING:0.7, BOUNCE_SPRING:0.08,
   HORIZ:true, SNAPDISTANCE:20, DISABLELINKS:true, LAYER:[]
 };
 var o = $.extend(defaults, options);

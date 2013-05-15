@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"wid",
+				"width"
+			],
+			[
+				"contr",
+				"containers"
+			],
+			[
 				"font",
 				"font-size"
 			],
@@ -331,7 +339,7 @@
 			"file": "assets/css/parallaxVertical.css",
 			"settings":
 			{
-				"buffer_size": 6633,
+				"buffer_size": 7320,
 				"line_ending": "Windows"
 			}
 		},
@@ -339,7 +347,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 2742,
+				"buffer_size": 3155,
 				"line_ending": "Windows"
 			}
 		},
@@ -347,15 +355,18 @@
 			"file": "assets/js/bama.game.js",
 			"settings":
 			{
-				"buffer_size": 811,
+				"buffer_size": 1033,
 				"line_ending": "Windows"
 			}
 		},
 		{
+			"contents": "",
 			"file": "/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/pi/srv/php/pi.util.file.highlight.php",
+			"file_size": -1,
+			"file_write_time": -1,
 			"settings":
 			{
-				"buffer_size": 1127,
+				"buffer_size": 0,
 				"line_ending": "Windows"
 			}
 		}
@@ -396,6 +407,8 @@
 	},
 	"file_history":
 	[
+		"/D/dev/VIDEO/mplayer-svn-36265/README.txt",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/assets/js/lib/parallaxSwipe/parallax.html",
 		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/pi/π.sublime-workspace",
 		"/D/Work/VG Mobil/ads.utilities/common/assets/js/lib/π.utilities.scroll-listener.js",
 		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/pi/README.md",
@@ -521,9 +534,7 @@
 		"/D/dev/doc/research/storm.php",
 		"/D/dev/lazarus/components/xdev_toolkit/ReadMe.txt",
 		"/D/install/dev/salt-0.12.1/requirements.txt",
-		"/D/dev/ZeroMQ/delphizmq/zmq.inc",
-		"/C/Program Files/ZeroMQ 3.2.2/README.txt",
-		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/scripts/kromaviews/doc/kromaviews.appserver.interface.doc"
+		"/D/dev/ZeroMQ/delphizmq/zmq.inc"
 	],
 	"find":
 	{
@@ -548,6 +559,20 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"100px",
+			"100",
+			"\"container\"",
+			"bama_",
+			"bama_p",
+			"bama_",
+			".bama ",
+			"bama ",
+			"#",
+			"bama_",
+			"\"bama ",
+			"class=\"",
+			"id=\"",
+			"#",
 			"/>\n",
 			"span",
 			"	color                : black;",
@@ -685,15 +710,15 @@
 					"file": "assets/css/parallaxVertical.css",
 					"settings":
 					{
-						"buffer_size": 6633,
+						"buffer_size": 7320,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								649,
-								649
+								4430,
+								4430
 							]
 						],
 						"settings":
@@ -703,7 +728,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 812.0,
+						"translation.y": 6148.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -713,15 +738,15 @@
 					"file": "index.html",
 					"settings":
 					{
-						"buffer_size": 2742,
+						"buffer_size": 3155,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2726,
-								2726
+								1462,
+								1462
 							]
 						],
 						"settings":
@@ -731,7 +756,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1885.0,
+						"translation.y": 1160.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -741,15 +766,15 @@
 					"file": "assets/js/bama.game.js",
 					"settings":
 					{
-						"buffer_size": 811,
+						"buffer_size": 1033,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								811,
-								811
+								520,
+								520
 							]
 						],
 						"settings":
@@ -769,15 +794,15 @@
 					"file": "/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/pi/srv/php/pi.util.file.highlight.php",
 					"settings":
 					{
-						"buffer_size": 1127,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								586,
-								586
+								0,
+								0
 							]
 						],
 						"settings":
@@ -787,7 +812,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1044.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

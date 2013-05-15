@@ -21,6 +21,19 @@ h1 {
   color        : rgb(33, 169, 126);
 }
 
+
+
+
+  /* The ugly */
+
+  .hwaccel {  
+    -webkit-transform: translateZ(0); 
+  }
+
+
+
+
+
 .para {
   position : relative;
   width    : 280px;
@@ -86,13 +99,6 @@ h1 {
 }
 
 
-.outline {
-   /*-webkit-text-fill-color: white;*/  /* Will override color (regardless of order) */
-   -webkit-text-stroke-width: 1px;
-   -webkit-text-stroke-color: #666;  
-}
-
-
 .medium {
   font-size: 24px;
   line-height: 28px;
@@ -104,6 +110,15 @@ h1 {
 
 .regular {
   font-weight: 400;
+}
+
+
+.mirror {
+    display:block;
+    -webkit-transform: matrix(-1, 0, 0, 1, 0, 0);
+       -moz-transform: matrix(-1, 0, 0, 1, 0, 0);
+          -o-transform:matrix(-1, 0, 0, 1, 0, 0);
+             transform:matrix(-1, 0, 0, 1, 0, 0);
 }
 
 
@@ -123,10 +138,7 @@ h1 {
 	position             : absolute;
   height               : 500px;
 	background-color     : transparent;
-  background           : transparent url('../img/sky_bg.png') repeat-x;
-  background-position  : bottom left;
-  background-origin    : content-box;
-	cursor               : move;
+  background           : transparent url('../img/sky_bg_small.png') repeat-x;
   z-index              : 1;
 }
 
@@ -135,10 +147,9 @@ h1 {
 	-moz-user-select     : none;
 	position             : absolute;
   height               : 500px;
-	background           : transparent url('../img/hill_middle_layer2.png') repeat-x;
-  background-position  : bottom left;
+	background           : transparent url('../img/hill_middle_layer2_small.png') repeat-x;
+  background-position  : 0px 300px;
   background-origin    : content-box;
-	cursor               : move;
   z-index              : 2;
 
 }
@@ -148,29 +159,42 @@ h1 {
   -moz-user-select     : none;
   position             : absolute;
   height               : 500px;
-  background           : transparent url('../img/hill_middle_layer1.png') repeat-x;
-  background-position  : bottom left;
+  background           : transparent url('../img/hill_middle_layer1_small.png') repeat-x;
+  background-position  : 0px 280px;
   background-origin    : content-box;
-  cursor               : move;
   z-index              : 3;
 
 }
+
 
 #layer4 {
   -webkit-user-select  : none;
   -moz-user-select     : none;
   position             : absolute;
   height               : 500px;
-  background           : transparent url('../img/hill_front1.png') repeat-x;
-  background-position  : 0px 193px;
+  background           : transparent url('../img/hill_front2_small.png') repeat-x;
+  background-position  : 0px 310px;
   background-origin    : content-box;
-  cursor               : move;
   z-index              : 4;
 
 }
 
 
+
 #layer5 {
+  -webkit-user-select  : none;
+  -moz-user-select     : none;
+  position             : absolute;
+  height               : 500px;
+  background           : transparent url('../img/hill_front1_small.png') repeat-x;
+  background-position  : 0px 310px;
+  background-origin    : content-box;
+  z-index              : 5;
+
+}
+
+
+#layer6 {
 
   -webkit-user-select : none;
   -moz-user-select    : none;
@@ -181,7 +205,7 @@ h1 {
   height              : 500px;
   pointer-events      : auto;
   cursor              : auto;
-  z-index             : 5;
+  z-index             : 6;
 
 }
 
@@ -195,19 +219,28 @@ h1 {
   background-position  : 0px 0px;
   top                  : 428px; 
   height               : 72px;
-  width                : 625px;
+  width                : 100%;
 
   pointer-events       : none;
   z-index              : 91;
 }
 
 
-.scroll-left {
+/*  Behaviours, animations, transitions  */
+
+.continuous {
+  -webkit-animation-iteration-count: infinite;
+     -moz-animation-iteration-count: infinite;
+       -o-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+
+}
+
+.scroll_left {
   -webkit-animation    : slide 0.2s linear infinite;
      -moz-animation    : slide 0.2s linear infinite;
           animation    : slide 0.2s linear infinite;
 }
-
 
 @-webkit-keyframes slide {
     0%   {background-position: 0 0;}
@@ -219,11 +252,19 @@ h1 {
     100% {background-position: -24px 0;}
 }
 
+@-o-keyframes slide {
+    0%   {background-position: 0 0;}
+    100% {background-position: -24px 0;}
+}
+
 @keyframes slide {
     0%   {background-position: 0 0;}
     100% {background-position: -24px 0;}
 }
 
+.parallax_layer {
+
+}
 
 
 
@@ -238,7 +279,9 @@ h1 {
 }
 
 #video1_container {
-  /*display           : inline; */
+  display           : inline; 
+  -webkit-user-select  : none;
+  -moz-user-select     : none;
   margin            : 0px auto 0px auto; 
   padding           : 0px;
   top               : 0px;
@@ -251,6 +294,7 @@ h1 {
 #video1 {
   z-index           : 201;
   cursor            : auto;
+  pointer-events    : auto;
 }
 
 
@@ -308,7 +352,7 @@ h1 {
 #birds {
   position  : absolute;
   top       : 96px;
-  left      : 128px;
+  left      : 1166px;
 
 }
 

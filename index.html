@@ -3,16 +3,18 @@
 <head>
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
   <meta name="viewport" content="width=device-width, initial-scale=.5, maximum-scale=1.0" />  
-  <title>parallaxSwipe</title>
+  <title>Norsk Bama</title>
   <link href='http://fonts.googleapis.com/css?family=Cabin:400,700' rel='stylesheet' type='text/css'>  
   <link href="assets/css/parallaxVertical.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
 
-  <div class="container" onselectstart="return false;">
+  <div class="container" class="hwaccel" onselectstart="return false;">
 
-    <img id="logo" src="assets/img/bama_logo.svg" />
+    <span id="animationclass">animation</span>
+    <img id="logo" class="animated bounce pulse continuous" src="assets/img/bama_logo.svg" />
     <div id="parallax">
       <div class="panel">    
         <div class="content">
@@ -34,7 +36,7 @@
   </div> 
 
   <div class="container" onselectstart="return false;">
-    <div id="layer1">
+    <div id="layer1" class="parallax_layer">
       <div class="panel">
       
       </div>
@@ -42,21 +44,30 @@
   </div>
 
   <div class="container" onselectstart="return false;">
-    <div id="layer2"> <!-- bg_sky.png layer -->
+    <div id="layer2" class="parallax_layer"> <!-- bg_sky.png layer -->
       <div class="panel">
       </div>
     </div>
   </div>
 
   <div class="container" onselectstart="return false;">
-    <div id="layer3"> <!-- bg_landscape.png layer -->
+    <div id="layer3" class="parallax_layer"> <!-- bg_landscape.png layer -->
       <div class="panel">
       </div>
     </div>
   </div>
 
   <div class="container" onselectstart="return false;">
-    <div id="layer4"> <!-- fg_landscape.png layer -->
+    <div id="layer4" class="parallax_layer"> <!-- fg_landscape.png layer -->
+      <div class="panel">
+          LAYER4    
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container" onselectstart="return false;">
+    <div id="layer5" class="parallax_layer"> <!-- fg_landscape.png layer -->
       <div class="panel">
         <div id="level1">
           <span class="big bold">Nå kommer de<br />norske jordbærene!</span>
@@ -70,11 +81,12 @@
   </div>
 
 
+
   <div class="container" onselectstart="return false;">
-    <div id="layer5"> <!-- fg_road.png layer -->
+    <div id="layer6" class="parallax_layer"> <!-- fg_road.png layer -->
       <div class="panel"></div>
-      <div id="video1_container">
-        <video id="video1" class="video" width="320" height="180" controls poster="assets/img/video1_poster.png">
+      <div id="video1_container" >
+        <video id="video1" width="480" height="270" controls poster="assets/img/video1_poster.png">
           <source src="http://kromaviews.no:80/dev/games/bama/assets/video/video1.webm" type="video/webm">
           <source src="http://kromaviews.no:80/dev/games/bama/assets/video/video1.mp4" type="video/mp4">
           Your browser does not support the video tag. 
@@ -85,17 +97,14 @@
   </div>
 
   <div class="container" onselectstart="return false;">
-    <div id="layer_player interactive" onclick="console.log('clicked player layer!');">
-      <img id="car" src="assets/img/car.png" width="283" height="126" />
-      <div id="road">
-        
-      </div>
+    <div id="layer_player" class="parallax_layer interactive" onclick="console.log('clicked player layer!');">
+      <img id="car" class="animated shake" src="assets/img/car.png" width="283" height="126" />
     </div>
   </div>
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>  
   <script src="assets/js/lib/jquery.parallaxSwipe.js"></script>
-  <script async defer src="assets/js/bama.game.js"></script>
+  <script src="assets/js/bama.game.js"></script>
 
   <!-- GreenSock's replacement for jQuery.animate() 
   <script async defer src="assets/js/lib/gsap/jquery.gsap.min.js"></script>
