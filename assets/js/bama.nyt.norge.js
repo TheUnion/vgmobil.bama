@@ -134,19 +134,17 @@
 
 
 
-        $("#parallax").parallaxSwipe( { DECAY:0.9, MOUSEDOWN_DECAY:0.5, SPEED_SPRING:0.7, BOUNCE_SPRING:0.08, 
+        $("#parallax").parallaxSwipe( { DECAY:0.9, MOUSEDOWN_DECAY:0.5, SPEED_SPRING:0.7, BOUNCE_SPRING:1, 
             HORIZ:true, SNAPDISTANCE:20, DISABLELINKS: false, LAYER:[ 20, 20, 3.2, 1.6, 1, 0.9 ] });
 
-        $('#video1, #video1_container, #layer6').click(function(event) {
-          console.log(event.type + ": " + event.target.id, event.originalTarget);
-//          console.log(event.type + ": " + event.originalTarget.id);
-           event.preventDefault();
-        });
+//         $('#video1').click(function(event) {
+//           console.log(event.type + ": " + event.target.id);
+//           console.log(event.type + ": " + event.originalTarget.id);
+//           event.preventDefault();
+//         });
 
 
 
-
-//        $("#parallax").css({cursor: 'move'})
 
         var layerWidth = $('#parallax').parallaxSwipe.getSize();
 
@@ -154,28 +152,48 @@
         $('.parallax_layer').css('width',layerWidth);
 
 
-        var 
-          requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
-                                  window.webkitRequestAnimationFrame || window.msRequestAnimationFrame,
-          start         = window.mozAnimationStartTime || Date.now(),
-          player_layer  = $('#player_layer'),
-          indicator     = $('#progress');
+        var getOffsetRect = function (el) {
+            console.log("el: ", el);
+            // (1)
+            var box = el.getBoundingClientRect();
+            
+            var body = document.body;
+            var docElem = document.documentElement;
+            
+            // (2)
+            var scrollTop = window.pageYOffset || docElem.scrollTop || body.scrollTop;
+            var scrollLeft = window.pageXOffset || docElem.scrollLeft || body.scrollLeft;
+            
+            // (3)
+            var clientTop = docElem.clientTop || body.clientTop || 0;
+            var clientLeft = docElem.clientLeft || body.clientLeft || 0;
+            
+            // (4)
+            var top  = box.top +  scrollTop - clientTop;
+            var left = box.left + scrollLeft - clientLeft;
+            
+            return { top: Math.round(top), left: Math.round(left) };
+        };
 
-        window.requestAnimationFrame = requestAnimationFrame;
 
 
-        function update(timestamp) {
+        var doUpdate = function(timestamp) {
           var 
-            progress = Math.round((-player_layer.left) / layerWidth);
-          
-          console.log("progress: " + progress + "%");
-          if (progress <= 95) {
-            indicator.innerHTML = progress + "%"; 
-            requestAnimationFrame(update);
-          }
-        }
- 
-        requestAnimationFrame(update);
+            para   = jQuery('#parallax');
+            offset = jQuery('#parallax').offset(),
+            prllx  = document.getElementById("parallax");
 
+          var
+            progress = Math.round(-(100*(offset.left/ layerWidth)));
+            rect     = prllx.getBoundingClientRect();
+
+          // console.log('layer: ', layer);  
+          console.log('offset: ', offset);  
+          console.log('rect: ', rect);  
+          console.log('para: ', para);  
+          console.log('prllx: ', prllx);  
+
+          $('#progress').html("progress: " + progress + "%"); 
+        };
 
     });

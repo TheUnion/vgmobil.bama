@@ -123,9 +123,9 @@
 
 
   #parallax {
-  	-webkit-user-select  : none;
+/*  	-webkit-user-select  : none;
   	-moz-user-select     : none;
-  	position             : absolute;
+*/  	position             : absolute;
     height               : 500px;
   	cursor               : move;
     /*pointer-events       : none;*/
@@ -133,18 +133,18 @@
   }
 
   #layer1 {
-  	-webkit-user-select  : none;
+/*  	-webkit-user-select  : none;
   	-moz-user-select     : none;
-  	position             : absolute;
+*/  	position             : absolute;
     height               : 500px;
     background           : transparent url('../img/sky_bg_small.png') repeat-x;
     z-index              : 1;
   }
 
   #layer2 {
-  	-webkit-user-select  : none;
+/*  	-webkit-user-select  : none;
   	-moz-user-select     : none;
-  	position             : absolute;
+*/  	position             : absolute;
     height               : 500px;
   	background           : transparent url('../img/hill_middle_layer2_small.png') repeat-x;
     background-position  : 0px 300px;
@@ -154,9 +154,9 @@
   }
 
   #layer3 {
-    -webkit-user-select  : none;
+/*    -webkit-user-select  : none;
     -moz-user-select     : none;
-    position             : absolute;
+*/    position             : absolute;
     height               : 500px;
     background           : transparent url('../img/hill_middle_layer1_small.png') repeat-x;
     background-position  : 0px 280px;
@@ -167,9 +167,9 @@
 
 
   #layer4 {
-    -webkit-user-select  : none;
+/*    -webkit-user-select  : none;
     -moz-user-select     : none;
-    position             : absolute;
+*/    position             : absolute;
     height               : 500px;
     background           : transparent url('../img/hill_front2_small.png') repeat-x;
     background-position  : 0px 310px;
@@ -181,9 +181,9 @@
 
 
   #layer5 {
-    -webkit-user-select  : none;
+/*    -webkit-user-select  : none;
     -moz-user-select     : none;
-    position             : absolute;
+*/    position             : absolute;
     height               : 500px;
     background           : transparent url('../img/hill_front1_small.png') repeat-x;
     background-position  : 0px 310px;
@@ -196,9 +196,9 @@
 
   #layer6 {
 
-    -webkit-user-select : none;
+/*    -webkit-user-select : none;
     -moz-user-select    : none;
-    position            : absolute;
+*/    position            : absolute;
     top                 : 10px;
     left                : 900px;
     width               : 580px;
@@ -210,7 +210,7 @@
 
 
   #video1_container {
-    /*-webkit-user-select  : none;*/
+/*    /*-webkit-user-select  : none;*/
     /*-moz-user-select     : none;*/
     display           : block; 
     margin            : 0px auto 0px auto; 
@@ -220,7 +220,7 @@
     overflow          : hidden;
     background        : transparent; 
     z-index             : 1001;
-    pointer-events    : default;
+    /*pointer-events    : default;*/
     /*cursor            : default;*/
   }
 
@@ -236,9 +236,9 @@
 
   #road {
     position             : absolute; 
-    -webkit-user-select  : none;
+/*    -webkit-user-select  : none;
     -moz-user-select     : none;
-
+*/
     background           : transparent url('../img/road.png') repeat-x;
     background-position  : 0px 0px;
     top                  : 428px; 
@@ -252,9 +252,9 @@
 
 
   #layer_player {
-    -webkit-user-select  : none;
+/*    -webkit-user-select  : none;
     -moz-user-select     : none;
-    position             : absolute;
+*/    position             : absolute;
     height               : 500px;
 
 /*    pointer-events       : none;*/
@@ -264,9 +264,9 @@
 
 
   #player {
-    -webkit-user-select  : none;
+/*    -webkit-user-select  : none;
     -moz-user-select     : none;
-    position             : absolute;
+*/    position             : absolute;
     /*height               : 500px;*/
     background           : transparent;
     background-position  : bottom left;
@@ -278,9 +278,9 @@
 
 
   #car {
-    -webkit-user-select  : none;
+/*    -webkit-user-select  : none;
     -moz-user-select     : none;
-    position             : absolute;
+*/    position             : absolute;
     top                  : 364px;
     left                 : 150px;
     background           : transparent;
@@ -289,14 +289,15 @@
 
 
   #HUD {
-    -webkit-user-select  : none;
+/*    -webkit-user-select  : none;
     -moz-user-select     : none;
-    position             : relative;
+*/    position             : relative;
+    background           : transparent; 
     width                : 580px;
     height               : 500px;
-    z-index              : 200;
+    z-index              : 2000;
     padding              : 16px;
-/*    pointer-events       : none;*/
+    pointer-events       : none;
   }
 
 
