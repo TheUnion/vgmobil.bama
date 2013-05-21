@@ -53,9 +53,9 @@
     top               : 0px;
     width             : 580px;
     height            : 500px;
-    background-color  : rgb(230, 230, 230);
+    background        : transparent;
     overflow          : hidden;
-    cursor            : move;
+    cursor            : default;
   }
 
   .box {
@@ -75,7 +75,7 @@
     margin           : 0px;
     padding          : 0px;
     width            : 9000px;
-    background-color : transparent;
+    background       : transparent;
   }
 
   /*
@@ -127,10 +127,9 @@
   	-moz-user-select     : none;
   	position             : absolute;
     height               : 500px;
-  	background           : transparent;
   	cursor               : move;
-    z-index              : -1;
-    pointer-events       : none;
+    /*pointer-events       : none;*/
+    z-index              : 500;
   }
 
   #layer1 {
@@ -138,7 +137,6 @@
   	-moz-user-select     : none;
   	position             : absolute;
     height               : 500px;
-  	background-color     : transparent;
     background           : transparent url('../img/sky_bg_small.png') repeat-x;
     z-index              : 1;
   }
@@ -190,6 +188,7 @@
     background           : transparent url('../img/hill_front1_small.png') repeat-x;
     background-position  : 0px 310px;
     background-origin    : content-box;
+/*    pointer-events       : inherit;*/
     z-index              : 5;
 
   }
@@ -204,10 +203,34 @@
     left                : 900px;
     width               : 580px;
     height              : 500px;
-    pointer-events      : auto;
-    cursor              : auto;
-    z-index             : 6;
+    pointer-events      : none;
+    z-index             : 1000;
 
+  }
+
+
+  #video1_container {
+    /*-webkit-user-select  : none;*/
+    /*-moz-user-select     : none;*/
+    display           : block; 
+    margin            : 0px auto 0px auto; 
+    padding           : 0px;
+    top               : 0px;
+    left              : 2000px; 
+    overflow          : hidden;
+    background        : transparent; 
+    z-index             : 1001;
+    pointer-events    : default;
+    /*cursor            : default;*/
+  }
+
+
+  #video1 {
+    z-index           : 1002;
+    width             : 416px;
+    height            : 234px;   
+    cursor            : default;
+    pointer-events    : default;
   }
 
 
@@ -222,9 +245,128 @@
     height               : 72px;
     width                : 100%;
 
-    pointer-events       : none;
+/*    pointer-events       : none;*/
     z-index              : 91;
   }
+
+
+
+  #layer_player {
+    -webkit-user-select  : none;
+    -moz-user-select     : none;
+    position             : absolute;
+    height               : 500px;
+
+/*    pointer-events       : none;*/
+    z-index              : 100;
+  }
+
+
+
+  #player {
+    -webkit-user-select  : none;
+    -moz-user-select     : none;
+    position             : absolute;
+    /*height               : 500px;*/
+    background           : transparent;
+    background-position  : bottom left;
+    background-origin    : content-box;
+    z-index              : 101;
+/*    pointer-events       : none;*/
+
+  }
+
+
+  #car {
+    -webkit-user-select  : none;
+    -moz-user-select     : none;
+    position             : absolute;
+    top                  : 364px;
+    left                 : 150px;
+    background           : transparent;
+    z-index              : 110;
+  }
+
+
+  #HUD {
+    -webkit-user-select  : none;
+    -moz-user-select     : none;
+    position             : relative;
+    width                : 580px;
+    height               : 500px;
+    z-index              : 200;
+    padding              : 16px;
+/*    pointer-events       : none;*/
+  }
+
+
+  #logo {
+    position             : absolute;
+    width                : 85px;
+    height               : 30px;
+    left                 : 448px;
+    top                  : 0;
+    z-index              : 90;
+    margin               : 16px;
+    cursor               : auto; 
+/*    pointer-events       : none;  */
+  }
+
+
+
+  #birds {
+    position  : absolute;
+    top       : 96px;
+    left      : 1166px;
+
+  }
+
+
+
+  #level1 {
+    position        : absolute;
+    top             : 200px;
+    left            : 400px;
+    width           : 580px;
+    height          : 428px;
+/*    pointer-events  : none;*/
+    background      : transparent; 
+  }
+
+  #level2 {
+    position        : absolute;
+    top             : 10px;
+    left            : 1400px;
+    width           : 580px;
+    height          : 500px;
+/*    pointer-events  : none;*/
+    background      : transparent; 
+  }
+
+
+  #level3 {
+    position      : absolute;
+    top           : 10px;
+    left          : 2700px;
+    width         : 580px;
+    height        : 500px;
+/*    pointer-events: none;*/
+    background      : transparent; 
+
+  }
+
+
+  #level4 {
+    position      : absolute;
+    top           : 10px;
+    left          : 3500px;
+    width         : 580px;
+    height        : 500px;
+/*    pointer-events: none;*/
+    background    : transparent url('../img/level4.png') no-repeat; 
+  }
+
+
 
 
   /*  Behaviours, animations, transitions  */
@@ -438,148 +580,37 @@
 
 
   .parallax_layer {
-  }
-
-
-
-
-
-
-  #layer_player {
-    -webkit-user-select  : none;
-    -moz-user-select     : none;
-    position             : absolute;
-    height               : 500px;
-
-    pointer-events       : none;
-    z-index              : 100;
-  }
-
-  #video1_container {
-    display           : inline; 
-    -webkit-user-select  : none;
-    -moz-user-select     : none;
-    margin            : 0px auto 0px auto; 
-    padding           : 0px;
-    top               : 0px;
-    overflow          : hidden;
-    background        : transparent;  
-    z-index           : 190;
-    cursor            : default;
-    pointer-events    : all;
-  }
-
-  #video1 {
-    z-index           : 201;
-    cursor            : default;
-    pointer-events    : all;
-  }
-
-
-  #player {
-    -webkit-user-select  : none;
-    -moz-user-select     : none;
-    position             : absolute;
-    /*height               : 500px;*/
-    background           : transparent;
-    background-position  : bottom left;
-    background-origin    : content-box;
-    z-index              : 101;
-    pointer-events       : none;
-
-  }
-
-
-  #car {
-    -webkit-user-select  : none;
-    -moz-user-select     : none;
-    position             : absolute;
-    top                  : 364px;
-    left                 : 150px;
-    background           : transparent;
-    z-index              : 110;
-  }
-
-
-  #HUD {
-    -webkit-user-select  : none;
-    -moz-user-select     : none;
-    position             : relative;
-    width                : 580px;
-    height               : 500px;
-    z-index              : 200;
-    padding              : 16px;
-    pointer-events       : none;
-  }
-
-
-  #logo {
-    position             : absolute;
-    width                : 85px;
-    height               : 30px;
-    left                 : 448px;
-    top                  : 0;
-    z-index              : 90;
-    margin               : 16px;
-    cursor               : auto; 
-    pointer-events       : none;  
-  }
-
-
-
-  #birds {
-    position  : absolute;
-    top       : 96px;
-    left      : 1166px;
 
   }
 
 
 
-  #level1 {
-    position        : absolute;
-    top             : 200px;
-    left            : 400px;
-    width           : 580px;
-    height          : 428px;
-    pointer-events  : none;
-    background      : transparent; 
+
+
+
+
+  /*
+
+  CSS inheritance from class to id
+
+  div.someBaseDiv,
+  #someInhertedDiv
+  {
+      margin-top:3px;
+      margin-left:auto;
+      margin-right:auto;
+      margin-bottom:0px;
   }
 
-  #level2 {
-    position        : absolute;
-    top             : 10px;
-    left            : 1400px;
-    width           : 580px;
-    height          : 500px;
-    pointer-events  : none;
-    background      : transparent; 
+  This will tell your #someInhertedDiv to apply the same styles as div.someBaseDiv has. Then you extend this set of styles with more specific to your #someInhertedDiv:
+  #someInhertedDiv
+  {
+      background-image:url("images/worldsource/customBackground.gif");
+      background-repeat:no-repeat;
+      width:950px;
+      height:572px;
   }
 
-
-  #level3 {
-    position      : absolute;
-    top           : 10px;
-    left          : 2700px;
-    width         : 580px;
-    height        : 500px;
-    pointer-events: none;
-    background      : transparent; 
-
-  }
-
-
-  #level4 {
-    position      : absolute;
-    top           : 10px;
-    left          : 3500px;
-    width         : 580px;
-    height        : 500px;
-    pointer-events: none;
-    background    : transparent url('../img/level4.png') no-repeat; 
-  }
-
-
-
-
+   */
   ​
+

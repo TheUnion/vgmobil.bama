@@ -81,13 +81,15 @@
         var 
           bama_ad = {
 
-            self      : null,
             resources : [],
             LAYERS    : [],
 
 
             __init : function(){
-              self = this;
+              var
+                self = this;
+  
+
             },
 
 /**
@@ -121,11 +123,6 @@
             }
           }
  */
-            addResource: function (obj) {
-              //return the index of our newly added resource            
-              if (π.require())
-                return resources[resources.push(obj)-1];
-            },
 
             addLayer : function (obj) {
               //return the index of our newly added resource            
@@ -138,7 +135,16 @@
 
 
         $("#parallax").parallaxSwipe( { DECAY:0.9, MOUSEDOWN_DECAY:0.5, SPEED_SPRING:0.7, BOUNCE_SPRING:0.08, 
-            HORIZ:true, SNAPDISTANCE:20, DISABLELINKS: true, LAYER:[ 20, 20, 3.2, 1.6, 1, 0.9 ] });
+            HORIZ:true, SNAPDISTANCE:20, DISABLELINKS: false, LAYER:[ 20, 20, 3.2, 1.6, 1, 0.9 ] });
+
+        $('#video1, #video1_container, #layer6').click(function(event) {
+          console.log(event.type + ": " + event.target.id, event.originalTarget);
+//          console.log(event.type + ": " + event.originalTarget.id);
+           event.preventDefault();
+        });
+
+
+
 
 //        $("#parallax").css({cursor: 'move'})
 
@@ -147,4 +153,29 @@
         // set width for all parallax layers
         $('.parallax_layer').css('width',layerWidth);
 
-      });
+
+        var 
+          requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+                                  window.webkitRequestAnimationFrame || window.msRequestAnimationFrame,
+          start         = window.mozAnimationStartTime || Date.now(),
+          player_layer  = $('#player_layer'),
+          indicator     = $('#progress');
+
+        window.requestAnimationFrame = requestAnimationFrame;
+
+
+        function update(timestamp) {
+          var 
+            progress = Math.round((-player_layer.left) / layerWidth);
+          
+          console.log("progress: " + progress + "%");
+          if (progress <= 95) {
+            indicator.innerHTML = progress + "%"; 
+            requestAnimationFrame(update);
+          }
+        }
+ 
+        requestAnimationFrame(update);
+
+
+    });

@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"call",
+				"caller"
+			],
+			[
+				"th",
+				"thisPtr"
+			],
+			[
+				"tran",
+				"translateY"
+			],
+			[
+				"remo",
+				"removeClass"
+			],
+			[
 				"wid",
 				"width"
 			],
@@ -180,10 +196,6 @@
 				"date_format"
 			],
 			[
-				"th",
-				"this"
-			],
-			[
 				"ng",
 				"ng-model"
 			],
@@ -272,10 +284,6 @@
 				"serviceUrl"
 			],
 			[
-				"call",
-				"callWebService"
-			],
-			[
 				"isn",
 				"is_null"
 			],
@@ -336,37 +344,53 @@
 	"buffers":
 	[
 		{
-			"file": "assets/css/parallaxVertical.css",
-			"settings":
-			{
-				"buffer_size": 7320,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 3155,
+				"buffer_size": 3687,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "assets/js/bama.game.js",
+			"file": "parallax/js/jquery.parallaxSwipe.js",
 			"settings":
 			{
-				"buffer_size": 1033,
+				"buffer_size": 5166,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "",
-			"file": "/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/pi/srv/php/pi.util.file.highlight.php",
-			"file_size": -1,
-			"file_write_time": -1,
+			"file": "assets/css/bama.main.css",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 15031,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "  body {\n    margin       : 0;\n    padding      : 0;\n  	background   : rgb(230, 250, 250);\n  	color        : white;\n  	line-height  : 1.5;\n  	font-family  : Cabin, Ubuntu, Helvetica, sans-serif;\n    font-weight  : 400;\n  	font-size    : 14px;\n  }\n\n\n  h1 {\n    position     : relative;\n    width        : 300px;\n    margin       : 20px 0px 20px 50px;\n    font-family  : Georgia, serif;\n    font-size    : 60px;\n    line-height  : 65px;\n    font-weight  : 700;\n    color        : rgb(33, 169, 126);\n  }\n\n\n\n\n    /* The ugly */\n\n    .hwaccel {  \n      -webkit-transform: translateZ(0); \n    }\n\n\n\n\n\n  .para {\n    position : relative;\n    width    : 280px;\n    padding  : 10px;\n  }\n\n  /* Text styles */\n\n\n\n  .container {\n    position          : absolute;\n    left              : 0px; \n    right             : 0px; \n    margin            : 0px auto 0px auto; \n    padding           : 0px;\n    top               : 0px;\n    width             : 580px;\n    height            : 500px;\n    background-color  : rgb(230, 230, 230);\n    overflow          : hidden;\n    cursor            : move;\n  }\n\n  .box {\n    position          : absolute;\n    margin            : 0px auto 0px auto; \n    padding           : 0px;\n    top               : 0px;\n    overflow          : hidden;\n    display           : inline; \n  }\n\n\n\n\n  .panel {\n    float            : left;\n    margin           : 0px;\n    padding          : 0px;\n    width            : 9000px;\n    background-color : transparent;\n  }\n\n  /*\n  .content {\n    position    : relative;\n    float       : left;\n    left        : 50px;\n    width       : 580px;\n    height      : 500px;\n    background  : transparent;\n  }\n  */\n\n  .big {\n    font-size: 32px;\n    line-height: 34px;\n  }\n\n  .red {\n    color: #d21;\n  }\n\n\n  .medium {\n    font-size: 24px;\n    line-height: 28px;\n  }\n\n  .bold {\n    font-weight: 700;\n  }\n\n  .regular {\n    font-weight: 400;\n  }\n\n\n  .mirror {\n      display:block;\n      -webkit-transform: matrix(-1, 0, 0, 1, 0, 0);\n         -moz-transform: matrix(-1, 0, 0, 1, 0, 0);\n            -o-transform:matrix(-1, 0, 0, 1, 0, 0);\n               transform:matrix(-1, 0, 0, 1, 0, 0);\n  }\n\n\n  #parallax {\n  	-webkit-user-select  : none;\n  	-moz-user-select     : none;\n  	position             : absolute;\n    height               : 500px;\n  	background-color     : transparent;\n  	cursor               : move;\n    z-index              : 99;\n  }\n\n  #layer1 {\n  	-webkit-user-select  : none;\n  	-moz-user-select     : none;\n  	position             : absolute;\n    height               : 500px;\n  	background-color     : transparent;\n    background           : transparent url('../img/sky_bg_small.png') repeat-x;\n    z-index              : 1;\n  }\n\n  #layer2 {\n  	-webkit-user-select  : none;\n  	-moz-user-select     : none;\n  	position             : absolute;\n    height               : 500px;\n  	background           : transparent url('../img/hill_middle_layer2_small.png') repeat-x;\n    background-position  : 0px 300px;\n    background-origin    : content-box;\n    z-index              : 2;\n\n  }\n\n  #layer3 {\n    -webkit-user-select  : none;\n    -moz-user-select     : none;\n    position             : absolute;\n    height               : 500px;\n    background           : transparent url('../img/hill_middle_layer1_small.png') repeat-x;\n    background-position  : 0px 280px;\n    background-origin    : content-box;\n    z-index              : 3;\n\n  }\n\n\n  #layer4 {\n    -webkit-user-select  : none;\n    -moz-user-select     : none;\n    position             : absolute;\n    height               : 500px;\n    background           : transparent url('../img/hill_front2_small.png') repeat-x;\n    background-position  : 0px 310px;\n    background-origin    : content-box;\n    z-index              : 4;\n\n  }\n\n\n\n  #layer5 {\n    -webkit-user-select  : none;\n    -moz-user-select     : none;\n    position             : absolute;\n    height               : 500px;\n    background           : transparent url('../img/hill_front1_small.png') repeat-x;\n    background-position  : 0px 310px;\n    background-origin    : content-box;\n    z-index              : 5;\n\n  }\n\n\n  #layer6 {\n\n    -webkit-user-select : none;\n    -moz-user-select    : none;\n    position            : absolute;\n    top                 : 10px;\n    left                : 900px;\n    width               : 580px;\n    height              : 500px;\n    pointer-events      : auto;\n    cursor              : auto;\n    z-index             : 6;\n\n  }\n\n\n  #road {\n    position             : absolute; \n    -webkit-user-select  : none;\n    -moz-user-select     : none;\n\n    background           : transparent url('../img/road.png') repeat-x;\n    background-position  : 0px 0px;\n    top                  : 428px; \n    height               : 72px;\n    width                : 100%;\n\n    pointer-events       : none;\n    z-index              : 91;\n  }\n\n\n  /*  Behaviours, animations, transitions  */\n\n  .continuous {\n    -webkit-animation-iteration-count: infinite;\n       -moz-animation-iteration-count: infinite;\n         -o-animation-iteration-count: infinite;\n            animation-iteration-count: infinite;\n\n  }\n\n  .scroll_left {\n    -webkit-animation    : slide 0.2s linear infinite;\n       -moz-animation    : slide 0.2s linear infinite;\n            animation    : slide 0.2s linear infinite;\n  }\n\n  @-webkit-keyframes slide {\n      0%   {background-position: 0 0;}\n      100% {background-position: -24px 0;}\n  }\n  ​\n  @-moz-keyframes slide {\n      0%   {background-position: 0 0;}\n      100% {background-position: -24px 0;}\n  }\n\n  @-o-keyframes slide {\n      0%   {background-position: 0 0;}\n      100% {background-position: -24px 0;}\n  }\n\n  @keyframes slide {\n      0%   {background-position: 0 0;}\n      100% {background-position: -24px 0;}\n  }\n\n  /* originally authored by Angelo Rohit - https://github.com/angelorohit */\n\n  @-webkit-keyframes woggle {\n      0% { -webkit-transform: skewX(0.9deg); }\n      10% { -webkit-transform: skewX(-0.8deg); }\n      20% { -webkit-transform: skewX(-0.3deg); }\n      30% { -webkit-transform: skewX(-0.6deg); }\n      40% { -webkit-transform: skewX(-0.5deg); }\n      50% { -webkit-transform: skewX(-0.4deg); }\n      60% { -webkit-transform: skewX(-0.7deg); }\n      70% { -webkit-transform: skewX(-0.2deg); }\n      80% { -webkit-transform: skewX(0.1deg); }\n      90% { -webkit-transform: skewX(0deg); }\n    100% { -webkit-transform: skewX(0deg); }\n  }\n\n  @-moz-keyframes woggle {\n      0% { -moz-transform: skewX(0.9deg); }\n      10% { -moz-transform: skewX(-0.8deg); }\n      20% { -moz-transform: skewX(-0.3deg); }\n      30% { -moz-transform: skewX(-0.6deg); }\n      40% { -moz-transform: skewX(-0.5deg); }\n      50% { -moz-transform: skewX(-0.4deg); }\n      60% { -moz-transform: skewX(-0.7deg); }\n      70% { -moz-transform: skewX(-0.2deg); }\n      80% { -moz-transform: skewX(0.1deg); }\n      90% { -moz-transform: skewX(0deg); }\n    100% { -moz-transform: skewX(0deg); }\n  }\n\n  @-o-keyframes woggle {\n      0% { -o-transform: skewX(0.9deg); }\n      10% { -o-transform: skewX(-0.8deg); }\n      20% { -o-transform: skewX(-0.3deg); }\n      30% { -o-transform: skewX(-0.6deg); }\n      40% { -o-transform: skewX(-0.5deg); }\n      50% { -o-transform: skewX(-0.4deg); }\n      60% { -o-transform: skewX(-0.7deg); }\n      70% { -o-transform: skewX(-0.2deg); }\n      80% { -o-transform: skewX(0.1deg); }\n      90% { -o-transform: skewX(0deg); }\n    100% { -o-transform: skewX(0deg); }\n  }\n\n  @keyframes woggle {\n      0% { transform: skewX(0.9deg); }\n      10% { transform: skewX(-0.8deg); }\n      20% { transform: skewX(-0.3deg); }\n      30% { transform: skewX(-0.6deg); }\n      40% { transform: skewX(-0.5deg); }\n      50% { transform: skewX(-0.4deg); }\n      60% { transform: skewX(-0.7deg); }\n      70% { transform: skewX(-0.2deg); }\n      80% { transform: skewX(0.1deg); }\n      90% { transform: skewX(0deg); }\n    100% { transform: skewX(0deg); }\n  }\n\n  .woggle {\n      -webkit-animation-name: woggle;\n      -moz-animation-name: woggle;\n      -o-animation-name: woggle;\n      animation-name: woggle;\n\n      -webkit-animation-timing-function: ease-in;\n      -moz-animation-timing-function: ease-in;\n      -o-animation-timing-function: ease-in;\n      animation-timing-function: ease-in;\n  }\n\n  .animated.woggle {\n      -webkit-animation-duration: 0.5s;\n      -moz-animation-duration: 0.5s;\n      -o-animation-duration: 0.5s;\n      animation-duration: 0.5s;\n  }\n\n\n\n  @-webkit-keyframes wibble {\n      0% { -webkit-transform: translateY(1px); }\n      10% { -webkit-transform: translateY(-2px); }\n      20% { -webkit-transform: translateY(1px); }\n      30% { -webkit-transform: translateY(-2px); }\n      40% { -webkit-transform: translateY(-5px); }\n      50% { -webkit-transform: translateY(-2px); }\n      60% { -webkit-transform: translateY(1px); }\n      70% { -webkit-transform: translateY(-2px); }\n      80% { -webkit-transform: translateY(1px); }\n      90% { -webkit-transform: translateY(0px); }\n    100% { -webkit-transform: translateY(0px); }\n  }\n\n  @-moz-keyframes wibble {\n      0% { -moz-transform: translateY(1px); }\n      10% { -moz-transform: translateY(-2px); }\n      20% { -moz-transform: translateY(1px); }\n      30% { -moz-transform: translateY(-2px); }\n      40% { -moz-transform: translateY(-5px); }\n      50% { -moz-transform: translateY(-2px); }\n      60% { -moz-transform: translateY(1px); }\n      70% { -moz-transform: translateY(-2px); }\n      80% { -moz-transform: translateY(1px); }\n      90% { -moz-transform: translateY(0px); }\n    100% { -moz-transform: translateY(0px); }\n  }\n\n  @-o-keyframes wibble {\n      0% { -o-transform: translateY(1px); }\n      10% { -o-transform: translateY(-2px); }\n      20% { -o-transform: translateY(1px); }\n      30% { -o-transform: translateY(-2px); }\n      40% { -o-transform: translateY(-5px); }\n      50% { -o-transform: translateY(-2px); }\n      60% { -o-transform: translateY(1px); }\n      70% { -o-transform: translateY(-2px); }\n      80% { -o-transform: translateY(1px); }\n      90% { -o-transform: translateY(0px); }\n    100% { -o-transform: translateY(0px); }\n  }\n\n  @keyframes wibble {\n      0% { transform: translateY(1px); }\n      10% { transform: translateY(-2px); }\n      20% { transform: translateY(1px); }\n      30% { transform: translateY(-2px); }\n      40% { transform: translateY(-5px); }\n      50% { transform: translateY(-2px); }\n      60% { transform: translateY(1px); }\n      70% { transform: translateY(-2px); }\n      80% { transform: translateY(1px); }\n      90% { transform: translateY(0px); }\n    100% { transform: translateY(0px); }\n  }\n\n  .wibble {\n      -webkit-animation-name: wibble;\n      -moz-animation-name: wibble;\n      -o-animation-name: wibble;\n      animation-name: wibble;\n\n      -webkit-animation-timing-function: ease-in;\n      -moz-animation-timing-function: ease-in;\n      -o-animation-timing-function: ease-in;\n      animation-timing-function: ease-in;\n\n  }\n\n  .animated.wibble {\n      -webkit-animation-duration: 0.3s;\n         -moz-animation-duration: 0.3s;\n           -o-animation-duration: 0.3s;\n              animation-duration: 0.3s;\n\n  }\n\n\n\n  .driving.fast {\n      -webkit-transform: skewX(165deg) scaleY(1.2) translateY(-10px);\n         -moz-transform: skewX(165deg) scaleY(1.2) translateY(-10px);\n           -o-transform: skewX(165deg) scaleY(1.2) translateY(-10px);\n              transform: skewX(165deg) scaleY(1.2) translateY(-10px);\n\n  /*    -webkit-transform: scaleY(1.2);\n         -moz-transform: scaleY(1.2);\n           -o-transform: scaleY(1.2);\n              transform: scaleY(1.2);\n  */\n  }\n\n\n\n\n  .parallax_layer {\n\n  }\n\n\n\n\n\n\n  #layer_player {\n    -webkit-user-select  : none;\n    -moz-user-select     : none;\n    position             : absolute;\n    height               : 500px;\n\n    pointer-events       : none;\n    z-index              : 100;\n  }\n\n  #video1_container {\n    display           : inline; \n    -webkit-user-select  : none;\n    -moz-user-select     : none;\n    margin            : 0px auto 0px auto; \n    padding           : 0px;\n    top               : 0px;\n    overflow          : hidden;\n    background        : transparent;  \n    z-index           : 190;\n    cursor            : auto;\n  }\n\n  #video1 {\n    z-index           : 201;\n    cursor            : auto;\n    pointer-events    : auto;\n  }\n\n\n  #player {\n    -webkit-user-select  : none;\n    -moz-user-select     : none;\n    position             : absolute;\n    /*height               : 500px;*/\n    background           : transparent;\n    background-position  : bottom left;\n    background-origin    : content-box;\n    z-index              : 101;\n    pointer-events       : none;\n\n  }\n\n\n  #car {\n    -webkit-user-select  : none;\n    -moz-user-select     : none;\n    position             : absolute;\n    top                  : 364px;\n    left                 : 150px;\n    background           : transparent;\n    z-index              : 110;\n  }\n\n\n  #HUD {\n    -webkit-user-select  : none;\n    -moz-user-select     : none;\n    position             : relative;\n    width                : 580px;\n    height               : 500px;\n    z-index              : 200;\n    padding              : 16px;\n    pointer-events       : none;\n  }\n\n\n  #logo {\n    position             : absolute;\n    width                : 85px;\n    height               : 30px;\n    left                 : 448px;\n    top                  : 0;\n    z-index              : 90;\n    margin               : 16px;\n    cursor               : auto; \n    pointer-events       : none;  \n  }\n\n\n\n  #birds {\n    position  : absolute;\n    top       : 96px;\n    left      : 1166px;\n\n  }\n\n\n\n  #level1 {\n    position        : absolute;\n    top             : 200px;\n    left            : 400px;\n    width           : 580px;\n    height          : 428px;\n    pointer-events  : none;\n    background      : transparent; \n  }\n\n  #level2 {\n    position        : absolute;\n    top             : 10px;\n    left            : 1400px;\n    width           : 580px;\n    height          : 500px;\n    pointer-events  : none;\n    background      : transparent; \n  }\n\n\n  #level3 {\n    position      : absolute;\n    top           : 10px;\n    left          : 2700px;\n    width         : 580px;\n    height        : 500px;\n    pointer-events: none;\n    background      : transparent; \n\n  }\n\n\n  #level4 {\n    position      : absolute;\n    top           : 10px;\n    left          : 3500px;\n    width         : 580px;\n    height        : 500px;\n    pointer-events: none;\n    background    : transparent url('../img/level4.png') no-repeat; \n  }\n\n\n\n\n  ​",
+			"file": "assets/css/parallaxVertical.css",
+			"file_size": 14156,
+			"file_write_time": 130131646407320119,
+			"settings":
+			{
+				"buffer_size": 14491,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "assets/js/pi.bama.js",
+			"settings":
+			{
+				"buffer_size": 5977,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "assets/js/bama.nyt.norge.js",
+			"settings":
+			{
+				"buffer_size": 4038,
 				"line_ending": "Windows"
 			}
 		}
@@ -407,18 +431,27 @@
 	},
 	"file_history":
 	[
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/assets/css/animate.css",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/index.html",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/assets/css/bama.main.css",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/scripts/kromaviews/php/public/views-report-full.php",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/assets/js/lib/jquery.parallaxSwipe.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/assets/js/pi.bama.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/assets/js/bama.nyt.norge.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/pi/README.md",
+		"/C/Users/ballefrans/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/assets/css/source/pulse.css",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/pi/cli/assets/css/head.css",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/pi/srv/php/pi.util.file.highlight.php",
+		"/C/util/loadaliases.cmd",
 		"/D/dev/VIDEO/mplayer-svn-36265/README.txt",
 		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/assets/js/lib/parallaxSwipe/parallax.html",
 		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/pi/π.sublime-workspace",
 		"/D/Work/VG Mobil/ads.utilities/common/assets/js/lib/π.utilities.scroll-listener.js",
-		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/pi/README.md",
-		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/assets/js/lib/jquery.parallaxSwipe.js",
 		"/C/Users/ballefrans/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
 		"/D/Work/VG Mobil/ads.utilities/common/assets/js/lib/π.core.background-worker.js",
 		"/D/Work/VG Mobil/ads.utilities/common/assets/js/lib/π.core.main.js",
 		"/D/Work/VG Mobil/ads.utilities/common/assets/js/lib/ads.utilities.scroll-listener.js",
-		"/C/util/loadaliases.cmd",
-		"/C/Users/ballefrans/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/C/Users/ballefrans/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
 		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/parallax/parallax.html",
 		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/parallaxVertical.html",
@@ -525,16 +558,7 @@
 		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/scripts/kromaviews/php/server/websocket.client.php",
 		"/D/Work/KROMA/KromaViews/KromaTracks.js",
 		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/zeromq/sample.php",
-		"/D/dev/doc/zguide/examples/PHP/psenvpub.php",
-		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/scripts/kromaviews/php/public/assets/js/libs/binary.js",
-		"/D/dev/doc/zguide/examples/PHP/asyncsrv.php",
-		"/D/dev/doc/zguide/examples/PHP/zhelpers.php",
-		"/D/dev/doc/zguide/examples/PHP/taskwork.php",
-		"/D/dev/ZeroMQ/delphizmq/README.md",
-		"/D/dev/doc/research/storm.php",
-		"/D/dev/lazarus/components/xdev_toolkit/ReadMe.txt",
-		"/D/install/dev/salt-0.12.1/requirements.txt",
-		"/D/dev/ZeroMQ/delphizmq/zmq.inc"
+		"/D/dev/doc/zguide/examples/PHP/psenvpub.php"
 	],
 	"find":
 	{
@@ -559,6 +583,45 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"preve",
+			" onselectstart=\"return false;\"",
+			"curso",
+			"move",
+			"\"move\"",
+			"log",
+			"\n    ",
+			"addRe",
+			"/**",
+			"\n",
+			"LAYER",
+			"\n              ",
+			"0,",
+			"0",
+			"160deg",
+			"()",
+			"(1.2)",
+			"g)",
+			"deg",
+			"170deg",
+			"170",
+			"skewX",
+			"18deg",
+			"8deg",
+			"Y(-5",
+			"Y(9px",
+			"translate0",
+			"translateY",
+			"skewX",
+			"woggle",
+			"wiggle",
+			"9deg",
+			"(2deg",
+			"(4deg",
+			"9deg",
+			"current",
+			"length",
+			");\n",
+			"1.4",
 			"100px",
 			"100",
 			"\"container\"",
@@ -647,43 +710,7 @@
 			"SlickGrid",
 			"slickgrid",
 			"js/jqu",
-			"/api",
-			"kromaviews",
-			"app",
-			"assets",
-			"say($msg)",
-			"Wine",
-			"wine",
-			"Wine",
-			"wine",
-			"Wine",
-			"wine",
-			"Wine",
-			"wine",
-			"Wine",
-			"wine",
-			"Wine",
-			"wines",
-			"Wines",
-			"wines",
-			"  src",
-			"type=\"text/javascript\"",
-			"[JOBS]",
-			"headerlist",
-			"microtime",
-			"->say",
-			"isset",
-			"$curl",
-			"curl",
-			"CURL",
-			"curl",
-			"master",
-			"curl_arr",
-			"sendReply",
-			"sendRe		",
-			"private",
-			"say",
-			"_connection"
+			"/api"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -707,46 +734,18 @@
 			[
 				{
 					"buffer": 0,
-					"file": "assets/css/parallaxVertical.css",
-					"settings":
-					{
-						"buffer_size": 7320,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4430,
-								4430
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 6148.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "index.html",
 					"settings":
 					{
-						"buffer_size": 3155,
+						"buffer_size": 3687,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1462,
-								1462
+								2230,
+								2230
 							]
 						],
 						"settings":
@@ -756,31 +755,115 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1160.0,
+						"translation.y": 2021.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "parallax/js/jquery.parallaxSwipe.js",
+					"settings":
+					{
+						"buffer_size": 5166,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2393,
+								2393
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1499.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "assets/js/bama.game.js",
+					"file": "assets/css/bama.main.css",
 					"settings":
 					{
-						"buffer_size": 1033,
+						"buffer_size": 15031,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								520,
-								520
+								4340,
+								4406
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 12760.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "assets/css/parallaxVertical.css",
+					"settings":
+					{
+						"buffer_size": 14491,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13128,
+								13128
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 14330.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "assets/js/pi.bama.js",
+					"settings":
+					{
+						"buffer_size": 5977,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								89,
+								89
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
@@ -790,29 +873,29 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/pi/srv/php/pi.util.file.highlight.php",
+					"buffer": 5,
+					"file": "assets/js/bama.nyt.norge.js",
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 4038,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								3896,
+								3896
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 3248.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

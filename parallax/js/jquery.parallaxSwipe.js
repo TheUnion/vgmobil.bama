@@ -72,7 +72,15 @@ var disablelinks=function() {
 
 var touchStart=function(e) { //mouse down
   if (!_mouseDown) {
-    if (hasTouch) { e.preventDefault(); e = event.touches[0]; } else { if (!e) e = window.event; }
+    if (hasTouch) { 
+      console.log('We have touch: touchStart()'); 
+      e.preventDefault(); 
+      e = event.touches[0]; 
+    } 
+    else { 
+      if (!e) e = window.event; 
+    }
+
     if (elm.setCapture) {
       elm.setCapture(); //if dragged outside of div
     } else {
