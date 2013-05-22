@@ -1,585 +1,129 @@
-  body {
-    margin       : 0;
-    padding      : 0;
-  	background   : rgb(230, 250, 250);
-  	color        : white;
-  	line-height  : 1.5;
-  	font-family  : Cabin, Ubuntu, Helvetica, sans-serif;
-    font-weight  : 400;
-  	font-size    : 14px;
-  }
+﻿body {
+  margin: 0px;
+  padding: 0px;
+	background: rgb(230, 250, 250);
+	color: black;
+	line-height: 1.5;
+	font-family: Arial,sans-serif;
+	font-size: 14px;
+}
+
+.container {
+  position: absolute;
+  left: 0px; 
+  right: 0px; 
+  margin: 0px auto 0px auto; 
+  padding: 0px;
+  top: 0px;
+  width: 900px;
+  height: 500px;
+	color: black;
+	background-color: rgb(230, 230, 230);;
+  overflow: hidden;
+}
+
+#parallax {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	position: absolute;
+	color: black;
+  height: 500px;
+	background-color: transparent;
+	cursor: move;
+  z-index: 4;
+}
+#layer1 {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	position: absolute;
+	color: black;
+  height: 500px;
+	background-color: transparent;
+	cursor: move;
+  z-index: 3;
+}
+#layer2 {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	position: absolute;
+	color: black;
+  height: 500px;
+	background: transparent url('images/cloud1.png') repeat;
+	cursor: move;
+  z-index: 2;
+}
+#layer3 {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	position: absolute;
+	color: black;
+  height: 500px;
+	background: transparent url('images/cloud2.png') repeat;
+	cursor: move;
+  z-index: 1;
+}
+.panel {
+  float: left;
+	margin: 0px;
+  padding: 0px;
+	width: 900px;
+	background-color: transparent;
+}
+h1 {
+	position: relative;
+	width: 300px;
+  margin: 20px 0px 20px 50px;
+	font-family: Georgia, serif;
+	font-size: 60px;
+  line-height: 65px;
+  font-weight: normal;
+  color: rgb(33, 169, 126);
+}
+p {
+	position: relative;
+	width: 280px;
+	padding: 10px;
+}
+.content {
+  position: relative;
+  float: left;
+  left: 50px;
+  width: 300px;
+  webkit-border-radius: 20px; 
+  -moz-border-radius: 20px; 
+  border-radius: 20px;
+  -webkit-box-shadow: 1px 1px 30px rgba(0, 0, 0, 1);
+ -moz-box-shadow: 1px 1px 30px rgba(0, 0, 0, 1);
+  box-shadow: 1px 1px 30px rgba(0, 0, 0, 1);
+  -moz-opacity: 0.7;
+  opacity: 0.7;
+  background-color: white;
+}
+#balloon1 {
+  position: absolute;
+  top: -20px;
+  left: 400px;
+  width: 350px;
+  height: 500px;
+  pointer-events: none;
+  background: transparent url('images/balloon1.png') no-repeat; 
+}
+#balloon2 {
+  position: absolute;
+  top: 10px;
+  left: 1400px;
+  width: 500px;
+  height: 500px;
+  pointer-events: none;
+  background: transparent url('images/balloon2.png') no-repeat; 
+}
+#balloon3 {
+  position: absolute;
+  top: 10px;
+  left: 2700px;
+  width: 300px;
+  height: 500px;
+  pointer-events: none;
+  background: transparent url('images/balloon3.png') no-repeat; 
+}
 
-
-  h1 {
-    position     : relative;
-    width        : 300px;
-    margin       : 20px 0px 20px 50px;
-    font-family  : Georgia, serif;
-    font-size    : 60px;
-    line-height  : 65px;
-    font-weight  : 700;
-    color        : rgb(33, 169, 126);
-  }
-
-
-
-
-    /* The ugly */
-
-    .hwaccel {  
-      -webkit-transform: translateZ(0); 
-    }
-
-
-
-
-
-  .para {
-    position : relative;
-    width    : 280px;
-    padding  : 10px;
-  }
-
-  /* Text styles */
-
-
-
-  .container {
-    position          : absolute;
-    left              : 0px; 
-    right             : 0px; 
-    margin            : 0px auto 0px auto; 
-    padding           : 0px;
-    top               : 0px;
-    width             : 580px;
-    height            : 500px;
-    background-color  : rgb(230, 230, 230);
-    overflow          : hidden;
-    cursor            : move;
-  }
-
-  .box {
-    position          : absolute;
-    margin            : 0px auto 0px auto; 
-    padding           : 0px;
-    top               : 0px;
-    overflow          : hidden;
-    display           : inline; 
-  }
-
-
-
-
-  .panel {
-    float            : left;
-    margin           : 0px;
-    padding          : 0px;
-    width            : 9000px;
-    background-color : transparent;
-  }
-
-  /*
-  .content {
-    position    : relative;
-    float       : left;
-    left        : 50px;
-    width       : 580px;
-    height      : 500px;
-    background  : transparent;
-  }
-  */
-
-  .big {
-    font-size: 32px;
-    line-height: 34px;
-  }
-
-  .red {
-    color: #d21;
-  }
-
-
-  .medium {
-    font-size: 24px;
-    line-height: 28px;
-  }
-
-  .bold {
-    font-weight: 700;
-  }
-
-  .regular {
-    font-weight: 400;
-  }
-
-
-  .mirror {
-      display:block;
-      -webkit-transform: matrix(-1, 0, 0, 1, 0, 0);
-         -moz-transform: matrix(-1, 0, 0, 1, 0, 0);
-            -o-transform:matrix(-1, 0, 0, 1, 0, 0);
-               transform:matrix(-1, 0, 0, 1, 0, 0);
-  }
-
-
-  #parallax {
-  	-webkit-user-select  : none;
-  	-moz-user-select     : none;
-  	position             : absolute;
-    height               : 500px;
-  	background           : transparent;
-  	cursor               : move;
-    z-index              : -1;
-    pointer-events       : none;
-  }
-
-  #layer1 {
-  	-webkit-user-select  : none;
-  	-moz-user-select     : none;
-  	position             : absolute;
-    height               : 500px;
-  	background-color     : transparent;
-    background           : transparent url('../img/sky_bg_small.png') repeat-x;
-    z-index              : 1;
-  }
-
-  #layer2 {
-  	-webkit-user-select  : none;
-  	-moz-user-select     : none;
-  	position             : absolute;
-    height               : 500px;
-  	background           : transparent url('../img/hill_middle_layer2_small.png') repeat-x;
-    background-position  : 0px 300px;
-    background-origin    : content-box;
-    z-index              : 2;
-
-  }
-
-  #layer3 {
-    -webkit-user-select  : none;
-    -moz-user-select     : none;
-    position             : absolute;
-    height               : 500px;
-    background           : transparent url('../img/hill_middle_layer1_small.png') repeat-x;
-    background-position  : 0px 280px;
-    background-origin    : content-box;
-    z-index              : 3;
-
-  }
-
-
-  #layer4 {
-    -webkit-user-select  : none;
-    -moz-user-select     : none;
-    position             : absolute;
-    height               : 500px;
-    background           : transparent url('../img/hill_front2_small.png') repeat-x;
-    background-position  : 0px 310px;
-    background-origin    : content-box;
-    z-index              : 4;
-
-  }
-
-
-
-  #layer5 {
-    -webkit-user-select  : none;
-    -moz-user-select     : none;
-    position             : absolute;
-    height               : 500px;
-    background           : transparent url('../img/hill_front1_small.png') repeat-x;
-    background-position  : 0px 310px;
-    background-origin    : content-box;
-    z-index              : 5;
-
-  }
-
-
-  #layer6 {
-
-    -webkit-user-select : none;
-    -moz-user-select    : none;
-    position            : absolute;
-    top                 : 10px;
-    left                : 900px;
-    width               : 580px;
-    height              : 500px;
-    pointer-events      : auto;
-    cursor              : auto;
-    z-index             : 6;
-
-  }
-
-
-  #road {
-    position             : absolute; 
-    -webkit-user-select  : none;
-    -moz-user-select     : none;
-
-    background           : transparent url('../img/road.png') repeat-x;
-    background-position  : 0px 0px;
-    top                  : 428px; 
-    height               : 72px;
-    width                : 100%;
-
-    pointer-events       : none;
-    z-index              : 91;
-  }
-
-
-  /*  Behaviours, animations, transitions  */
-
-  .continuous {
-    -webkit-animation-iteration-count: infinite;
-       -moz-animation-iteration-count: infinite;
-         -o-animation-iteration-count: infinite;
-            animation-iteration-count: infinite;
-
-  }
-
-  .scroll_left {
-    -webkit-animation    : slide 0.2s linear infinite;
-       -moz-animation    : slide 0.2s linear infinite;
-            animation    : slide 0.2s linear infinite;
-  }
-
-  @-webkit-keyframes slide {
-      0%   {background-position: 0 0;}
-      100% {background-position: -24px 0;}
-  }
-  ​
-  @-moz-keyframes slide {
-      0%   {background-position: 0 0;}
-      100% {background-position: -24px 0;}
-  }
-
-  @-o-keyframes slide {
-      0%   {background-position: 0 0;}
-      100% {background-position: -24px 0;}
-  }
-
-  @keyframes slide {
-      0%   {background-position: 0 0;}
-      100% {background-position: -24px 0;}
-  }
-
-  /* originally authored by Angelo Rohit - https://github.com/angelorohit */
-
-  @-webkit-keyframes woggle {
-      0% { -webkit-transform: skewX(0.9deg); }
-      10% { -webkit-transform: skewX(-0.8deg); }
-      20% { -webkit-transform: skewX(-0.3deg); }
-      30% { -webkit-transform: skewX(-0.6deg); }
-      40% { -webkit-transform: skewX(-0.5deg); }
-      50% { -webkit-transform: skewX(-0.4deg); }
-      60% { -webkit-transform: skewX(-0.7deg); }
-      70% { -webkit-transform: skewX(-0.2deg); }
-      80% { -webkit-transform: skewX(0.1deg); }
-      90% { -webkit-transform: skewX(0deg); }
-    100% { -webkit-transform: skewX(0deg); }
-  }
-
-  @-moz-keyframes woggle {
-      0% { -moz-transform: skewX(0.9deg); }
-      10% { -moz-transform: skewX(-0.8deg); }
-      20% { -moz-transform: skewX(-0.3deg); }
-      30% { -moz-transform: skewX(-0.6deg); }
-      40% { -moz-transform: skewX(-0.5deg); }
-      50% { -moz-transform: skewX(-0.4deg); }
-      60% { -moz-transform: skewX(-0.7deg); }
-      70% { -moz-transform: skewX(-0.2deg); }
-      80% { -moz-transform: skewX(0.1deg); }
-      90% { -moz-transform: skewX(0deg); }
-    100% { -moz-transform: skewX(0deg); }
-  }
-
-  @-o-keyframes woggle {
-      0% { -o-transform: skewX(0.9deg); }
-      10% { -o-transform: skewX(-0.8deg); }
-      20% { -o-transform: skewX(-0.3deg); }
-      30% { -o-transform: skewX(-0.6deg); }
-      40% { -o-transform: skewX(-0.5deg); }
-      50% { -o-transform: skewX(-0.4deg); }
-      60% { -o-transform: skewX(-0.7deg); }
-      70% { -o-transform: skewX(-0.2deg); }
-      80% { -o-transform: skewX(0.1deg); }
-      90% { -o-transform: skewX(0deg); }
-    100% { -o-transform: skewX(0deg); }
-  }
-
-  @keyframes woggle {
-      0% { transform: skewX(0.9deg); }
-      10% { transform: skewX(-0.8deg); }
-      20% { transform: skewX(-0.3deg); }
-      30% { transform: skewX(-0.6deg); }
-      40% { transform: skewX(-0.5deg); }
-      50% { transform: skewX(-0.4deg); }
-      60% { transform: skewX(-0.7deg); }
-      70% { transform: skewX(-0.2deg); }
-      80% { transform: skewX(0.1deg); }
-      90% { transform: skewX(0deg); }
-    100% { transform: skewX(0deg); }
-  }
-
-  .woggle {
-      -webkit-animation-name: woggle;
-      -moz-animation-name: woggle;
-      -o-animation-name: woggle;
-      animation-name: woggle;
-
-      -webkit-animation-timing-function: ease-in;
-      -moz-animation-timing-function: ease-in;
-      -o-animation-timing-function: ease-in;
-      animation-timing-function: ease-in;
-  }
-
-  .animated.woggle {
-      -webkit-animation-duration: 0.5s;
-      -moz-animation-duration: 0.5s;
-      -o-animation-duration: 0.5s;
-      animation-duration: 0.5s;
-  }
-
-
-
-  @-webkit-keyframes wibble {
-      0% { -webkit-transform: translateY(1px); }
-      10% { -webkit-transform: translateY(-2px); }
-      20% { -webkit-transform: translateY(1px); }
-      30% { -webkit-transform: translateY(-2px); }
-      40% { -webkit-transform: translateY(-5px); }
-      50% { -webkit-transform: translateY(-2px); }
-      60% { -webkit-transform: translateY(1px); }
-      70% { -webkit-transform: translateY(-2px); }
-      80% { -webkit-transform: translateY(1px); }
-      90% { -webkit-transform: translateY(0px); }
-    100% { -webkit-transform: translateY(0px); }
-  }
-
-  @-moz-keyframes wibble {
-      0% { -moz-transform: translateY(1px); }
-      10% { -moz-transform: translateY(-2px); }
-      20% { -moz-transform: translateY(1px); }
-      30% { -moz-transform: translateY(-2px); }
-      40% { -moz-transform: translateY(-5px); }
-      50% { -moz-transform: translateY(-2px); }
-      60% { -moz-transform: translateY(1px); }
-      70% { -moz-transform: translateY(-2px); }
-      80% { -moz-transform: translateY(1px); }
-      90% { -moz-transform: translateY(0px); }
-    100% { -moz-transform: translateY(0px); }
-  }
-
-  @-o-keyframes wibble {
-      0% { -o-transform: translateY(1px); }
-      10% { -o-transform: translateY(-2px); }
-      20% { -o-transform: translateY(1px); }
-      30% { -o-transform: translateY(-2px); }
-      40% { -o-transform: translateY(-5px); }
-      50% { -o-transform: translateY(-2px); }
-      60% { -o-transform: translateY(1px); }
-      70% { -o-transform: translateY(-2px); }
-      80% { -o-transform: translateY(1px); }
-      90% { -o-transform: translateY(0px); }
-    100% { -o-transform: translateY(0px); }
-  }
-
-  @keyframes wibble {
-      0% { transform: translateY(1px); }
-      10% { transform: translateY(-2px); }
-      20% { transform: translateY(1px); }
-      30% { transform: translateY(-2px); }
-      40% { transform: translateY(-5px); }
-      50% { transform: translateY(-2px); }
-      60% { transform: translateY(1px); }
-      70% { transform: translateY(-2px); }
-      80% { transform: translateY(1px); }
-      90% { transform: translateY(0px); }
-    100% { transform: translateY(0px); }
-  }
-
-  .wibble {
-      -webkit-animation-name: wibble;
-      -moz-animation-name: wibble;
-      -o-animation-name: wibble;
-      animation-name: wibble;
-
-      -webkit-animation-timing-function: ease-in;
-      -moz-animation-timing-function: ease-in;
-      -o-animation-timing-function: ease-in;
-      animation-timing-function: ease-in;
-
-  }
-
-  .animated.wibble {
-      -webkit-animation-duration: 0.3s;
-         -moz-animation-duration: 0.3s;
-           -o-animation-duration: 0.3s;
-              animation-duration: 0.3s;
-
-  }
-
-
-
-  .driving.fast {
-      -webkit-transform: skewX(165deg) scaleY(1.2) translateY(-10px);
-         -moz-transform: skewX(165deg) scaleY(1.2) translateY(-10px);
-           -o-transform: skewX(165deg) scaleY(1.2) translateY(-10px);
-              transform: skewX(165deg) scaleY(1.2) translateY(-10px);
-
-  /*    -webkit-transform: scaleY(1.2);
-         -moz-transform: scaleY(1.2);
-           -o-transform: scaleY(1.2);
-              transform: scaleY(1.2);
-  */
-  }
-
-
-
-
-  .parallax_layer {
-  }
-
-
-
-
-
-
-  #layer_player {
-    -webkit-user-select  : none;
-    -moz-user-select     : none;
-    position             : absolute;
-    height               : 500px;
-
-    pointer-events       : none;
-    z-index              : 100;
-  }
-
-  #video1_container {
-    display           : inline; 
-    -webkit-user-select  : none;
-    -moz-user-select     : none;
-    margin            : 0px auto 0px auto; 
-    padding           : 0px;
-    top               : 0px;
-    overflow          : hidden;
-    background        : transparent;  
-    z-index           : 190;
-    cursor            : default;
-    pointer-events    : all;
-  }
-
-  #video1 {
-    z-index           : 201;
-    cursor            : default;
-    pointer-events    : all;
-  }
-
-
-  #player {
-    -webkit-user-select  : none;
-    -moz-user-select     : none;
-    position             : absolute;
-    /*height               : 500px;*/
-    background           : transparent;
-    background-position  : bottom left;
-    background-origin    : content-box;
-    z-index              : 101;
-    pointer-events       : none;
-
-  }
-
-
-  #car {
-    -webkit-user-select  : none;
-    -moz-user-select     : none;
-    position             : absolute;
-    top                  : 364px;
-    left                 : 150px;
-    background           : transparent;
-    z-index              : 110;
-  }
-
-
-  #HUD {
-    -webkit-user-select  : none;
-    -moz-user-select     : none;
-    position             : relative;
-    width                : 580px;
-    height               : 500px;
-    z-index              : 200;
-    padding              : 16px;
-    pointer-events       : none;
-  }
-
-
-  #logo {
-    position             : absolute;
-    width                : 85px;
-    height               : 30px;
-    left                 : 448px;
-    top                  : 0;
-    z-index              : 90;
-    margin               : 16px;
-    cursor               : auto; 
-    pointer-events       : none;  
-  }
-
-
-
-  #birds {
-    position  : absolute;
-    top       : 96px;
-    left      : 1166px;
-
-  }
-
-
-
-  #level1 {
-    position        : absolute;
-    top             : 200px;
-    left            : 400px;
-    width           : 580px;
-    height          : 428px;
-    pointer-events  : none;
-    background      : transparent; 
-  }
-
-  #level2 {
-    position        : absolute;
-    top             : 10px;
-    left            : 1400px;
-    width           : 580px;
-    height          : 500px;
-    pointer-events  : none;
-    background      : transparent; 
-  }
-
-
-  #level3 {
-    position      : absolute;
-    top           : 10px;
-    left          : 2700px;
-    width         : 580px;
-    height        : 500px;
-    pointer-events: none;
-    background      : transparent; 
-
-  }
-
-
-  #level4 {
-    position      : absolute;
-    top           : 10px;
-    left          : 3500px;
-    width         : 580px;
-    height        : 500px;
-    pointer-events: none;
-    background    : transparent url('../img/level4.png') no-repeat; 
-  }
-
-
-
-
-  ​

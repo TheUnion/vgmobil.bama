@@ -49,6 +49,9 @@
   .parallax_layer {
     
     /*  Group all the parallax layers with this class */
+    -webkit-user-select  : none;
+    -moz-user-select  : none;
+    pointer-events       : none;
 
   }
 
@@ -157,28 +160,29 @@
  */
 
   #parallax {
-/*  	-webkit-user-select  : none;
+  	-webkit-user-select  : none;
   	-moz-user-select     : none;
-*/  	position             : absolute;
+  	position             : absolute;
     height               : 500px;
   	cursor               : move;
-    /*pointer-events       : none;*/
-    z-index              : 500;
+    z-index              : 5000;
   }
 
   #layer1 {
-/*  	-webkit-user-select  : none;
+  	-webkit-user-select  : none;
   	-moz-user-select     : none;
-*/  	position             : absolute;
+  	position             : absolute;
     height               : 500px;
     background           : transparent url('../img/sky_bg_small.png') repeat-x;
+    pointer-events       : none;
     z-index              : 1;
   }
 
   #layer2 {
-/*  	-webkit-user-select  : none;
+  	-webkit-user-select  : none;
   	-moz-user-select     : none;
-*/	
+    pointer-events       : none;
+	
     position             : absolute;
     height               : 500px;
   	background           : transparent; /* url('../img/hill_middle_layer2_small.png') repeat-x;*/
@@ -189,9 +193,10 @@
   }
 
   #layer3 {
-/*    -webkit-user-select  : none;
+    -webkit-user-select  : none;
     -moz-user-select     : none;
-*/    position             : absolute;
+    pointer-events       : none;
+    position             : absolute;
     height               : 500px;
     background           : transparent url('../img/hill_middle_layer1_small.png') repeat-x;
     background-position  : 0px 280px;
@@ -202,9 +207,10 @@
 
 
   #layer4 {
-/*    -webkit-user-select  : none;
+    -webkit-user-select  : none;
     -moz-user-select     : none;
-*/
+    pointer-events       : none;
+
     position             : absolute;
     height               : 500px;
     background           : transparent url('../img/hill_front2_small.png') repeat-x;
@@ -219,6 +225,9 @@
   #layer5 {
 /*  This is our main layer, the one where everything happens
 */    
+    -webkit-user-select  : none;
+    -moz-user-select     : none;
+    pointer-events       : none;
     position             : absolute;
     height               : 500px;
     background           : transparent url('../img/hill_front1_small.png') repeat-x;
@@ -231,9 +240,9 @@
 
   #layer6 {
 
-/*    -webkit-user-select : none;
+    -webkit-user-select : none;
     -moz-user-select    : none;
-*/    position            : absolute;
+    position            : absolute;
     top                 : 10px;
     left                : 900px;
     width               : 580px;
@@ -292,6 +301,9 @@
 
 
   #video1_container {
+    -webkit-user-select  : none;
+    -moz-user-select     : none;
+    pointer-events       : none;
     position          : relative; 
     display           : block; 
     margin            : 0px auto 0px auto; 
@@ -330,6 +342,9 @@
 
 
   #layer_player {
+    -webkit-user-select  : none;
+    -moz-user-select     : none;
+    pointer-events       : none;
     position             : absolute;
     height               : 500px;
     z-index              : 100;
