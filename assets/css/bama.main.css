@@ -46,6 +46,14 @@
  */
 
 
+  .parallax_layer {
+    
+    /*  Group all the parallax layers with this class */
+
+  }
+
+
+
   .para {
     position : relative;
     width    : 280px;
@@ -142,13 +150,6 @@
   }
 
 
-  #progress {
-    margin: 0;
-    padding: 0;
-    z-index: 3000;
-    pointer-events : none;
-  }
-
 
 /**
  *  Parallax layers
@@ -216,17 +217,16 @@
 
 
   #layer5 {
-/*    -webkit-user-select  : none;
-    -moz-user-select     : none;
-*/    position             : absolute;
+/*  This is our main layer, the one where everything happens
+*/    
+    position             : absolute;
     height               : 500px;
     background           : transparent url('../img/hill_front1_small.png') repeat-x;
     background-position  : 0px 310px;
     background-origin    : content-box;
-/*    pointer-events       : inherit;*/
     z-index              : 5;
-
   }
+
 
 
   #layer6 {
@@ -244,9 +244,54 @@
   }
 
 
+
+
+/**
+ *  This is our sprites and scene/gfx elements
+ *
+ */
+
+
+  #progress {
+    margin: 0;
+    padding: 0;
+    z-index: 3000;
+    pointer-events : none;
+  }
+
+
+  #frosta_sign {
+
+  }
+
+  #farmer_small {
+    
+  }
+
+  #farmer_large {
+    
+  }
+
+  #lise_large {
+    
+  }
+
+  #lise_small {
+    
+  }
+
+  #drivein_sign {
+    
+  }
+
+  #drivein_screen {
+    
+  }
+
+
+
+
   #video1_container {
-/*    /*-webkit-user-select  : none;*/
-    /*-moz-user-select     : none;*/
     position          : relative; 
     display           : block; 
     margin            : 0px auto 0px auto; 
@@ -256,8 +301,6 @@
     overflow          : hidden;
     background        : transparent; 
     z-index           : 1001;
-    /*pointer-events    : none;*/
-    /*cursor            : default;*/
   }
 
 
@@ -270,53 +313,41 @@
   }
 
 
+
+
+
+
   #road {
     position             : absolute; 
-/*    -webkit-user-select  : none;
-    -moz-user-select     : none;
-*/
     background           : transparent url('../img/road_small.png') repeat-x;
     background-position  : 0px 0px;
     top                  : 428px; 
     height               : 72px;
     width                : 100%;
-
-/*    pointer-events       : none;*/
     z-index              : 91;
   }
 
 
 
   #layer_player {
-/*    -webkit-user-select  : none;
-    -moz-user-select     : none;
-*/    position             : absolute;
+    position             : absolute;
     height               : 500px;
-
-/*    pointer-events       : none;*/
     z-index              : 100;
   }
 
 
 
   #player {
-/*    -webkit-user-select  : none;
-    -moz-user-select     : none;
-*/    position             : absolute;
-    /*height               : 500px;*/
+    position             : absolute;
     background           : transparent;
     background-position  : bottom left;
     background-origin    : content-box;
     z-index              : 101;
-/*    pointer-events       : none;*/
-
   }
 
 
   #car {
-/*    -webkit-user-select  : none;
-    -moz-user-select     : none;
-*/    position             : absolute;
+    position             : absolute;
     top                  : 364px;
     left                 : 150px;
     background           : transparent;
@@ -333,7 +364,6 @@
     z-index              : 90;
     margin               : 16px;
     cursor               : auto; 
-/*    pointer-events       : none;  */
   }
 
 
@@ -358,7 +388,6 @@
     left            : 0px;
     width           : 580px;
     height          : 428px;
-/*    pointer-events  : none;*/
     background      : transparent; 
   }
 
@@ -369,7 +398,6 @@
     left            : 2000px;
     width           : 580px;
     height          : 428px;
-/*    pointer-events  : none;*/
     background      : transparent; 
   }
 
@@ -379,7 +407,6 @@
     left            : 4000px;
     width           : 580px;
     height          : 500px;
-/*    pointer-events  : none;*/
     background      : transparent; 
   }
 
@@ -390,9 +417,7 @@
     left          : 6000px;
     width         : 580px;
     height        : 500px;
-/*    pointer-events: none;*/
     background      : transparent; 
-
   }
 
 
@@ -402,23 +427,26 @@
     left          : 8000px;
     width         : 580px;
     height        : 500px;
-/*    pointer-events: none;*/
     background    : transparent; 
   }
 
   #station5 {
     position      : absolute;
     top           : 10px;
-    left          : 15000px;
+    left          : 10000px;
     width         : 580px;
     height        : 500px;
-/*    pointer-events: none;*/
     background    : transparent; 
   }
 
 
 
-  /*  Behaviours, animations, transitions  */
+
+
+  /**
+   * Behaviours, animations and transitions
+   * 
+   */
 
   .continuous {
     -webkit-animation-iteration-count: infinite;
@@ -433,6 +461,13 @@
        -moz-animation    : slide 0.2s linear infinite;
             animation    : slide 0.2s linear infinite;
   }
+
+
+
+  /**
+   * Animations 
+   * 
+   */
 
   @-webkit-keyframes slide {
       0%   {background-position: 0 0;}
@@ -532,7 +567,6 @@
   }
 
 
-
   @-webkit-keyframes wibble {
       0% { -webkit-transform: translateY(1px); }
       10% { -webkit-transform: translateY(-2px); }
@@ -627,10 +661,6 @@
 
 
 
-
-  .parallax_layer {
-
-  }
 
 
 
