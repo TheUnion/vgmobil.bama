@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=.5, maximum-scale=1.0" />  
   <title>Bama - Nyt Norge </title>
   <link href='http://fonts.googleapis.com/css?family=Cabin:400,700' rel='stylesheet' type='text/css'>  
-  <!-- <link href="assets/css/bama.main.css" rel="stylesheet" type="text/css" /> -->
   <link href="assets/css/bama.main.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
 </head>
@@ -14,12 +13,13 @@
 
   <div class="container hwaccel" onselectstart="return false;">
 
-    <div id="progress">progress</div>
+
+    <!-- <div id="progress"><progress id="progressbar" value="0" max="100"></progress></div> -->
 
     <img id="logo" src="assets/img/bama_logo.svg" />
     <div id="parallax">
       <div class="panel">    
-        <div class="content">Innhold
+        <div class="content">
         </div>
       </div>
       
@@ -48,6 +48,8 @@
   <div class="container" onselectstart="return false;">
     <div id="layer2" class="parallax_layer"> <!-- bg_sky.png layer -->
       <div class="panel">
+        <img class="horizontal" src="assets/img/hill_middle_layer2_small.png" />
+        <img class="horizontal mirror" src="assets/img/hill_middle_layer2_small.png" />
       </div>
     </div>
   </div>
@@ -71,11 +73,48 @@
   <div class="container" onselectstart="return false;">
     <div id="layer5" class="parallax_layer"> <!-- fg_landscape.png layer -->
       <div class="panel">
-        <div id="level1">
-          <span class="big bold">Nå kommer de<br />norske jordbærene!</span>
-          
-          <p class="medium regular"><span class="big bold red">Sveip</span> og opplev de flotte<br />jordbærene fra Akershus.</p>
+
+        <div id="start">
+          <div id="intro_text">
+            <span class="big bold">Nå kommer de<br />norske jordbærene!</span>
+            <p class="medium regular">
+              <span class="big bold red">Sveip</span>
+              og opplev de flotte<br />jordbærene fra Akershus.
+            </p>
+            </div>
         </div>
+
+        <div id="station1" class="station">
+          STATION 1
+          <img id="frosta_sign" src="assets/img/frosta_kommuneskilt_small.png">
+        </div>
+
+        <div id="station2" class="station">
+          STATION 2
+
+        </div>
+
+        <div id="station3" class="station">
+          STATION 3
+          <img id="farmer_small" src="assets/img/farmer_small_small.png">
+          <img id="farmer_large" src="assets/img/farmer_small_small.png">
+          <img is="barn" src="assets/img/barn_small.png">
+        </div>
+
+        <div id="station4" class="station">
+          STATION 4
+          <img id="lise_large" src="assets/img/lise_large_small.png">
+
+        </div>
+
+        <div id="station5" class="station">
+          STATION 5
+          <img id="drivein_sign" src="assets/img/drive_in_sign_salat_small.png">
+          <img id="drivein_screen" src="assets/img/drive_in_screen_small.png">
+
+        </div>
+
+        <!-- this is the div containing the road tiles -->
         <div id="road"></div>
 
       </div>

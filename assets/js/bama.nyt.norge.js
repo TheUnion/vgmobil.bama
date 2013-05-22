@@ -193,7 +193,7 @@
           console.log('para: ', para);  
           console.log('prllx: ', prllx);  
 
-          $('#progress').html("progress: " + progress + "%"); 
+          $('#progressbar').attr('value', progress); 
         };
 
     });

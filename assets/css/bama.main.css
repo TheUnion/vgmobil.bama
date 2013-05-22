@@ -1,3 +1,11 @@
+
+/**
+ *  Basic setup
+ *
+ */
+
+
+
   body {
     margin       : 0;
     padding      : 0;
@@ -5,7 +13,7 @@
   	color        : white;
   	line-height  : 1.5;
   	font-family  : Cabin, Ubuntu, Helvetica, sans-serif;
-    font-weight  : 400;
+    font-weight  : 700;
   	font-size    : 14px;
   }
 
@@ -32,6 +40,10 @@
 
 
 
+/**
+ *  Our classes
+ *
+ */
 
 
   .para {
@@ -78,16 +90,13 @@
     background       : transparent;
   }
 
-  /*
-  .content {
-    position    : relative;
-    float       : left;
-    left        : 50px;
-    width       : 580px;
-    height      : 500px;
-    background  : transparent;
-  }
-  */
+
+
+/**
+ *  Some text styles
+ *
+ */
+
 
   .big {
     font-size: 32px;
@@ -95,7 +104,7 @@
   }
 
   .red {
-    color: #d21;
+    color: #d42;
   }
 
 
@@ -112,15 +121,39 @@
     font-weight: 400;
   }
 
+  .horizontal {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    float: left;
+    display:inline-block;
+    overflow: hidden;
+    top : 300px;
+    width: 665px;
+  }
+
 
   .mirror {
-      display:block;
+      /*display:inline-block;*/
       -webkit-transform: matrix(-1, 0, 0, 1, 0, 0);
          -moz-transform: matrix(-1, 0, 0, 1, 0, 0);
             -o-transform:matrix(-1, 0, 0, 1, 0, 0);
                transform:matrix(-1, 0, 0, 1, 0, 0);
   }
 
+
+  #progress {
+    margin: 0;
+    padding: 0;
+    z-index: 3000;
+    pointer-events : none;
+  }
+
+
+/**
+ *  Parallax layers
+ *
+ */
 
   #parallax {
 /*  	-webkit-user-select  : none;
@@ -144,12 +177,13 @@
   #layer2 {
 /*  	-webkit-user-select  : none;
   	-moz-user-select     : none;
-*/  	position             : absolute;
+*/	
+    position             : absolute;
     height               : 500px;
-  	background           : transparent url('../img/hill_middle_layer2_small.png') repeat-x;
-    background-position  : 0px 300px;
+  	background           : transparent; /* url('../img/hill_middle_layer2_small.png') repeat-x;*/
+/*    background-position  : 0px 300px;
     background-origin    : content-box;
-    z-index              : 2;
+*/    z-index              : 2;
 
   }
 
@@ -169,7 +203,8 @@
   #layer4 {
 /*    -webkit-user-select  : none;
     -moz-user-select     : none;
-*/    position             : absolute;
+*/
+    position             : absolute;
     height               : 500px;
     background           : transparent url('../img/hill_front2_small.png') repeat-x;
     background-position  : 0px 310px;
@@ -212,6 +247,7 @@
   #video1_container {
 /*    /*-webkit-user-select  : none;*/
     /*-moz-user-select     : none;*/
+    position          : relative; 
     display           : block; 
     margin            : 0px auto 0px auto; 
     padding           : 0px;
@@ -219,8 +255,8 @@
     left              : 2000px; 
     overflow          : hidden;
     background        : transparent; 
-    z-index             : 1001;
-    /*pointer-events    : default;*/
+    z-index           : 1001;
+    /*pointer-events    : none;*/
     /*cursor            : default;*/
   }
 
@@ -239,7 +275,7 @@
 /*    -webkit-user-select  : none;
     -moz-user-select     : none;
 */
-    background           : transparent url('../img/road.png') repeat-x;
+    background           : transparent url('../img/road_small.png') repeat-x;
     background-position  : 0px 0px;
     top                  : 428px; 
     height               : 72px;
@@ -288,19 +324,6 @@
   }
 
 
-  #HUD {
-/*    -webkit-user-select  : none;
-    -moz-user-select     : none;
-*/    position             : relative;
-    background           : transparent; 
-    width                : 580px;
-    height               : 500px;
-    z-index              : 2000;
-    padding              : 16px;
-    pointer-events       : none;
-  }
-
-
   #logo {
     position             : absolute;
     width                : 85px;
@@ -318,26 +341,42 @@
   #birds {
     position  : absolute;
     top       : 96px;
-    left      : 1166px;
-
+    left      : 2566px;
   }
 
 
+  .station {
+    color       : black;
+    font-size   : 72px;
+    font-weight : bold;
+  }
 
-  #level1 {
+
+  #intro {
     position        : absolute;
-    top             : 200px;
-    left            : 400px;
+    top             : 0px;
+    left            : 0px;
     width           : 580px;
     height          : 428px;
 /*    pointer-events  : none;*/
     background      : transparent; 
   }
 
-  #level2 {
+
+  #station1 {
     position        : absolute;
     top             : 10px;
-    left            : 1400px;
+    left            : 2000px;
+    width           : 580px;
+    height          : 428px;
+/*    pointer-events  : none;*/
+    background      : transparent; 
+  }
+
+  #station2 {
+    position        : absolute;
+    top             : 10px;
+    left            : 4000px;
     width           : 580px;
     height          : 500px;
 /*    pointer-events  : none;*/
@@ -345,10 +384,10 @@
   }
 
 
-  #level3 {
+  #station3 {
     position      : absolute;
     top           : 10px;
-    left          : 2700px;
+    left          : 6000px;
     width         : 580px;
     height        : 500px;
 /*    pointer-events: none;*/
@@ -357,16 +396,25 @@
   }
 
 
-  #level4 {
+  #station4 {
     position      : absolute;
     top           : 10px;
-    left          : 3500px;
+    left          : 8000px;
     width         : 580px;
     height        : 500px;
 /*    pointer-events: none;*/
-    background    : transparent url('../img/level4.png') no-repeat; 
+    background    : transparent; 
   }
 
+  #station5 {
+    position      : absolute;
+    top           : 10px;
+    left          : 15000px;
+    width         : 580px;
+    height        : 500px;
+/*    pointer-events: none;*/
+    background    : transparent; 
+  }
 
 
 
@@ -565,16 +613,16 @@
 
 
   .driving.fast {
-      -webkit-transform: skewX(165deg) scaleY(1.2) translateY(-10px);
-         -moz-transform: skewX(165deg) scaleY(1.2) translateY(-10px);
-           -o-transform: skewX(165deg) scaleY(1.2) translateY(-10px);
-              transform: skewX(165deg) scaleY(1.2) translateY(-10px);
 
-  /*    -webkit-transform: scaleY(1.2);
-         -moz-transform: scaleY(1.2);
-           -o-transform: scaleY(1.2);
-              transform: scaleY(1.2);
-  */
+    -webkit-transform: skewX(165deg) scaleY(1.2) translateY(-10px);
+       -moz-transform: skewX(165deg) scaleY(1.2) translateY(-10px);
+         -o-transform: skewX(165deg) scaleY(1.2) translateY(-10px);
+            transform: skewX(165deg) scaleY(1.2) translateY(-10px);
+
+    -webkit-animation    : slide 0.2s ease-in;
+       -moz-animation    : slide 0.2s ease-in;
+         -o-animation    : slide 0.2s ease-in;
+            animation    : slide 0.2s ease-in;
   }
 
 
