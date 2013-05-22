@@ -1,7 +1,7 @@
 /*copyright 2012 robert w. stewart torontographic.com*/
 ;(function($) {
 $.fn.parallaxSwipe = function(options) {
-var defaults = {DECAY:0.95, MOUSEDOWN_DECAY:0.5, SPEED_SPRING:0.7, BOUNCE_SPRING:0.08,
+var defaults = {DECAY:0.9, MOUSEDOWN_DECAY:0.5, SPEED_SPRING:0.5, BOUNCE_SPRING:0.08,
   HORIZ:true, SNAPDISTANCE:20, DISABLELINKS:true, LAYER:[]
 };
 var o = $.extend(defaults, options);
@@ -76,7 +76,6 @@ var touchStart=function(e) { //mouse down
     if (elm.setCapture) {
       elm.setCapture(); //if dragged outside of div
     } else {
-
       window.addEventListener('mousemove', touchMove, false);
       window.addEventListener('mouseup', touchEnd, false);
     }
@@ -124,16 +123,9 @@ var touchEnd=function(e) { //mouse up
   }
 };
 
-var touchTap=function(e) { //mouse up
-  console.log('Tap!', e);
-};
-
-
 hasTouch = 'ontouchstart' in window;
 plugin.bind('mousedown touchstart', function(event){ touchStart(event); }); 
 plugin.bind('mousemove touchmove', function(event){ touchMove(event); }); 
 plugin.bind('mouseup touchend', function(event){ touchEnd(event); });
-plugin.bind('mouseclick tap', function(event){ touchTap(event); });
-
 } //end options
 })(jQuery)
