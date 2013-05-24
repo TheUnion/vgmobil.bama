@@ -21,9 +21,12 @@ Trigger a preload-event on scenes that are about to become visible, if there's t
 There should be a single event handler controlling the event triggering, so all the tracking code can be added there.
 
 
+####Documentation
+Read the code and the comments.
+
+
 
 ####Snippets
-
 
 CSS inheritance from class to id
 
