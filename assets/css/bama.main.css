@@ -1,9 +1,10 @@
-
 /**
- *  Basic setup
+ *  Basic setup. 
+ *  
+ *  We are assuming an iframe, obviously.
+ *  Otherwise we would never touch these tags.
  *
  */
-
 
 
   body {
@@ -12,7 +13,7 @@
   	background   : rgb(230, 250, 250);
   	color        : white;
   	line-height  : 1.5;
-  	font-family  : Abel, Ubuntu, Helvetica, sans-serif;
+  	font-family  : Abel, Helvetica, Arial, sans-serif;
     font-weight  : 700;
   	font-size    : 14px;
   }
@@ -32,25 +33,26 @@
 
 
 
-    /* The ugly */
+  /* The ugly */
 
-    .hwaccel {  
-      -webkit-transform: translateZ(0); 
-    }
-
-
-@media 
-  (-webkit-min-device-pixel-ratio: 2), 
-  (min-resolution: 192dpi) { 
-    /* Retina-specific stuff here */
-}
+  .hwaccel {  
+    /* Supposedly this forces activation of HW-acceleration on WebKit, or only iOS */
+    -webkit-transform: translateZ(0); 
+  }
 
 
+  @media 
+    (-webkit-min-device-pixel-ratio: 2), 
+    (min-resolution: 192dpi) { 
+      /* Retina-specific stuff here */
+  }
 
-/**
- *  Our classes
- *
- */
+
+
+  /**
+   *  Our classes
+   *
+   */
 
 
   .parallax_layer {
@@ -58,6 +60,7 @@
     /*  Group all the parallax layers with this class */
     -webkit-user-select  : none;
        -moz-user-select  : none;
+            user-select  : none;
     pointer-events       : none;
   }
 
@@ -102,15 +105,15 @@
   }
 
 
+
   /**
-   *  Some text styles
+   *  Text styles
    *
    */
 
-
   .center {
-    
-
+    margin-right: auto;
+    margin-left: auto;
   }
 
   .big {
@@ -208,7 +211,6 @@
     z-index              : 3;
 
   }
-
 
   #layer4 {
     -webkit-user-select  : none;
@@ -415,19 +417,6 @@
     border-color  : #bbb;
     background    : #eee;
 
-/*    
-    -webkit-box-shadow : 0 0 5px rgba(255, 255, 255, 1) inset; 
-       -moz-box-shadow : 0 0 5px rgba(255, 255, 255, 1) inset; 
-        -ms-box-shadow : 0 0 5px rgba(255, 255, 255, 1) inset; 
-         -o-box-shadow : 0 0 5px rgba(255, 255, 255, 1) inset; 
-            box-shadow : 0 0 5px rgba(255, 255, 255, 1) inset;
-    -webkit-box-shadow    : 1px 1px -1px -1px #fff inset;
-       -moz-box-shadow    : 1px 1px -1px -1px #fff inset;
-        -ms-box-shadow    : 1px 1px -1px -1px #fff inset;
-         -o-box-shadow    : 1px 1px -1px -1px #fff inset;
-            box-shadow    : 1px 1px -1px -1px #fff inset;
-*/    
-
 
     -webkit-transform-style: preserve-3d;
        -moz-transform-style: preserve-3d;
@@ -458,7 +447,6 @@
     width               : 96px;
     margin-right        : auto;
     margin-left         : auto;
-    /*background-color    : #004288;*/
     cursor              : pointer;
     background          : #004288;
     -moz-border-radius  : 3px;
@@ -600,14 +588,6 @@
     z-index              : 90;
     margin               : 16px;
     cursor               : auto; 
-  }
-
-
-
-  #birds {
-    position  : absolute;
-    top       : 96px;
-    left      : 256px;
   }
 
 
@@ -940,38 +920,3 @@
          -o-animation    : slide 0.4s ease-in;
             animation    : slide 0.4s ease-in;
   }
-
-
-
-
-
-
-
-
-
-
-  /*
-
-  CSS inheritance from class to id
-
-  div.someBaseDiv,
-  #someInhertedDiv
-  {
-      margin-top:3px;
-      margin-left:auto;
-      margin-right:auto;
-      margin-bottom:0px;
-  }
-
-  This will tell your #someInhertedDiv to apply the same styles as div.someBaseDiv has. Then you extend this set of styles with more specific to your #someInhertedDiv:
-  #someInhertedDiv
-  {
-      background-image:url("images/worldsource/customBackground.gif");
-      background-repeat:no-repeat;
-      width:950px;
-      height:572px;
-  }
-
-   */
-  ​
-
