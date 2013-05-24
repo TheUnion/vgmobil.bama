@@ -11,7 +11,7 @@
     margin       : 0;
     padding      : 0;
   	background   : rgb(230, 250, 250);
-  	color        : white;
+  	color        : #4e4e4e;
   	line-height  : 1.5;
   	font-family  : Abel, Helvetica, Arial, sans-serif;
     font-weight  : 700;
@@ -123,6 +123,11 @@
 
   .red {
     color: #d42;
+  }
+
+
+  .blue {
+    color: #014289;
   }
 
 
@@ -315,10 +320,17 @@
 
 
 
-  #frosta_sign {
-    left: 300px;
-    top: 300px;
+  #muni_sign {
+    font-family         : Arial, sans-serif;
+    font-weight         : 700;
+    font-size           : 11px;
+    left                : 300px;
+    top                 : 300px;
+    background          : transparent url('../img/kommuneskilt.png');
+    background-repeat   : no-repeat;
   }
+
+
 
   #barn {
 
@@ -350,6 +362,12 @@
   }
 
   #drivein_sign {
+    color           : #000;
+    font-family     : Arial, sans-serif;
+    font-weight     : 900;
+    font-size       : 13px;
+    line-height     : 18px;
+    text-transform  : uppercase;
     position: absolute;
     top: 384px;
     left: 0px;
@@ -404,9 +422,10 @@
   .snakkeboble {
     position      : absolute;
     display       : block;
-    color         : #1B1B1C;
-    font-family   : Abel, Cabin, Futura, Helvetica, sans-serif;
+    color         : #333;
+    font-family   : Abel, Futura, Helvetica, sans-serif;
     font-weight   : 400;
+    font-size     : 18px;
     margin-top    : 111px;
     margin-bottom : 68px;
     padding       : 4px;
@@ -414,7 +433,7 @@
     width         : 400px;
     border-style  : solid solid none solid;
     border-width  : 1px;
-    border-color  : #bbb;
+    border-color  : #928c85;
     background    : #eee;
 
 
@@ -442,6 +461,8 @@
     moz-user-select     : none;
     pointer-events      : visible;
     text-align          : center;
+    font-weight         : 700;
+    font-size           : 22px;
     color               : white;
     padding             : 8px;
     width               : 96px;
@@ -449,9 +470,9 @@
     margin-left         : auto;
     cursor              : pointer;
     background          : #004288;
-    -moz-border-radius  : 3px;
-      -o-border-radius  : 3px;
-         border-radius  : 3px;
+    -moz-border-radius  : 4px;
+      -o-border-radius  : 4px;
+         border-radius  : 4px;
   }
 
 
@@ -485,17 +506,18 @@
         -ms-transform: rotateY(-180deg) scaleX(2.0) scaleY(2.0);
          -o-transform: rotateY(-180deg) scaleX(2.0) scaleY(2.0);
             transform: rotateY(-180deg) scaleX(2.0) scaleY(2.0);
+
+    -webkit-backface-visibility: hidden;
+       -moz-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+         -o-backface-visibility: hidden;
+            backface-visibility: hidden;
     }
 
     
     .snakkeboble.flip.back {
       z-index: 1000;
 
-      -webkit-backface-visibility: hidden;
-         -moz-backface-visibility: hidden;
-          -ms-backface-visibility: hidden;
-           -o-backface-visibility: hidden;
-              backface-visibility: hidden;
 
       -webkit-transform: rotateX(0deg) rotateY(0deg);
          -moz-transform: rotateX(0deg) rotateY(0deg);
