@@ -31,7 +31,7 @@ Read the code and the comments.
 CSS inheritance from class to id
 
     div.someBaseDiv,
-    #someInhertedDiv
+    #someInheritedDiv
     {
         margin-top:3px;
         margin-left:auto;
@@ -39,8 +39,9 @@ CSS inheritance from class to id
         margin-bottom:0px;
     } 
 
-This will tell your #someInhertedDiv to apply the same styles as div.someBaseDiv has. Then you extend this set of styles with more specific to your #someInhertedDiv:
-    #someInhertedDiv
+This will tell your #someInheritedDiv to apply the same styles as div.someBaseDiv has. Then you extend this set of styles with more specific to your #someInheritedDiv:
+
+    #someInheritedDiv
     {
         background-image:url("images/worldsource/customBackground.gif");
         background-repeat:no-repeat;
@@ -50,3 +51,14 @@ This will tell your #someInhertedDiv to apply the same styles as div.someBaseDiv
 
   ​
 
+###Storyboard
+
+
+####STORYBOARD
+![Intro](https://github.com/TheUnion/vgmobil.bama/blob/dev/assets/img/storyboard/bilreise_intro.jpg)
+![Station #1](https://github.com/TheUnion/vgmobil.bama/blob/dev/assets/img/storyboard/bilreise_station1.jpg)
+![Station #2](https://github.com/TheUnion/vgmobil.bama/blob/dev/assets/img/storyboard/bilreise_station2.jpg)
+![Station #3](https://github.com/TheUnion/vgmobil.bama/blob/dev/assets/img/storyboard/bilreise_station3.jpg)
+![Station #4](https://github.com/TheUnion/vgmobil.bama/blob/dev/assets/img/storyboard/bilreise_station4.jpg)
+![Station #5](https://github.com/TheUnion/vgmobil.bama/blob/dev/assets/img/storyboard/bilreise_station5.jpg)
+![Station #6](https://github.com/TheUnion/vgmobil.bama/blob/dev/assets/img/storyboard/bilreise_station6.jpg)
