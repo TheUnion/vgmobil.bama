@@ -2,15 +2,49 @@
 <html>
 <head>
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-  <meta name="viewport" content="width=device-width, initial-scale=.5, maximum-scale=1.0" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />  
   <title>Bama - Nyt Norge </title>
   <link href='http://fonts.googleapis.com/css?family=Cabin:400,700' rel='stylesheet' type='text/css'>  
+  <link href='http://fonts.googleapis.com/css?family=Abel:400,700' rel='stylesheet' type='text/css'>  
+  <link href='http://fonts.googleapis.com/css?family=Just+Another+Hand&text=Velkommen+til+gards+VELKOMMEN+TIL+GARDS' rel='stylesheet' type='text/css'>
   <link href="assets/css/parallaxVertical.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/bama.main.css" rel="stylesheet" type="text/css" />
   <!-- <link href="assets/css/animate.css" rel="stylesheet" type="text/css" /> -->
 </head>
 
 <body>
+
+
+  <div class="woodsign" onselectstart="return false;">Velkommen til gards</div>
+
+  <div class="callout">
+    <img src="assets/img/lise_large_small.png" />
+    <div class="snakkeboble" onselectstart="return false;">
+      <span class="bold">Hei!</span>
+        <span>
+          Jeg har et tips til deg.
+          <div class="btn">Klikk her</div>
+        </span>
+    </div>
+    <div class="btm">
+    </div>
+  </div>
+
+
+  <div class="callout">
+    <img class="clean" src="assets/img/farmer_large_small.png" />
+    <div class="snakkeboble" onselectstart="return false;">
+      <span class="bold">Hei!</span>
+        <span>
+          Jeg har et tips til deg.
+          <div class="btn">Klikk her</div>
+        </span>
+    </div>
+    <!-- <img src="assets/img/pop_up_btm.png" /> -->
+    <div class="callout btm clean">
+    </div>
+  </div>
+
 
   <div class="container">
 
@@ -24,9 +58,8 @@
         </div>
       </div>
       
-      <div class="panel"> 
+<!--       <div class="panel"> 
         <div class="content">
-          <img id="birds" src="assets/img/crows.gif" />
         </div>
       </div>
 
@@ -34,6 +67,7 @@
         <div class="content">
         </div>
       </div>
+ -->
 
     </div>
   </div> 
@@ -47,36 +81,49 @@
   </div>
 
   <div class="container">
-    <div id="layer2" class="parallax_layer"> <!-- bg_sky.png layer -->
+    <div id="layer2" class="parallax_layer"> <!-- middle layer #2 -->
       <div class="panel">
-        <img class="horizontal" src="assets/img/hill_middle_layer2_small.png" />
-        <img class="horizontal mirror" src="assets/img/hill_middle_layer2_small.png" />
+        <img class="horizontal mirror sprite" src="assets/img/hill_middle_layer2_small.png" />
       </div>
     </div>
   </div>
 
   <div class="container">
-    <div id="layer3" class="parallax_layer"> <!-- bg_landscape.png layer -->
+    <div id="layer3" class="parallax_layer">  <!-- middle layer #1 -->
       <div class="panel">
       </div>
     </div>
   </div>
 
   <div class="container">
-    <div id="layer4" class="parallax_layer"> <!-- fg_landscape.png layer -->
+    <div id="layer4" class="parallax_layer"> <!-- front layer #2 -->
       <div class="panel">
-          LAYER4    
-      </div>
+<!--           <img class="horizontal sprite" src='assets/img/hill_front2_small.png' />
+          <img class="horizontal mirror sprite" src='assets/img/hill_front2_small.png' />
+          <img class="horizontal sprite" src='assets/img/hill_front2_small.png' />
+          <img class="horizontal mirror sprite" src='assets/img/hill_front2_small.png' />
+          <img class="horizontal sprite" src='assets/img/hill_front2_small.png' />
+          <img class="horizontal mirror sprite" src='assets/img/hill_front2_small.png' />
+          <img class="horizontal sprite" src='assets/img/hill_front2_small.png' />
+          <img class="horizontal mirror sprite" src='assets/img/hill_front2_small.png' />
+          <img class="horizontal sprite" src='assets/img/hill_front2_small.png' />
+          <img class="horizontal mirror sprite" src='assets/img/hill_front2_small.png' />
+          <img class="horizontal sprite" src='assets/img/hill_front2_small.png' />
+          <img class="horizontal mirror sprite" src='assets/img/hill_front2_small.png' />
+          <img class="horizontal sprite" src='assets/img/hill_front2_small.png' />
+          <img class="horizontal mirror sprite" src='assets/img/hill_front2_small.png' />
+ -->      </div>
     </div>
   </div>
 
 
   <div class="container">
-    <div id="layer5" class="parallax_layer"> <!-- fg_landscape.png layer -->
+    <div id="layer5" class="parallax_layer"> <!-- front layer #1, the scene layer -->
       <div class="panel">
 
         <div id="start">
-          <div id="intro_text">
+          <div id="intro_text" class="sprite">
+            <img class="animated continuous bounce" src="assets/img/arrow.png" />
             <span class="big bold">Nå kommer de<br />norske jordbærene!</span>
             <p class="medium regular">
               <span class="big bold red">Sveip</span>
@@ -87,7 +134,7 @@
 
         <div id="station1" class="station">
           STATION 1
-          <img id="frosta_sign" src="assets/img/frosta_kommuneskilt_small.png">
+          <img id="frosta_sign" class="sprite" src="assets/img/frosta_kommuneskilt_small.png">
         </div>
 
         <div id="station2" class="station">
@@ -97,21 +144,34 @@
 
         <div id="station3" class="station">
           STATION 3
-          <img id="farmer_small" src="assets/img/farmer_small_small.png">
-          <img id="farmer_large" src="assets/img/farmer_small_small.png">
-          <img is="barn" src="assets/img/barn_small.png">
+          <img id="barn" class="sprite" src="assets/img/barn_small.png">
+          <img id="farmer_small" class="sprite" src="assets/img/farmer_small_small.png">
+
+          <img id="tractor" class="sprite" src="assets/img/tractor_small.png">
+          
+          <div id="farmer_large" class="front face sprite snakkeboble">
+            <img id="farmer_large" src="assets/img/farmer_large_small.png">
+          </div>
+
+          <div id="farmer_recipe" class="back face center recipe">
+
+          </div>   
         </div>
+
 
         <div id="station4" class="station">
           STATION 4
-          <img id="lise_large" src="assets/img/lise_large_small.png">
-
+          <div id="lise_large" class="front face sprite snakkeboble">
+          <img src="assets/img/lise_large_small.png">
+          </div>
+          <div id="lise_recipe" class="back face center recipe">
+          </div> 
         </div>
 
         <div id="station5" class="station">
           STATION 5
           <img id="drivein_sign" src="assets/img/drive_in_sign_salat_small.png">
-          <img id="drivein_screen" src="assets/img/drive_in_screen_small.png">
+          <img id="drivein_screen" class="sprite" src="assets/img/drive_in_screen_small.png">
 
           <div id="video1_container">
             <video id="video1" width="416" height="234" controls poster="assets/img/video_poster_contrast.jpg">
@@ -151,7 +211,28 @@
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>  
   <script src="assets/js/lib/jquery.parallaxSwipe.js"></script>
+  <script src="assets/js/lib/jquery.flip.js"></script>
   <script async src="assets/js/bama.nyt.norge.js"></script>
+
+
+  <div id="testpanel" style="float: right;">
+    <button id="flip" class="button_flip">
+      Lise      
+    </button>    
+    <button id="flip2" class="button_flip">
+      Franke
+    </button>    
+    <p>
+      <button id="button_s1" class="ffwd">
+        GOTO Franke
+      </button>    
+      <button id="button_s2" class="ffwd">
+        GOTO Lise
+      </button>    
+    </p>
+
+  </div
+
 
 </body>
 </html>

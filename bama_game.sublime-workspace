@@ -4,28 +4,64 @@
 		"selected_items":
 		[
 			[
+				"backg",
+				"background"
+			],
+			[
+				"back",
+				"background-repeat"
+			],
+			[
+				"po",
+				"pos-a	position: absolute;"
+			],
+			[
+				"cle",
+				"clear"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"client",
+				"clientY"
+			],
+			[
+				"clien",
+				"clientX"
+			],
+			[
+				"margin",
+				"margin-right"
+			],
+			[
+				"font",
+				"font-family"
+			],
+			[
+				"pos",
+				"pos-a	position: absolute;"
+			],
+			[
+				"ov",
+				"ov-v	overflow: visible;"
+			],
+			[
+				"no",
+				"no-repeat"
+			],
+			[
+				"fon",
+				"font-weight"
+			],
+			[
 				"e",
 				"ease-in"
 			],
 			[
-				"font",
-				"font-weight"
-			],
-			[
-				"fon",
-				"font-size"
-			],
-			[
 				"re",
 				"relative"
-			],
-			[
-				"po",
-				"position"
-			],
-			[
-				"no",
-				"none"
 			],
 			[
 				"get",
@@ -116,10 +152,6 @@
 				"backgroundWorker"
 			],
 			[
-				"back",
-				"backgroundWorker"
-			],
-			[
 				"subsc",
 				"subscribers"
 			],
@@ -150,10 +182,6 @@
 			[
 				"transpa",
 				"transparent"
-			],
-			[
-				"pos",
-				"pos-r	position: relative;"
 			],
 			[
 				"border-c",
@@ -320,10 +348,6 @@
 				"is_null"
 			],
 			[
-				"in",
-				"inputfile"
-			],
-			[
 				"pa",
 				"param	@param"
 			],
@@ -379,7 +403,15 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 4551,
+				"buffer_size": 7824,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "assets/js/lib/jquery.parallaxSwipe.js",
+			"settings":
+			{
+				"buffer_size": 5122,
 				"line_ending": "Windows"
 			}
 		},
@@ -387,15 +419,23 @@
 			"file": "assets/css/bama.main.css",
 			"settings":
 			{
-				"buffer_size": 15819,
+				"buffer_size": 23583,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "assets/css/animate.css",
+			"settings":
+			{
+				"buffer_size": 61524,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "assets/js/bama.nyt.norge.js",
 			"settings":
 			{
-				"buffer_size": 5514,
+				"buffer_size": 7859,
 				"line_ending": "Windows"
 			}
 		}
@@ -436,12 +476,16 @@
 	},
 	"file_history":
 	[
-		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/parallax/js/jquery.parallaxSwipe.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/assets/css/bama.main.css",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/assets/js/lib/roncioso-Flip-jQuery-5f5d9a4/README",
 		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/assets/css/parallaxVertical.css",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/assets/js/lib/parallaxSwipe/js/jquery.parallaxSwipe.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/assets/js/lib/parallaxSwipe/parallaxVertical.html",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/assets/js/lib/parallaxSwipe/parallaxVertical.css",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/parallax/js/jquery.parallaxSwipe.js",
 		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/assets/js/pi.bama.js",
 		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/assets/css/animate.css",
 		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/index.html",
-		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/assets/css/bama.main.css",
 		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/scripts/kromaviews/php/public/views-report-full.php",
 		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/assets/js/lib/jquery.parallaxSwipe.js",
 		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/assets/js/bama.nyt.norge.js",
@@ -559,11 +603,7 @@
 		"/D/dev/gitflow/README.mdown",
 		"/D/dev/gitflow/contrib/msysgit-install.cmd",
 		"/C/Users/ballefrans/Desktop/msysgit-install.cmd",
-		"/C/Users/ballefrans/Desktop/85983875.mp4",
-		"/C/Users/ballefrans/mm.cfg",
-		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/scripts/kromaviews/php/server/websocket.server.class.php",
-		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/scripts/kromaviews/php/server/websocket.client.php",
-		"/D/Work/KROMA/KromaViews/KromaTracks.js"
+		"/C/Users/ballefrans/Desktop/85983875.mp4"
 	],
 	"find":
 	{
@@ -588,6 +628,48 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"-15",
+			"-30",
+			"translateY",
+			"Y",
+			"front",
+			"class=\"",
+			"sprite mirror",
+			"horizontal ",
+			"..",
+			"btm",
+			"gfx",
+			"span",
+			" class=\"container\"",
+			"4",
+			";",
+			"0,",
+			"touches[0].",
+			"client",
+			"perspective",
+			"5",
+			"15",
+			"+",
+			"backg",
+			"1000",
+			"800",
+			"800px",
+			"0.4s",
+			"0.2s",
+			"scale(2.0)",
+			"0.2",
+			"linear",
+			"180deg",
+			"lise_recipe",
+			"4s",
+			"trans",
+			"1.",
+			"trans",
+			" onselectstart=\"return false;\"",
+			"pointer-events",
+			"/*pointer-events",
+			"-webkit-user-select",
+			"000px",
 			"\">",
 			"linear",
 			"5",
@@ -673,49 +755,7 @@
 			"	color                : black;",
 			"	color                : black;\n",
 			"\n	",
-			"900",
-			"/src/",
-			"video",
-			" onselectstart=\"return false;\"",
-			");\">\n",
-			"//static background but need to add a width.",
-			"svg",
-			"caret",
-			"left:",
-			"position:",
-			"svg",
-			"_π",
-			"VgAds",
-			"has",
-			"VgAds",
-			"^^^^^^",
-			"backgroundWorker",
-			"\n      ",
-			"'on",
-			"that.",
-			"B.",
-			"B",
-			"b",
-			"B",
-			"A.",
-			"balloon",
-			"balloon1",
-			"\"js",
-			"images",
-			"balloon",
-			"\"",
-			"[",
-			"* ",
-			"[http",
-			"](",
-			"showsecondtag",
-			"\"",
-			"\\",
-			"save_path",
-			"Linear",
-			"{",
-			"relative",
-			"absolute"
+			"900"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -742,15 +782,15 @@
 					"file": "index.html",
 					"settings":
 					{
-						"buffer_size": 4551,
+						"buffer_size": 7824,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1804,
-								1804
+								4520,
+								4520
 							]
 						],
 						"settings":
@@ -760,53 +800,25 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1798.0,
+						"translation.y": 3310.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "assets/css/bama.main.css",
+					"file": "assets/js/lib/jquery.parallaxSwipe.js",
 					"settings":
 					{
-						"buffer_size": 15819,
+						"buffer_size": 5122,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6978,
-								6978
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 9483.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "assets/js/bama.nyt.norge.js",
-					"settings":
-					{
-						"buffer_size": 5514,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5506,
-								5506
+								1760,
+								1760
 							]
 						],
 						"settings":
@@ -816,7 +828,89 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 4901.0,
+						"translation.y": 669.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "assets/css/bama.main.css",
+					"settings":
+					{
+						"buffer_size": 23583,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								21838,
+								21838
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 25959.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "assets/css/animate.css",
+					"settings":
+					{
+						"buffer_size": 61524,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5298,
+								5298
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 3745.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "assets/js/bama.nyt.norge.js",
+					"settings":
+					{
+						"buffer_size": 7859,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2714,
+								2714
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1947.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -869,6 +963,10 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"pajs",
+				"bama/assets/js/lib/parallaxSwipe/js/jquery.parallaxSwipe.js"
+			],
 			[
 				"",
 				"bama/parallaxVertical.html"
