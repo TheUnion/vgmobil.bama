@@ -12,7 +12,7 @@
   	background   : rgb(230, 250, 250);
   	color        : white;
   	line-height  : 1.5;
-  	font-family  : Abel, Cabin, Ubuntu, Helvetica, sans-serif;
+  	font-family  : Abel, Ubuntu, Helvetica, sans-serif;
     font-weight  : 700;
   	font-size    : 14px;
   }
@@ -348,11 +348,16 @@
   }
 
   #drivein_sign {
-    
+    position: absolute;
+    top: 384px;
+    left: 0px;
   }
 
   #drivein_screen {
-    
+    position: absolute;
+    top: 114px;
+    left: 0px;
+    z-index: 99;
   }
 
 

@@ -419,7 +419,7 @@
 			"file": "assets/css/bama.main.css",
 			"settings":
 			{
-				"buffer_size": 23583,
+				"buffer_size": 23693,
 				"line_ending": "Windows"
 			}
 		},
@@ -774,7 +774,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -789,8 +789,8 @@
 						"selection":
 						[
 							[
-								4520,
-								4520
+								5821,
+								5821
 							]
 						],
 						"settings":
@@ -800,7 +800,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3310.0,
+						"translation.y": 4586.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -838,15 +838,15 @@
 					"file": "assets/css/bama.main.css",
 					"settings":
 					{
-						"buffer_size": 23583,
+						"buffer_size": 23693,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								21838,
-								21838
+								794,
+								794
 							]
 						],
 						"settings":
@@ -856,7 +856,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 25959.0,
+						"translation.y": 1276.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
