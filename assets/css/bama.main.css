@@ -7,23 +7,18 @@
  */
 
 
-  .debugoutput {
-    position    : absolute;
-    float       : left;
-    top         : 504px;
-    width       : 800px;
-    height      : 1600px;
-    background  : #272822;
-    color       : #f8f8f2;
-    overflow    : auto;
-    border      : none;
+  #debug {
+    position  : absolute;
+    top       : 500px;
+    width     : 800px;
   }
 
+
   .code {
-    font-family: monospace;
-    font-weight: 700;
-    font-size: 12px;
-    color: #f8f8f2;
+    font-family : monospace;
+    font-weight : 700;
+    font-size   : 12px;
+    color       : #f8f8f2;
   }
 
 
@@ -34,6 +29,8 @@
   .code.reserved { color: #66D9EF; }
   .code.number   { color: #AE81FF; }
   .code.string   { color: #e6db74; }
+
+
 
 
 
@@ -136,6 +133,17 @@
   }
 
 
+  .HUD {
+    z-index                 : 9999;
+
+    -webkit-pointer-events  : none;
+       -moz-pointer-events  : none;
+            pointer-events  : none;
+    overflow                : hidden;
+    width                   : 580px;
+    height                  : 500px;
+  }
+
 
   /**
    *  Text styles
@@ -143,8 +151,8 @@
    */
 
   .center {
-    margin-right: auto;
-    margin-left: auto;
+    margin-right  : auto;
+    margin-left   : auto;
   }
 
   .verybig {

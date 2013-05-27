@@ -7,66 +7,110 @@
     //variables global to our scope
 
       var 
-        timer     = null,
-        loaded    = null,
-        starttime = null,
-        layers    = [],
-        oldconsole = window.console,
-        console   = {
-          log : function (line, obj) {
-           // no message, escape
-            if(!!!line) {
-              return false;
-            }
+        timer           = null,
+        loaded          = null,
+        startdate       = false,
+        starttime       = false,
+        stations        = {},
+        currentstation  = 'none',
+        startpos        = 0,
+        sessionstart    = null,
+        UPDATE_INTERVAL = 100, //millisec
+        STATION_MARGIN  = 300, // delta for when station becomes visible
 
-            // prepend time
-            line = (new Date().getTime()) + ": " + line;
+        //store triggers as they occur
+        triggers      = [],
+        events        = [],
 
-            if(!!debugoutput) {
-              debugoutput.value += line;
+        debugpanel    = document.getElementById('debugoutput'),
+        parallax      = document.getElementById('parallax'),
+        debugtrigger  = document.getElementById('debug_trigger'),
+        debuginfo     = document.getElementById('debug_info');
+
+
+      /**
+       *  progresstimer()
+       *
+       *  This is where we do our tracking, and detect which station we are currently at
+       * 
+       */
+
+      var progresstimer = function (e) {
+        var
+          i, x, y     = 0,
+          time        = (new Date()).getTime(),
+          position    = parallax.getBoundingClientRect();
+
+
+          if(!starttime) {
+            startdate = (new Date()).toString();
+            starttime = (new Date()).getTime();
+            starttimetext = (new Date()).getTime().toString();
+            //console.log("");
+          }
+
+        if(!!position) {
+
+          debuginfo.innerHTML = "Current station: " + currentstation + " <br />";
+          debuginfo.innerHTML += "Distance travelled: " + (startpos - position.left) + " <br />";
+          debuginfo.innerHTML += "Stations visited:<br />";
+
+          // for..in normally not acceptable, but ok with this few elements
+          for (var key in stations) {
+            x = (startpos - (stations[key].getBoundingClientRect().left - STATION_MARGIN));
+            if(x<0) {
+              break;
+            } else {
+              if(!triggers[key]) {
+                triggers[key] = true;
               }
-            else {
-
-              // if obj given, log it to console
-              (!!obj) ? oldconsole.log(line, obj) : oldconsole.log('fake.console: ' + line);
+              if(x > 400) {
+                if(currentstation !== 'none') {
+                  events.push({ event: 'leave_station', message: 'leaving station ' + key, target: currentstation, time: time});
+                  currentstation = 'none';
+                }
+              } else {
+                events.push({ event: 'arrive_station', message: 'arriving at station ' + key, target: currentstation, time: time});
+                currentstation = key;
+              }
             }
-          },
-          debug : oldconsole.debug,
-          info  : oldconsole.info,
-          error : oldconsole.error
-          },
 
-        debugpanel  = document.getElementById('debugoutput'),
-        debuginfo   = document.getElementById('debuginfo'),
-        parallax    = document.getElementById('parallax');
+            debuginfo.innerHTML += key + ": " + x + "<br />";
+          }
 
-
-        oldconsole.log('');
-
+        debuginfo.innerHTML += "Time spent: " + Math.round(((time - starttime)/1000) / 60) + ":" + (((time - starttime)/1000) % 60) + " <br />";
+        debuginfo.innerHTML += "Session started: " + startdate + " <br />";
+        }
+        else {
+          console.log("(!)debugx: ", debugx);
+          console.log("position is " + position + ", parallax is " + parallax);
+        }
+      };
 
 
 
       var initializetimer = function (dbg) {
 
         var
-          count = layers.length;
+          count = stations.length;
 
         if(!!dbg) {
           console.log('initializing timer...');
         }
 
+        startpos = parallax.getBoundingClientRect().left;
 
         if(!count) {
-          $('.parallax_layer').each(function (el){
-            layers.push(el);
+          $('.station').each(function (key, value){
+            console.log("station: " + key, value);
+            stations[value.id || key] = value;
           });
-          count = layers.length;
-          console.log("layers.length = " + layers.length);
+          count = stations.length;
         }
         else {
-          debugger;
+          // debugger;
         }
-        timer = setInterval(ontimer, 100);
+        timer = setInterval(progresstimer, UPDATE_INTERVAL);
       };
 
 
@@ -76,7 +120,7 @@
         if(!!!line) { return false; }
 
         var
-          caller = (!!arguments) ? arguments.callee.caller.toString() : false;
+          caller = (!!arguments) ? arguments.callee.caller.name : false;
 
         // // prepend time
         // line = (new Date().getTime()) + ": " + line;
@@ -84,28 +128,9 @@
         // prepend calling function name
         line =  (caller) ? caller + "(): " + line : line;
 
-        if(!!debugoutput) {
-          // redirect to our debugconsole
-          debugoutput.value += line;
-          }
-        else {
-          // if obj given, log it to console
-          (!!obj) ? console.log(line, obj) : console.log(line);
-        }
+        (!!obj) ? console.log(line, obj) : console.log(line);
       };
 
-
-      var ontimer = function (e) {
-        var
-          i,x,y       = 0,
-          time        = (new Date()).getTime(),
-          trigger     = {},
-          position    = parallax.getBoundingClientRect();
-
-        if(!!position) {
-          debug("x: " + position.left);
-        }
-      };
 
 
 
@@ -143,14 +168,8 @@
 
     var layerWidth = $('#parallax').parallaxSwipe.getSize();
 
-    // set width for all parallax layers
+    // set width for all parallax stations
     $('.parallax_layer').css('width',layerWidth);
-    $('.container').on('click', function () {
-      if (!timer) {
-        initializetimer();
-        oldconsole.log('test!');
-      }
-    });
 
     $('.container').on('selectstart', function () { return false; });
 
@@ -180,6 +199,8 @@
           break; 
       }
     });
+
+    initializetimer();
 
     });
   });
