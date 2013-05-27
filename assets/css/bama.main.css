@@ -7,6 +7,37 @@
  */
 
 
+  .debugoutput {
+    position    : absolute;
+    float       : left;
+    top         : 504px;
+    width       : 800px;
+    height      : 1600px;
+    background  : #272822;
+    color       : #f8f8f2;
+    overflow    : auto;
+    border      : none;
+  }
+
+  .code {
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 12px;
+    color: #f8f8f2;
+  }
+
+
+/* monokai, obviously */
+  .code.comment  { color: #75715e; }
+  .code.keyword  { color: #f92672; }
+  .code.default  { color: #f8f8f2; }
+  .code.reserved { color: #66D9EF; }
+  .code.number   { color: #AE81FF; }
+  .code.string   { color: #e6db74; }
+
+
+
+
   body {
     margin       : 0;
     padding      : 0;
@@ -116,10 +147,22 @@
     margin-left: auto;
   }
 
-  .big {
-    font-size   : 32px;
-    line-height : 34px;
+  .verybig {
+    text-align  : center;
+    font-size   : 52px;
+    line-height : 60px;
   }
+
+  .big {
+    text-align  : center;
+    font-size   : 34px;
+    line-height : 32px;
+  }
+
+  .gray {
+    color: #4e4e4e;
+  }
+
 
   .red {
     color: #d42;
@@ -185,7 +228,7 @@
   	-moz-user-select     : none;
   	position             : absolute;
     height               : 500px;
-    background           : transparent url('../img/sky_bg_small.png') repeat-x;
+    background           : transparent url('../img/sky_bg.png') repeat-x;
     pointer-events       : none;
     z-index              : 1;
   }
@@ -197,7 +240,7 @@
 	
     position             : absolute;
     height               : 500px;
-  	background           : transparent url('../img/hill_middle_layer2_small.png') repeat-x;
+  	background           : transparent url('../img/hill_middle_layer2.png') repeat-x;
     background-position  : 0px 320px;
     background-origin    : content-box;
     z-index              : 2;
@@ -210,7 +253,7 @@
     pointer-events       : none;
     position             : absolute;
     height               : 500px;
-    background           : transparent url('../img/hill_middle_layer1_small.png') repeat-x;
+    background           : transparent url('../img/hill_middle_layer1.png') repeat-x;
     background-position  : 0px 330px;
     background-origin    : content-box;
     z-index              : 3;
@@ -224,7 +267,7 @@
 
     position             : absolute;
     height               : 500px;
- /*   background           : transparent url('../img/hill_front2_small.png') repeat-x;
+ /*   background           : transparent url('../img/hill_front2.png') repeat-x;
     background-position  : 0px 310px;
     background-origin    : content-box;
  */   z-index              : 4;
@@ -243,16 +286,16 @@
     height                : 500px;
     background            : transparent;
 
-    background-image      : url('../img/hill_front1_small.png'), url('../img/hill_front2_small.png'), 
-                            url('../img/hill_front1_small.png'), url('../img/hill_front2_small.png'), 
-                            url('../img/hill_front1_small.png'), url('../img/hill_front2_small.png'), 
-                            url('../img/hill_front1_small.png'), url('../img/hill_front2_small.png'), 
-                            url('../img/hill_front1_small.png'), url('../img/hill_front2_small.png'), 
-                            url('../img/hill_front1_small.png'), url('../img/hill_front2_small.png'), 
-                            url('../img/hill_front1_small.png'), url('../img/hill_front2_small.png'), 
-                            url('../img/hill_front1_small.png'), url('../img/hill_front2_small.png'), 
-                            url('../img/hill_front1_small.png'), url('../img/hill_front2_small.png'), 
-                            url('../img/hill_front1_small.png'), url('../img/hill_front2_small.png');
+    background-image      : url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png');
     background-position   :     0px 310px,   768px 310px,   
                              1536px 310px,  2304px 310px,   
                              3072px 310px,  3840px 310px,   
@@ -292,6 +335,14 @@
  *
  */
 
+/*  #intro_text {
+    text-align    : center;
+    margin-left   : auto;
+    margin-right  : auto;
+    width         : 80%;
+  }
+*/
+
   #arrow {
 
   }
@@ -320,25 +371,42 @@
 
 
 
-  #muni_sign {
+  .muni_sign {
+
+    position            : absolute;
+    overflow            : visible;
+    padding-left        : 32px;
+    padding-top         : 8px;
+
+    left                : 300px;
+    top                 : 300px;
+    width               : 87px;
+    height              : 46px;
+
+    color               : white;
     font-family         : Arial, sans-serif;
     font-weight         : 700;
     font-size           : 11px;
-    left                : 300px;
-    top                 : 300px;
+
     background          : transparent url('../img/kommuneskilt.png');
     background-repeat   : no-repeat;
+    background-origin   : content-box;
+    background-position : top left;
   }
 
 
 
   #barn {
+    position  : absolute;
+    top       : 200px;
+    left      : 20px;
 
   }
 
-  #farmer_small {
+  #farmer {
     position: absolute;
     top: 302px;
+
     z-index: 102;
   }
 
@@ -348,14 +416,14 @@
   }
 
   #farmer_large {
-    display: none;    
+    /*display: none;    */
   }
 
   #lise_large {
-    display: none;    
+    /*display: none;    */
   }
 
-  #lise_small {
+  #lise {
     position  : absolute;
     top       : 302px;    
     z-index   : 102;
@@ -381,21 +449,19 @@
   }
 
 
-  .woodsign {
-    overflow    : visible;
-    color       : #443;
-    padding     : 4px;
-    font-family : "Just Another Hand", Helvetica, Arial, sans-serif;
-    font-size   : 13px;
-    font-weight : 400;
-    background  : transparent url('../img/wood_sign_arrow.png') no-repeat;
+  .wood_sign {
+    overflow            : visible;
+    color               : #4c2b0c;
+    padding             : 4px;
+    font-family         : Abel, Helvetica, Arial, sans-serif;
+    font-size           : 12px;
+    font-weight         : 700;
+    background          : transparent url('../img/wood_sign_arrow.png') no-repeat;
     background-position : top left;
-    width       : 213px;
-    height      : 94px;
+    width               : 213px;
+    height              : 94px;
     /*background-origin   : content-box;*/
-    position: absolute;
-
-
+    position            : absolute;
   }
 
 
@@ -562,7 +628,7 @@
 
   #road {
     position             : absolute; 
-    background           : transparent url('../img/road_small.png') repeat-x;
+    background           : transparent url('../img/road.png') repeat-x;
     background-position  : 0px 0px;
     top                  : 428px; 
     height               : 72px;
