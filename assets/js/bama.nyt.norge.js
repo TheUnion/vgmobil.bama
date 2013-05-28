@@ -37,10 +37,25 @@
         debuginfo     = document.getElementById('debug_info');
 
 
+
+      var onEvent = function (eventObject) {
+        // eventObject : {
+        //   event: eventObject.event,
+        //   target: HTMLElement,
+        //   x : eventObject.x,
+        //   y : eventObject.y,
+        //   time: eventObject.time,
+        // }
+
+      // # tracking code here
+
+      }
+
+
       /**
        *  progresstimer()
        *
-       *  This is where we do our tracking, and detect which station we are currently at
+       *  This is where we detect which station we are currently at, &c
        * 
        */
 
@@ -65,7 +80,11 @@
           debuginfo.innerHTML += "Stations visited:<br />";
 
           // for..in normally not acceptable, but ok with this few elements
+          var counter = 0, startAtIndex = 3;
           for (var key in stations) {
+            if(++counter < startAtIndex) {
+              continue;
+            }
             x = (startpos - (stations[key].getBoundingClientRect().left - STATION_MARGIN));
             if(x<0) {
               break;
@@ -74,8 +93,8 @@
                 triggers[key] = true;
               }
               if(Math.abs(x) > STATION_MARGIN) {
-                if(currentstation === key) {
-                  ROAD_SPEED = $('#parallax').parallaxSwipe.setSpeed(STATION_SPEED, ROAD_DECAY, ROAD_MOUSE_DECAY);
+                if( (currentstation === key) ) {
+                  ROAD_SPEED = $('#parallax').parallaxSwipe.setSpeed(ROAD_SPEED, ROAD_DECAY, ROAD_MOUSE_DECAY, x);
                   console.log("Leaving " + key);
                   events.push({ event: 'leave_station', message: 'leaving station ' + key, target: currentstation, time: time});
                   currentstation = 'none';
@@ -83,16 +102,16 @@
               } else {
                 if(currentstation !== key) {
                   console.log("Arriving at " + key);
-                  $('#parallax').parallaxSwipe.setSpeed(ROAD_SPEED, DECAY, MOUSEDOWN_DECAY);
+                  $('#parallax').parallaxSwipe.setSpeed(STATION_SPEED, DECAY, MOUSEDOWN_DECAY, x);
                   events.push({ event: 'arrive_station', message: 'arriving at station ' + key, target: currentstation, time: time});
                   currentstation = key;
-                  if (currentstation == "station" + 3) {
+                  if ((counter === 3) || ((counter === 4))) { 
                     console.log('switching to dirt road...' + key);
-                    document.getElementByClassName('road').classList.add('dirt');
+                    document.getElementById('road').classList.add('dirt');
                   }
                   else {
                     console.log('switching back to asphalt at station ' + key);
-                    document.getElementByClassName('road').classList.remove('dirt');
+                    document.getElementById('road').classList.remove('dirt');
                   }
                 }
               }
