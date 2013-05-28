@@ -1,7 +1,7 @@
 /*copyright 2012 robert w. stewart torontographic.com*/
 ;(function($) {
 $.fn.parallaxSwipe = function(options) {
-var defaults = {DECAY:0.9, MOUSEDOWN_DECAY:0.5, SPEED_SPRING:0.5, BOUNCE_SPRING:0.08,
+var defaults = {DECAY:0.9, MOUSEDOWN_DECAY:0.9, SPEED_SPRING:0.5, BOUNCE_SPRING:0.08,
   HORIZ:true, SNAPDISTANCE:20, DISABLELINKS:true, LAYER:[]
 };
 var o = $.extend(defaults, options);
@@ -26,17 +26,17 @@ plugin.css(edge,0);
 
 this.parallaxSwipe.getSize = function(i){ if (sliderW>'') { return sliderW; } else { return sliderH; }};
 
-this.parallaxSwipe.setSpeed = function(newspeed) { 
+this.parallaxSwipe.setSpeed = function(newspring, decay, mousedecay) { 
   var
-    result = o.DECAY;
+    result = o;
 
-  if(typeof newspeed !== "number") {
-    return false;
-  }
+  o.DECAY           = decay;
+  o.MOUSEDOWN_DECAY = mousedecay;
 
-  o.DECAY = newspeed;
-  return result;
+  //_velocity       = newvelocity;
+  return o;
 };
+
 
 
 var mouseswipe=function(sliderLT) {

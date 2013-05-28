@@ -7,16 +7,25 @@
     //variables global to our scope
 
       var 
-        timer           = null,
-        loaded          = null,
-        startdate       = false,
-        starttime       = false,
-        stations        = {},
-        currentstation  = 'none',
-        startpos        = 0,
-        sessionstart    = null,
-        UPDATE_INTERVAL = 100, //millisec
-        STATION_MARGIN  = 300, // delta for when station becomes visible
+        timer             = null,
+        loaded            = null,
+        startdate         = false,
+        starttime         = false,
+        stations          = {},
+        currentstation    = 'none',
+        currentspeed      = 0.9,
+        startpos          = 0,
+        sessionstart      = null,
+        UPDATE_INTERVAL   = 100, //millisec
+        STATION_MARGIN    = 400, // delta for when station becomes visible
+        STATION_SPEED     = 0.3, // when approaching station
+        ROAD_SPEED        = 0.9, // when leaving station
+        STATION_VELOCITY  = 0.3, // when approaching station
+        ROAD_VELOCITY     = 0.9, // when approaching station
+        DECAY             = 0.6, // when approaching station
+        MOUSEDOWN_DECAY   = 0.6, // when approaching station
+        ROAD_DECAY        = 0.9, // when leaving station
+        ROAD_MOUSE_DECAY  = 0.9, // when leaving station
 
         //store triggers as they occur
         triggers      = [],
@@ -64,17 +73,30 @@
               if(!triggers[key]) {
                 triggers[key] = true;
               }
-              if(x > 400) {
-                if(currentstation !== 'none') {
+              if(Math.abs(x) > STATION_MARGIN) {
+                if(currentstation === key) {
+                  ROAD_SPEED = $('#parallax').parallaxSwipe.setSpeed(STATION_SPEED, ROAD_DECAY, ROAD_MOUSE_DECAY);
+                  console.log("Leaving " + key);
                   events.push({ event: 'leave_station', message: 'leaving station ' + key, target: currentstation, time: time});
                   currentstation = 'none';
                 }
               } else {
-                events.push({ event: 'arrive_station', message: 'arriving at ' + key, target: currentstation, time: time});
-                currentstation = key;
+                if(currentstation !== key) {
+                  console.log("Arriving at " + key);
+                  $('#parallax').parallaxSwipe.setSpeed(ROAD_SPEED, DECAY, MOUSEDOWN_DECAY);
+                  events.push({ event: 'arrive_station', message: 'arriving at station ' + key, target: currentstation, time: time});
+                  currentstation = key;
+                  if (currentstation == "station" + 3) {
+                    console.log('switching to dirt road...' + key);
+                    document.getElementByClassName('road').classList.add('dirt');
+                  }
+                  else {
+                    console.log('switching back to asphalt at station ' + key);
+                    document.getElementByClassName('road').classList.remove('dirt');
+                  }
+                }
               }
             }
-
             debuginfo.innerHTML += key + ": " + x + "<br />";
           }
 
@@ -163,7 +185,7 @@
 
 
 
-    $("#parallax").parallaxSwipe( { DECAY:0.9, MOUSEDOWN_DECAY:0.5, SPEED_SPRING:0.7, BOUNCE_SPRING:0.1, 
+    $("#parallax").parallaxSwipe( { DECAY: ROAD_DECAY, MOUSEDOWN_DECAY: ROAD_MOUSE_DECAY, SPEED_SPRING: ROAD_SPEED, BOUNCE_SPRING:0.1, 
           HORIZ:true, SNAPDISTANCE:20, DISABLELINKS: false, LAYER:[ 20, 20, 3.2, 1.6, 1, 0.9 ] });
 
 

@@ -9,12 +9,22 @@
   <link href="assets/css/parallaxVertical.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/bama.main.css" rel="stylesheet" type="text/css" />
   <!-- <link href="assets/css/animate.css" rel="stylesheet" type="text/css" /> -->
+
+  <script>
+
+     var ffwd = function( to ) {
+        console.log("moving to " + to);
+        document.getElementById('parallax').left = to;
+        console.log("new position: " + document.getElementById('parallax').left);
+      };
+
+  </script>
 </head>
 
 <body>
 
 
-  <div id="muni_sign" class="muni_sign"> <img class="hires" src="assets/img/frosta_kommunevapen.png" /> Frosta</div>
+  <div id="muni_sign" class="muni_sign"> <img class="hires kommunevapen" src="assets/img/frosta_kommunevapen.png" /> Frosta</div>
 
 
   <div class="container">
@@ -82,7 +92,7 @@
 
         <div id="start">
           <div id="intro_text" class="sprite">
-            <img class="animated continuous bounce hires" src="assets/img/arrow.png" />
+            <img class="animated continuous arrow" src="assets/img/arrow.png" />
             <span class="verybig blue">Nå kommer de<br />norske salatene!</span>
             <span class="big gray regular">
               <br /> Swipe og opplev de flotte<br />salatene fra Frosta.
@@ -92,33 +102,32 @@
 
         <div id="station1" class="station">
           STATION 1
-          <div id="muni_sign" class="muni_sign">FROSTA</div>
+          <div id="muni_sign" class="muni_sign">Frosta</div>
         </div>
 
         <div id="station2" class="station">
           STATION 2
-
+          <div id="farm_sign">
         </div>
 
         <div id="station3" class="station">
           STATION 3
-          <img id="barn" class="sprite hires" src="assets/img/barn.png">
+          <!-- <img id="barn" class="sprite hires" src="assets/img/barn.png"> -->
+          <div id="barn" class="sprite"></div>
           <img id="farmer" class="sprite" src="assets/img/farmer_small.png">
 
-          <img id="tractor" class="sprite hires" src="assets/img/tractor.png">
-          
           <div id="farmer_large" class="front face sprite snakkeboble">
             <img id="farmer_large" class="hires" src="assets/img/farmer_large.png">
           </div>
 
           <div id="farmer_recipe" class="back face center recipe">
-
           </div>   
         </div>
 
 
         <div id="station4" class="station">
           STATION 4
+          <img id="tractor" class="sprite hires" src="assets/img/tractor.png">
           <div id="lise_large" class="front face sprite snakkeboble">
           <img class="hires" src="assets/img/lise_large.png">
           </div>
@@ -131,6 +140,10 @@
           <img id="drivein_sign" class="hires" src="assets/img/drive_in_sign_salat.png">
           <img id="drivein_screen" class="sprite hires" src="assets/img/drive_in_screen.png">
 
+        </div>
+
+        <div id="station6" class="station">
+          STATION 6
           <div id="video1_container">
             <video id="video1" width="416" height="234" controls poster="assets/img/video_poster_contrast.jpg">
               <source src="http://kromaviews.no:80/dev/games/bama/assets/video/video1.webm" type="video/webm">
@@ -143,7 +156,10 @@
         </div>
 
         <!-- this is the div containing the road tiles -->
-        <div id="road"></div>
+        <div id="road" class="road">
+        </div>
+
+
 
       </div>
     </div>
@@ -181,10 +197,10 @@
       Franke
     </button>    
     <p>
-      <button id="button_s1" class="ffwd">
+      <button id="button_s1" class="ffwd" onclick="ffwd(6000);">
         GOTO Franke
       </button>    
-      <button id="button_s2" class="ffwd">
+      <button id="button_s2" class="ffwd" onclick="ffwd(6000);">
         GOTO Lise
       </button>    
     </p>
