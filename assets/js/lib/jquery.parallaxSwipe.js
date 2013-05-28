@@ -26,6 +26,19 @@ plugin.css(edge,0);
 
 this.parallaxSwipe.getSize = function(i){ if (sliderW>'') { return sliderW; } else { return sliderH; }};
 
+this.parallaxSwipe.setSpeed = function(newspeed) { 
+  var
+    result = o.DECAY;
+
+  if(typeof newspeed !== "number") {
+    return false;
+  }
+
+  o.DECAY = newspeed;
+  return result;
+};
+
+
 var mouseswipe=function(sliderLT) {
   if (_mouseDown) {
     _velocity *= o.MOUSEDOWN_DECAY;

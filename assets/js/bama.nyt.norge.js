@@ -70,7 +70,7 @@
                   currentstation = 'none';
                 }
               } else {
-                events.push({ event: 'arrive_station', message: 'arriving at station ' + key, target: currentstation, time: time});
+                events.push({ event: 'arrive_station', message: 'arriving at ' + key, target: currentstation, time: time});
                 currentstation = key;
               }
             }
@@ -145,20 +145,21 @@
     /**
      *  Swap to hi-res images for Retina displays
      */
-    if (window.devicePixelRatio == 2) {
-      var images = $("img.hires");
+    
+    // if (window.devicePixelRatio == 2) {
+    //   var images = $("img.hires");
 
-      /* loop through the images and make them hi-res */
-      for(var i = 0; i < images.length; i++) {
+    //   /* loop through the images and make them hi-res */
+    //   for(var i = 0; i < images.length; i++) {
 
-        /* create new image name */
-        var imageType = images[i].src.substr(-4);
-        var imageName = images[i].src.substr(0, images[i].src.length - 4).replace('/img/', '/img/retina/');
-        imageName += "@2x" + imageType;
-        /* load retina image */
-        images[i].src = imageName; 
-      }
-    }
+    //     /* create new image name */
+    //     var imageType = images[i].src.substr(-4);
+    //     var imageName = images[i].src.substr(0, images[i].src.length - 4).replace('/img/', '/img/retina/');
+    //     imageName += "@2x" + imageType;
+    //     /* load retina image */
+    //     images[i].src = imageName; 
+    //   }
+    // }
 
 
 
