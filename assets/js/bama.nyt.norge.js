@@ -36,7 +36,9 @@
         lise_tips     = document.getElementById('lise_tips');
         // farmer_tips   = document.getElementById('farmer_tips');
 
-        lise_tips.add 
+        parallax.addEventListener('click', function(e) {
+          console.log('was clicked: ' + this.id, e);
+        });
 
       var onEvent = function (eventObject) {
         // eventObject : {
@@ -210,32 +212,6 @@
 
     $('.container').on('selectstart', function () { return false; });
 
-
-    $("#flipbox").flip({
-      direction:'lr',
-      onBefore: function(){
-          console.log('before starting the animation');
-      },
-      onAnimation: function(){
-          console.log('in the middle of the animation');
-      },
-      onEnd: function(){
-          console.log('when the animation has already ended');
-      }
-    });
-
-
-    $('.button_flip').on('click', function (el) {
-      console.log('flipping: ' + this.id + " (" + this.className + ")");
-      switch(this.id) {
-        case "flip" :
-          $('#lise_large').toggleClass('flip');
-          break; 
-        case "flip2" :
-          $('#farmer_large').toggleClass('flip');
-          break; 
-      }
-    });
 
     initializetimer();
 

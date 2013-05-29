@@ -1,6 +1,6 @@
-/**
- *  Basic setup. 
- *  
+/**--------------+
+ ---------*  Ba------sic setup. 
+ *  -----------
  *  We are assuming an iframe, obviously.
  *  Otherwise we would never touch these tags.
  *
@@ -354,7 +354,7 @@
 
   #arrow {
     position      : absolute;
-    top           : 128px;
+    top           : 176px;
     left          : 480px;
   }
 
@@ -636,7 +636,7 @@
     }
 
     
-    .snakkeboble.flip.back {
+    sg.snakkeboble.flip.back {
       z-index: 1000;
 
 
@@ -672,7 +672,7 @@
 
 
   #video1 {
-    position            : absolute;
+  ga  position            : absolute;
     z-index             : 1002;
     margin              : 0;
     padding             : 0;
@@ -708,7 +708,7 @@
 /*
   .road.dirt {
     position              : absolute; 
-    overflow              : visible;
+ a   overflow              : visible;
     background-repeat     : repeat-x;
     background-image      : url('../img/road_farm.png');
     background-position   : -144px 0px;
@@ -877,13 +877,6 @@
   }
 
 
-  .arrow {
-    -webkit-animation    : arrow 0.8s ease-in-out infinite;
-       -moz-animation    : arrow 0.8s ease-in-out infinite;
-         -o-animation    : arrow 0.8s ease-in-out infinite;
-            animation    : arrow 0.8s ease-in-out infinite;
-  }
-
 
 
   /**
@@ -933,46 +926,45 @@
 
   @-webkit-keyframes hint {
     0%, 100% {-webkit-transform: translateX(0);}
-    50% {-webkit-transform: translateX(64px);}
+    50% {-webkit-transform: translateX(10px);}
   }
 
   @-moz-keyframes hint {
     0%, 100% {-moz-transform: translateX(0);}
-    50% {-moz-transform: translateX(64px);}
+    50% {-moz-transform: translateX(10px);}
   }
 
   @-o-keyframes hint {
     0%, 100% {-o-transform: translateX(0);}
-    50% {-o-transform: translateX(64px);}
+    50% {-o-transform: translateX(10px);}
   }
   @keyframes hint {
     0%, 100% {transform: translateX(0);}
-    50% {transform: translateX(64px);}
+    50% {transform: translateX(10px);}
   }
 
   .hint {
-
-   -webkit-animation    : hint 0.8s ease-in-out infinite;
-       -moz-animation   : hint 0.8s ease-in-out infinite;
-         -o-animation   : hint 0.8s ease-in-out infinite;
-            animation   : hint 0.8s ease-in-out infinite;
+   -webkit-animation    : hint 0.2s ease-in-out infinite;
+       -moz-animation   : hint 0.2s ease-in-out infinite;
+         -o-animation   : hint 0.2s ease-in-out infinite;
+            animation   : hint 0.2s ease-in-out infinite;
   }
 
-  @-webkit-keyframes 64row {
+  @-webkit-keyframes arrow {
       50%  {left: 8px;}
-      100% {left: 24px;}
+      100% {left: 16px;}
   }
   ​
   @-moz-keyframes arrow {
       0%   {left: 0px;}
       50%  {left: 8px;}
-      100% {left: 24px;}
+      100% {left: 16px;}
   }
-
+''
   @keyframes arrow {
       0%   {left: 0px;}
       50%  {left: 8px;}
-      100% {left: 24px;}
+      100% {left: 16px;}
   }
 
 
@@ -1177,7 +1169,7 @@
     60% {transform: translateX(-11px);}
   }
 
-  .bounce {
+------------------''  .bounce {-''
     -webkit-animation-name: bounce;
        -moz-animation-name: bounce;
          -o-animation-name: bounce;
@@ -1198,3 +1190,66 @@
          -o-animation    : slide 0.4s ease-in;
             animation    : slide 0.4s ease-in;
   }
+
+    .effect .flip-container {
+      -webkit-perspective: 1000;
+      -moz-perspective: 1000;
+      perspective: 1000;
+    }
+ 
+    .effect .flip-container:hover .flipper {
+      -webkit-transform: rotateY(180deg);
+      -moz-transform: rotateY(180deg);
+      transform: rotateY(180deg);
+    }
+ 
+    .effect .flipper {
+      -webkit-transition: 0.6s;
+      -webkit-transform-style: preserve-3d;
+ 
+      -moz-transition: 0.6s;
+      -moz-transform-style: preserve-3d;
+ 
+      transition: 0.6s;
+      transform-style: preserve-3d;
+    }
+ 
+    .effect .front, .effect .back {
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+ 
+    .effect .back {
+      -webkit-transform: rotateY(180deg);
+      -moz-transform: rotateY(180deg);
+      transform: rotateY(180deg);
+    }
+ 
+    .flip-container {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      bottom: 500px;
+      width: 580px;
+      background: transparent;
+      border: 0;
+    }
+ 
+    .front, .back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 320px;
+    }
+ 
+    .front {
+      background: transparent;
+      z-index: 2;
+    }
+ 
+    .back {
+      background: transparent;
+    }
+ 

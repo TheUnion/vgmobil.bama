@@ -4,7 +4,6 @@
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />  
   <title>Bama - Nyt Norge </title>
-  <link href='http://fonts.googleapis.com/css?family=Cabin:400,700' rel='stylesheet' type='text/css'>  
   <link href='http://fonts.googleapis.com/css?family=Abel:400,700' rel='stylesheet' type='text/css'>  
   <link href="assets/css/parallaxVertical.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/bama.main.css" rel="stylesheet" type="text/css" />
@@ -84,26 +83,45 @@
     <div id="layer5" class="parallax_layer"> <!-- front layer #1, the scene layer -->
       <div class="panel">
 
-
         <div id="start">
+          <div id="arrow" class="animated continuous hint"><img class="hires" src="assets/img/arrow.png" /></div>
+          
+            
           <div id="intro_text" class="sprite">
-            <img class="hires animated continuous hint" src="assets/img/arrow.png" />
             <span class="verybig blue">Nå kommer de<br />norske salatene!</span>
             <span class="big gray regular">
               <br /> Swipe og opplev de flotte<br />salatene fra Frosta.
             </span>
             </div>
 
-          <div id="lise_tips" class="front face sprite lise_tips">
-            <!-- <img id="lise_large" src="assets/img/lise_large.png" /> -->
-            <!-- <img id="close_button" src="assets/img/close_grey.png" /> -->
-            <div id="lise_tekst" class="snakkeboble"><span class="bold">Hei!</span> Jeg heter Lise, og her<br />er et lite tips til deg!
-            <br /> <div class="btn">Vær så god!</div>
+
+          <div id="container" class="x-effect">
+            <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+              <div class="flipper">
+                <div class="front">
+                  <div id="lise_tips" class="front face sprite lise_tips">
+                    <!-- <img id="lise_large" src="assets/img/lise_large.png" /> -->
+                    <!-- <img id="close_button" src="assets/img/close_grey.png" /> -->
+                    <div id="lise_tekst" class="snakkeboble"><span class="bold">Hei!</span> Jeg heter Lise, og her<br />er et lite tips til deg!
+                    <br /> <div class="btn">Vær så god!</div>
+                    </div>
+                    <div class="btm"></div>
+                  </div>
+                </div>
+                <div class="back">
+                  <div id="lise_recipe" class="back face center recipe">
+                    <img src="assets/img/bilreise_station3_flip.jpg" />
+                  </div>
+                  <span class="name">back</span>
+                </div>
+              </div>
             </div>
-            
-            <div class="btm"></div>
           </div>
-          <div id="lise_recipe" class="back face center recipe"></div>
+
+
+
+          </div>
+
         </div>
 
 
@@ -145,7 +163,7 @@
         </div>
 
         <div id="station6" class="station">
-          <div id="video1_container">
+          <div id="video1_container" onclick="console.log('click');return false;" onclick="console.log('click');return false;">
             <video id="video1" width="416" height="234" poster="assets/img/video_poster_contrast.jpg">
               <source src="http://kromaviews.no:80/dev/games/bama/assets/video/video1.webm" type="video/webm">
               <source src="http://kromaviews.no:80/dev/games/bama/assets/video/video1.mp4" type="video/mp4">
