@@ -18,12 +18,10 @@
         sessionstart      = null,
         UPDATE_INTERVAL   = 100, //millisec
         STATION_MARGIN    = 400, // delta for when station becomes visible
-        STATION_SPEED     = 0.3, // when approaching station
+        STATION_SPEED     = 0.6, // when approaching station
         ROAD_SPEED        = 0.9, // when leaving station
-        STATION_VELOCITY  = 0.3, // when approaching station
-        ROAD_VELOCITY     = 0.9, // when approaching station
-        DECAY             = 0.6, // when approaching station
-        MOUSEDOWN_DECAY   = 0.6, // when approaching station
+        DECAY             = 0.75, // when approaching station
+        MOUSEDOWN_DECAY   = 0.75, // when approaching station
         ROAD_DECAY        = 0.9, // when leaving station
         ROAD_MOUSE_DECAY  = 0.9, // when leaving station
 
@@ -35,8 +33,10 @@
         parallax      = document.getElementById('parallax'),
         debugtrigger  = document.getElementById('debug_trigger'),
         debuginfo     = document.getElementById('debug_info');
+        lise_tips     = document.getElementById('lise_tips');
+        // farmer_tips   = document.getElementById('farmer_tips');
 
-
+        lise_tips.add 
 
       var onEvent = function (eventObject) {
         // eventObject : {
@@ -102,9 +102,13 @@
               } else {
                 if(currentstation !== key) {
                   console.log("Arriving at " + key);
-                  $('#parallax').parallaxSwipe.setSpeed(STATION_SPEED, DECAY, MOUSEDOWN_DECAY, x);
                   events.push({ event: 'arrive_station', message: 'arriving at station ' + key, target: currentstation, time: time});
                   currentstation = key;
+                  // don't slow down at these stations
+                  if(counter === 5){
+                    continue;
+                  }
+                  $('#parallax').parallaxSwipe.setSpeed(STATION_SPEED, DECAY, MOUSEDOWN_DECAY, x);
                   if ((counter === 3) || ((counter === 4))) { 
                     console.log('switching to dirt road...' + key);
                     document.getElementById('road').classList.add('dirt');
@@ -156,24 +160,15 @@
 
 
       var debug = function (line, obj) {
-
-        // no message, quick escape
-        if(!!!line) { return false; }
-
         var
           caller = (!!arguments) ? arguments.callee.caller.name : false;
-
-        // // prepend time
-        // line = (new Date().getTime()) + ": " + line;
 
         // prepend calling function name
         line =  (caller) ? caller + "(): " + line : line;
 
-        (!!obj) ? console.log(line, obj) : console.log(line);
+        // output to console
+        !!obj ? console.log(line, obj) : console.log(line);
       };
-
-
-
 
 
     // Hide the address bar in Mobile Safari

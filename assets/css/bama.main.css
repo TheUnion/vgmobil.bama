@@ -64,7 +64,7 @@
   /* The ugly */
 
   .hwaccel {  
-    /* Supposedly this forces activation of HW-acceleration on WebKit, or only iOS */
+    /* Supposedly this forces activation of HW-acceleration on iOS Safari */
     -webkit-transform: translateZ(0); 
   }
 
@@ -89,7 +89,7 @@
     -webkit-user-select  : none;
        -moz-user-select  : none;
             user-select  : none;
-    pointer-events       : none;
+    pointer-events       : inherit;
   }
 
 
@@ -111,7 +111,7 @@
     height            : 500px;
     background        : transparent;
     overflow          : hidden;
-    cursor            : default;
+    cursor            : auto;
   }
 
   .box {
@@ -226,7 +226,7 @@
   	-moz-user-select     : none;
   	position             : absolute;
     height               : 500px;
-    width                : 12000px
+    width                : 12000px;
   	cursor               : move;
     z-index              : 500;
   }
@@ -284,9 +284,9 @@
   #layer5 {
 /*  This is our main layer, the one where everything happens
 */    
-    -webkit-user-select   : none;
-    -moz-user-select      : none;
-    pointer-events        : none;
+    -webkit-user-select   : auto;
+    -moz-user-select      : auto;
+    pointer-events        : auto;
     position              : absolute;
     height                : 500px;
     background            : transparent;
@@ -341,6 +341,9 @@
  */
 
   #intro_text {
+    color         : #4e4e4e;
+    font-family   : Abel, sans-serif;
+    font-weight   : 400;
     text-align    : center;
     margin-left   : auto;
     margin-right  : auto;
@@ -468,16 +471,25 @@
     top                 : 96px;
     left                : 32px;
     /*background          : transparent;*/
-    background          : url('../img/lise_large.png');
-    background-repeat   : no-repeat;
-    background-origin   : content-box;
-    background-position : bottom center;   
+  }
+
+  #lise_text {
+    top                 : 90px;
+    /*background          : transparent;*/
   }
 
   .lise_tips {
+    pointer-events      : default;
+    cursor              : pointer;
+    width               : 428px;
     overflow            : hidden;
     /*background          : transparent;*/
-    background          : transparent url('../img/lise_large.png');
+    /*background          : transparent url('../img/lise_large.png');*/
+    background-image    : url('../img/lise_large.png');
+    background-repeat   : no-repeat;
+    background-origin   : content-box;
+    background-position : top left;   
+    z-index             : 501;
   }
 
 
@@ -515,7 +527,7 @@
   .btm {
     position      : absolute;
     background    : transparent url('../img/pop_up_btm.png') no-repeat;
-    top           : 115px;
+    top           : 227px;
     left          : 0;
     width         : 410px;
     height        : 68px;
@@ -539,6 +551,7 @@
     font-size     : 18px;
     padding       : 4px;
     text-align    : center;
+    top           : 110px;
     height        : 108px;
     width         : 219px;
     border-style  : solid solid none solid;
@@ -639,11 +652,11 @@
 
 
   #video1_container {
-/*    -webkit-user-select : none;
-       -moz-user-select : none;
-            user-select : none;
-    pointer-events      : none;
-*/
+    -webkit-user-select : default;
+       -moz-user-select : default;
+            user-select : default;
+    pointer-events      : auto;
+
     position            : absolute; 
     display             : block; 
     margin              : 0px auto 0px auto; 
@@ -668,8 +681,13 @@
     width               : 416px;
     height              : 234px;   
     
-    cursor              : default;
-    pointer-events      : default;
+    -webkit-user-select : auto;
+       -moz-user-select : auto;
+            user-select : auto;
+    pointer-events      : auto;
+
+    cursor              : auto;
+    pointer-events      : auto;
     -webkit-user-select : auto;
        -moz-user-select : auto;
             user-select : auto;
@@ -874,8 +892,73 @@
    */
 
 
-  @-webkit-keyframes arrow {
-      0%   {left: 0px;}
+  @-webkit-keyframes point {
+    0%, 50%, 100% {-webkit-transform: translateX(0);}
+    25% {-webkit-transform: translateX(20px);}
+    75% {-webkit-transform: translateX(-15px);}
+  }
+
+  @-moz-keyframes point {
+    0%, 50%, 100% {-moz-transform: translateX(0);}
+    25% {-moz-transform: translateX(20px);}
+    75% {-moz-transform: translateX(-15px);}
+  }
+
+  @-o-keyframes point {
+    0%, 50%, 100% {-o-transform: translateX(0);}
+    25% {-o-transform: translateX(20px);}
+    75% {-o-transform: translateX(-15px);}
+  }
+  @keyframes point {
+    0%, 50%, 100% {transform: translateX(0);}
+    25% {transform: translateX(20px);}
+    75% {transform: translateX(-15px);}
+  }
+
+  .point {
+/*    -webkit-animation-name: point;
+    -moz-animation-name: point;
+    -o-animation-name: point;
+    animation-name: point;*/
+
+    -webkit-animation    : point 0.8s ease-in-out infinite;
+       -moz-animation    : point 0.8s ease-in-out infinite;
+         -o-animation    : point 0.8s ease-in-out infinite;
+            animation    : point 0.8s ease-in-out infinite;
+
+
+  }
+
+
+
+  @-webkit-keyframes hint {
+    0%, 100% {-webkit-transform: translateX(0);}
+    50% {-webkit-transform: translateX(64px);}
+  }
+
+  @-moz-keyframes hint {
+    0%, 100% {-moz-transform: translateX(0);}
+    50% {-moz-transform: translateX(64px);}
+  }
+
+  @-o-keyframes hint {
+    0%, 100% {-o-transform: translateX(0);}
+    50% {-o-transform: translateX(64px);}
+  }
+  @keyframes hint {
+    0%, 100% {transform: translateX(0);}
+    50% {transform: translateX(64px);}
+  }
+
+  .hint {
+
+   -webkit-animation    : hint 0.8s ease-in-out infinite;
+       -moz-animation   : hint 0.8s ease-in-out infinite;
+         -o-animation   : hint 0.8s ease-in-out infinite;
+            animation   : hint 0.8s ease-in-out infinite;
+  }
+
+  @-webkit-keyframes 64row {
       50%  {left: 8px;}
       100% {left: 24px;}
   }
