@@ -22,7 +22,9 @@
 
 <body>
 
-  <div class="container">
+
+
+  <div class="container" onselectstart="return false;">
 
     <!-- <div id="progress"><progress id="progressbar" value="0" max="100"></progress></div> -->
     <img id="logo" class="hires" src="assets/img/bama_logo.svg" />
@@ -46,7 +48,7 @@
     </div>
   </div> 
 
-  <div class="container">
+  <div class="container" onselectstart="return false;">
     <div id="layer1" class="parallax_layer">
       <div class="panel">
       
@@ -54,24 +56,28 @@
     </div>
   </div>
 
-  <div class="container">
+  <div class="container" onselectstart="return false;">
     <div id="layer2" class="parallax_layer"> <!-- middle layer #2 -->
       <div class="panel">
         <img class="hires horizontal sprite" src="assets/img/hill_middle_layer2.png" />
         <img class="hires horizontal mirror sprite" style="left: 665px;" src="assets/img/hill_middle_layer2.png" />
         <img class="hires horizontal sprite" src="assets/img/hill_middle_layer2.png" />
+
+        <img class="hires horizontal mirror sprite" style="top: 40px; left: 665px;" src="assets/img/cloud2.png" />
+        <img class="hires horizontal sprite"  style="top: 80px; left: 265px;" src="assets/img/cloud1.png" />
+
       </div>
     </div>
   </div>
 
-  <div class="container">
+  <div class="container" onselectstart="return false;">
     <div id="layer3" class="parallax_layer">  <!-- middle layer #1 -->
       <div class="panel">
       </div>
     </div>
   </div>
 
-  <div class="container">
+  <div class="container" onselectstart="return false;">
     <div id="layer4" class="parallax_layer"> <!-- front layer #2 -->
       <div class="panel">
       </div>
@@ -79,14 +85,14 @@
   </div>
 
 
-  <div class="container">
+  <div class="container" onselectstart="return false;">
     <div id="layer5" class="parallax_layer"> <!-- front layer #1, the scene layer -->
       <div class="panel">
 
         <div id="start">
+
           <div id="arrow" class="animated continuous hint"><img class="hires" src="assets/img/arrow.png" /></div>
           
-            
           <div id="intro_text" class="sprite">
             <span class="verybig blue">Nå kommer de<br />norske salatene!</span>
             <span class="big gray regular">
@@ -95,28 +101,6 @@
             </div>
 
 
-          <div id="container" class="x-effect">
-            <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-              <div class="flipper">
-                <div class="front">
-                  <div id="lise_tips" class="front face sprite lise_tips">
-                    <!-- <img id="lise_large" src="assets/img/lise_large.png" /> -->
-                    <!-- <img id="close_button" src="assets/img/close_grey.png" /> -->
-                    <div id="lise_tekst" class="snakkeboble"><span class="bold">Hei!</span> Jeg heter Lise, og her<br />er et lite tips til deg!
-                    <br /> <div class="btn">Vær så god!</div>
-                    </div>
-                    <div class="btm"></div>
-                  </div>
-                </div>
-                <div class="back">
-                  <div id="lise_recipe" class="back face center recipe">
-                    <img src="assets/img/bilreise_station3_flip.jpg" />
-                  </div>
-                  <span class="name">back</span>
-                </div>
-              </div>
-            </div>
-          </div>
 
 
 
@@ -140,22 +124,50 @@
           <div id="barn" class="sprite"></div>
           <img id="farmer" class="sprite" src="assets/img/farmer_small.png">
 
-          <!-- <div id="farmer_large" class="front face sprite snakkeboble">
-            <img id="farmer_large" class="hires" src="assets/img/farmer_large.png">
-          </div>
- -->
-          <div id="farmer_recipe" class="back face center recipe">
-          </div>   
+          <div id="farmer_hello">
+            <div id="farmer_tips" class="front sprite farmer_tips">
+              <!-- <img id="farmer_large" src="assets/img/farmer_large.png" /> -->
+              <!-- <img id="close_button" src="assets/img/close_grey.png" /> -->
+              <div id="farmer_tekst" class="snakkeboble"><span class="bold">Hei!</span> Jeg heter Frank, og her<br />er et lite tips til deg!
+              <br /> <div class="btn">Vær så god!</div>
+              </div>
+              <div class="btm"></div>
+            </div>
+
+              <div id="farmer_recipe" class="center recipe">
+                <img src="assets/img/salat_tips.jpg" />
+                <div class="recipe">
+                  <span class="recipe">SALATDYRKING I NORGE</span>
+                </div>
+              </div>
+            </div>
         </div>
 
 
-        <div id="station4" class="station">
+        <div id="station4" class="station x-effect">
+          <div id="lise_hello">
+            <div id="lise_tips" class="front sprite lise_tips">
+              <!-- <img id="lise_large" src="assets/img/lise_large.png" /> -->
+              <!-- <img id="close_button" src="assets/img/close_grey.png" /> -->
+              <div id="lise_tekst" class="snakkeboble"><span class="bold">Hei!</span> Jeg heter Lise, og her<br />er et lite tips til deg!
+              <br /> <div class="btn">Vær så god!</div>
+              </div>
+              <div class="btm"></div>
+            </div>
+
+              <div id="lise_recipe" class="center recipe">
+                <img src="assets/img/salat_tips.jpg" />
+                <div class="recipe">
+                  <span class="recipe">SALATDYRKING I NORGE</span>
+                </div>
+              </div>
+            </div>
+
           <img id="tractor" class="sprite hires" src="assets/img/tractor.png">
           <img id="lise" class="hires" src="assets/img/lise_small.png">
           <!-- <div id="lise_tips" class="front face sprite snakkeboble">
           </div>
-           --><div id="lise_recipe" class="back face center recipe">
-          </div> 
+           -->
         </div>
 
         <div id="station5" class="station">
@@ -164,7 +176,7 @@
 
         <div id="station6" class="station">
           <div id="video1_container" onclick="console.log('click');return false;" onclick="console.log('click');return false;">
-            <video id="video1" width="416" height="234" poster="assets/img/video_poster_contrast.jpg">
+            <video id="video1" width="416" height="234" controls poster="assets/img/video_poster_contrast.jpg">
               <source src="http://kromaviews.no:80/dev/games/bama/assets/video/video1.webm" type="video/webm">
               <source src="http://kromaviews.no:80/dev/games/bama/assets/video/video1.mp4" type="video/mp4">
               Your browser does not support the video tag. 
@@ -174,19 +186,25 @@
 
         </div>
 
+
+        <div id="station7" class="station">
+
+          <div id="final_sign" class="final_sign">
+            <span id="final_sign_title"><a>Salat passer til dette</a><br />
+          <a>Dette er i sesong nå</a> </span>
+          </div>
+          
         <!-- this is the div containing the road tiles -->
+        </div>
         <div id="road" class="road">
         </div>
 
-
-
       </div>
     </div>
-  </div>
 
 
 
-  <div class="container">  <!-- -->
+  <div class="container" onselectstart="return false;">  <!-- -->
     <div id="layer6"> <!-- fg_road.png layer -->
       <div class="panel">
         <div class="content">
@@ -195,7 +213,7 @@
       </div>
   </div>
 
-  <div class="container">
+  <div class="container" onselectstart="return false;">
     <div id="layer_player" class="parallax_layer interactive">
       <img id="car" class="hires animated continuous" src="assets/img/car.png" width="283" height="126" />
     </div>
@@ -226,13 +244,9 @@
 
   </div>
 
-<div id="HUD" class="HUD">
   <span id="debug_trigger"></span><br />
-
   <p><span id="debug_info"></span></p>
-
   <div id="debugoutput"></div>
-</div>
 
 </body>
 </html>
