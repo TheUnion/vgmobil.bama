@@ -5,46 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />  
   <title>Bama - Nyt Norge </title>
   <link href='http://fonts.googleapis.com/css?family=Abel:400,700' rel='stylesheet' type='text/css'>  
-  <link href="assets/css/parallaxVertical.css" rel="stylesheet" type="text/css" />
+  <!-- <link href="assets/css/parallaxVertical.css" rel="stylesheet" type="text/css" /> -->
   <link href="assets/css/bama.main.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
 
-  <script>
-
-     var ffwd = function( to ) {
-        console.log("moving to " + to);
-        document.getElementById('parallax').left = to;
-        console.log("new position: " + document.getElementById('parallax').left);
-      };
-
-  </script>
 </head>
 
 <body>
 
 
-
   <div class="container" onselectstart="return false;">
 
-    <!-- <div id="progress"><progress id="progressbar" value="0" max="100"></progress></div> -->
     <img id="logo" class="hires" src="assets/img/bama_logo.svg" />
     <div id="parallax">
       <div class="panel">    
         <div class="content">
         </div>
       </div>
-      
-<!--       <div class="panel"> 
-        <div class="content">
-        </div>
-      </div>
-
-      <div class="panel"> 
-        <div class="content">
-        </div>
-      </div>
- -->
-
     </div>
   </div> 
 
@@ -63,10 +40,10 @@
         <img class="hires horizontal mirror sprite" style="left: 665px;" src="assets/img/hill_middle_layer2.png" />
         <img class="hires horizontal sprite" src="assets/img/hill_middle_layer2.png" />
 
-        <img class="hires horizontal mirror sprite" style="top: 40px; left: 665px;" src="assets/img/cloud2.png" />
+<!--         <img class="hires horizontal mirror sprite" style="top: 40px; left: 665px;" src="assets/img/cloud2.png" />
         <img class="hires horizontal sprite"  style="top: 80px; left: 265px;" src="assets/img/cloud1.png" />
 
-      </div>
+ -->      </div>
     </div>
   </div>
 
@@ -125,28 +102,23 @@
           <img id="farmer" class="sprite" src="assets/img/farmer_small.png">
 
           <div id="farmer_hello">
-            <div id="farmer_tips" class="front sprite farmer_tips">
+            <div id="farmer_tips" class="front sprite farmer_tips clicktarget">
               <!-- <img id="farmer_large" src="assets/img/farmer_large.png" /> -->
               <!-- <img id="close_button" src="assets/img/close_grey.png" /> -->
-              <div id="farmer_tekst" class="snakkeboble"><span class="bold">Hei!</span> Jeg heter Frank, og her<br />er et lite tips til deg!
+              <div id="farmer_tekst" class="snakkeboble"><span class="bold">Hei</span>, vil du vite hvorfor norske salater er de beste?
               <br /> <div class="btn">Vær så god!</div>
               </div>
               <div class="btm"></div>
             </div>
 
-              <div id="farmer_recipe" class="center recipe">
-                <img src="assets/img/salat_tips.jpg" />
-                <div class="recipe">
-                  <span class="recipe">SALATDYRKING I NORGE</span>
-                </div>
-              </div>
+
             </div>
         </div>
 
 
-        <div id="station4" class="station x-effect">
-          <div id="lise_hello">
-            <div id="lise_tips" class="front sprite lise_tips">
+        <div id="station4" class="station">
+          <div id="lise_hello" class="interactive">
+            <div id="lise_tips" class="front sprite lise_tips clicktarget">
               <!-- <img id="lise_large" src="assets/img/lise_large.png" /> -->
               <!-- <img id="close_button" src="assets/img/close_grey.png" /> -->
               <div id="lise_tekst" class="snakkeboble"><span class="bold">Hei!</span> Jeg heter Lise, og her<br />er et lite tips til deg!
@@ -155,13 +127,8 @@
               <div class="btm"></div>
             </div>
 
-              <div id="lise_recipe" class="center recipe">
-                <img src="assets/img/salat_tips.jpg" />
-                <div class="recipe">
-                  <span class="recipe">SALATDYRKING I NORGE</span>
-                </div>
-              </div>
-            </div>
+
+          </div>
 
           <img id="tractor" class="sprite hires" src="assets/img/tractor.png">
           <img id="lise" class="hires" src="assets/img/lise_small.png">
@@ -175,7 +142,7 @@
         </div>
 
         <div id="station6" class="station">
-          <div id="video1_container" onclick="console.log('click');return false;" onclick="console.log('click');return false;">
+          <div id="video1_container">
             <video id="video1" width="416" height="234" controls poster="assets/img/video_poster_contrast.jpg">
               <source src="http://kromaviews.no:80/dev/games/bama/assets/video/video1.webm" type="video/webm">
               <source src="http://kromaviews.no:80/dev/games/bama/assets/video/video1.mp4" type="video/mp4">
@@ -190,8 +157,8 @@
         <div id="station7" class="station">
 
           <div id="final_sign" class="final_sign">
-            <span id="final_sign_title"><a>Salat passer til dette</a><br />
-          <a>Dette er i sesong nå</a> </span>
+            <span class="clicktarget"><a class="btn" href="http://www.bama.no/norsk/index.html">Salat passer til dette</a></span><br />
+            <span class="btn clicktarget"><a class="btn" href="http://www.bama.no/norsk/sesong/juni.html">Dette er i sesong nå</a> </span>
           </div>
           
         <!-- this is the div containing the road tiles -->
@@ -216,37 +183,42 @@
   <div class="container" onselectstart="return false;">
     <div id="layer_player" class="parallax_layer interactive">
       <img id="car" class="hires animated continuous" src="assets/img/car.png" width="283" height="126" />
+
+
+      <div id="lise_recipe" class="center recipe clicktarget">
+        <img src="assets/img/salat_tips.jpg" />
+        <div class="recipe">
+          <span class="recipe">LUN SOPPSALAT MED VALNØTTER OG RUCCULA</span><br />
+Stek renset, delt, assortert sopp i litt olje i en stor stekepanne. Grovhakk noen valnøtter og rist dem gylne i en tørr stekepanne. 
+ Bland sammen stekt sopp, valnøtter, finsnittet sjalottløk, gressløk og bladpersille. Krydre med salt og pepper. Bland inn ruccula og olivenolje. Topp med tynne skiver parmesan.
+        </div>
+      </div>
+
+      <div id="farmer_recipe" class="center recipe clicktarget">
+        <img src="assets/img/salat_tips.jpg" />
+        <div class="recipe">
+          <span class="recipe_title">SALATDYRKING I NORGE</span><br />
+          <span class="recipe_small">
+Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste salater. Og siden det er kort avstand mellom deg og meg vil du få denne salaten i butikken i morgen. En crispy salat smaker ekstra godt. Så husk å se etter de ferskeste salatene!
+
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>  
   <script src="assets/js/lib/jquery.parallaxSwipe.js"></script>
-  <script src="assets/js/lib/jquery.flip.js"></script>
+  <!--script src="assets/js/lib/jquery.flip.js"></script-->
   <script async src="assets/js/bama.nyt.norge.js"></script>
 
-
-  <div id="testpanel" style="float: right;">
-    <button id="flip" class="button_flip">
-      Lise      
-    </button>    
-    <button id="flip2" class="button_flip">
-      Franke
-    </button>    
-    <p>
-      <button id="button_s1" class="ffwd" onclick="ffwd(6000);">
-        GOTO Franke
-      </button>    
-      <button id="button_s2" class="ffwd" onclick="ffwd(6000);">
-        GOTO Lise
-      </button>    
-    </p>
-
-  </div>
 
   <span id="debug_trigger"></span><br />
   <p><span id="debug_info"></span></p>
   <div id="debugoutput"></div>
+  <div id="touchoutput" style="position: absolute; top: 500px;">TouchOutput</div>
+
 
 </body>
 </html>

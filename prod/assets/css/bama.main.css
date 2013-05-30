@@ -8,6 +8,7 @@
 
 
   #debug {
+    display: none;
     position  : absolute;
     top       : 500px;
     width     : 800px;
@@ -59,7 +60,18 @@
   }
 
 
+#debugoutput {    
+  display: none;
+}
 
+#debug_info {    
+  display: none;
+}
+
+
+#touchoutput {    
+  display: none;
+}
 
   /* The ugly */
 
