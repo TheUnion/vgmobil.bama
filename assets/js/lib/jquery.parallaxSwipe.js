@@ -66,10 +66,10 @@ var mouseswipe=function(sliderLT) {
     //console.log();
    
     if(!!REQUESTED_POSITION) {
-      if((sliderLT + _velocity) < -REQUESTED_POSITION){
+      if((sliderLT - _velocity) < -REQUESTED_POSITION){
         sliderLT = REQUESTED_POSITION;
-        console.log("moving to requested position: " + REQUESTED_POSITION);
 
+        console.log("moving to requested position: " + REQUESTED_POSITION);
         plugin.css(edge,sliderLT); //swipe left
         if (o.LAYER.length>0) {
          
@@ -215,7 +215,7 @@ this.parallaxSwipe.setSpeed = function(newspring, decay, mousedecay) {
 
 
 this.parallaxSwipe.requestPosition = function (position) {
-  REQUESTED_POSITION = position;
+  REQUESTED_POSITION = Math.floor(position);
 }
 
 
