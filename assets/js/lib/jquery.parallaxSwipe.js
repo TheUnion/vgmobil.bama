@@ -1,8 +1,9 @@
 /*copyright 2012 robert w. stewart torontographic.com*/
 ;(function($) {
+
 $.fn.parallaxSwipe = function(options) {
 var defaults = {DECAY:0.9, MOUSEDOWN_DECAY:0.5, SPEED_SPRING:0.5, BOUNCE_SPRING:0.08,
-  HORIZ:true, SNAPDISTANCE:20, DISABLELINKS:false, LAYER:[]
+  HORIZ:true, SNAPDISTANCE:20, DISABLELINKS:true, LAYER:[]
 };
 var o = $.extend(defaults, options);
 var plugin = this; //jQuery object or a collection of jQuery objects.
@@ -15,6 +16,15 @@ var bouncing = 0, _mouseDownLT, _mouseDownXY, _lastMouseDownXY, panelnum=1;
 var edge, sliderLT, sliderLen, _mouseDown = false, ie = false, hasTouch = false, VIEWPORT, len;
 var startAnimFrame=false;
 
+
+
+/*** -- FIX  -- ***/
+//flags to indicate is the layers have reached the edges
+var leftEdge= true;
+var rightEdge = false;
+/******/
+
+
 if (o.HORIZ==true) {
   var sliderW = parseInt(panel.css('width'),10) * panel.length;
   VIEWPORT=vw; edge='left'; panel.css('float','left'); plugin.css('width',sliderW); sliderLen = sliderW;
@@ -26,51 +36,43 @@ plugin.css(edge,0);
 
 this.parallaxSwipe.getSize = function(i){ if (sliderW>'') { return sliderW; } else { return sliderH; }};
 
-this.parallaxSwipe.setSpeed = function(newspring, decay, mousedecay) { 
-  var
-    result = o;
-
-  o.DECAY           = decay;
-  o.MOUSEDOWN_DECAY = mousedecay;
-  return result;
-};
-
-
-
-
 var mouseswipe=function(sliderLT) {
   if (_mouseDown) {
     _velocity *= o.MOUSEDOWN_DECAY;
   } else {
     _velocity *= o.DECAY;
   }
-  
   if (!_mouseDown) {
+
+   
     if (sliderLT > 0)  {
+      
       bouncing = -sliderLT * o.BOUNCE_SPRING;
     } else if (sliderLT + sliderLen < VIEWPORT) {
+     
       bouncing = (VIEWPORT - sliderLen - sliderLT) * o.BOUNCE_SPRING;
-    } else { bouncing = 0; }
-    bouncing = 0;
+    } else {   bouncing = 0; }
     if (_lastMouseDownXY-_mouseDownXY < 0) {
-//      console.log('swipe left, to ' + (sliderLT + Math.ceil(_velocity + bouncing)));
+     
       plugin.css(edge,sliderLT + Math.ceil(_velocity + bouncing)); //swipe left
-      if ((o.LAYER.length>0)) {
+      if (o.LAYER.length>0) {
+       
         $.each(o.LAYER, function(index, value) {
           $('#layer'+(index+1)).css(edge,(sliderLT + Math.ceil(_velocity + bouncing))/value); //layer
         });
       }
     } else {
-//      console.log('swipe right, to ' + (sliderLT + Math.floor(_velocity + bouncing)));
-      plugin.css(edge,sliderLT + Math.floor(_velocity + bouncing)); //swipe right
+     
+         plugin.css(edge,sliderLT + Math.floor(_velocity + bouncing)); //swipe right
       if (o.LAYER.length>0) {
+       
         $.each(o.LAYER, function(index, value) {
           $('#layer'+(index+1)).css(edge,(sliderLT + Math.floor(_velocity + bouncing))/value); //layer
         });
+
       }
     }
-}};
-
+  }};
 
 window.requestAnimFrame = function(){ 
   return ( window.requestAnimationFrame || window.webkitRequestAnimationFrame || 
@@ -82,25 +84,22 @@ function frame() { mouseswipe(parseInt(plugin.css(edge),10)); if (startAnimFrame
 
 var disablelinks=function() {
   $('a', plugin).each(function(){ 
-  $(this).click(function(){ if(Math.abs(_lastMouseDownXY-_mouseDownXY) >= o.SNAPDISTANCE) { console.log("killing click: ", this); return false;} }); 
+  $(this).click(function(){ if(Math.abs(_lastMouseDownXY-_mouseDownXY) >= o.SNAPDISTANCE) {return false;} }); 
 }); 
 };
 
 var touchStart=function(e) { //mouse down
+
+   
   if (!_mouseDown) {
-    if (hasTouch) { 
-//      e.preventDefault(); 
-      e = event.touches[0]; 
-    } else { 
-      if (!e) 
-        e = window.event; 
-    }
+    if (hasTouch) { e.preventDefault(); e = event.touches[0]; } else { if (!e) e = window.event; }
     if (elm.setCapture) {
-      elm.setCapture(); //if dragged outside of div
+      //elm.setCapture(); //if dragged outside of div
     } else {
       window.addEventListener('mousemove', touchMove, false);
       window.addEventListener('mouseup', touchEnd, false);
     }
+   
     if (o.HORIZ==true) {
       _mouseDownXY = _lastMouseDownXY = ie == true ? e.clientX : e.pageX;
       _mouseDownLT = document.getElementById(plugin.attr('id')).offsetLeft;
@@ -108,13 +107,41 @@ var touchStart=function(e) { //mouse down
       _mouseDownXY = _lastMouseDownXY = ie == true ? e.clientY : e.pageY;
       _mouseDownLT = document.getElementById(plugin.attr('id')).offsetTop;
     }
+/******/
+//set the flags for the edges you cannot start swipe left if you have reached the left edge same for right
+     if(_mouseDownLT == 0){ 
+      leftEdge = true; 
+      console.log("leftEdge set");
+    }else if ( _mouseDownLT <= -11420){
+      rightEdge = true;
+      console.log("rightEdge set");
+      } else {
+        leftEdge = false;
+        rightEdge = false;
+      }
+/******/
     _mouseDown = true;
     if (startAnimFrame==false) { startAnimFrame=true; requestAnimFrame(frame); } //mouseSwipe
+  
   }
+ 
+};
+
+this.parallaxSwipe.setSpeed = function(newspring, decay, mousedecay) { 
+  var
+    result = o;
+
+  o.DECAY           = decay;
+  o.MOUSEDOWN_DECAY = mousedecay;
+
+  //_velocity       = newvelocity;
+  return o;
 };
 
 
 var touchMove=function(e) { //mouse move
+
+  
   if (_mouseDown) {
     if (hasTouch) { e.preventDefault(); e = event.touches[0]; } else { if (!e) e = window.event; }
     if (ie == true) {
@@ -122,17 +149,36 @@ var touchMove=function(e) { //mouse move
     } else {
       var MouseXY = edge == 'left' ? e.pageX : e.pageY;
     }
+
+/******/
+// consoleVar is the css value for the left parameter
+    var consoleVar = _mouseDownLT + (MouseXY - _mouseDownXY);
+
+//If you are in the left edge and swipe left the layers won't move, or if you are swiping to the left from a different position than the edge it will also stop the movement of layers same for the right
+    if (leftEdge && consoleVar>0 || (consoleVar>0)){
+      console.log("moving over the left edge");
+      rightEdge = false;
+    }else if (rightEdge && consoleVar <-11420 || ( consoleVar< -11420)) {
+      //-1800 is the width of the layer number of stations * width of each station here 3x900
+      console.log("moving over the right edge");
+      leftEdge = false;
+      }
+      else {
+/******/
     plugin.css(edge, _mouseDownLT + (MouseXY - _mouseDownXY));
     if (o.LAYER.length>0) {
       $.each(o.LAYER, function(index, value) {
         $('#layer'+(index+1)).css(edge, (_mouseDownLT + (MouseXY - _mouseDownXY))/value); //layer
+        
       });
     }
     _velocity += ((MouseXY - _lastMouseDownXY) * o.SPEED_SPRING);
     _lastMouseDownXY = MouseXY;
+/******/
+  }
+/******/
   }
 };
-
 
 var touchEnd=function(e) { //mouse up
   if (_mouseDown) {
@@ -147,9 +193,9 @@ var touchEnd=function(e) { //mouse up
   }
 };
 
-hasTouch = 'ontouchstart' in window;
-plugin.bind('mousedown touchstart', function(event){ touchStart(event); }); 
-plugin.bind('mousemove touchmove', function(event){ touchMove(event); }); 
-plugin.bind('mouseup touchend', function(event){ touchEnd(event); });
+  hasTouch = 'ontouchstart' in window;
+  plugin.bind('mousedown touchstart', function(event){ touchStart(event); }); 
+  plugin.bind('mousemove touchmove', function(event){ touchMove(event); }); 
+  plugin.bind('mouseup touchend', function(event){ touchEnd(event); });
 } //end options
 })(jQuery)

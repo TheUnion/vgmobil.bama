@@ -74,7 +74,7 @@
         }
         else if( (clickpos>=11111 && (clickpos<=11325) )) {
           if((click.clientY>132) && (click.clientY<382)){
-            window.location.href = 'http://bama.no';
+            //window.location.href = 'http://bama.no';
             //goURL('http://bama.no');
             return;
           }
@@ -247,11 +247,6 @@
             // console.log('stopping at beginning.');
             // $('#parallax').parallaxSwipe.halt();
           }
-
-          debuginfo.innerHTML = "Current station: " + currentstation + " <br />";
-          debuginfo.innerHTML += "Distance travelled: " + currentpos + " <br />";
-          debuginfo.innerHTML += "Stations visited:<br />";
-
           // for..in normally not acceptable, but ok with this few elements
           var counter = 0, startAtIndex = 3;
           for (var key in stations) {
@@ -294,11 +289,7 @@
                 }
               }
             }
-            debuginfo.innerHTML += key + ": " + x + "<br />";
           }
-
-        debuginfo.innerHTML += "Time spent: " + Math.round(((time - starttime)/1000) / 60) + ":" + (((time - starttime)/1000) % 60) + " <br />";
-        debuginfo.innerHTML += "Session started: " + startdate + " <br />";
         }
         else {
           console.log("(!)debugx: ", debugx);
@@ -321,13 +312,9 @@
 
         if(!count) {
           $('.station').each(function (key, value){
-            // console.log("station: " + key, value);
             stations[value.id || key] = value;
           });
           count = stations.length;
-        }
-        else {
-          // debugger;
         }
         timer = setInterval(progresstimer, UPDATE_INTERVAL);
       };

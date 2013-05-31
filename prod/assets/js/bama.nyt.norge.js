@@ -72,13 +72,15 @@
             return;
           }
         }
-        else if( (clickpos>=11111 && (clickpos<=11325) )) {
-          if((click.clientY>132) && (click.clientY<382)){
-            window.location.href = 'http://bama.no';
-            //goURL('http://bama.no');
-            return;
-          }
-        }
+
+
+        // else if( (clickpos>=11111 && (clickpos<=11325) )) {
+        //   if((click.clientY>132) && (click.clientY<382)){
+        //     window.location.href = 'http://bama.no';
+        //     //goURL('http://bama.no');
+        //     return;
+        //   }
+        // }
 
 
 
@@ -129,15 +131,8 @@
         ROAD_DECAY        = 0.9, // when leaving station
         ROAD_MOUSE_DECAY  = 0.9, // when leaving station
 
-        // STATION_SPEED     = 0.75, // when approaching station
-        // ROAD_SPEED        = 0.9, // when leaving station
-        // DECAY             = 0.75, // when approaching station
-        // MOUSEDOWN_DECAY   = 0.75, // when approaching station
-        // ROAD_DECAY        = 0.9, // when leaving station
-        // ROAD_MOUSE_DECAY  = 0.9, // when leaving station
-
-        LISE_FLIPPED        = false,
-        FARMER_FLIPPED        = false,
+        LISE_FLIPPED      = false,
+        FARMER_FLIPPED    = false,
         TOLERANCE         = 100;
 
 
@@ -178,21 +173,15 @@
         console.log(clicktargets);
 
         
-
-        // farmer_tips   = document.getElementById('farmer_tips');
-
-
-    // $('#layer5').bind("click tap touchstart", function() { console.log('layer5!'); return false; });
-
       var flipLise = function() {
         if(!LISE_FLIPPED) {
           console.log('lise flipper');
-          $('#lise_tips').animate({ top : 500, opacity: 0}, 125, 'linear');
-          $('#lise_recipe').animate({ top : 0, opacity: 1}, 125, 'linear');
+          $('#lise_tips').animate({ top : 500, opacity: 0}, 200, 'linear');
+          $('#lise_recipe').animate({ top : 0, opacity: 1}, 200, 'linear');
         }
         else {
-          $('#lise_tips').animate({ top : 0, opacity: 1}, 125, 'linear');
-          $('#lise_recipe').animate({ top : -500, opacity: 0}, 125, 'linear');
+          $('#lise_tips').animate({ top : 0, opacity: 1}, 200, 'linear');
+          $('#lise_recipe').animate({ top : -500, opacity: 0}, 200, 'linear');
         }
         LISE_FLIPPED = !LISE_FLIPPED;
       };
@@ -201,13 +190,13 @@
       var flipFarmer = function() {
         if(!FARMER_FLIPPED) {
           console.log('bonden flipper');
-          $('#farmer_tips').animate({ top : 500, opacity: 0}, 125, 'linear');
-          $('#farmer_recipe').animate({ top : 0, opacity: 1}, 125, 'linear');
+          $('#farmer_tips').animate({ top : 500, opacity: 0}, 200, 'linear');
+          $('#farmer_recipe').animate({ top : 0, opacity: 1}, 200, 'linear');
         }
         else {
           console.log('bonden flipper tilbake');
-          $('#farmer_tips').animate({ top : 0, opacity: 1}, 125, 'linear');
-          $('#farmer_recipe').animate({ top : -500, opacity: 0}, 125, 'linear');
+          $('#farmer_tips').animate({ top : 0, opacity: 1}, 200, 'linear');
+          $('#farmer_recipe').animate({ top : -500, opacity: 0}, 200, 'linear');
         }
         FARMER_FLIPPED = !FARMER_FLIPPED;
       };
@@ -248,9 +237,9 @@
             // $('#parallax').parallaxSwipe.halt();
           }
 
-          debuginfo.innerHTML = "Current station: " + currentstation + " <br />";
-          debuginfo.innerHTML += "Distance travelled: " + currentpos + " <br />";
-          debuginfo.innerHTML += "Stations visited:<br />";
+          debuginfo = "Current station: " + currentstation + " <br />";
+          debuginfo += "Distance travelled: " + currentpos + " <br />";
+          debuginfo += "Stations visited:<br />";
 
           // for..in normally not acceptable, but ok with this few elements
           var counter = 0, startAtIndex = 3;
@@ -294,11 +283,11 @@
                 }
               }
             }
-            debuginfo.innerHTML += key + ": " + x + "<br />";
+            debuginfo += key + ": " + x + "<br />";
           }
 
-        debuginfo.innerHTML += "Time spent: " + Math.round(((time - starttime)/1000) / 60) + ":" + (((time - starttime)/1000) % 60) + " <br />";
-        debuginfo.innerHTML += "Session started: " + startdate + " <br />";
+        debuginfo += "Time spent: " + Math.round(((time - starttime)/1000) / 60) + ":" + (((time - starttime)/1000) % 60) + " <br />";
+        debuginfo += "Session started: " + startdate + " <br />";
         }
         else {
           console.log("(!)debugx: ", debugx);
@@ -372,11 +361,14 @@
           HORIZ:true, SNAPDISTANCE:20, DISABLELINKS: false, LAYER:[ 20, 20, 3.2, 1.6, 1, 0.9 ] });
 
 
-    var layerWidth = $('#parallax').parallaxSwipe.getSize();
+    var layerWidth = $('#parallax').parallaxSwipe.getSize()-580;
 
     // set width for all parallax stations
     $('.parallax_layer').css('width',layerWidth);
 
+
+
+    /** hack to fix click handling where plugin doesn't pass touchevents to us */
 
     $('#parallax').bind('touchstart', function (e) { 
          var
@@ -414,6 +406,8 @@
           onClicked(result);
 
           return true; });
+
+
 
     $('#parallax').bind('mousedown', function (e) { 
           var

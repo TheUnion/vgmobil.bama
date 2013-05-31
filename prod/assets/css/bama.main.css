@@ -7,6 +7,32 @@
  */
 
 
+
+  body {
+    margin       : 0;
+    padding      : 0;
+  	background   : rgb(230, 250, 250);
+  	color        : #4e4e4e;
+  	line-height  : 1.5;
+  	font-family  : Abel, sans-serif;
+    font-weight  : 700;
+  	font-size    : 14px;
+  }
+
+
+  h1 {
+    position     : relative;
+    width        : 300px;
+    margin       : 20px 0px 20px 50px;
+    font-family  : Georgia, serif;
+    font-size    : 60px;
+    line-height  : 65px;
+    font-weight  : 700;
+    color        : rgb(33, 169, 126);
+  }
+
+
+
   #debug {
     position  : absolute;
     top       : 500px;
@@ -30,33 +56,6 @@
   .code.number   { color: #AE81FF; }
   .code.string   { color: #e6db74; }
 
-
-
-
-
-
-  body {
-    margin       : 0;
-    padding      : 0;
-  	background   : rgb(230, 250, 250);
-  	color        : #4e4e4e;
-  	line-height  : 1.5;
-  	font-family  : Abel, Helvetica, Arial, sans-serif;
-    font-weight  : 700;
-  	font-size    : 14px;
-  }
-
-
-  h1 {
-    position     : relative;
-    width        : 300px;
-    margin       : 20px 0px 20px 50px;
-    font-family  : Georgia, serif;
-    font-size    : 60px;
-    line-height  : 65px;
-    font-weight  : 700;
-    color        : rgb(33, 169, 126);
-  }
 
 
 
@@ -264,18 +263,14 @@
 
     position             : absolute;
     height               : 500px;
- /*   background           : transparent url('../img/hill_front2.png') repeat-x;
-    background-position  : 0px 310px;
-    background-origin    : content-box;
- */   z-index              : 4;
-
+    z-index              : 4;
   }
 
 
 
   #layer5 {
-/*  This is our main layer, the one where everything happens
-*/    
+
+  /*  This is our main layer, the one where everything happens  */    
     -webkit-user-select   : auto;
     -moz-user-select      : auto;
     pointer-events        : auto;
@@ -328,7 +323,7 @@
 
 
 /**
- *  This is our sprites and scene/gfx elements
+ *  sprites and scene/gfx elements
  *
  */
 
