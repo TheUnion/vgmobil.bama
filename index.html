@@ -4,33 +4,17 @@
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />  
   <title>Bama - Nyt Norge </title>
-  <link href='http://fonts.googleapis.com/css?family=Cabin:400,700' rel='stylesheet' type='text/css'>  
   <link href='http://fonts.googleapis.com/css?family=Abel:400,700' rel='stylesheet' type='text/css'>  
-  <link href="assets/css/parallaxVertical.css" rel="stylesheet" type="text/css" />
+  <!-- <link href="assets/css/parallaxVertical.css" rel="stylesheet" type="text/css" /> -->
   <link href="assets/css/bama.main.css" rel="stylesheet" type="text/css" />
-  <!-- <link href="assets/css/animate.css" rel="stylesheet" type="text/css" /> -->
+  <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
 
-  <script>
-
-     var ffwd = function( to ) {
-        console.log("moving to " + to);
-        document.getElementById('parallax').left = to;
-        console.log("new position: " + document.getElementById('parallax').left);
-      };
-
-  </script>
 </head>
 
 <body>
 
 
-  <div id="muni_sign" class="muni_sign"> <img class="hires kommunevapen" src="assets/img/frosta_kommunevapen.png" /> Frosta</div>
-
-
-  <div class="container">
-
-
-    <!-- <div id="progress"><progress id="progressbar" value="0" max="100"></progress></div> -->
+  <div class="container" onselectstart="return false;">
 
     <img id="logo" class="hires" src="assets/img/bama_logo.svg" />
     <div id="parallax">
@@ -38,22 +22,10 @@
         <div class="content">
         </div>
       </div>
-      
-<!--       <div class="panel"> 
-        <div class="content">
-        </div>
-      </div>
-
-      <div class="panel"> 
-        <div class="content">
-        </div>
-      </div>
- -->
-
     </div>
   </div> 
 
-  <div class="container">
+  <div class="container" onselectstart="return false;">
     <div id="layer1" class="parallax_layer">
       <div class="panel">
       
@@ -61,24 +33,28 @@
     </div>
   </div>
 
-  <div class="container">
+  <div class="container" onselectstart="return false;">
     <div id="layer2" class="parallax_layer"> <!-- middle layer #2 -->
       <div class="panel">
         <img class="hires horizontal sprite" src="assets/img/hill_middle_layer2.png" />
         <img class="hires horizontal mirror sprite" style="left: 665px;" src="assets/img/hill_middle_layer2.png" />
         <img class="hires horizontal sprite" src="assets/img/hill_middle_layer2.png" />
-      </div>
+
+<!--         <img class="hires horizontal mirror sprite" style="top: 40px; left: 665px;" src="assets/img/cloud2.png" />
+        <img class="hires horizontal sprite"  style="top: 80px; left: 265px;" src="assets/img/cloud1.png" />
+
+ -->      </div>
     </div>
   </div>
 
-  <div class="container">
+  <div class="container" onselectstart="return false;">
     <div id="layer3" class="parallax_layer">  <!-- middle layer #1 -->
       <div class="panel">
       </div>
     </div>
   </div>
 
-  <div class="container">
+  <div class="container" onselectstart="return false;">
     <div id="layer4" class="parallax_layer"> <!-- front layer #2 -->
       <div class="panel">
       </div>
@@ -86,64 +62,86 @@
   </div>
 
 
-  <div class="container">
+  <div class="container" onselectstart="return false;">
     <div id="layer5" class="parallax_layer"> <!-- front layer #1, the scene layer -->
       <div class="panel">
 
         <div id="start">
+
+          <div id="arrow" class="animated continuous hint"><img class="hires" src="assets/img/arrow.png" /></div>
+          
           <div id="intro_text" class="sprite">
-            <img class="animated continuous arrow" src="assets/img/arrow.png" />
             <span class="verybig blue">Nå kommer de<br />norske salatene!</span>
             <span class="big gray regular">
               <br /> Swipe og opplev de flotte<br />salatene fra Frosta.
             </span>
             </div>
+
+
+
+
+
+          </div>
+
         </div>
 
+
         <div id="station1" class="station">
-          STATION 1
-          <div id="muni_sign" class="muni_sign">Frosta</div>
+          <div id="muni_sign" class="muni_sign"><span id="muni_sign_title">Frosta</span></div>
         </div>
 
         <div id="station2" class="station">
-          STATION 2
-          <div id="farm_sign">
+          <div id="farm_sign" class="farm_sign">
+            <span id="farm_sign_title">Bondegård</span>
+          </div>
         </div>
 
         <div id="station3" class="station">
-          STATION 3
           <!-- <img id="barn" class="sprite hires" src="assets/img/barn.png"> -->
           <div id="barn" class="sprite"></div>
           <img id="farmer" class="sprite" src="assets/img/farmer_small.png">
 
-          <div id="farmer_large" class="front face sprite snakkeboble">
-            <img id="farmer_large" class="hires" src="assets/img/farmer_large.png">
-          </div>
+          <div id="farmer_hello">
+            <div id="farmer_tips" class="front sprite farmer_tips clicktarget">
+              <!-- <img id="farmer_large" src="assets/img/farmer_large.png" /> -->
+              <!-- <img id="close_button" src="assets/img/close_grey.png" /> -->
+              <div id="farmer_tekst" class="snakkeboble"><span class="bold">Hei</span>, vil du vite hvorfor norske salater er de beste?
+              <br /> <div class="btn">Vær så god!</div>
+              </div>
+              <div class="btm"></div>
+            </div>
 
-          <div id="farmer_recipe" class="back face center recipe">
-          </div>   
+
+            </div>
         </div>
 
 
         <div id="station4" class="station">
-          STATION 4
-          <img id="tractor" class="sprite hires" src="assets/img/tractor.png">
-          <div id="lise_large" class="front face sprite snakkeboble">
-          <img class="hires" src="assets/img/lise_large.png">
+          <div id="lise_hello" class="interactive">
+            <div id="lise_tips" class="front sprite lise_tips clicktarget">
+              <!-- <img id="lise_large" src="assets/img/lise_large.png" /> -->
+              <!-- <img id="close_button" src="assets/img/close_grey.png" /> -->
+              <div id="lise_tekst" class="snakkeboble"><span class="bold">Hei!</span> Jeg heter Lise, og her<br />er et lite tips til deg!
+              <br /> <div class="btn">Vær så god!</div>
+              </div>
+              <div class="btm"></div>
+            </div>
+
+
           </div>
-          <div id="lise_recipe" class="back face center recipe">
-          </div> 
+
+          <img id="tractor" class="sprite hires" src="assets/img/tractor.png">
+          <img id="lise" class="hires" src="assets/img/lise_small.png">
+          <!-- <div id="lise_tips" class="front face sprite snakkeboble">
+          </div>
+           -->
         </div>
 
         <div id="station5" class="station">
-          STATION 5
           <img id="drivein_sign" class="hires" src="assets/img/drive_in_sign_salat.png">
-          <img id="drivein_screen" class="sprite hires" src="assets/img/drive_in_screen.png">
-
         </div>
 
         <div id="station6" class="station">
-          STATION 6
           <div id="video1_container">
             <video id="video1" width="416" height="234" controls poster="assets/img/video_poster_contrast.jpg">
               <source src="http://kromaviews.no:80/dev/games/bama/assets/video/video1.webm" type="video/webm">
@@ -155,19 +153,25 @@
 
         </div>
 
+
+        <div id="station7" class="station">
+
+          <div id="final_sign" class="final_sign">
+            <span class="clicktarget"><a class="btn" href="http://www.bama.no/norsk/index.html">Salat passer til dette</a></span><br />
+            <span class="btn clicktarget"><a class="btn" href="http://www.bama.no/norsk/sesong/juni.html">Dette er i sesong nå</a> </span>
+          </div>
+          
         <!-- this is the div containing the road tiles -->
+        </div>
         <div id="road" class="road">
         </div>
 
-
-
       </div>
     </div>
-  </div>
 
 
 
-  <div class="container">  <!-- -->
+  <div class="container" onselectstart="return false;">  <!-- -->
     <div id="layer6"> <!-- fg_road.png layer -->
       <div class="panel">
         <div class="content">
@@ -176,44 +180,47 @@
       </div>
   </div>
 
-  <div class="container">
+  <div class="container" onselectstart="return false;">
     <div id="layer_player" class="parallax_layer interactive">
       <img id="car" class="hires animated continuous" src="assets/img/car.png" width="283" height="126" />
+
+
+      <div id="lise_recipe" class="center recipe clicktarget">
+        <img src="assets/img/salat_tips.jpg" />
+        <div class="recipe" style="width=580px; font-size: 22px; color: #555; padding-left: 40px; padding-right: 40px">
+          <span class="recipe_title" style="font-size: 20px;">LUN SOPPSALAT MED VALNØTTER OG RUCCULA</span><br />
+          <p class="recipe_small">
+Stek renset, delt, assortert sopp i litt olje i en stor stekepanne. Grovhakk noen valnøtter og rist dem gylne i en tørr stekepanne. 
+ Bland sammen stekt sopp, valnøtter, finsnittet sjalottløk, gressløk og bladpersille. Krydre med salt og pepper. Bland inn ruccula og olivenolje. Topp med tynne skiver parmesan.
+        </p>
+        </div>
+      </div>
+
+      <div id="farmer_recipe" class="center recipe clicktarget">
+        <img src="assets/img/salat_tips.jpg" />
+        <div class="recipe" style="width=580px; font-size: 22px; color: #555; padding-left: 40px; padding-right: 40px">
+          <span class="recipe_title">SALATDYRKING I NORGE</span><br />
+          <span class="recipe_small"><p>
+Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste salater. Og siden det er kort avstand mellom deg og meg vil du få denne salaten i butikken i morgen. En crispy salat smaker ekstra godt. Så husk å se etter de ferskeste salatene!</p>
+
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>  
   <script src="assets/js/lib/jquery.parallaxSwipe.js"></script>
-  <script src="assets/js/lib/jquery.flip.js"></script>
+  <!--script src="assets/js/lib/jquery.flip.js"></script-->
   <script async src="assets/js/bama.nyt.norge.js"></script>
 
 
-  <div id="testpanel" style="float: right;">
-    <button id="flip" class="button_flip">
-      Lise      
-    </button>    
-    <button id="flip2" class="button_flip">
-      Franke
-    </button>    
-    <p>
-      <button id="button_s1" class="ffwd" onclick="ffwd(6000);">
-        GOTO Franke
-      </button>    
-      <button id="button_s2" class="ffwd" onclick="ffwd(6000);">
-        GOTO Lise
-      </button>    
-    </p>
-
-  </div>
-
-<div id="HUD" class="HUD">
   <span id="debug_trigger"></span><br />
-
   <p><span id="debug_info"></span></p>
-
   <div id="debugoutput"></div>
-</div>
+  <div id="touchoutput" style="position: absolute; top: 500px;">TouchOutput</div>
+
 
 </body>
 </html>

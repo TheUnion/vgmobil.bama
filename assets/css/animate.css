@@ -290,6 +290,7 @@
   	-o-animation-name: pulse;
   	animation-name: pulse;
   }
+
   @-webkit-keyframes flip {
   	0% {
   		-webkit-transform: perspective(400px) rotateY(0);
@@ -389,6 +390,7 @@
   	backface-visibility: visible !important;
   	animation-name: flip;
   }
+
   @-webkit-keyframes flipInX {
       0% {
           -webkit-transform: perspective(400px) rotateX(90deg);

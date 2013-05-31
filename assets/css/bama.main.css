@@ -1,6 +1,6 @@
-/**
- *  Basic setup. 
- *  
+/**--------------+
+ ---------*  Ba------sic setup. 
+ *  -----------
  *  We are assuming an iframe, obviously.
  *  Otherwise we would never touch these tags.
  *
@@ -41,7 +41,7 @@
   	background   : rgb(230, 250, 250);
   	color        : #4e4e4e;
   	line-height  : 1.5;
-  	font-family  : Abel, Cabin, Helvetica, Arial, sans-serif;
+  	font-family  : Abel, Helvetica, Arial, sans-serif;
     font-weight  : 700;
   	font-size    : 14px;
   }
@@ -64,14 +64,14 @@
   /* The ugly */
 
   .hwaccel {  
-    /* Supposedly this forces activation of HW-acceleration on WebKit, or only iOS */
+    /* Supposedly this forces activation of HW-acceleration on iOS Safari */
     -webkit-transform: translateZ(0); 
   }
 
 
   @media 
     (-webkit-min-device-pixel-ratio: 2), 
-    (min-resolution: 192dpi) { 
+    (min-resolution: 192dppx) { 
       /* Retina-specific stuff here */
   }
 
@@ -111,7 +111,7 @@
     height            : 500px;
     background        : transparent;
     overflow          : hidden;
-    cursor            : default;
+    cursor            : auto;
   }
 
   .box {
@@ -132,17 +132,6 @@
     background       : transparent;
   }
 
-
-  .HUD {
-    z-index                 : 9999;
-
-    -webkit-pointer-events  : none;
-       -moz-pointer-events  : none;
-            pointer-events  : none;
-    overflow                : hidden;
-    width                   : 580px;
-    height                  : 500px;
-  }
 
 
   /**
@@ -226,7 +215,7 @@
   	-moz-user-select     : none;
   	position             : absolute;
     height               : 500px;
-    width                : 12000px
+    width                : 12000px;
   	cursor               : move;
     z-index              : 500;
   }
@@ -244,9 +233,12 @@
   #layer2 {
   	-webkit-user-select  : none;
   	-moz-user-select     : none;
+         user-select     : none;
+
     pointer-events       : none;
-	
-    position             : absolute;
+/*    background           : transparent url('../img/cloud1.png') no-repeat;
+    background-position  : 64px 128px;
+*/    position             : absolute;
     height               : 500px;
     z-index              : 2;
 
@@ -284,9 +276,9 @@
   #layer5 {
 /*  This is our main layer, the one where everything happens
 */    
-    -webkit-user-select   : none;
-    -moz-user-select      : none;
-    pointer-events        : none;
+    -webkit-user-select   : auto;
+    -moz-user-select      : auto;
+    pointer-events        : auto;
     position              : absolute;
     height                : 500px;
     background            : transparent;
@@ -302,15 +294,15 @@
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png');
     background-position   :     0px 311px,   768px 311px,   
-                             1536px 310px,  2304px 310px,   
-                             3072px 310px,  3840px 310px,   
-                             4608px 310px,  5376px 310px,   
-                             6144px 310px,  6912px 310px,
-                             7680px 310px,  8448px 310px,   
-                             9216px 310px,  9984px 310px,   
-                            10752px 310px, 11520px 310px,   
-                            12288px 310px, 13056px 310px,   
-                            13824px 310px, 14592px 310px;
+                             1536px 311px,  2304px 311px,   
+                             3072px 311px,  3840px 311px,   
+                             4608px 311px,  5376px 311px,   
+                             6144px 311px,  6912px 311px,
+                             7680px 311px,  8448px 311px,   
+                             9216px 311px,  9984px 311px,   
+                            10752px 311px, 11520px 311px,   
+                            12288px 311px, 13056px 311px,   
+                            13824px 311px, 14592px 311px;
     background-repeat     : no-repeat;
     background-origin     : content-box;
     z-index               : 5;
@@ -341,26 +333,68 @@
  */
 
   #intro_text {
+    color         : #4e4e4e;
+    font-family   : Abel, sans-serif;
+    font-weight   : 400;
     text-align    : center;
     margin-left   : auto;
     margin-right  : auto;
     left          : 64px;
-    top           : 128px;
+    top           : 80px;
     width         : 80%;
   }
 
   #arrow {
-    
+    position      : absolute;
+    top           : 176px;
+    left          : 480px;
   }
 
 
+
+
   .recipe {
-    background-color: #fefefb;
+    pointer-events: auto;
+    font-family: Abel, Helvetica, sans-serif;
+    color: #333;
+    width: 480px;
+    font-weight: 700;
+    font-size: 22px;
+    text-align: left;
+    background-color: #f7eee7;
+    z-index: 12001;
+  }
+
+  .recipe_title {
+    color: #333;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+    width: 480px;
+    margin-left: 12px;
+    text-transform: uppercase;
+    margin-top: 40px;
+    padding-bottom: 8px;
+    border-bottom: solid 1px #333;   
+  }
+
+
+  .recipe_small {
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 12px;
+    color: #555;
+    font-family: Abel, sans-serif;
+    text-align: left;
+    font-size: 22px;
+    font-weight: 400;
   }
 
 
   .sprite {
     position: absolute;
+    background-repeat: no-repeat;
   }
 
   .gfx {
@@ -376,16 +410,12 @@
   }
 
 
-
   .muni_sign {
 
     position            : absolute;
     overflow            : visible;
-    padding-left        : 40px;
-    padding-top         : 12px;
-
     left                : 300px;
-    top                 : 383px;
+    top                 : 371px;
     width               : 87px;
     height              : 46px;
 
@@ -394,27 +424,93 @@
     font-weight         : 700;
     font-size           : 10px;
 
-    background-image    : url('../img/kommuneskilt.png'), url('../img/kommunevapen.png');
+    background-image    : url('../img/frosta_kommunevapen.png'), url('../img/kommuneskilt.png');
     background-repeat   : no-repeat;
     background-origin   : content-box;
-    background-position : top left, top center;
+    background-position : 2px 2px, top left;
   }
 
-  .kommunevapen {
-    position    : absolute;
-    /*width       : */
-  
+  #muni_sign_title {
+    position  : absolute;
+    top       : 3px;
+    left      : 24px;
   }
+
+  .farm_sign {
+    overflow            : visible;
+    color               : #4c2b0c;
+    padding             : 4px;
+    font-family         : Abel, Helvetica, Arial, sans-serif;
+    font-size           : 12px;
+    font-weight         : 700;
+    background          : transparent url('../img/wood_sign_arrow.png') no-repeat;
+    background-position : top left;
+    top                 : 366px;
+    width               : 213px;
+    left                : 128px;
+    height              : 94px;
+    background-origin   : content-box;
+    position            : absolute;
+  }
+
+
+
+  #farm_sign_title {
+    font-family   : Helvetica, Arial, sans-serif;
+    font-weight   : 700;
+    color         : #4c2b0c;
+    position      : absolute;
+    top           : 6px;
+    left          : 12px;
+  }
+
+
+
+  .final_sign {
+    overflow            : visible;
+    color               : #4c2b0c;
+    padding             : 4px;
+    font-family         : Abel, Helvetica, Arial, sans-serif;
+    font-size           : 24px;
+    text-align          : center;
+    line-height         : 54px;
+    font-weight         : 700;
+
+
+    background          : transparent url('../img/wood_sign_big.png') no-repeat;
+    background-position : top left;
+    top                 : 212px;
+    width               : 253px;
+    left                : 128px;
+    height              : 204px;
+    margin-left         : 40px;
+    margin-right        : auto;
+    background-origin   : content-box;
+    position            : absolute;
+  }
+
+
+
+  #final_sign_title {
+    font-family   : Helvetica, Arial, sans-serif;
+    font-weight   : 700;
+    color         : #4c2b0c;
+    position      : absolute;
+    top           : 6px;
+    left          : 12px;
+  }
+
+
 
 
   #barn {
     position            : absolute;
     width               : 492px; /* + (fence posts * post width) (12 * 19 == 228) */
     height              : 249px;
-    top                 : 169px;
+    top                 : 171px;
     left                : 0px;
     background-image    : url('../img/barn.png'), url('../img/fence.png');
-    background-position : top left, right bottom;
+    background-position : top left, bottom right;
     background-repeat   : no-repeat, repeat-x;
     background-origin   : content-box;
   }
@@ -430,20 +526,81 @@
   #tractor {
     position  : absolute;
     left      : 0px;
-    top       : 244px;
+    top       : 240px;
   }
 
   #farmer_large {
     /*display: none;    */
   }
 
-  #lise_large {
-    /*display: none;    */
+
+
+
+  #farmer_tips {
+    background-image: url('../img/farmer_large.png');
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-origin: content-box;
+    top : 40px;
+    left: 208px;
+    z-index: 10000;
+    overflow            : visible;
   }
+
+  #farmer_recipe {
+    
+    position: absolute;
+    top : -500px;
+    left: 0;
+    height: 500px;
+    width: 100%;
+    opacity: 0;
+    z-index: 10000;
+  }
+
+
+  #farmer_text {
+    padding: 16px;
+    top                 : 90px;
+    /*background          : transparent;*/
+  }
+
+
+
+
+  #lise_tips {
+    background-image: url('../img/lise_large.png');
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-origin: content-box;
+    top : 40px;
+    left: 150px;
+    z-index: 10000;
+    overflow            : visible;
+  }
+
+  #lise_recipe {
+    position: absolute;
+    top : -500px;
+    left: 0;
+    width: 580px;
+    height: 500px;
+    opacity: 0;
+    z-index: 10000;
+  }
+
+
+  #lise_text {
+    padding: 16px;
+    top                 : 90px;
+    /*background          : transparent;*/
+  }
+
 
   #lise {
     position  : absolute;
     top       : 302px;    
+    left      : 324px;    
     z-index   : 102;
   }
 
@@ -454,34 +611,18 @@
     font-size       : 13px;
     line-height     : 18px;
     text-transform  : uppercase;
-    position: absolute;
-    top: 384px;
-    left: 0px;
+    position        : absolute;
+    top             : 168px;
+    left            : 200px;
   }
 
-  #drivein_screen {
+/*  #drivein_screen {
     position: absolute;
     top: 114px;
     left: 0px;
     z-index: 99;
   }
-
-
-  .farm_sign {
-    overflow            : visible;
-    color               : #4c2b0c;
-    padding             : 4px;
-    font-family         : Abel, Cabin, Helvetica, Arial, sans-serif;
-    font-size           : 12px;
-    font-weight         : 700;
-    background          : transparent url('../img/wood_sign_arrow.png') no-repeat;
-    background-position : top left;
-    width               : 213px;
-    height              : 94px;
-    background-origin   : content-box;
-    position            : absolute;
-  }
-
+*/
 
   .callout {
     height: auto;
@@ -490,6 +631,8 @@
   .btm {
     position      : absolute;
     background    : transparent url('../img/pop_up_btm.png') no-repeat;
+    top           : 227px;
+    left          : 0;
     width         : 410px;
     height        : 68px;
     overflow      : hidden;
@@ -510,11 +653,11 @@
     font-family   : Abel, Futura, Helvetica, sans-serif;
     font-weight   : 400;
     font-size     : 18px;
-    margin-top    : 111px;
-    margin-bottom : 68px;
     padding       : 4px;
     text-align    : center;
-    width         : 400px;
+    top           : 110px;
+    height        : 108px;
+    width         : 219px;
     border-style  : solid solid none solid;
     border-width  : 1px;
     border-color  : #928c85;
@@ -541,22 +684,22 @@
 
 
   .btn {
-    webkit-user-select  : none;
-    moz-user-select     : none;
-    pointer-events      : visible;
+    pointer-events      : auto;
+    text-decoration     : none;
     text-align          : center;
     font-weight         : 700;
-    font-size           : 22px;
+    font-size           : 18px;
     color               : white;
-    padding             : 8px;
+    padding             : 4px 12px 4px 12px;
     width               : 96px;
     margin-right        : auto;
     margin-left         : auto;
+    margin-top          : 12px;
     cursor              : pointer;
     background          : #004288;
-    -moz-border-radius  : 4px;
-      -o-border-radius  : 4px;
-         border-radius  : 4px;
+    -moz-border-radius  : 6px;
+      -o-border-radius  : 6px;
+         border-radius  : 6px;
   }
 
 
@@ -577,7 +720,6 @@
 
 
    .snakkeboble.back {
-      float: none;
       position: absolute;
       top: 0;
       left: 0;
@@ -599,7 +741,7 @@
     }
 
     
-    .snakkeboble.flip.back {
+    sg.snakkeboble.flip.back {
       z-index: 1000;
 
 
@@ -615,16 +757,19 @@
 
 
   #video1_container {
-    -webkit-user-select : none;
-       -moz-user-select : none;
-            user-select : none;
-    pointer-events      : none;
-    position            : relative; 
+    -webkit-user-select : default;
+       -moz-user-select : default;
+            user-select : default;
+    pointer-events      : auto;
+
+    position            : absolute; 
     display             : block; 
     margin              : 0px auto 0px auto; 
-    padding             : 0px;
-    top                 : 0px;
-    left                : 2000px; 
+    padding             : 0;
+    top                 : 76px;
+    left                : 118px; 
+    width               : 416px;
+    height              : 234px;   
     overflow            : hidden;
     background          : transparent; 
     z-index             : 1001;
@@ -632,38 +777,41 @@
 
 
   #video1 {
-    z-index           : 1002;
-    width             : 416px;
-    height            : 234px;   
-    cursor            : default;
-    pointer-events    : default;
+    position            : absolute;
+    z-index             : 1002;
+    margin              : 0;
+    padding             : 0;
+    top                 : 0;
+    left                : 0;
+    width               : 416px;
+    height              : 234px;   
+    
+    -webkit-user-select : auto;
+       -moz-user-select : auto;
+            user-select : auto;
+    pointer-events      : auto;
+
+    cursor              : auto;
+    pointer-events      : auto;
+    -webkit-user-select : auto;
+       -moz-user-select : auto;
+            user-select : auto;
   }
-
-
-
-
 
 
   .road {
-    position             : absolute; 
-    background           : transparent url('../img/road.png') repeat-x;
-    background-position  : 0px 0px;
-    top                  : 429px; 
-    height               : 71px;
-    width                : 100%;
-    z-index              : 91;
+    position              : absolute; 
+    background-image      : url('../img/road.png');
+    background-repeat     : repeat-x;
+    background-position   : top left;
+    top                   : 428px; 
+    height                : 71px;
+    width                 : 100%;
+    z-index               : 91;
   }
 
-
   .road.dirt {
-    position              : absolute; 
-    overflow              : visible;
-    background            : url('../img/road_farm.png') repeat-x;
-    background-position   : -144px 0px;
-    top                   : 429px; 
-    height                : 71px;
-    width                 : 724px;
-    z-index               : 92;
+    background-image      : url('../img/road_farm.png');
   }
 
 
@@ -709,8 +857,14 @@
   }
 
 
+  .clicktarget {
+    pointer-events: auto;
+  }
+
   .station {
-    color       : black;
+    opacity     : 20%;
+    color       : navy;
+    /*border-left : solid 1px #fff;*/
     font-size   : 72px;
     font-weight : bold;
     z-index     : 100;
@@ -730,7 +884,7 @@
   #station1 {
     position        : absolute;
     top             : 10px;
-    left            : 800px;
+    left            : 1600px;
     width           : 580px;
     height          : 428px;
     background      : transparent; 
@@ -739,7 +893,7 @@
   #station2 {
     position        : absolute;
     top             : 10px;
-    left            : 1600px;
+    left            : 3200px;
     width           : 580px;
     height          : 500px;
     background      : transparent; 
@@ -749,7 +903,7 @@
   #station3 {
     position      : absolute;
     top           : 10px;
-    left          : 2400px;
+    left          : 4606px;
     width         : 580px;
     height        : 500px;
     background    : transparent; 
@@ -759,7 +913,7 @@
   #station4 {
     position      : absolute;
     top           : 10px;
-    left          : 3600px;
+    left          : 6180px;
     width         : 580px;
     height        : 500px;
     background    : transparent; 
@@ -768,7 +922,7 @@
   #station5 {
     position      : absolute;
     top           : 10px;
-    left          : 4800px;
+    left          : 7800px;
     width         : 580px;
     height        : 500px;
     background    : transparent; 
@@ -777,13 +931,25 @@
   #station6 {
     position            : absolute;
     top                 : 10px;
-    left                : 6400px;
+    left                : 9224px;
     width               : 580px;
     height              : 500px;
-    background          : transparent url('../img/drive_in_screen.png');
-    background-position : 
+    padding             : 0;
+    margin              : 0;
+    background-image    : url('../img/drive_in_screen.png');
+    background-position : 53px 76px;
     background-origin   : content-box;
     background-repeat   : no-repeat;  
+  }
+
+
+  #station7 {
+    position            : absolute;
+    top                 : 10px;
+    left                : 10924px;
+    width               : 580px;
+    height              : 500px;
+    background          : transparent;
   }
 
 
@@ -824,13 +990,6 @@
   }
 
 
-  .arrow {
-    -webkit-animation    : arrow 0.8s ease-in-out infinite;
-       -moz-animation    : arrow 0.8s ease-in-out infinite;
-         -o-animation    : arrow 0.8s ease-in-out infinite;
-            animation    : arrow 0.8s ease-in-out infinite;
-  }
-
 
 
   /**
@@ -839,27 +998,87 @@
    */
 
 
+  @-webkit-keyframes point {
+    0%, 50%, 100% {-webkit-transform: translateX(0);}
+    25% {-webkit-transform: translateX(20px);}
+    75% {-webkit-transform: translateX(-15px);}
+  }
+
+  @-moz-keyframes point {
+    0%, 50%, 100% {-moz-transform: translateX(0);}
+    25% {-moz-transform: translateX(20px);}
+    75% {-moz-transform: translateX(-15px);}
+  }
+
+  @-o-keyframes point {
+    0%, 50%, 100% {-o-transform: translateX(0);}
+    25% {-o-transform: translateX(20px);}
+    75% {-o-transform: translateX(-15px);}
+  }
+  @keyframes point {
+    0%, 50%, 100% {transform: translateX(0);}
+    25% {transform: translateX(20px);}
+    75% {transform: translateX(-15px);}
+  }
+
+  .point {
+/*    -webkit-animation-name: point;
+    -moz-animation-name: point;
+    -o-animation-name: point;
+    animation-name: point;*/
+
+    -webkit-animation    : point 0.8s ease-in-out infinite;
+       -moz-animation    : point 0.8s ease-in-out infinite;
+         -o-animation    : point 0.8s ease-in-out infinite;
+            animation    : point 0.8s ease-in-out infinite;
+
+
+  }
+
+
+
+  @-webkit-keyframes hint {
+    0%, 100% {-webkit-transform: translateX(0);}
+    50% {-webkit-transform: translateX(10px);}
+  }
+
+  @-moz-keyframes hint {
+    0%, 100% {-moz-transform: translateX(0);}
+    50% {-moz-transform: translateX(10px);}
+  }
+
+  @-o-keyframes hint {
+    0%, 100% {-o-transform: translateX(0);}
+    50% {-o-transform: translateX(10px);}
+  }
+  @keyframes hint {
+    0%, 100% {transform: translateX(0);}
+    50% {transform: translateX(10px);}
+  }
+
+  .hint {
+   -webkit-animation    : hint 0.2s ease-in-out infinite;
+       -moz-animation   : hint 0.2s ease-in-out infinite;
+         -o-animation   : hint 0.2s ease-in-out infinite;
+            animation   : hint 0.2s ease-in-out infinite;
+  }
+
   @-webkit-keyframes arrow {
-      0%   {background-position: 0 0;}
-      100% {background-position: -24px 0;}
+      50%  {left: 8px;}
+      100% {left: 16px;}
   }
   ​
   @-moz-keyframes arrow {
-      0%   {background-position: 0 0;}
-      100% {background-position: -24px 0;}
+      0%   {left: 0px;}
+      50%  {left: 8px;}
+      100% {left: 16px;}
   }
-
-  @-o-keyframes arrow {
-      0%   {background-position: 0 0;}
-      100% {background-position: -24px 0;}
-  }
-
+''
   @keyframes arrow {
-      0%   {background-position: 0 0;}
-      100% {background-position: -24px 0;}
+      0%   {left: 0px;}
+      50%  {left: 8px;}
+      100% {left: 16px;}
   }
-
-
 
 
 
@@ -1063,7 +1282,7 @@
     60% {transform: translateX(-11px);}
   }
 
-  .bounce {
+------------------''  .bounce {-''
     -webkit-animation-name: bounce;
        -moz-animation-name: bounce;
          -o-animation-name: bounce;
@@ -1084,3 +1303,66 @@
          -o-animation    : slide 0.4s ease-in;
             animation    : slide 0.4s ease-in;
   }
+
+    .effect .flip-container {
+      -webkit-perspective: 1000;
+      -moz-perspective: 1000;
+      perspective: 1000;
+    }
+ 
+    .effect .flip-container:hover .flipper {
+      -webkit-transform: rotateY(180deg);
+      -moz-transform: rotateY(180deg);
+      transform: rotateY(180deg);
+    }
+ 
+    .effect .flipper {
+      -webkit-transition: 0.6s;
+      -webkit-transform-style: preserve-3d;
+ 
+      -moz-transition: 0.6s;
+      -moz-transform-style: preserve-3d;
+ 
+      transition: 0.6s;
+      transform-style: preserve-3d;
+    }
+ 
+    .effect .front, .effect .back {
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+ 
+    .effect .back {
+      -webkit-transform: rotateY(180deg);
+      -moz-transform: rotateY(180deg);
+      transform: rotateY(180deg);
+    }
+ 
+    .flip-container {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      bottom: 500px;
+      width: 580px;
+      background: transparent;
+      border: 0;
+    }
+ 
+    .front, .back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 320px;
+    }
+ 
+    .front {
+      background: transparent;
+      z-index: 2;
+    }
+ 
+    .back {
+      background: transparent;
+    }
+ 

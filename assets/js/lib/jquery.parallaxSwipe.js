@@ -1,8 +1,8 @@
 /*copyright 2012 robert w. stewart torontographic.com*/
 ;(function($) {
 $.fn.parallaxSwipe = function(options) {
-var defaults = {DECAY:0.9, MOUSEDOWN_DECAY:0.9, SPEED_SPRING:0.5, BOUNCE_SPRING:0.08,
-  HORIZ:true, SNAPDISTANCE:20, DISABLELINKS:true, LAYER:[]
+var defaults = {DECAY:0.9, MOUSEDOWN_DECAY:0.5, SPEED_SPRING:0.5, BOUNCE_SPRING:0.08,
+  HORIZ:true, SNAPDISTANCE:20, DISABLELINKS:false, LAYER:[]
 };
 var o = $.extend(defaults, options);
 var plugin = this; //jQuery object or a collection of jQuery objects.
@@ -32,10 +32,9 @@ this.parallaxSwipe.setSpeed = function(newspring, decay, mousedecay) {
 
   o.DECAY           = decay;
   o.MOUSEDOWN_DECAY = mousedecay;
-
-  //_velocity       = newvelocity;
-  return o;
+  return result;
 };
+
 
 
 
@@ -52,14 +51,17 @@ var mouseswipe=function(sliderLT) {
     } else if (sliderLT + sliderLen < VIEWPORT) {
       bouncing = (VIEWPORT - sliderLen - sliderLT) * o.BOUNCE_SPRING;
     } else { bouncing = 0; }
+    bouncing = 0;
     if (_lastMouseDownXY-_mouseDownXY < 0) {
+//      console.log('swipe left, to ' + (sliderLT + Math.ceil(_velocity + bouncing)));
       plugin.css(edge,sliderLT + Math.ceil(_velocity + bouncing)); //swipe left
-      if (o.LAYER.length>0) {
+      if ((o.LAYER.length>0)) {
         $.each(o.LAYER, function(index, value) {
           $('#layer'+(index+1)).css(edge,(sliderLT + Math.ceil(_velocity + bouncing))/value); //layer
         });
       }
     } else {
+//      console.log('swipe right, to ' + (sliderLT + Math.floor(_velocity + bouncing)));
       plugin.css(edge,sliderLT + Math.floor(_velocity + bouncing)); //swipe right
       if (o.LAYER.length>0) {
         $.each(o.LAYER, function(index, value) {
@@ -68,6 +70,7 @@ var mouseswipe=function(sliderLT) {
       }
     }
 }};
+
 
 window.requestAnimFrame = function(){ 
   return ( window.requestAnimationFrame || window.webkitRequestAnimationFrame || 
@@ -79,13 +82,19 @@ function frame() { mouseswipe(parseInt(plugin.css(edge),10)); if (startAnimFrame
 
 var disablelinks=function() {
   $('a', plugin).each(function(){ 
-  $(this).click(function(){ if(Math.abs(_lastMouseDownXY-_mouseDownXY) >= o.SNAPDISTANCE) {return false;} }); 
+  $(this).click(function(){ if(Math.abs(_lastMouseDownXY-_mouseDownXY) >= o.SNAPDISTANCE) { console.log("killing click: ", this); return false;} }); 
 }); 
 };
 
 var touchStart=function(e) { //mouse down
   if (!_mouseDown) {
-    if (hasTouch) { e.preventDefault(); e = event.touches[0]; } else { if (!e) e = window.event; }
+    if (hasTouch) { 
+//      e.preventDefault(); 
+      e = event.touches[0]; 
+    } else { 
+      if (!e) 
+        e = window.event; 
+    }
     if (elm.setCapture) {
       elm.setCapture(); //if dragged outside of div
     } else {
@@ -103,6 +112,7 @@ var touchStart=function(e) { //mouse down
     if (startAnimFrame==false) { startAnimFrame=true; requestAnimFrame(frame); } //mouseSwipe
   }
 };
+
 
 var touchMove=function(e) { //mouse move
   if (_mouseDown) {
@@ -122,6 +132,7 @@ var touchMove=function(e) { //mouse move
     _lastMouseDownXY = MouseXY;
   }
 };
+
 
 var touchEnd=function(e) { //mouse up
   if (_mouseDown) {
