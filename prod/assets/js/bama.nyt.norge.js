@@ -48,6 +48,12 @@
           clickpos = Math.abs(click.offsetLeft + startpos) + click.clientX;
           // console.log('click: ' + click.x + ", "+ click.y);
 
+
+        if (!TAP_ENABLED) {
+          return false;
+        }
+
+
         if(LISE_FLIPPED) {
           flipLise();
           return;
@@ -100,7 +106,7 @@
           result = getClickedElement(click);
 
         if(!result){
-          
+                    
 
         }
       };
@@ -134,6 +140,9 @@
         LISE_FLIPPED      = false,
         FARMER_FLIPPED    = false,
         TOLERANCE         = 100;
+        TAP_ENABLED       = false;
+        SWIPE_ENABLED     = true;
+
 
 
         //store triggers as they occur
@@ -256,6 +265,7 @@
               }
               if(Math.abs(x) > (STATION_MARGIN + 250)) {
                 if( (currentstation === key) ) {
+                  TAP_ENABLED = false;
                   $('#parallax').parallaxSwipe.setSpeed(ROAD_SPEED, ROAD_DECAY, ROAD_MOUSE_DECAY);
                   console.log("Leaving " + key);
                   var
@@ -266,6 +276,7 @@
                 }
               } else {
                 if(currentstation !== key) {
+                  TAP_ENABLED = true;
                   console.log("Arriving at " + key);
                   onEvent({ event: 'arrive_station', message: 'arriving at station ' + key, target: currentstation, time: time});
                   currentstation = key;
