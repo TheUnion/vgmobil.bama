@@ -86,10 +86,11 @@ var mouseswipe=function(sliderLT) {
 
 
     if (sliderLT > ( 0 - _velocity ))  {
+      
+      //console.log("moving to zero, sliderLT: " + sliderLT);
       sliderLT = 0;
       // _velocity = 0;
-      console.log("moving to zero, sliderLT: " + sliderLT);
-
+      
       plugin.css(edge,sliderLT); //swipe left
       if (o.LAYER.length>0) {
        

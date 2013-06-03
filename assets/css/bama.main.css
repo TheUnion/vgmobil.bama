@@ -20,19 +20,6 @@
   }
 
 
-  h1 {
-    position     : relative;
-    width        : 300px;
-    margin       : 20px 0px 20px 50px;
-    font-family  : Georgia, serif;
-    font-size    : 60px;
-    line-height  : 65px;
-    font-weight  : 700;
-    color        : rgb(33, 169, 126);
-  }
-
-
-
   #debug {
     position  : absolute;
     top       : 500px;
@@ -113,15 +100,6 @@
     cursor            : auto;
   }
 
-  .box {
-    position          : absolute;
-    margin            : 0px auto 0px auto; 
-    padding           : 0px;
-    top               : 0px;
-    overflow          : hidden;
-    display           : inline; 
-  }
-
 
   .panel {
     float            : left;
@@ -139,14 +117,19 @@
    */
 
   .center {
+    text-align    : center;
     margin-right  : auto;
     margin-left   : auto;
   }
 
+  .air_above {
+    margin-top: 16px;
+  }
+
   .verybig {
-    text-align  : center;
-    font-size   : 52px;
-    line-height : 60px;
+    text-align    : center;
+    font-size     : 52px;
+    line-height   : 42px;
   }
 
   .big {
@@ -194,6 +177,11 @@
     width     : 665px;
   }
 
+  .delayed_load {
+    /*  just for grouping the divs where we will be loading images after initial user engagement */
+  }
+
+
 /*
   .mirror {
       -webkit-transform: matrix(-1, 0, 0, 1, 0, 0);
@@ -235,14 +223,18 @@
          user-select     : none;
 
     pointer-events       : none;
-    background           : transparent url('../img/hill_middle_layer2.png') repeat-x;
-    background-origin    : content-box;
-    background-position  : 0px 328px;
     position             : absolute;
     height               : 500px;
     z-index              : 2;
-
   }
+
+  .layer2 {
+    background-image     : url('../img/hill_middle_layer2.png'), url('../img/cloud1.png'), url('../img/cloud2.png');
+    background-repeat    : repeat-x, no-repeat, no-repeat; 
+    background-origin    : content-box;
+    background-position  : 0px 320px, 600px 64px, 800px 124px;
+  }
+
 
   #layer3 {
     -webkit-user-select  : none;
@@ -250,12 +242,17 @@
     pointer-events       : none;
     position             : absolute;
     height               : 500px;
-    background           : transparent url('../img/hill_middle_layer1.png') repeat-x;
-    background-position  : 0px 330px;
-    background-origin    : content-box;
     z-index              : 3;
 
   }
+
+  .layer3 {
+    background-image     : url('../img/hill_middle_layer1.png'), url('../img/cloud2.png');
+    background-position  : 0px 326px, 1000px 62px;
+    background-origin    : content-box;    
+    background-repeat    : repeat-x, no-repeat;    
+  }
+
 
   #layer4 {
     -webkit-user-select  : none;
@@ -336,7 +333,7 @@
     margin-left   : auto;
     margin-right  : auto;
     left          : 64px;
-    top           : 80px;
+    top           : 128px;
     width         : 80%;
   }
 
@@ -374,13 +371,15 @@
   
 
   .grey {
+    color   : #534741;
     stroke  : #534741;
     fill    : #534741;
   }
 
   .white {
-    stroke  : #fff;
-    fill    : #fff;
+    color   : #ffffff;
+    stroke  : #ffffff;
+    fill    : #ffffff;
   }
 
 
@@ -786,8 +785,8 @@
     display             : block; 
     margin              : 0px auto 0px auto; 
     padding             : 0;
-    top                 : 84px;
-    left                : 9341px; 
+    top                 : 81px;
+    left                : 118px; 
     width               : 416px;
     height              : 234px;   
     overflow            : hidden;
@@ -816,6 +815,7 @@
     -webkit-user-select : auto;
        -moz-user-select : auto;
             user-select : auto;
+    z-index             : 1002;
   }
 
 
@@ -870,7 +870,7 @@
     width                : 54px;
     height               : 36px;
     left                 : 263px;
-    top                  : 44px;
+    top                  : 72px;
     z-index              : 90;
   }
 
@@ -879,7 +879,7 @@
     position             : absolute;
     width                : 192px;
     height               : 34px;
-    left                 : 328px;
+    left                 : 356px;
     top                  : 0;
     z-index              : 90;
     margin               : 16px;

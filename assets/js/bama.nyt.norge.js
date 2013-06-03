@@ -4,10 +4,29 @@
    
     $(function() {
 
+      var 
+        INITIALIZED = false,
+        lazyload    = [];
+
+
+
+/*
+    background-repeat    : repeat-x,
+    no-repeat; 
+    background-origin    : content-box;
+    background-position  : 0px 328px, 64px 302px;
+
+ */
 
 
       // this is where we send all trackable events
       var onEvent = function (eventObject) {
+
+
+      if(!INITIALIZED) {
+        INITIALIZED = true;
+        startSession();
+      }
 
         // eventObject : {
         //   event: eventObject.event,
@@ -22,6 +41,20 @@
         // console.log(events);
       };
 
+
+      var startSession = function() {
+
+        var
+          lazyloaders = document.getElementsByClassName('lazyload');
+
+        console.log("Starting user session ...")
+        console.log("Loading bg images ...");
+        // load extra backgrounds on first user interaction
+        for(var i = 0, count = lazyloaders.length; i < count; i++) {
+          console.log("Adding class " + lazyloaders[i].id + " to #" + lazyloaders[i].id);
+          lazyloaders[i].classList.add(lazyloaders[i].id);
+        }
+      };
 
 
 
@@ -145,8 +178,8 @@
         // ROAD_DECAY        = 0.9, // when leaving station
         // ROAD_MOUSE_DECAY  = 0.9, // when leaving station
 
-        LISE_FLIPPED        = false,
-        FARMER_FLIPPED        = false,
+        LISE_FLIPPED      = false,
+        FARMER_FLIPPED    = false,
         TOLERANCE         = 100;
 
 
@@ -157,6 +190,7 @@
         debugpanel    = document.getElementById('debugoutput'),
         parallax      = document.getElementById('parallax'),
         scene         = document.getElementById('layer5'),
+
         debugtrigger  = document.getElementById('debug_trigger'),
         debuginfo     = document.getElementById('debug_info'),
 
@@ -241,6 +275,11 @@
 
         if(!!position) {
           currentpos = startpos - position.left;
+          if(position.left !== 0) {
+            console.log("First movement!");
+            INITIALIZED = true
+            startSession();
+          }
 
           // for..in normally not acceptable, but ok with this few elements
           var counter = 0, startAtIndex = 3;
@@ -374,6 +413,10 @@
             trueX = 0,
             trueY = 0;
 
+          if(!INITIALIZED) {
+            INITIALIZED = true;
+            startSession();
+          }
 
           var x = e.originalEvent.touches[0].pageX;//relative position of html,body document
           var y = e.originalEvent.touches[0].pageY;//relative position of html,body document
