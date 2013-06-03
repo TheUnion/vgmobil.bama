@@ -5,18 +5,8 @@
     $(function() {
 
       var 
-        INITIALIZED = false,
-        lazyload    = [];
+        INITIALIZED = false;
 
-
-
-/*
-    background-repeat    : repeat-x,
-    no-repeat; 
-    background-origin    : content-box;
-    background-position  : 0px 328px, 64px 302px;
-
- */
 
 
       // this is where we send all trackable events
@@ -24,7 +14,6 @@
 
 
       if(!INITIALIZED) {
-        INITIALIZED = true;
         startSession();
       }
 
@@ -51,9 +40,16 @@
         console.log("Loading bg images ...");
         // load extra backgrounds on first user interaction
         for(var i = 0, count = lazyloaders.length; i < count; i++) {
-          console.log("Adding class " + lazyloaders[i].id + " to #" + lazyloaders[i].id);
+          // by convention, the lazyloadee will be a class of the same name as the lazyloader's id
+          // The class defines the background image(s) we wish to load into the "lazyload" divs
+          // This way, we can load the image files on demand, and still have fluid animations
           lazyloaders[i].classList.add(lazyloaders[i].id);
         }
+        this.INITIALIZED = true;
+
+        var
+          userEvent = { event: 'start_interaction', message: 'First swipe detected.', target: null, time: time};
+        onEvent(userEvent);
       };
 
 
@@ -74,14 +70,13 @@
 
       var getClickedElement = function (click) {
         var
-          target = null,
-          sceneLeft = scene.getBoundingClientRect().left,
-          parallaxLeft = parallax.getBoundingClientRect().left;
+          target        = null,
+          sceneLeft     = scene.getBoundingClientRect().left,
+          parallaxLeft  = parallax.getBoundingClientRect().left;
 
-          clickpos = Math.abs(click.offsetLeft + startpos) + click.clientX;
-          // console.log('click: ' + click.x + ", "+ click.y);
+          clickpos      = Math.abs(click.offsetLeft + startpos) + click.clientX;
 
-        
+       
         if(LISE_FLIPPED) {
           flipLise();
           return;
@@ -92,8 +87,7 @@
           return;
         }
 
-
-
+        // a dirty little gollum of a hack
         if( (clickpos>=4812) && (clickpos<=5042) ) {
           if((click.clientY>232) && (click.clientY<282)){
             flipFarmer();
@@ -108,6 +102,7 @@
         }
         else if( (clickpos>=11111 && (clickpos<=11325) )) {
           if((click.clientY>132) && (click.clientY<382)){
+            fakeClick()
             //window.location.href = 'http://bama.no';
             //goURL('http://bama.no');
             return;

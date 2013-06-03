@@ -48,6 +48,8 @@ this.parallaxSwipe.getSize = function(i){ if (sliderW>'') { return sliderW; } el
 
 
 
+
+
 /**
  *  This is the animation loop
  * 
@@ -224,6 +226,12 @@ var touchStart=function(e) { //mouse down
  
 };
 
+/*
+  Custom adaptations to plugin
+
+ */
+
+
 this.parallaxSwipe.setSpeed = function(newspring, decay, mousedecay) { 
   var
     result = o;
@@ -243,8 +251,18 @@ this.parallaxSwipe.setSpeed = function(newspring, decay, mousedecay) {
 
 this.parallaxSwipe.requestPosition = function (position) {
   REQUESTED_POSITION = Math.round(position);
+  console.log("REQUESTED_POSITION: " + REQUESTED_POSITION);
 }
 
+
+this.parallaxSwipe.setEdge = function (which) {
+
+  console.log("setting edge: " + which)
+  switch (which.toLowerCase()) {
+    case "right"  : rightEdge = true; break;
+    case "left"   : leftEdge  = true; break;
+  }
+}
 
 
 var touchMove=function(e) { //mouse move
