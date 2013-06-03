@@ -45,8 +45,6 @@
 
 
 
-
-
   /* The ugly */
 
   .hwaccel {  
@@ -368,8 +366,6 @@
 
 
 
-  
-
   .grey {
     color   : #534741;
     stroke  : #534741;
@@ -381,7 +377,6 @@
     stroke  : #ffffff;
     fill    : #ffffff;
   }
-
 
 
   .recipe_title {

@@ -26,6 +26,7 @@ var rightEdge = false;
 var ARRIVING_AT_STATION = false;
 var LEAVING_STATION     = false;
 var SWIPE_ENABLED       = false;
+console.log("Setting REQUESTED_POSITION to false");
 var REQUESTED_POSITION  = false;
 
 
@@ -66,9 +67,12 @@ var mouseswipe=function(sliderLT) {
 
   if (!_mouseDown) {
    
+    // have we requested a specific position? I.e. to stop at a station or at either end
     if(!!REQUESTED_POSITION) {
-      // move 10% of the difference
-      _velocity = 0.1 * (REQUESTED_POSITION - sliderLT);
+      
+      // move 20% of the difference
+
+      _velocity = 0.2 * (REQUESTED_POSITION - sliderLT);
 
       if((sliderLT - _velocity) < -REQUESTED_POSITION){
         sliderLT = Math.round(REQUESTED_POSITION);
@@ -77,7 +81,7 @@ var mouseswipe=function(sliderLT) {
         if (o.LAYER.length>0) {
          
           $.each(o.LAYER, function(index, value) {
-            $('#layer'+(index+1)).css(edge,sliderLT); //loop through parallax layers
+            $('#layer'+(index+1)).css(edge,sliderLT/value); //loop through parallax layers
           });
         }
         return;      
@@ -123,13 +127,13 @@ var mouseswipe=function(sliderLT) {
     if (_lastMouseDownXY-_mouseDownXY < 0) {
      
       var 
-        delta = Math.ceil(_velocity + bouncing);
+        delta = Math.round(_velocity + bouncing);
       if(delta === 1) {
         console.log("LEFT delta: " + delta + ". Is this our bug?  -   _velocity: " + _velocity + ", bouncing: " + bouncing);     
       }
 
       // console.log('Moving to ' + (sliderLT + Math.ceil(_velocity + bouncing)));
-      var newSliderLT = sliderLT + Math.ceil(_velocity + bouncing);
+      var newSliderLT = sliderLT + Math.round(_velocity + bouncing);
 
 
       plugin.css(edge,newSliderLT); //swipe left
@@ -142,7 +146,7 @@ var mouseswipe=function(sliderLT) {
     } else {
 
       var 
-        delta = Math.ceil(_velocity + bouncing);
+        delta = Math.round(_velocity + bouncing);
       if(delta === 1) {
         debugdata += "<br />RIGHT delta: " + delta + ". Is this our bug? <br />_velocity: " + _velocity + "<br />bouncing: " + bouncing;
       }
