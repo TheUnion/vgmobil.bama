@@ -7,8 +7,33 @@
  */
 
 
+
+  body {
+    margin       : 0;
+    padding      : 0;
+  	background   : rgb(230, 250, 250);
+  	color        : #4e4e4e;
+  	line-height  : 1.5;
+  	font-family  : Abel, sans-serif;
+    font-weight  : 700;
+  	font-size    : 14px;
+  }
+
+
+  h1 {
+    position     : relative;
+    width        : 300px;
+    margin       : 20px 0px 20px 50px;
+    font-family  : Georgia, serif;
+    font-size    : 60px;
+    line-height  : 65px;
+    font-weight  : 700;
+    color        : rgb(33, 169, 126);
+  }
+
+
+
   #debug {
-    display: none;
     position  : absolute;
     top       : 500px;
     width     : 800px;
@@ -34,44 +59,6 @@
 
 
 
-
-
-  body {
-    margin       : 0;
-    padding      : 0;
-  	background   : rgb(230, 250, 250);
-  	color        : #4e4e4e;
-  	line-height  : 1.5;
-  	font-family  : Abel, Cabin, Helvetica, Arial, sans-serif;
-    font-weight  : 700;
-  	font-size    : 14px;
-  }
-
-
-  h1 {
-    position     : relative;
-    width        : 300px;
-    margin       : 20px 0px 20px 50px;
-    font-family  : Georgia, serif;
-    font-size    : 60px;
-    line-height  : 65px;
-    font-weight  : 700;
-    color        : rgb(33, 169, 126);
-  }
-
-
-#debugoutput {    
-  display: none;
-}
-
-#debug_info {    
-  display: none;
-}
-
-
-#touchoutput {    
-  display: none;
-}
 
   /* The ugly */
 
@@ -248,8 +235,10 @@
          user-select     : none;
 
     pointer-events       : none;
+/*
     background           : transparent url('../img/cloud1.png') no-repeat;
     background-position  : 64px 128px;
+*/
     position             : absolute;
     height               : 500px;
     z-index              : 2;
@@ -276,18 +265,14 @@
 
     position             : absolute;
     height               : 500px;
- /*   background           : transparent url('../img/hill_front2.png') repeat-x;
-    background-position  : 0px 310px;
-    background-origin    : content-box;
- */   z-index              : 4;
-
+    z-index              : 4;
   }
 
 
 
   #layer5 {
-/*  This is our main layer, the one where everything happens
-*/    
+
+  /*  This is our main layer, the one where everything happens  */    
     -webkit-user-select   : auto;
     -moz-user-select      : auto;
     pointer-events        : auto;
@@ -340,7 +325,7 @@
 
 
 /**
- *  This is our sprites and scene/gfx elements
+ *  sprites and scene/gfx elements
  *
  */
 
@@ -363,24 +348,62 @@
   }
 
 
-  .stripe {
-    height: 1px;
-    border-top : solid 1px #333;
-  }
+
 
   .recipe {
     pointer-events: auto;
     font-family: Abel, Helvetica, sans-serif;
-    color: #555;
+    color: #333;
+    width: 480px;
     font-weight: 700;
+    font-size: 22px;
     text-align: left;
-    background-color: #fefefb;
+    background-color: #f7eee7;
     z-index: 12001;
+  }
+
+  .close_recipe {
+    position: absolute;
+    top : 24px;
+    left: 556px;
+    width: 44px;
+    height: 41px;
+    background-image: url('../img/close_white.png');
+    background-repeat: no-repeat;
+    background-position: top left;
+    z-index: 12002;
+  }
+
+  .recipe_title {
+    color: #333;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+    width: 480px;
+    margin-left: 12px;
+    text-transform: uppercase;
+    margin-top: 40px;
+    padding-bottom: 8px;
+    border-bottom: solid 1px #333;   
+  }
+
+
+  .recipe_small {
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 12px;
+    color: #555;
+    font-family: Abel, sans-serif;
+    text-align: left;
+    font-size: 22px;
+    font-weight: 400;
   }
 
 
   .sprite {
     position: absolute;
+    background-repeat: no-repeat;
   }
 
   .gfx {
@@ -426,7 +449,7 @@
     overflow            : visible;
     color               : #4c2b0c;
     padding             : 4px;
-    font-family         : Abel, Cabin, Helvetica, Arial, sans-serif;
+    font-family         : Abel, Helvetica, Arial, sans-serif;
     font-size           : 12px;
     font-weight         : 700;
     background          : transparent url('../img/wood_sign_arrow.png') no-repeat;
@@ -458,14 +481,19 @@
     padding             : 4px;
     font-family         : Abel, Helvetica, Arial, sans-serif;
     font-size           : 24px;
+    text-align          : center;
     line-height         : 54px;
     font-weight         : 700;
+
+
     background          : transparent url('../img/wood_sign_big.png') no-repeat;
     background-position : top left;
     top                 : 212px;
     width               : 253px;
     left                : 128px;
     height              : 204px;
+    margin-left         : 40px;
+    margin-right        : auto;
     background-origin   : content-box;
     position            : absolute;
   }
@@ -529,14 +557,19 @@
   }
 
   #farmer_recipe {
+    
+    position: absolute;
     top : -500px;
     left: 0;
+    height: 500px;
+    width: 100%;
     opacity: 0;
     z-index: 10000;
   }
 
 
   #farmer_text {
+    padding: 16px;
     top                 : 90px;
     /*background          : transparent;*/
   }
@@ -556,14 +589,18 @@
   }
 
   #lise_recipe {
+    position: absolute;
     top : -500px;
     left: 0;
+    width: 580px;
+    height: 500px;
     opacity: 0;
     z-index: 10000;
   }
 
 
   #lise_text {
+    padding: 16px;
     top                 : 90px;
     /*background          : transparent;*/
   }
@@ -656,12 +693,13 @@
 
 
   .btn {
-    /*pointer-events      : visible;*/
+    pointer-events      : auto;
+    text-decoration     : none;
     text-align          : center;
     font-weight         : 700;
     font-size           : 18px;
     color               : white;
-    padding             : 4px;
+    padding             : 4px 12px 4px 12px;
     width               : 96px;
     margin-right        : auto;
     margin-left         : auto;
@@ -781,19 +819,10 @@
     z-index               : 91;
   }
 
-/*
   .road.dirt {
-    position              : absolute; 
- a   overflow              : visible;
-    background-repeat     : repeat-x;
     background-image      : url('../img/road_farm.png');
-    background-position   : -144px 0px;
-    top                   : 417px; 
-    height                : 71px;
-    width                 : 710px;
-    z-index               : 92;
   }
-*/
+
 
 
   #layer_player {
@@ -837,9 +866,15 @@
   }
 
 
+  .clicktarget {
+    pointer-events: auto;
+  }
+
   .station {
     opacity     : 20%;
     color       : navy;
+    /* show where our stations begin */
+    /*border-left : dotted 1px #fff;*/
     font-size   : 72px;
     font-weight : bold;
     z-index     : 100;
@@ -909,6 +944,8 @@
     left                : 9224px;
     width               : 580px;
     height              : 500px;
+    padding             : 0;
+    margin              : 0;
     background-image    : url('../img/drive_in_screen.png');
     background-position : 53px 76px;
     background-origin   : content-box;

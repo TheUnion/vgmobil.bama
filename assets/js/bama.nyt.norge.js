@@ -48,6 +48,7 @@
           clickpos = Math.abs(click.offsetLeft + startpos) + click.clientX;
           // console.log('click: ' + click.x + ", "+ click.y);
 
+        
         if(LISE_FLIPPED) {
           flipLise();
           return;
@@ -102,6 +103,14 @@
 
         }
       };
+
+
+      var enableSwipe = function () {
+
+        $("#parallax").parallaxSwipe.SWIPE_ENABLED = true;          
+
+      }
+
 
 
 
@@ -175,24 +184,18 @@
             }
           }
 
-        console.log(clicktargets);
-
-        
-
-        // farmer_tips   = document.getElementById('farmer_tips');
-
 
     // $('#layer5').bind("click tap touchstart", function() { console.log('layer5!'); return false; });
 
       var flipLise = function() {
         if(!LISE_FLIPPED) {
           console.log('lise flipper');
-          $('#lise_tips').animate({ top : 500, opacity: 0}, 125, 'linear');
-          $('#lise_recipe').animate({ top : 0, opacity: 1}, 125, 'linear');
+          $('#lise_tips').animate({ top : 500, opacity: 0}, 325, 'linear');
+          $('#lise_recipe').animate({ top : 0, opacity: 1}, 325, 'linear');
         }
         else {
-          $('#lise_tips').animate({ top : 0, opacity: 1}, 125, 'linear');
-          $('#lise_recipe').animate({ top : -500, opacity: 0}, 125, 'linear');
+          $('#lise_tips').animate({ top : 40, opacity: 1}, 325, 'linear');
+          $('#lise_recipe').animate({ top : -500, opacity: 0}, 325, 'linear');
         }
         LISE_FLIPPED = !LISE_FLIPPED;
       };
@@ -201,13 +204,13 @@
       var flipFarmer = function() {
         if(!FARMER_FLIPPED) {
           console.log('bonden flipper');
-          $('#farmer_tips').animate({ top : 500, opacity: 0}, 125, 'linear');
-          $('#farmer_recipe').animate({ top : 0, opacity: 1}, 125, 'linear');
+          $('#farmer_tips').animate({ top : 500, opacity: 0}, 325, 'linear');
+          $('#farmer_recipe').animate({ top : 0, opacity: 1}, 325, 'linear');
         }
         else {
           console.log('bonden flipper tilbake');
-          $('#farmer_tips').animate({ top : 0, opacity: 1}, 125, 'linear');
-          $('#farmer_recipe').animate({ top : -500, opacity: 0}, 125, 'linear');
+          $('#farmer_tips').animate({ top : 40, opacity: 1}, 325, 'linear');
+          $('#farmer_recipe').animate({ top : -500, opacity: 0}, 325, 'linear');
         }
         FARMER_FLIPPED = !FARMER_FLIPPED;
       };
@@ -239,17 +242,10 @@
         if(!!position) {
           currentpos = startpos - position.left;
 
-          if(currentpos > (layerWidth-580)) {
-            // console.log('stopping at end.');
-            // $('#parallax').parallaxSwipe.halt();
-          }
-          else if (currentpos<0) {
-            // console.log('stopping at beginning.');
-            // $('#parallax').parallaxSwipe.halt();
-          }
           // for..in normally not acceptable, but ok with this few elements
           var counter = 0, startAtIndex = 3;
           for (var key in stations) {
+            // skip the first 2 stations, no stops there
             if(++counter < startAtIndex) {
               continue;
             }
@@ -279,20 +275,19 @@
                   if(counter === 5){
                     continue;
                   }
-                  $('#parallax').parallaxSwipe.setSpeed(STATION_SPEED, DECAY, MOUSEDOWN_DECAY);
-                  if ((counter === 3) || ((counter === 4))) { 
-                    document.getElementById('road').classList.add('dirt');
-                  }
-                  else {
-                    document.getElementById('road').classList.remove('dirt');
-                  }
+
+                  var 
+                    stationx = Math.round($("#" + currentstation).position().left);
+
+                  console.log('Requesting position of ' + currentstation + " at " + stationx + ", offset: " + $("#" + currentstation).offset().left + ", position: " + $("#" + currentstation).position().left + ", startpos: " + startpos);
+                  $('#parallax').parallaxSwipe.requestPosition(-stationx);
                 }
               }
             }
           }
         }
         else {
-          console.log("(!)debugx: ", debugx);
+          console.log("(WTF!) no position?   debugx: ", debugx);
           console.log("position is " + position + ", parallax is " + parallax);
         }
       };
@@ -363,7 +358,7 @@
           HORIZ:true, SNAPDISTANCE:20, DISABLELINKS: false, LAYER:[ 20, 20, 3.2, 1.6, 1, 0.9 ] });
 
 
-    var layerWidth = $('#parallax').parallaxSwipe.getSize();
+    var layerWidth = $('#parallax').parallaxSwipe.getSize() + 580;
 
     // set width for all parallax stations
     $('.parallax_layer').css('width',layerWidth);
@@ -400,7 +395,7 @@
             }            
 
 
-          document.getElementById('touchoutput').innerHTML += 'touchstart_parallax:' + dump + "px <br />";
+          // document.getElementById('touchoutput').innerHTML += 'touchstart_parallax:' + dump + "px <br />";
           
           onClicked(result);
 
