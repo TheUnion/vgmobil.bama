@@ -3,7 +3,7 @@
 
 $.fn.parallaxSwipe = function(options) {
 var defaults = {DECAY:0.9, MOUSEDOWN_DECAY:0.5, SPEED_SPRING:0.5, BOUNCE_SPRING:0.08,
-  HORIZ:true, SNAPDISTANCE:20, DISABLELINKS:true, LAYER:[]
+  HORIZ:true, SNAPDISTANCE:20, DISABLELINKS:false, LAYER:[]
 };
 var o = $.extend(defaults, options);
 var plugin = this; //jQuery object or a collection of jQuery objects.
@@ -53,28 +53,31 @@ this.parallaxSwipe.getSize = function(i){ if (sliderW>'') { return sliderW; } el
  */
 
 var mouseswipe=function(sliderLT) {
+  var
+    oldSliderLT = sliderLT,
+    debugdata = '';
+
   if (_mouseDown) {
     _velocity *= o.MOUSEDOWN_DECAY;
   } else {
     _velocity *= o.DECAY;
   }
 
- $('#position_data').html("sliderLT is " + sliderLT + ", _velocity is " + _velocity + ", REQUESTED_POSITION is " + REQUESTED_POSITION);
 
   if (!_mouseDown) {
-    $('#position_data').html("sliderLT is " + sliderLT + ", _velocity is " + _velocity);
-    //console.log();
    
     if(!!REQUESTED_POSITION) {
-      if((sliderLT - _velocity) < -REQUESTED_POSITION){
-        sliderLT = REQUESTED_POSITION;
+      // move 10% of the difference
+      _velocity = 0.1 * (REQUESTED_POSITION - sliderLT);
 
-        console.log("moving to requested position: " + REQUESTED_POSITION);
-        plugin.css(edge,sliderLT); //swipe left
+      if((sliderLT - _velocity) < -REQUESTED_POSITION){
+        sliderLT = Math.round(REQUESTED_POSITION);
+
+        plugin.css(edge,sliderLT);
         if (o.LAYER.length>0) {
          
           $.each(o.LAYER, function(index, value) {
-            $('#layer'+(index+1)).css(edge,sliderLT); //layer
+            $('#layer'+(index+1)).css(edge,sliderLT); //loop through parallax layers
           });
         }
         return;      
@@ -84,7 +87,8 @@ var mouseswipe=function(sliderLT) {
 
     if (sliderLT > ( 0 - _velocity ))  {
       sliderLT = 0;
-      console.log("moving to zero");
+      // _velocity = 0;
+      console.log("moving to zero, sliderLT: " + sliderLT);
 
       plugin.css(edge,sliderLT); //swipe left
       if (o.LAYER.length>0) {
@@ -117,26 +121,44 @@ var mouseswipe=function(sliderLT) {
 
     if (_lastMouseDownXY-_mouseDownXY < 0) {
      
+      var 
+        delta = Math.ceil(_velocity + bouncing);
+      if(delta === 1) {
+        console.log("LEFT delta: " + delta + ". Is this our bug?  -   _velocity: " + _velocity + ", bouncing: " + bouncing);     
+      }
+
       // console.log('Moving to ' + (sliderLT + Math.ceil(_velocity + bouncing)));
-      plugin.css(edge,sliderLT + Math.ceil(_velocity + bouncing)); //swipe left
+      var newSliderLT = sliderLT + Math.ceil(_velocity + bouncing);
+
+
+      plugin.css(edge,newSliderLT); //swipe left
       if (o.LAYER.length>0) {
        
         $.each(o.LAYER, function(index, value) {
-          $('#layer'+(index+1)).css(edge,(sliderLT + Math.ceil(_velocity + bouncing))/value); //layer
+          $('#layer'+(index+1)).css(edge,newSliderLT/value); //layer
         });
       }
     } else {
-     
-         plugin.css(edge,sliderLT + Math.floor(_velocity + bouncing)); //swipe right
+
+      var 
+        delta = Math.ceil(_velocity + bouncing);
+      if(delta === 1) {
+        debugdata += "<br />RIGHT delta: " + delta + ". Is this our bug? <br />_velocity: " + _velocity + "<br />bouncing: " + bouncing;
+      }
+
+      plugin.css(edge,sliderLT + delta); //swipe right
       if (o.LAYER.length>0) {
-       
         $.each(o.LAYER, function(index, value) {
-          $('#layer'+(index+1)).css(edge,(sliderLT + Math.floor(_velocity + bouncing))/value); //layer
+          $('#layer'+(index+1)).css(edge,(sliderLT + delta)/value); //layer
         });
 
       }
     }
-  }};
+
+  debugdata += "sliderLT is " + sliderLT + "<br />_velocity is " + _velocity + "<br />REQUESTED_POSITION is " + REQUESTED_POSITION + "<br />bounce is " + bouncing;
+  $('#position_data').html(debugdata);
+  }
+};
 
 
 window.requestAnimFrame = function(){ 
@@ -215,7 +237,7 @@ this.parallaxSwipe.setSpeed = function(newspring, decay, mousedecay) {
 
 
 this.parallaxSwipe.requestPosition = function (position) {
-  REQUESTED_POSITION = Math.floor(position);
+  REQUESTED_POSITION = Math.round(position);
 }
 
 

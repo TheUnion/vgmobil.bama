@@ -242,14 +242,6 @@
         if(!!position) {
           currentpos = startpos - position.left;
 
-          if(currentpos > (layerWidth-580)) {
-            // console.log('stopping at end.');
-            // $('#parallax').parallaxSwipe.halt();
-          }
-          else if (currentpos<0) {
-            // console.log('stopping at beginning.');
-            // $('#parallax').parallaxSwipe.halt();
-          }
           // for..in normally not acceptable, but ok with this few elements
           var counter = 0, startAtIndex = 3;
           for (var key in stations) {
@@ -284,13 +276,10 @@
                     continue;
                   }
 
-                  // change speed when approaching station
-//                  $('#parallax').parallaxSwipe.setSpeed(STATION_SPEED, DECAY, MOUSEDOWN_DECAY);
-                  
                   var 
-                    stationx = $("#" + currentstation).position().left;
+                    stationx = Math.round($("#" + currentstation).position().left);
 
-                  console.log('Moving to ' + currentstation + " at position " + stationx + ", offset: " + $("#" + currentstation).offset().left + ", position: " + $("#" + currentstation).position().left + ", startpos: " + startpos);
+                  console.log('Requesting position of ' + currentstation + " at " + stationx + ", offset: " + $("#" + currentstation).offset().left + ", position: " + $("#" + currentstation).position().left + ", startpos: " + startpos);
                   $('#parallax').parallaxSwipe.requestPosition(-stationx);
                 }
               }
@@ -298,7 +287,7 @@
           }
         }
         else {
-          console.log("(!)debugx: ", debugx);
+          console.log("(WTF!) no position?   debugx: ", debugx);
           console.log("position is " + position + ", parallax is " + parallax);
         }
       };
@@ -369,7 +358,7 @@
           HORIZ:true, SNAPDISTANCE:20, DISABLELINKS: false, LAYER:[ 20, 20, 3.2, 1.6, 1, 0.9 ] });
 
 
-    var layerWidth = $('#parallax').parallaxSwipe.getSize();
+    var layerWidth = $('#parallax').parallaxSwipe.getSize() + 580;
 
     // set width for all parallax stations
     $('.parallax_layer').css('width',layerWidth);

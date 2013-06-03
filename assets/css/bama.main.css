@@ -235,9 +235,11 @@
          user-select     : none;
 
     pointer-events       : none;
-/*    background           : transparent url('../img/cloud1.png') no-repeat;
+/*
+    background           : transparent url('../img/cloud1.png') no-repeat;
     background-position  : 64px 128px;
-*/    position             : absolute;
+*/
+    position             : absolute;
     height               : 500px;
     z-index              : 2;
 
@@ -871,7 +873,8 @@
   .station {
     opacity     : 20%;
     color       : navy;
-    border-left : dotted 1px #fff;
+    /* show where our stations begin */
+    /*border-left : dotted 1px #fff;*/
     font-size   : 72px;
     font-weight : bold;
     z-index     : 100;
