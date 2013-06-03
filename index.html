@@ -17,9 +17,11 @@
   <div class="container" onselectstart="return false;">
 
     <img id="logo" class="hires" src="assets/img/bama_logo.svg" />
+    
     <div id="parallax">
       <div class="panel">    
         <div class="content">
+
         </div>
       </div>
     </div>
@@ -36,14 +38,11 @@
   <div class="container" onselectstart="return false;">
     <div id="layer2" class="parallax_layer"> <!-- middle layer #2 -->
       <div class="panel">
-        <img class="hires horizontal sprite" src="assets/img/hill_middle_layer2.png" style="left: 0px;" />
-        <img class="hires horizontal mirror sprite" style="left:660px;" src="assets/img/hill_middle_layer2.png" />
-        <img class="hires horizontal sprite" style="left:1326px;" src="assets/img/hill_middle_layer2.png" />
   
 <!--         <img class="hires horizontal mirror sprite" style="top: 40px; left: 665px;" src="assets/img/cloud2.png" />
         <img class="hires horizontal sprite"  style="top: 80px; left: 265px;" src="assets/img/cloud1.png" />
 
- -->      </div>
+ -->  </div>
     </div>
   </div>
 
@@ -67,7 +66,9 @@
       <div class="panel">
 
         <div id="start">
-
+    
+          <div id="flag"><img class="hires" src="assets/img/flag.png" /></div>
+  
           <div id="arrow" class="animated continuous hint"><img class="hires" src="assets/img/arrow.png" /></div>
           
           <div id="intro_text" class="sprite">
@@ -76,13 +77,7 @@
               <br /> Swipe og opplev de flotte<br />salatene fra Frosta.
             </span>
             </div>
-
-
-
-
-
           </div>
-
         </div>
 
 
@@ -105,7 +100,7 @@
             <div id="farmer_tips" class="front sprite farmer_tips clicktarget">
               <!-- <img id="farmer_large" src="assets/img/farmer_large.png" /> -->
               <!-- <img id="close_button" src="assets/img/close_grey.png" /> -->
-              <div id="farmer_tekst" class="snakkeboble"><span class="bold">Hei</span>, vil du vite hvorfor norske salater er de beste?
+              <div id="farmer_tekst" class="snakkeboble center"><span class="bold">Hei</span>, vil du vite hvorfor norske salater er de beste?
               <br /> <div class="btn">Vær så god!</div>
               </div>
               <div class="btm"></div>
@@ -121,7 +116,7 @@
             <div id="lise_tips" class="front sprite lise_tips clicktarget">
               <!-- <img id="lise_large" src="assets/img/lise_large.png" /> -->
               <!-- <img id="close_button" src="assets/img/close_grey.png" /> -->
-              <div id="lise_tekst" class="snakkeboble"><span class="bold">Hei!</span> Jeg heter Lise, og her<br />er et lite tips til deg!
+              <div id="lise_tekst" class="snakkeboble center"><span class="bold">Hei!</span> Jeg heter Lise, og her<br />er et lite tips til deg!
               <br /> <div class="btn">Vær så god!</div>
               </div>
               <div class="btm"></div>
@@ -143,7 +138,7 @@
 
         <div id="station6" class="station">
           <div id="video1_container">
-            <video id="video1" width="416" height="234" controls poster="assets/img/video_poster_contrast.jpg">
+            <video id="video1" class="interactive" width="416" height="234" controls poster="assets/img/video_poster_contrast.jpg">
               <source src="http://kromaviews.no:80/dev/games/bama/assets/video/video1.webm" type="video/webm">
               <source src="http://kromaviews.no:80/dev/games/bama/assets/video/video1.mp4" type="video/mp4">
               <source src="http://kromaviews.no:80/dev/games/bama/assets/video/video1.ogv" type="video/theora">
@@ -158,8 +153,8 @@
         <div id="station7" class="station">
 
           <div id="final_sign" class="final_sign">
-            <span class="clicktarget"><a class="btn" href="http://www.bama.no/norsk/index.html">Salat passer til dette</a></span><br />
-            <span class="btn clicktarget"><a class="btn" href="http://www.bama.no/norsk/sesong/juni.html">Dette er i sesong nå</a> </span>
+            <span class="clicktarget"><a class="btn" target="_blank" href="http://www.bama.no/norsk/index.html">Salat passer til dette</a></span><br />
+            <span class="btn clicktarget"><a class="btn" target="_blank" href="http://www.bama.no/norsk/sesong/juni.html">Dette er i sesong nå</a> </span>
           </div>
           
         <!-- this is the div containing the road tiles -->
@@ -187,7 +182,8 @@
 
 
       <div id="lise_recipe" class="center recipe clicktarget">
-        <img src="assets/img/salat_tips.jpg" />
+        <img src="assets/img/salat_caesar.jpg" />
+        <img src="assets/img/btn_close.svg" class="close white" />
         <div class="recipe" style="width=580px; font-size: 22px; color: #555; padding-left: 40px; padding-right: 40px">
           <span class="recipe_title" style="font-size: 20px;">LUN SOPPSALAT MED VALNØTTER OG RUCCULA</span><br />
           <p class="recipe_small">
@@ -198,6 +194,7 @@ Stek renset, delt, assortert sopp i litt olje i en stor stekepanne. Grovhakk noe
       </div>
 
       <div id="farmer_recipe" class="center recipe clicktarget">
+        <img src="assets/img/btn_close.svg" class="close grey" />
         <img src="assets/img/salat_tips.jpg" />
         <div class="recipe" style="width=580px; font-size: 22px; color: #555; padding-left: 40px; padding-right: 40px">
           <span class="recipe_title">SALATDYRKING I NORGE</span><br />
