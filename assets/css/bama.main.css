@@ -1,6 +1,6 @@
-/**--------------+
- ---------*  Ba------sic setup. 
- *  -----------
+/**
+ *  Basic setup. 
+ *  
  *  We are assuming an iframe, obviously.
  *  Otherwise we would never touch these tags.
  *
@@ -194,14 +194,14 @@
     width     : 665px;
   }
 
-
+/*
   .mirror {
       -webkit-transform: matrix(-1, 0, 0, 1, 0, 0);
          -moz-transform: matrix(-1, 0, 0, 1, 0, 0);
            -o-transform: matrix(-1, 0, 0, 1, 0, 0);
               transform: matrix(-1, 0, 0, 1, 0, 0);
   }
-
+*/
 
 
 /**
@@ -235,10 +235,9 @@
          user-select     : none;
 
     pointer-events       : none;
-/*
-    background           : transparent url('../img/cloud1.png') no-repeat;
-    background-position  : 64px 128px;
-*/
+    background           : transparent url('../img/hill_middle_layer2.png') repeat-x;
+    background-origin    : content-box;
+    background-position  : 0px 328px;
     position             : absolute;
     height               : 500px;
     z-index              : 2;
@@ -362,17 +361,29 @@
     z-index: 12001;
   }
 
-  .close_recipe {
-    position: absolute;
-    top : 24px;
-    left: 556px;
-    width: 44px;
-    height: 41px;
-    background-image: url('../img/close_white.png');
-    background-repeat: no-repeat;
-    background-position: top left;
-    z-index: 12002;
+  .close {
+    position  : absolute;
+    top       : 24px;
+    left      : 516px;
+    width     : 44px;
+    height    : 44px;
   }
+
+
+
+  
+
+  .grey {
+    stroke  : #534741;
+    fill    : #534741;
+  }
+
+  .white {
+    stroke  : #fff;
+    fill    : #fff;
+  }
+
+
 
   .recipe_title {
     color: #333;
@@ -414,7 +425,7 @@
   #progress {
     margin: 0;
     padding: 0;
-    z-index: 3000;
+    z-index: 300;
     pointer-events : none;
   }
 
@@ -775,8 +786,8 @@
     display             : block; 
     margin              : 0px auto 0px auto; 
     padding             : 0;
-    top                 : 76px;
-    left                : 118px; 
+    top                 : 84px;
+    left                : 9341px; 
     width               : 416px;
     height              : 234px;   
     overflow            : hidden;
@@ -854,11 +865,21 @@
   }
 
 
+  #flag {
+    position             : absolute;
+    width                : 54px;
+    height               : 36px;
+    left                 : 263px;
+    top                  : 44px;
+    z-index              : 90;
+  }
+
+
   #logo {
     position             : absolute;
-    width                : 85px;
-    height               : 30px;
-    left                 : 448px;
+    width                : 192px;
+    height               : 34px;
+    left                 : 328px;
     top                  : 0;
     z-index              : 90;
     margin               : 16px;
