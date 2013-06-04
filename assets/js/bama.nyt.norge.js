@@ -155,11 +155,14 @@
         videoController.element = video;
 
 
-        videoController.play = function() {
+        videoController.play = function(resume) {
+
+            onEvent({event: resume ? "video_resume" : "video_play"});
             video.play();
         };
 
         videoController.pause = function() {
+            onEvent({event: 'video_pause'});
             video.pause();
         };
 
@@ -177,6 +180,7 @@
 
         videoController.restart = function() {
           video.currentTime = 0;
+          onEvent({event: 'video_restart'});
         };
 
         videoController.toggleControls = function() {
