@@ -152,6 +152,7 @@ var mouseswipe=function(sliderLT) {
       plugin.css(edge,sliderLT + delta); //swipe right
       if (o.LAYER.length>0) {
         $.each(o.LAYER, function(index, value) {
+          // this is where we had a bug that screwed up tha hard stop, the "/value" bit had gone missing
           $('#layer'+(index+1)).css(edge,(sliderLT + delta)/value); //layer
         });
 
