@@ -28,6 +28,7 @@ var LEAVING_STATION     = false;
 var SWIPE_ENABLED       = false;
 var REQUESTED_POSITION  = false;
 
+
 /******/
 
 

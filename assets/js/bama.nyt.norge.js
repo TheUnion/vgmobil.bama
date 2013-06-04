@@ -29,16 +29,7 @@
         console.log("disabling clicks on event " + eventObject.event);
         CLICK_ENABLED = false;
       }
-
-
-
-        // eventObject : {
-        //   event: eventObject.event,
-        //   target: HTMLElement,
-        //   x : eventObject.x,
-        //   y : eventObject.y,
-        //   time: eventObject.time,
-        // }
+      
 
       // # tracking code here
         events.push(eventObject);
@@ -46,14 +37,13 @@
       };
 
 
+
+
       var updateLazyloaders = function (eventName) {
 
         var 
           eventName = eventName || false,
           loadEvent = false;
-
-
-
 
         for(var i = 0, count = ONDEMAND_LOADERS.length; i < count; i++) {
           // by convention, the lazyloadee will be a class of the same name as the lazyloader's id
@@ -104,6 +94,131 @@
         onEvent(userEvent);
       };
 
+
+      var clickVideo = function(id) {
+        var
+          videoElement = document.getElementById(id || 'video1');
+
+        
+        if (!videoElement) {
+          return false;
+        }
+        if(!VIDEO_CONTROLLER) {
+          if(false === (VIDEO_CONTROLLER = HTMLVideo(videoElement))){
+            return false;
+          }
+        }
+        
+        VIDEO_CONTROLLER.togglePause();
+        return true;
+      };
+
+
+/* ------------------------------------------------------------ */
+
+
+    function vidplay() {
+       var video = document.getElementById("Video1");
+       var button = document.getElementById("play");
+       if (video.paused) {
+          video.play();
+          button.textContent = "||";
+       } else {
+          video.pause();
+          button.textContent = ">";
+       }
+    }
+
+    function restart() {
+        var video = document.getElementById("Video1");
+        video.currentTime = 0;
+    }
+
+    function skip(value) {
+        var video = document.getElementById("Video1");
+        video.currentTime += value;
+    }     
+
+/* ------------------------------------------------------------ */
+
+
+
+
+
+/**
+ *  HTMLVideo
+ *  
+ *  A dirt simple video controller for the HTML5 video element
+ *
+ * @param {string or videoElement} [img] The video element, or its id
+ * @returns videoElement or null
+ * 
+ */
+
+
+      var HTMLVideo = function(elem) {
+
+      try {
+
+        var 
+          video           = typeof elem === "string" ? document.getElementById(elem) : elem,
+          videoController = {};
+
+        videoController.element = video;
+
+
+        videoController.play = function() {
+            video.play();
+        };
+
+        videoController.pause = function() {
+            video.pause();
+        };
+
+        videoController.togglePause = function() {
+          if (video.paused) {
+            video.play();
+          } else {
+            video.pause();
+          }
+        };
+
+        videoController.skip = function(value) {
+          video.currentTime += value;
+        };
+
+        videoController.restart = function() {
+          video.currentTime = 0;
+        };
+
+        videoController.toggleControls = function() {
+          if (video.hasAttribute("controls")) {
+            this.hideControls();
+          } else {
+            this.showControls();
+          }
+        }
+
+        videoController.showControls = function(){
+          video.setAttribute("controls", "controls");   
+        };
+
+        videoController.hideControls = function(){
+          video.removeAttribute("controls")   
+        };
+
+        videoController.setPoster = function(img) {
+          video.setAttribute("poster", img);   
+        };
+
+      }
+      catch(e) {
+        videoController = null;
+        throw(e);
+      }
+
+      return videoController;
+      };
 
 
 
@@ -243,7 +358,14 @@
             return;
           }
         }
-
+        // click on video
+        else if( (clickpos>=(9224 + 118) && (clickpos<=(9224 + 118 + 416)) )) {
+          if((click.clientY>(86) && (click.clientY<((86 + 216))))){
+            console.log('click on video: ' + link2.href);
+            clickVideo();
+            return;
+          }
+        }
 
 
 
@@ -323,6 +445,7 @@
         events            = [],
         LAZY_LOADERS      = null;
         ONDEMAND_LOADERS  = null; 
+        VIDEO_CONTROLLER  = null;
         CLICK_ENABLED     = false;
 
         debugpanel        = document.getElementById('debugoutput'),
