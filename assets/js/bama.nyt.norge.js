@@ -308,12 +308,12 @@
 
         if(LISE_FLIPPED) {
           flipLise();
-          return;
+//          return;
         }
 
         if(FARMER_FLIPPED) {
           flipFarmer();
-          return;
+ //         return;
         }
 
 
@@ -333,14 +333,12 @@
         }
         // we could probably come up with somthing more general, but not in the time available
         else if( (clickpos>=11111 && (clickpos<=11325) )) {
-          if((click.clientY>270) && (click.clientY<330)){
+          if((click.clientY>208) && (click.clientY<272)){
             console.log('fake-click: ' + link1.href);
             fakeClick(null, link1);
             return;
           }
-        }
-        else if( (clickpos>=11111 && (clickpos<=11325) )) {
-          if((click.clientY>(340) && (click.clientY<((408))))){
+          else if((click.clientY>(276) && (click.clientY<((348))))){
             console.log('fake-click: ' + link2.href);
             fakeClick(null, link2);
             return;
