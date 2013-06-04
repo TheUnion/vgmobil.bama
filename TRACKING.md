@@ -1,4 +1,3 @@
-
 ##TRACKING
 
 
@@ -50,29 +49,29 @@
 ```javascript
   var EVENTS = 
     {
-      start_interaction   : "Eventbeskrivelse",
-      arrive_station3     : "Eventbeskrivelse",
-      arrive_station4     : "Eventbeskrivelse",
-      arrive_station6     : "Eventbeskrivelse",
-      arrive_station7     : "Eventbeskrivelse",
-      leave_station3      : "Eventbeskrivelse",
-      leave_station4      : "Eventbeskrivelse",
-      leave_station6      : "Eventbeskrivelse",
-      leave_station7      : "Eventbeskrivelse",
-      click_lise          : "Eventbeskrivelse",
-      click_farmer        : "Eventbeskrivelse",
-      click_link1         : "Eventbeskrivelse",
-      click_link2         : "Eventbeskrivelse",
-      close_lise          : "Eventbeskrivelse",
-      close_farmer        : "Eventbeskrivelse",
-      video_play          : "Eventbeskrivelse",
-      video_pause         : "Eventbeskrivelse",
-      event_idle          : "Eventbeskrivelse",
-      event_wake          : "Eventbeskrivelse",
-      video_resume        : "Eventbeskrivelse",
-      video_finish        : "Eventbeskrivelse",
-      error_javascript    : "Eventbeskrivelse",
-      error_unknown       : "Eventbeskrivelse"
+      start_interaction   : "start_bilreise",
+      arrive_station3     : "ankommet_bonde",
+      arrive_station4     : "ankommet_lise",
+      arrive_station6     : "ankommet_film",
+      arrive_station7     : "ankommet_slutt",
+      leave_station3      : "forlot_bonde",
+      leave_station4      : "forlot_lise",
+      leave_station6      : "forlot_film",
+      leave_station7      : "forlot_slutt",
+      click_lise          : "lise_klikk",
+      click_farmer        : "bonde_klikk",
+      click_link1         : "klikk_oppskrift",
+      click_link2         : "klikk_bama",
+      close_lise          : "lise_lukk",
+      close_farmer        : "bonde_lukk",
+      video_play          : "video_play",
+      video_pause         : "video_pause",
+      event_idle          : "inaktive_bruker",
+      event_wake          : "reaktivert_bruker",
+      video_resume        : "video_fortsett",
+      video_finish        : "video_slutt",
+      error_javascript    : "error_javascript",
+      error_unknown       : "error_unknown"
     }
 ```
 
