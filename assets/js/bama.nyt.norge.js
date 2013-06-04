@@ -17,6 +17,22 @@
         startSession();
       }
 
+      if(eventObject.event.indexOf("leave_station7") === 0) {
+        console.log("leaving at #7, setting right edge.");
+        $('#parallax').parallaxSwipe.setEdge("right");
+      }
+      else {
+        console.log("ignoring event " + eventObject.event);
+      }
+
+      if(eventObject.event.indexOf("arrive_station7") === 0) {
+        console.log("arriving at #7, setting right edge.");
+        $('#parallax').parallaxSwipe.setEdge("right");
+      }
+      else {
+        console.log("ignoring event " + eventObject.event);
+      }
+
 
       // check if any lazyloaders have requested to start loading on this event
       updateLazyloaders(eventObject.event);
@@ -112,34 +128,6 @@
         VIDEO_CONTROLLER.togglePause();
         return true;
       };
-
-
-/* ------------------------------------------------------------ */
-
-
-    function vidplay() {
-       var video = document.getElementById("Video1");
-       var button = document.getElementById("play");
-       if (video.paused) {
-          video.play();
-          button.textContent = "||";
-       } else {
-          video.pause();
-          button.textContent = ">";
-       }
-    }
-
-    function restart() {
-        var video = document.getElementById("Video1");
-        video.currentTime = 0;
-    }
-
-    function skip(value) {
-        var video = document.getElementById("Video1");
-        video.currentTime += value;
-    }     
-
-/* ------------------------------------------------------------ */
 
 
 
@@ -666,7 +654,7 @@
           HORIZ:true, SNAPDISTANCE:20, DISABLELINKS: false, LAYER:[ 20, 20, 3.2, 1.6, 1, 0.9 ] });
 
 
-    var layerWidth = $('#parallax').parallaxSwipe.getSize() + 580;
+    var layerWidth = $('#parallax').parallaxSwipe.getSize();
 
     // set width for all parallax stations
     $('.parallax_layer').css('width',layerWidth);
