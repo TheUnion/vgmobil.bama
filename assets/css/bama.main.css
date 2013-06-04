@@ -272,7 +272,6 @@
     pointer-events        : auto;
     position              : absolute;
     height                : 500px;
-    background            : transparent;
 
     background-image      : url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
@@ -478,6 +477,23 @@
     left          : 12px;
   }
 
+
+  .drive_in_sign {
+
+    color: #000;
+    font-family     : "Arial Black", Arial, sans-serif;
+    font-weight     : 700;
+    font-size       : 13px;
+    line-height     : 18px; 
+    text-transform  : uppercase;
+  
+    /*  We use the following to place text within a specific region of the bg image */
+    position        : absolute;
+    left            : 226px;
+    top             : 312px;
+    width           : 106px;
+    height          : auto;
+  }
 
 
   .final_sign {
@@ -951,8 +967,22 @@
     left          : 7800px;
     width         : 580px;
     height        : 500px;
-    background    : transparent; 
+
   }
+
+
+  /* When we set bg image in a class with the same name as the id, we can load images on demand
+     by adding the class to the div. Activate this function by adding class "lazyload" to the div 
+     Make sure you do not override any background-properties in the # definition
+     */
+  .station5 {
+    background-image: url('../img/drive_in_sign.png');
+    background-position : center 170px;
+    background-origin   : content-box;
+    background-repeat   : no-repeat;  
+  }
+
+
 
   #station6 {
     position            : absolute;
