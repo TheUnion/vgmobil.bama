@@ -88,7 +88,7 @@
           </div>
         </div>
 
-        <div id="station3" class="station">
+        <div id="station3" class="station ondemand" data-load-event="start_interaction">
           <!-- <img id="barn" class="sprite hires" src="assets/img/barn.png"> -->
           <div id="barn" class="sprite"></div>
           <img id="farmer" class="sprite" src="assets/img/farmer_small.png">
@@ -113,7 +113,7 @@
             <div id="lise_tips" class="front sprite lise_tips clicktarget">
               <!-- <img id="lise_large" src="assets/img/lise_large.png" /> -->
               <!-- <img id="close_button" src="assets/img/close_grey.png" /> -->
-              <div id="lise_tekst" class="snakkeboble center"><span class="bold">Hei!</span> Jeg heter Lise, og her<br />er et lite tips til deg!
+              <div id="lise_tekst" class="snakkeboble center"><span class="bold">Hei</span>, her har du en god oppskrift på salat fra meg.
               <br /> <div class="btn">Vær så god!</div>
               </div>
               <div class="btm"></div>
@@ -129,11 +129,11 @@
            -->
         </div>
 
-        <div id="station5" class="station lazyload">
+        <div id="station5" class="station lazyload ondemand" data-load-event="arrive_station3">
           <div class="drive_in_sign center">Nå kommer<br />salatene!</div>
         </div>
 
-        <div id="station6" class="station">
+        <div id="station6" class="station lazyload ondemand" data-load-event="arrive_station5">
           <div id="video1_container">
             <video id="video1" class="interactive" width="416" height="234" controls poster="assets/img/video_poster_contrast.jpg">
               <source src="http://kromaviews.no:80/dev/games/bama/assets/video/video1.webm" type="video/webm">

@@ -992,11 +992,17 @@
     height              : 500px;
     padding             : 0;
     margin              : 0;
+  }
+
+  /* class for lazyloading of bg images */
+  .station6 {
     background-image    : url('../img/drive_in_screen.png');
     background-position : 53px 76px;
     background-origin   : content-box;
     background-repeat   : no-repeat;  
   }
+
+
 
 
   #station7 {
