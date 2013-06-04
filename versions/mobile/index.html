@@ -3,20 +3,16 @@
 <head>
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />  
-  <title>Bama - Nyt Norge </title>
+  <title>Bama, Nyt Norge </title>
   <link href='http://fonts.googleapis.com/css?family=Abel:400,700' rel='stylesheet' type='text/css'>  
-  <!-- <link href="assets/css/parallaxVertical.css" rel="stylesheet" type="text/css" /> -->
   <link href="assets/css/bama.main.css" rel="stylesheet" type="text/css" />
-  <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
 </head>
 
-<body>
-
+<!-- ensure iframe transparency in parent document -->
+<body style="background-color:transparent">
 
   <div class="container" onselectstart="return false;">
-
     <img id="logo" class="hires" src="assets/img/bama_logo.svg" />
-    
     <div id="parallax">
       <div class="panel">    
         <div class="content">
@@ -24,7 +20,9 @@
         </div>
       </div>
     </div>
+
   </div> 
+
 
   <div class="container" onselectstart="return false;">
     <div id="layer1" class="parallax_layer">
@@ -61,14 +59,12 @@
       <div class="panel">
         <div id="start">
           <div id="flag">
-            <!-- <img src="http://content.screencast.com/users/fg-a/folders/world-flags/media/db7cc8e6-00d9-49d2-86dc-fa4ba0fbe3da/animated-norway-flag.gif" /> -->
             <img class="hires" src="assets/img/flag.png" />
           </div>
 
           <div id="arrow" class="animated continuous hint"><img class="hires" src="assets/img/arrow.png" /></div>
-          
+
           <div id="intro_text" class="sprite">
-            <span class="verybig blue">Nå kommer de<br />norske salatene!</span>
             <span class="big gray regular">
               <p class="air_above"> Swipe og opplev de flotte<br />salatene fra Frosta.</p>
             </span>
@@ -110,10 +106,8 @@
         <div id="station4" class="station">
           <div id="lise_hello" class="interactive">
             <div id="lise_tips" class="front sprite lise_tips clicktarget">
-              <!-- <img id="lise_large" src="assets/img/lise_large.png" /> -->
-              <!-- <img id="close_button" src="assets/img/close_grey.png" /> -->
               <div id="lise_tekst" class="snakkeboble center"><span class="bold">Hei</span>, her har du en god oppskrift på salat fra meg.
-              <br /> <div class="btn">Vær så god!</div>
+              <br /><div class="btn">Vær så god!</div>
               </div>
               <div class="btm"></div>
             </div>
@@ -123,9 +117,6 @@
 
           <img id="tractor" class="sprite hires" src="assets/img/tractor.png">
           <img id="lise" class="hires" src="assets/img/lise_small.png">
-          <!-- <div id="lise_tips" class="front face sprite snakkeboble">
-          </div>
-           -->
         </div>
 
         <div id="station5" class="station lazyload ondemand" data-load-event="arrive_station3">
@@ -139,10 +130,9 @@
               <source src="http://kromaviews.no:80/dev/games/bama/assets/video/video1.mp4" type="video/mp4">
               <source src="http://kromaviews.no:80/dev/games/bama/assets/video/video1.ogv" type="video/theora">
               Your browser does not support the video tag. 
-              You're using Internet Explorer, probably.
+              You're using Internet Explorer, probably?
             </video>
           </div>
-
         </div>
 
 
@@ -159,6 +149,7 @@
         </div>
 
       </div>
+    
     </div>
 
 
@@ -178,7 +169,6 @@
 
 
       <div id="lise_recipe" class="center recipe clicktarget">
-        <img src="assets/img/salat_caesar.jpg" />
         <svg version="1.1" id="Layer_1" class="close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
            width="44px" height="44px" stroke="#ffffff" fill="#ffffff" viewBox="0 0 44 44" style="enable-background:new 0 0 44 44;" xml:space="preserve">
           <path d="M21.936,1.501c11.299,0,20.492,9.193,20.492,20.493c0,11.299-9.192,20.492-20.492,20.492
@@ -189,17 +179,17 @@
           <line style="fill:none;stroke: #ffffff; stroke-width:1.3944;stroke-linecap:round;stroke-miterlimit:10;" x1="31.867" y1="11.766" x2="11.882" y2="31.75"/>
         </svg>
 
-        <div class="recipe" style="width=580px; font-size: 22px; color: #555; padding-left: 40px; padding-right: 40px">
-          <span class="recipe_title" style="font-size: 20px;">LUN SOPPSALAT MED VALNØTTER OG RUCCULA</span><br />
+        <div class="recipe">
+          <span class="recipe_title">LUN SOPPSALAT MED VALNØTTER OG RUCCULA</span><br />
           <p class="recipe_small">
-Stek renset, delt, assortert sopp i litt olje i en stor stekepanne. Grovhakk noen valnøtter og rist dem gylne i en tørr stekepanne. 
- Bland sammen stekt sopp, valnøtter, finsnittet sjalottløk, gressløk og bladpersille. Krydre med salt og pepper. Bland inn ruccula og olivenolje. Topp med tynne skiver parmesan.
+            Stek renset, delt, assortert sopp i litt olje i en stor stekepanne. Grovhakk noen valnøtter og rist dem gylne i en tørr stekepanne. 
+            Bland sammen stekt sopp, valnøtter, finsnittet sjalottløk, gressløk og bladpersille. Krydre med salt og pepper. Bland inn ruccula og olivenolje. Topp med tynne skiver parmesan.
         </p>
         </div>
       </div>
 
       <div id="farmer_recipe" class="center recipe clicktarget">
-       <svg version="1.1" id="Layer_2" class="close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        <svg version="1.1" id="Layer_2" class="close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
            width="44px" height="44px" stroke="#534741" fill="#534741" viewBox="0 0 44 44" style="enable-background:new 0 0 44 44;" xml:space="preserve">
           <path d="M21.936,1.501c11.299,0,20.492,9.193,20.492,20.493c0,11.299-9.192,20.492-20.492,20.492
             c-11.3,0-20.493-9.192-20.493-20.492C1.443,10.694,10.636,1.501,21.936,1.501 M21.936,0.106c-12.089,0-21.887,9.798-21.887,21.887
@@ -208,7 +198,6 @@ Stek renset, delt, assortert sopp i litt olje i en stor stekepanne. Grovhakk noe
           <line style="fill:none;stroke: #534741; stroke-width:1.3944;stroke-linecap:round;stroke-miterlimit:10;" x1="11.882" y1="11.766" x2="31.867" y2="31.75"/>
           <line style="fill:none;stroke: #534741; stroke-width:1.3944;stroke-linecap:round;stroke-miterlimit:10;" x1="31.867" y1="11.766" x2="11.882" y2="31.75"/>
         </svg>
-        <img src="assets/img/salat_tips.jpg" />
         <div class="recipe" style="width=580px; font-size: 22px; color: #555; padding-left: 40px; padding-right: 40px">
           <span class="recipe_title">SALATDYRKING I NORGE</span><br />
           <span class="recipe_small"><p>
@@ -221,20 +210,16 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste salater. Og 
   </div>
 
 
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>  
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
   <script src="assets/js/lib/jquery.parallaxSwipe.js"></script>
-  <!--script src="assets/js/lib/jquery.flip.js"></script-->
   <script async src="assets/js/bama.nyt.norge.js"></script>
 
 
-  <div id="position_data">position_data</div>
+  <div id="position_data">no position</div>
 
   <span id="debug_trigger"></span><br />
   <p><span id="debug_info"></span></p>
   <div id="debugoutput"></div>
-  <div id="touchoutput" style="position: absolute; top: 500px;">TouchOutput</div>
-
-
 
 </body>
 </html>
