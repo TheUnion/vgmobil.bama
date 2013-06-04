@@ -1,5 +1,4 @@
 
-
 ##TRACKING
 
 
@@ -45,5 +44,35 @@
 
 * error_javascript 
 * error_unknown 
+
+
+
+
+    var EVENTS = 
+      {
+        start_interaction   : "Eventbeskrivelse",
+        arrive_station3     : "Eventbeskrivelse",
+        arrive_station4     : "Eventbeskrivelse",
+        arrive_station6     : "Eventbeskrivelse",
+        arrive_station7     : "Eventbeskrivelse",
+        leave_station3      : "Eventbeskrivelse",
+        leave_station4      : "Eventbeskrivelse",
+        leave_station6      : "Eventbeskrivelse",
+        leave_station7      : "Eventbeskrivelse",
+        click_lise          : "Eventbeskrivelse",
+        click_farmer        : "Eventbeskrivelse",
+        click_link1         : "Eventbeskrivelse",
+        click_link2         : "Eventbeskrivelse",
+        close_lise          : "Eventbeskrivelse",
+        close_farmer        : "Eventbeskrivelse",
+        video_play          : "Eventbeskrivelse",
+        video_pause         : "Eventbeskrivelse",
+        event_idle          : "Eventbeskrivelse",
+        event_wake          : "Eventbeskrivelse",
+        video_resume        : "Eventbeskrivelse",
+        video_finish        : "Eventbeskrivelse",
+        error_javascript    : "Eventbeskrivelse",
+        error_unknown       : "Eventbeskrivelse"
+      }
 
 
