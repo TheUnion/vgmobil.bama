@@ -17,8 +17,19 @@
         startSession();
       }
 
+
       // check if any lazyloaders have requested to start loading on this event
       updateLazyloaders(eventObject.event);
+
+      if(eventObject.event.indexOf("arrive_station") === 0) {
+        console.log("enabling clicks on event " + eventObject.event);
+        CLICK_ENABLED = true;
+      }
+      else if(eventObject.event.indexOf("leave_station") === 0) {
+        console.log("disabling clicks on event " + eventObject.event);
+        CLICK_ENABLED = false;
+      }
+
 
 
         // eventObject : {
@@ -40,6 +51,7 @@
         var 
           eventName = eventName || false,
           loadEvent = false;
+
 
 
 
@@ -177,6 +189,12 @@
 
 
       var getClickedElement = function (click) {
+
+        // escape early
+        if(!CLICK_ENABLED) {
+          return;
+        }
+
         var
           target        = null,
           sceneLeft     = scene.getBoundingClientRect().left,
@@ -184,7 +202,7 @@
 
           clickpos      = Math.abs(click.offsetLeft + startpos) + click.clientX;
 
-       
+
         if(LISE_FLIPPED) {
           flipLise();
           return;
@@ -194,6 +212,7 @@
           flipFarmer();
           return;
         }
+
 
         // a dirty little gollum of a hack
         if( (clickpos>=4812) && (clickpos<=5042) ) {
@@ -303,7 +322,8 @@
         triggers          = [],
         events            = [],
         LAZY_LOADERS      = null;
-        ONDEMAND_LOADERS  = null;
+        ONDEMAND_LOADERS  = null; 
+        CLICK_ENABLED     = false;
 
         debugpanel        = document.getElementById('debugoutput'),
         parallax          = document.getElementById('parallax'),
