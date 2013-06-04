@@ -20,17 +20,13 @@ var startAnimFrame=false;
 
 /*** -- FIXES  -- ***/
 //flags to indicate is the layers have reached the edges
-var leftEdge= true;
+var leftEdge  = true;
 var rightEdge = false;
 
 var ARRIVING_AT_STATION = false;
 var LEAVING_STATION     = false;
 var SWIPE_ENABLED       = false;
-console.log("Setting REQUESTED_POSITION to false");
 var REQUESTED_POSITION  = false;
-
-
-
 
 /******/
 
@@ -60,6 +56,10 @@ var mouseswipe=function(sliderLT) {
     oldSliderLT = sliderLT,
     debugdata = '';
 
+
+  // this is our animation loop, so escape early
+  // if there's nothing to do
+
   if (_mouseDown) {
     _velocity *= o.MOUSEDOWN_DECAY;
   } else {
@@ -74,7 +74,15 @@ var mouseswipe=function(sliderLT) {
       
       // move 20% of the difference
 
+
+      // console.log("_velocity: " + _velocity);
       _velocity = 0.2 * (REQUESTED_POSITION - sliderLT);
+
+      // console.log("REQUESTED_POSITION: " + REQUESTED_POSITION);
+      // console.log("sliderLT: " + sliderLT);
+      // console.log("NEW _velocity: " + _velocity);
+      // console.log("----------");
+
 
       if((sliderLT - _velocity) < -REQUESTED_POSITION){
         sliderLT = Math.round(REQUESTED_POSITION);
@@ -89,24 +97,20 @@ var mouseswipe=function(sliderLT) {
         return;      
       }
     }
+    else {
 
+    }
 
+    //swipe left
     if (sliderLT > ( 0 - _velocity ))  {
-      
-      //console.log("moving to zero, sliderLT: " + sliderLT);
       sliderLT = 0;
-      // _velocity = 0;
-      
-      plugin.css(edge,sliderLT); //swipe left
+      plugin.css(edge,sliderLT); 
       if (o.LAYER.length>0) {
-       
         $.each(o.LAYER, function(index, value) {
           $('#layer'+(index+1)).css(edge,sliderLT); //layer
         });
       }
-
       return;
-
     } 
     else if (sliderLT + sliderLen < VIEWPORT) {
 
@@ -130,13 +134,8 @@ var mouseswipe=function(sliderLT) {
      
       var 
         delta = Math.round(_velocity + bouncing);
-      if(delta === 1) {
-        console.log("LEFT delta: " + delta + ". Is this our bug?  -   _velocity: " + _velocity + ", bouncing: " + bouncing);     
-      }
 
-      // console.log('Moving to ' + (sliderLT + Math.ceil(_velocity + bouncing)));
-      var newSliderLT = sliderLT + Math.round(_velocity + bouncing);
-
+      var newSliderLT = sliderLT + delta;
 
       plugin.css(edge,newSliderLT); //swipe left
       if (o.LAYER.length>0) {
@@ -149,9 +148,6 @@ var mouseswipe=function(sliderLT) {
 
       var 
         delta = Math.round(_velocity + bouncing);
-      if(delta === 1) {
-        debugdata += "<br />RIGHT delta: " + delta + ". Is this our bug? <br />_velocity: " + _velocity + "<br />bouncing: " + bouncing;
-      }
 
       plugin.css(edge,sliderLT + delta); //swipe right
       if (o.LAYER.length>0) {

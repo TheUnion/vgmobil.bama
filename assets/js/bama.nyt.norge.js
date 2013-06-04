@@ -1,6 +1,6 @@
   $(document).ready(function () {
 
-   // $(document).bind("dragstart", function() { return false; });
+   $(document).bind("dragstart", function() { return false; });
    
     $(function() {
 
@@ -36,6 +36,12 @@
         var
           lazyloaders = document.getElementsByClassName('lazyload');
 
+
+        if(this.INITIALIZED === true) {
+          console.log("startSession: already initialized, escaping ...")
+          return;
+        };
+
         console.log("Starting user session ...")
         console.log("Loading bg images ...");
         // load extra backgrounds on first user interaction
@@ -48,7 +54,7 @@
         this.INITIALIZED = true;
 
         var
-          userEvent = { event: 'start_interaction', message: 'First swipe detected.', target: null, time: time};
+          userEvent = { event: 'start_interaction', message: 'First swipe detected.', target: null, time: (new Date()).getTime()};
         onEvent(userEvent);
       };
 
@@ -66,6 +72,74 @@
         distance = Math.abs(clickpos - targetpos);
         return (distance<TOLERANCE);
       };
+
+
+
+
+/**
+ * fakeClick : trigger a click event on a   <a href target>   -> a workaround for creating new windows from javascript 
+ * without bothering the popup blocker thingsies
+ *
+ * This method was created by <http://stackoverflow.com/users/45433/crescent-fresh>
+ * <http://stackoverflow.com/questions/1421584/how-can-i-simulate-a-click-to-an-anchor-tag/1421968#1421968>
+ *
+ * To call programmatically, probably just fakeClick(null, <a>)
+ * 
+ */   var fakeClick = function (event, anchorObj) {
+      
+        console.log('fake-clicked: ' + anchorObj.href);
+
+        if (anchorObj.click) {
+          anchorObj.click()
+        } else if(document.createEvent) {
+          if(event.target !== anchorObj) {
+            var evt = document.createEvent("MouseEvents"); 
+            evt.initMouseEvent("click", true, true, window, 
+                0, 0, 0, 0, 0, false, false, false, false, 0, null); 
+            var allowDefault = anchorObj.dispatchEvent(evt);
+            // you can check allowDefault for false to see if
+            // any handler called evt.preventDefault().
+            // Firefox will *not* redirect to anchorObj.href
+            // for you. However every other browser will.
+          }
+        }
+      };
+
+
+
+// <div onclick="alert('Container clicked')">
+//     <div onclick="fakeClick(event, this.getElementsByTagName('a')[0])"><a id="link2" href="#" onclick="alert('foo')">Embedded Link</a></div>
+// </div>
+
+
+
+      
+
+/*-----------------------------------------------------------------------------------------------*/
+//   ----  fake-click:
+
+
+// <div onclick="alert('Container clicked')">
+//   <a id="link" href="#" onclick="alert((event.target || event.srcElement).innerHTML)">Normal link</a>
+// </div>
+
+// <button type="button" onclick="fakeClick(event, document.getElementById('link'))">
+//   Fake Click on Normal Link
+// </button>
+
+// <br /><br />
+
+// <div onclick="alert('Container clicked')">
+//      <a id="link2" href="#" onclick="alert('foo')">Embedded Link</a></div>
+// </div>
+
+// <button type="button" onclick="fakeClick(event, document.getElementById('link2'))">Fake Click on Embedded Link</button>
+
+
+
+/*-----------------------------------------------------------------------------------------------*/
+
+
 
 
       var getClickedElement = function (click) {
@@ -94,20 +168,29 @@
             return;
           }
         }
+        // it'ss hideousss
         else if( (clickpos>=6380) && (clickpos<=6600) ) {
           if((click.clientY>232) && (click.clientY<282)){
             flipLise();
             return;
           }
         }
+        // we could probably come up with somthing more general, but not in the time available
         else if( (clickpos>=11111 && (clickpos<=11325) )) {
-          if((click.clientY>132) && (click.clientY<382)){
-            fakeClick()
-            //window.location.href = 'http://bama.no';
-            //goURL('http://bama.no');
+          if((click.clientY>270) && (click.clientY<330)){
+            console.log('fake-click: ' + link1.href);
+            fakeClick(null, link1);
             return;
           }
         }
+        else if( (clickpos>=11111 && (clickpos<=11325) )) {
+          if((click.clientY>(340) && (click.clientY<((408))))){
+            console.log('fake-click: ' + link2.href);
+            fakeClick(null, link2);
+            return;
+          }
+        }
+
 
 
 
@@ -154,7 +237,7 @@
         currentspeed      = 0.9,
 
         startpos          = 0,
-        currentpos        = 0;
+        currentpos        = 0,
         sessionstart      = null,
         UPDATE_INTERVAL   = 100, //millisec
         STATION_MARGIN    = 400, // delta for when station becomes visible
@@ -175,7 +258,7 @@
 
         LISE_FLIPPED      = false,
         FARMER_FLIPPED    = false,
-        TOLERANCE         = 100;
+        TOLERANCE         = 100,
 
 
         //store triggers as they occur
@@ -197,11 +280,25 @@
         final_btn1    = document.getElementById('final_btn1'),
         final_btn2    = document.getElementById('final_btn2'),
 
+        link1         = document.getElementById('link1');
+        link2         = document.getElementById('link2');
+
+
+        LINK_01         = "http://www.bama.no/norsk/oppskrift/salat_lun.html";
+        LINK_02         = "http://www.bama.no/norsk/sesong/juni.html";
+
+
         clicktargets  = {};
 
 
         // our clicktargets
         var list = document.getElementsByClassName('clicktarget');
+
+        // when there's time, this can be expanded to a general solution
+        // where we get the bounding client rect of the click target.
+        // this is a way to have guaranteed clickable elements no matter  
+        // what. Even if the event is captured by enemy code, we can re-fire it
+        // programmatically
 
         for(var i = 0, count = list.length; i < count; i++) {
           clicktargets[list[i].id] = {
@@ -214,11 +311,16 @@
           }
 
 
-    // $('#layer5').bind("click tap touchstart", function() { console.log('layer5!'); return false; });
+
+
+
+/**
+ *  functions
+ *
+ */  
 
       var flipLise = function() {
         if(!LISE_FLIPPED) {
-          console.log('lise flipper');
           $('#lise_tips').animate({ top : 500, opacity: 0}, 325, 'linear');
           $('#lise_recipe').animate({ top : 0, opacity: 1}, 325, 'linear');
         }
@@ -232,12 +334,10 @@
 
       var flipFarmer = function() {
         if(!FARMER_FLIPPED) {
-          console.log('bonden flipper');
           $('#farmer_tips').animate({ top : 500, opacity: 0}, 325, 'linear');
           $('#farmer_recipe').animate({ top : 0, opacity: 1}, 325, 'linear');
         }
         else {
-          console.log('bonden flipper tilbake');
           $('#farmer_tips').animate({ top : 40, opacity: 1}, 325, 'linear');
           $('#farmer_recipe').animate({ top : -500, opacity: 0}, 325, 'linear');
         }
@@ -270,15 +370,11 @@
 
         if(!!position) {
           currentpos = startpos - position.left;
-          if(position.left !== 0) {
-            console.log("First movement!");
-            INITIALIZED = true
-            startSession();
-          }
 
           // for..in normally not acceptable, but ok with this few elements
           var counter = 0, startAtIndex = 3;
           for (var key in stations) {
+      
             // skip the first 2 stations, no stops there
             if(++counter < startAtIndex) {
               continue;
@@ -293,7 +389,6 @@
               if(Math.abs(x) > (STATION_MARGIN + 250)) {
                 if( (currentstation === key) ) {
                   $('#parallax').parallaxSwipe.setSpeed(ROAD_SPEED, ROAD_DECAY, ROAD_MOUSE_DECAY);
-                  console.log("Leaving " + key);
                   var
                     userEvent = { event: 'leave_station', message: 'leaving station ' + key, target: currentstation, time: time};
                   
@@ -302,9 +397,9 @@
                 }
               } else {
                 if(currentstation !== key) {
-                  console.log("Arriving at " + key);
                   onEvent({ event: 'arrive_station', message: 'arriving at station ' + key, target: currentstation, time: time});
                   currentstation = key;
+
                   // don't slow down at these stations
                   if(counter === 5){
                     continue;
@@ -320,22 +415,13 @@
             }
           }
         }
-        else {
-          console.log("(WTF!) no position?   debugx: ", debugx);
-          console.log("position is " + position + ", parallax is " + parallax);
-        }
       };
 
 
 
-      var initializetimer = function (dbg) {
-
+      var initializetimer = function () {
         var
           count = stations.length;
-
-        if(!!dbg) {
-          console.log('initializing timer...');
-        }
 
         startpos = parallax.getBoundingClientRect().left;
 
@@ -353,12 +439,22 @@
         var
           caller = (!!arguments) ? arguments.callee.caller.name : false;
 
-        // prepend calling function name
-        line =  (caller) ? caller + "(): " + line : line;
+        // prepend calling function name, if we know it
+        line = caller ? caller + "(): " + line : line;
 
         // output to console
         !!obj ? console.log(line, obj) : console.log(line);
       };
+
+
+
+
+
+
+/**
+ *  Initialization 
+ * 
+ */
 
 
     // Hide the address bar in Mobile Safari
@@ -459,35 +555,16 @@
               trueX = -result.offsetLeft + e.clientX + "\n";
               dump += "trueX: " + trueX + "\n";
 
-
-
             }            
 
-          // for(var index in e.target) {
-          //   if ((typeof e.target[index] == "number") && ((index.indexOf('client')==0) || (index.indexOf('offset')==0) || (index.indexOf('scroll')==0) ) )  {
-          //     dump += (index + ": " + e.target[index] + "\n");
-          //   }
-          // }
-//           for(var index in e) {
-// //            console.log(index);
-//             dump += (index + ": " + e[index] + "\n");
-//           }
           onClicked(result);
-          // console.log('mousedown_result: ', result);
           return true; 
-
         });
 
 
 
     $('.recipe').bind('selectstart', function (e) { 
-      alert('selectstart', e);
       return true; });
-
-    $('.recipe').bind('click', function (e) { 
-      alert('click', e);
-      return true; });
-
 
     initializetimer();
 
