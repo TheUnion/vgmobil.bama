@@ -17,13 +17,35 @@
         startSession();
       }
 
-        // eventObject : {
-        //   event: eventObject.event,
-        //   target: HTMLElement,
-        //   x : eventObject.x,
-        //   y : eventObject.y,
-        //   time: eventObject.time,
-        // }
+      if(eventObject.event.indexOf("leave_station7") === 0) {
+        console.log("leaving at #7, setting right edge.");
+        $('#parallax').parallaxSwipe.setEdge("right");
+      }
+      else {
+        console.log("ignoring event " + eventObject.event);
+      }
+
+      if(eventObject.event.indexOf("arrive_station7") === 0) {
+        console.log("arriving at #7, setting right edge.");
+        $('#parallax').parallaxSwipe.setEdge("right");
+      }
+      else {
+        console.log("ignoring event " + eventObject.event);
+      }
+
+
+      // check if any lazyloaders have requested to start loading on this event
+      updateLazyloaders(eventObject.event);
+
+      if(eventObject.event.indexOf("arrive_station") === 0) {
+        console.log("enabling clicks on event " + eventObject.event);
+        CLICK_ENABLED = true;
+      }
+      else if(eventObject.event.indexOf("leave_station") === 0) {
+        console.log("disabling clicks on event " + eventObject.event);
+        CLICK_ENABLED = false;
+      }
+      
 
       // # tracking code here
         events.push(eventObject);
@@ -31,10 +53,35 @@
       };
 
 
+
+
+      var updateLazyloaders = function (eventName) {
+
+        var 
+          eventName = eventName || false,
+          loadEvent = false;
+
+        for(var i = 0, count = ONDEMAND_LOADERS.length; i < count; i++) {
+          // by convention, the lazyloadee will be a class of the same name as the lazyloader's id
+          // The class defines the background image(s) we wish to load into the "lazyload" divs
+          // This way, we can load the image files on demand, and still have fluid animations
+
+          // check if any of our on-demand loadees want to load on this event
+
+          if (eventName === ONDEMAND_LOADERS[i].getAttribute("data-load-event")) {
+            console.log("loading bg for " + ONDEMAND_LOADERS[i].id + " on event " + eventName);
+            ONDEMAND_LOADERS[i].classList.add(ONDEMAND_LOADERS[i].id);
+          }
+        }
+      };
+
+
       var startSession = function() {
 
-        var
-          lazyloaders = document.getElementsByClassName('lazyload');
+
+        // populate our lazyload arrays
+        LAZY_LOADERS      = document.getElementsByClassName('lazyload');
+        ONDEMAND_LOADERS  = document.getElementsByClassName('lazyload ondemand');
 
 
         if(this.INITIALIZED === true) {
@@ -45,11 +92,16 @@
         console.log("Starting user session ...")
         console.log("Loading bg images ...");
         // load extra backgrounds on first user interaction
-        for(var i = 0, count = lazyloaders.length; i < count; i++) {
+        for(var i = 0, count = LAZY_LOADERS.length; i < count; i++) {
           // by convention, the lazyloadee will be a class of the same name as the lazyloader's id
           // The class defines the background image(s) we wish to load into the "lazyload" divs
           // This way, we can load the image files on demand, and still have fluid animations
-          lazyloaders[i].classList.add(lazyloaders[i].id);
+
+          // skip those elements that should load on demand
+          if (LAZY_LOADERS[i].classList.contains('ondemand')) {
+            continue;            
+          }
+          LAZY_LOADERS[i].classList.add(LAZY_LOADERS[i].id);
         }
         this.INITIALIZED = true;
 
@@ -58,6 +110,107 @@
         onEvent(userEvent);
       };
 
+
+      var clickVideo = function(id) {
+        var
+          videoElement = document.getElementById(id || 'video1');
+
+        
+        if (!videoElement) {
+          return false;
+        }
+        if(!VIDEO_CONTROLLER) {
+          if(false === (VIDEO_CONTROLLER = HTMLVideo(videoElement))){
+            return false;
+          }
+        }
+        
+        VIDEO_CONTROLLER.togglePause();
+        return true;
+      };
+
+
+
+
+
+/**
+ *  HTMLVideo
+ *  
+ *  A dirt simple video controller for the HTML5 video element
+ *
+ * @param {string or videoElement} [img] The video element, or its id
+ * @returns videoElement or null
+ * 
+ */
+
+
+      var HTMLVideo = function(elem) {
+
+      try {
+
+        var 
+          video           = typeof elem === "string" ? document.getElementById(elem) : elem,
+          videoController = {};
+
+        videoController.element = video;
+
+
+        videoController.play = function(resume) {
+
+            onEvent({event: resume ? "video_resume" : "video_play"});
+            video.play();
+        };
+
+        videoController.pause = function() {
+            onEvent({event: 'video_pause'});
+            video.pause();
+        };
+
+        videoController.togglePause = function() {
+          if (video.paused) {
+            video.play();
+          } else {
+            video.pause();
+          }
+        };
+
+        videoController.skip = function(value) {
+          video.currentTime += value;
+        };
+
+        videoController.restart = function() {
+          video.currentTime = 0;
+          onEvent({event: 'video_restart'});
+        };
+
+        videoController.toggleControls = function() {
+          if (video.hasAttribute("controls")) {
+            this.hideControls();
+          } else {
+            this.showControls();
+          }
+        }
+
+        videoController.showControls = function(){
+          video.setAttribute("controls", "controls");   
+        };
+
+        videoController.hideControls = function(){
+          video.removeAttribute("controls")   
+        };
+
+        videoController.setPoster = function(img) {
+          video.setAttribute("poster", img);   
+        };
+
+      }
+      catch(e) {
+        videoController = null;
+        throw(e);
+      }
+
+      return videoController;
+      };
 
 
 
@@ -143,6 +296,12 @@
 
 
       var getClickedElement = function (click) {
+
+        // escape early
+        if(!CLICK_ENABLED) {
+          return;
+        }
+
         var
           target        = null,
           sceneLeft     = scene.getBoundingClientRect().left,
@@ -150,16 +309,17 @@
 
           clickpos      = Math.abs(click.offsetLeft + startpos) + click.clientX;
 
-       
+
         if(LISE_FLIPPED) {
           flipLise();
-          return;
+//          return;
         }
 
         if(FARMER_FLIPPED) {
           flipFarmer();
-          return;
+ //         return;
         }
+
 
         // a dirty little gollum of a hack
         if( (clickpos>=4812) && (clickpos<=5042) ) {
@@ -177,20 +337,25 @@
         }
         // we could probably come up with somthing more general, but not in the time available
         else if( (clickpos>=11111 && (clickpos<=11325) )) {
-          if((click.clientY>270) && (click.clientY<330)){
+          if((click.clientY>208) && (click.clientY<272)){
             console.log('fake-click: ' + link1.href);
             fakeClick(null, link1);
             return;
           }
-        }
-        else if( (clickpos>=11111 && (clickpos<=11325) )) {
-          if((click.clientY>(340) && (click.clientY<((408))))){
+          else if((click.clientY>(276) && (click.clientY<((348))))){
             console.log('fake-click: ' + link2.href);
             fakeClick(null, link2);
             return;
           }
         }
-
+        // click on video
+        else if( (clickpos>=(9224 + 118) && (clickpos<=(9224 + 118 + 416)) )) {
+          if((click.clientY>(86) && (click.clientY<((86 + 216))))){
+            console.log('click on video: ' + link2.href);
+            clickVideo();
+            return;
+          }
+        }
 
 
 
@@ -221,6 +386,10 @@
         $("#parallax").parallaxSwipe.SWIPE_ENABLED = true;          
 
       }
+
+
+
+
 
 
 
@@ -262,34 +431,33 @@
 
 
         //store triggers as they occur
-        triggers      = [],
-        events        = [],
+        triggers          = [],
+        events            = [],
+        LAZY_LOADERS      = null;
+        ONDEMAND_LOADERS  = null; 
+        VIDEO_CONTROLLER  = null;
+        CLICK_ENABLED     = false;
 
-        debugpanel    = document.getElementById('debugoutput'),
-        parallax      = document.getElementById('parallax'),
-        scene         = document.getElementById('layer5'),
+        debugpanel        = document.getElementById('debugoutput'),
+        parallax          = document.getElementById('parallax'),
+        scene             = document.getElementById('layer5'),
 
-        debugtrigger  = document.getElementById('debug_trigger'),
-        debuginfo     = document.getElementById('debug_info'),
+        debugtrigger      = document.getElementById('debug_trigger'),
+        debuginfo         = document.getElementById('debug_info'),
 
-        lise_recipe   = document.getElementById('lise_recipe'),
-        lise_hello    = document.getElementById('lise_hello'),
-        farmer_recipe = document.getElementById('farmer_recipe'),
-        farmer_hello  = document.getElementById('farmer_hello'),
+        lise_recipe       = document.getElementById('lise_recipe'),
+        lise_hello        = document.getElementById('lise_hello'),
+        farmer_recipe     = document.getElementById('farmer_recipe'),
+        farmer_hello      = document.getElementById('farmer_hello'),
 
-        final_btn1    = document.getElementById('final_btn1'),
-        final_btn2    = document.getElementById('final_btn2'),
+        final_btn1        = document.getElementById('final_btn1'),
+        final_btn2        = document.getElementById('final_btn2'),
 
-        link1         = document.getElementById('link1');
-        link2         = document.getElementById('link2');
-
-
-        LINK_01         = "http://www.bama.no/norsk/oppskrift/salat_lun.html";
-        LINK_02         = "http://www.bama.no/norsk/sesong/juni.html";
+        link1             = document.getElementById('link1');
+        link2             = document.getElementById('link2');
 
 
         clicktargets  = {};
-
 
         // our clicktargets
         var list = document.getElementsByClassName('clicktarget');
@@ -390,14 +558,14 @@
                 if( (currentstation === key) ) {
                   $('#parallax').parallaxSwipe.setSpeed(ROAD_SPEED, ROAD_DECAY, ROAD_MOUSE_DECAY);
                   var
-                    userEvent = { event: 'leave_station', message: 'leaving station ' + key, target: currentstation, time: time};
+                    userEvent = { event: 'leave_' + key, message: 'leaving station ' + key, target: currentstation, time: time};
                   
                   onEvent(userEvent);
                   currentstation = 'none';
                 }
               } else {
                 if(currentstation !== key) {
-                  onEvent({ event: 'arrive_station', message: 'arriving at station ' + key, target: currentstation, time: time});
+                  onEvent({ event: 'arrive_' + key, message: 'arriving at station ' + key, target: currentstation, time: time});
                   currentstation = key;
 
                   // don't slow down at these stations
@@ -488,7 +656,7 @@
           HORIZ:true, SNAPDISTANCE:20, DISABLELINKS: false, LAYER:[ 20, 20, 3.2, 1.6, 1, 0.9 ] });
 
 
-    var layerWidth = $('#parallax').parallaxSwipe.getSize() + 580;
+    var layerWidth = $('#parallax').parallaxSwipe.getSize();
 
     // set width for all parallax stations
     $('.parallax_layer').css('width',layerWidth);

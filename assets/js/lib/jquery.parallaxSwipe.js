@@ -28,6 +28,7 @@ var LEAVING_STATION     = false;
 var SWIPE_ENABLED       = false;
 var REQUESTED_POSITION  = false;
 
+
 /******/
 
 
@@ -254,7 +255,7 @@ this.parallaxSwipe.requestPosition = function (position) {
 
 this.parallaxSwipe.setEdge = function (which) {
 
-  console.log("setting edge: " + which)
+  console.log("setting edge: " + which);
   switch (which.toLowerCase()) {
     case "right"  : rightEdge = true; break;
     case "left"   : leftEdge  = true; break;
