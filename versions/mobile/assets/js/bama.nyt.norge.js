@@ -168,8 +168,10 @@
 
         videoController.togglePause = function() {
           if (video.paused) {
+            video.classList.remove("shrunk");
             video.play();
           } else {
+            video.classList.add("shrunk");
             video.pause();
           }
         };
