@@ -544,7 +544,7 @@
     position            : absolute;
     width               : 492px; /* + (fence posts * post width) (12 * 19 == 228) */
     height              : 249px;
-    top                 : -29px;
+    top                 : -12px;
     left                : 0px;
     background-image    : url('../img/barn.png'), url('../img/fence.png');
     background-position : top left, bottom right;
@@ -554,7 +554,7 @@
 
   #farmer {
     position  : absolute;
-    top       : 102px;
+    top       : 114px;
     left      : 380px;
 
     z-index: 102;
