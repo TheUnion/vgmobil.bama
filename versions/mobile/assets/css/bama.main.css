@@ -345,9 +345,8 @@
     color             : #333;
     width             : 468px;
     padding-left      : 12px;
-    padding-right     : 12px;
     
-    font-weight       : 700;
+    font-weight       : 400;
     font-size         : 22px;
     text-align        : left;
     background-color  : #f7eee7;
@@ -386,6 +385,7 @@
 
 
   .recipe_title {
+    position: absolute;
     color: #333;
     text-align: center;
     font-size: 24px;
@@ -393,18 +393,17 @@
     width: 456px;
     margin-left: 12px;
     text-transform: uppercase;
-    margin-top: 24px;
-    padding-bottom: 4px;
+    top: 12px;
+    left: 16px;
     border-bottom: solid 1px #333;   
   }
 
 
   .recipe_small {
-    margin-top: 12px;
-    margin-right: auto;
-    margin-left: auto;
-    width : 404px;
-    padding: 12px;
+    margin-top: 0px;
+    margin-right: 4px;
+    margin-left: 12px;
+    width : 448px;
     color: #555;
     font-family: Abel, sans-serif;
     text-align: left;
@@ -436,19 +435,19 @@
     position            : absolute;
     overflow            : visible;
     left                : 300px;
-    top                 : 171px;
+    top                 : 192px;
     width               : 87px;
     height              : 46px;
 
     color               : white;
     font-family         : Arial, sans-serif;
     font-weight         : 700;
-    font-size           : 10px;
+    font-size           : 14px;
 
     background-image    : url('../img/frosta_kommunevapen.png'), url('../img/kommuneskilt.png');
     background-repeat   : no-repeat;
     background-origin   : content-box;
-    background-position : 4px 4px, top left;
+    background-position : 6px 6px, 4px 4px;
   }
 
   #muni_sign_title {
@@ -462,14 +461,14 @@
     color               : #4c2b0c;
     padding             : 4px;
     font-family         : Abel, Helvetica, Arial, sans-serif;
-    font-size           : 12px;
+    font-size           : 14px;
     font-weight         : 700;
     background          : transparent url('../img/wood_sign_arrow.png') no-repeat;
     background-position : top left;
-    top                 : 166px;
+    top                 : 184px;
     width               : 213px;
     left                : 128px;
-    height              : 84px;
+    height              : 72px;
     background-origin   : content-box;
     position            : absolute;
   }
