@@ -315,7 +315,6 @@
 
 
 
-
 /**
  *  sprites and scene/gfx elements
  *
@@ -326,31 +325,40 @@
     font-family   : Abel, sans-serif;
     font-weight   : 400;
     text-align    : center;
-    margin-left   : auto;
+    margin-left   : 40px;
     margin-right  : auto;
-    top           : 64px;
+    top           : 40px;
     width         : 80%;
   }
 
+
   #arrow {
     position      : absolute;
-    top           : 112px;
-    left          : 384px;
+    top           : 96px;
+    left          : 392px;
   }
 
 
-
-
   .recipe {
-    pointer-events: auto;
-    font-family: Abel, Helvetica, sans-serif;
-    color: #333;
-    width: 480px;
-    font-weight: 700;
-    font-size: 16px;
-    text-align: left;
-    background-color: #f7eee7;
-    z-index: 12001;
+    pointer-events    : auto;
+    font-family       : Abel, Helvetica, sans-serif;
+    color             : #333;
+    width             : 468px;
+    padding-left      : 12px;
+    
+    font-weight       : 400;
+    font-size         : 22px;
+    text-align        : left;
+    background-color  : #f7eee7;
+    z-index           : 12001;
+
+/*
+ 05.06 - Removed inline style in index.html:
+
+ style="width=580px; font-size: 22px; color: #555; padding-left: 40px; padding-right: 40px"
+
+ */
+
   }
 
   .close {
@@ -377,28 +385,29 @@
 
 
   .recipe_title {
+    position: absolute;
     color: #333;
     text-align: center;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 700;
     width: 456px;
     margin-left: 12px;
     text-transform: uppercase;
-    margin-top: 40px;
-    padding-bottom: 8px;
+    top: 12px;
+    left: 16px;
     border-bottom: solid 1px #333;   
   }
 
 
   .recipe_small {
-    margin-top: 20px;
-    margin-right: auto;
-    margin-left: auto;
-    padding: 12px;
+    margin-top: 0px;
+    margin-right: 4px;
+    margin-left: 12px;
+    width : 448px;
     color: #555;
     font-family: Abel, sans-serif;
     text-align: left;
-    font-size: 16px;
+    font-size: 22px;
     font-weight: 400;
   }
 
@@ -426,19 +435,19 @@
     position            : absolute;
     overflow            : visible;
     left                : 300px;
-    top                 : 171px;
+    top                 : 192px;
     width               : 87px;
     height              : 46px;
 
     color               : white;
     font-family         : Arial, sans-serif;
     font-weight         : 700;
-    font-size           : 10px;
+    font-size           : 14px;
 
     background-image    : url('../img/frosta_kommunevapen.png'), url('../img/kommuneskilt.png');
     background-repeat   : no-repeat;
     background-origin   : content-box;
-    background-position : 4px 4px, top left;
+    background-position : 6px 6px, 4px 4px;
   }
 
   #muni_sign_title {
@@ -452,14 +461,14 @@
     color               : #4c2b0c;
     padding             : 4px;
     font-family         : Abel, Helvetica, Arial, sans-serif;
-    font-size           : 12px;
+    font-size           : 14px;
     font-weight         : 700;
     background          : transparent url('../img/wood_sign_arrow.png') no-repeat;
     background-position : top left;
-    top                 : 166px;
+    top                 : 184px;
     width               : 213px;
     left                : 128px;
-    height              : 84px;
+    height              : 72px;
     background-origin   : content-box;
     position            : absolute;
   }
@@ -535,7 +544,7 @@
     position            : absolute;
     width               : 492px; /* + (fence posts * post width) (12 * 19 == 228) */
     height              : 249px;
-    top                 : -29px;
+    top                 : -12px;
     left                : 0px;
     background-image    : url('../img/barn.png'), url('../img/fence.png');
     background-position : top left, bottom right;
@@ -545,7 +554,7 @@
 
   #farmer {
     position  : absolute;
-    top       : 102px;
+    top       : 114px;
     left      : 380px;
 
     z-index: 102;
@@ -653,7 +662,7 @@
   .btm {
     position      : absolute;
     background    : transparent url('../img/pop_up_btm.png') no-repeat;
-    top           : 96px;
+    top           : 128px;
     left          : 0;
     width         : 410px;
     height        : 68px;
@@ -674,7 +683,7 @@
     color         : #333;
     font-family   : Abel, Futura, Helvetica, sans-serif;
     font-weight   : 400;
-    font-size     : 18px;
+    font-size     : 24px;
     padding       : 4px;
     text-align    : center;
     /*line-height   : 16px; */
@@ -724,6 +733,14 @@
       -o-border-radius  : 4px;
          border-radius  : 4px;
   }
+
+  .btn_close {
+    display   : block;
+    position  : absolute;
+    left      : 400px;
+    top       : 12px;
+  }
+
 
 
   .snakkeboble.flip.front{
@@ -869,7 +886,8 @@
     width                : 54px;
     height               : 36px;
     left                 : 192px;
-    top                  : 44px;
+
+    top                  : 12px;
     z-index              : 90;
   }
 
