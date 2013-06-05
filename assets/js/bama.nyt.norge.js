@@ -82,7 +82,6 @@
         p62601Event(6260116); 
       }
 
-
       
       ///###########################
       // # tracking code here
@@ -717,8 +716,7 @@
             trueX = 0,
             trueY = 0;
 
-          if(!INITIALIZED) {
-            INITIALIZED = true;
+          if(!this.INITIALIZED) {
             startSession();
           }
 
