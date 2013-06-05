@@ -315,7 +315,6 @@
 
 
 
-
 /**
  *  sprites and scene/gfx elements
  *
@@ -326,31 +325,41 @@
     font-family   : Abel, sans-serif;
     font-weight   : 400;
     text-align    : center;
-    margin-left   : auto;
+    margin-left   : 40px;
     margin-right  : auto;
-    top           : 64px;
+    top           : 40px;
     width         : 80%;
   }
 
+
   #arrow {
     position      : absolute;
-    top           : 112px;
-    left          : 384px;
+    top           : 96px;
+    left          : 392px;
   }
 
 
-
-
   .recipe {
-    pointer-events: auto;
-    font-family: Abel, Helvetica, sans-serif;
-    color: #333;
-    width: 480px;
-    font-weight: 700;
-    font-size: 16px;
-    text-align: left;
-    background-color: #f7eee7;
-    z-index: 12001;
+    pointer-events    : auto;
+    font-family       : Abel, Helvetica, sans-serif;
+    color             : #333;
+    width             : 468px;
+    padding-left      : 12px;
+    padding-right     : 12px;
+    
+    font-weight       : 700;
+    font-size         : 22px;
+    text-align        : left;
+    background-color  : #f7eee7;
+    z-index           : 12001;
+
+/*
+ 05.06 - Removed inline style in index.html:
+
+ style="width=580px; font-size: 22px; color: #555; padding-left: 40px; padding-right: 40px"
+
+ */
+
   }
 
   .close {
@@ -379,26 +388,27 @@
   .recipe_title {
     color: #333;
     text-align: center;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 700;
     width: 456px;
     margin-left: 12px;
     text-transform: uppercase;
-    margin-top: 40px;
-    padding-bottom: 8px;
+    margin-top: 24px;
+    padding-bottom: 4px;
     border-bottom: solid 1px #333;   
   }
 
 
   .recipe_small {
-    margin-top: 20px;
+    margin-top: 12px;
     margin-right: auto;
     margin-left: auto;
+    width : 404px;
     padding: 12px;
     color: #555;
     font-family: Abel, sans-serif;
     text-align: left;
-    font-size: 16px;
+    font-size: 22px;
     font-weight: 400;
   }
 
@@ -653,7 +663,7 @@
   .btm {
     position      : absolute;
     background    : transparent url('../img/pop_up_btm.png') no-repeat;
-    top           : 96px;
+    top           : 128px;
     left          : 0;
     width         : 410px;
     height        : 68px;
@@ -674,7 +684,7 @@
     color         : #333;
     font-family   : Abel, Futura, Helvetica, sans-serif;
     font-weight   : 400;
-    font-size     : 18px;
+    font-size     : 24px;
     padding       : 4px;
     text-align    : center;
     /*line-height   : 16px; */
@@ -724,6 +734,14 @@
       -o-border-radius  : 4px;
          border-radius  : 4px;
   }
+
+  .btn_close {
+    display   : block;
+    position  : absolute;
+    left      : 400px;
+    top       : 12px;
+  }
+
 
 
   .snakkeboble.flip.front{
@@ -869,7 +887,8 @@
     width                : 54px;
     height               : 36px;
     left                 : 192px;
-    top                  : 44px;
+
+    top                  : 12px;
     z-index              : 90;
   }
 

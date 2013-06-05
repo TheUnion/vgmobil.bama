@@ -32,6 +32,10 @@ Read the code and the comments.
 * [Better than Time Machine: backup your Mac with rsync](http://www.haykranen.nl/2008/05/05/rsync/) 
 
 
+####Git tools
+* [http://www.sourcetreeapp.com/](http://www.sourcetreeapp.com/)
+* [Smart branching with SourceTree and Git-flow](http://blog.sourcetreeapp.com/2012/08/01/smart-branching-with-sourcetree-and-git-flow/)
+
 
 ####Snippets
 
