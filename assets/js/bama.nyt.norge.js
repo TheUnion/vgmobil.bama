@@ -21,18 +21,6 @@
         console.log("leaving at #7, setting right edge.");
         $('#parallax').parallaxSwipe.setEdge("right");
       }
-      else {
-        console.log("ignoring event " + eventObject.event);
-      }
-
-      if(eventObject.event.indexOf("arrive_station7") === 0) {
-        console.log("arriving at #7, setting right edge.");
-        $('#parallax').parallaxSwipe.setEdge("right");
-      }
-      else {
-        console.log("ignoring event " + eventObject.event);
-      }
-
 
       // check if any lazyloaders have requested to start loading on this event
       updateLazyloaders(eventObject.event);
@@ -46,45 +34,58 @@
         CLICK_ENABLED = false;
       }
       
-      // ##############TRACKING IMPL:
+      console.log("Tracking event: " + eventObject.event);
+// ##############TRACKING IMPL:
       if(eventObject.event.indexOf("start_interaction") === 0) {
-    	  p62601Event(6260100); 
+
+        p62601Event(6260100); 
       }
       
       if(eventObject.event.indexOf("arrive_station3") === 0) {
-    	  p62601Event(6260101); 
+        p62601Event(6260101); 
       }
       
       if(eventObject.event.indexOf("arrive_station4") === 0) {
-    	  p62601Event(6260102); 
+        p62601Event(6260102); 
       }
       
       if(eventObject.event.indexOf("arrive_station6") === 0) {
-    	  p62601Event(6260103); 
+        p62601Event(6260103); 
       }
       
       if(eventObject.event.indexOf("arrive_station7") === 0) {
-    	  p62601Event(6260104); 
+        p62601Event(6260104); 
       }
       
       if(eventObject.event.indexOf("leave_station3") === 0) {
-    	  p62601Event(6260105); 
+        p62601Event(6260105); 
       }
       
       if(eventObject.event.indexOf("leave_station4") === 0) {
-    	  p62601Event(6260106); 
+        p62601Event(6260106); 
       }
       
       if(eventObject.event.indexOf("leave_station6") === 0) {
-    	  p62601Event(6260107); 
+        p62601Event(6260107); 
       }
       
       if(eventObject.event.indexOf("leave_station7") === 0) {
-    	  p62601Event(6260108); 
+        p62601Event(6260108); 
       }
+
+      /* EDIT: jt@kroma.no --- moved video event trackers from videocontroller to onEvent() */ 
+
+      if(eventObject.event.indexOf("video_play") === 0 || eventObject.event.indexOf("video_resume") === 0) {
+        p62601Event(6260115); 
+      }
+      if(eventObject.event.indexOf("video_pause") === 0) {
+        p62601Event(6260116); 
+      }
+
+
       
       ///###########################
-      
+      // # tracking code here
         events.push(eventObject);
         // console.log(events);
       };
@@ -192,23 +193,27 @@
         videoController.element = video;
 
 
-        videoController.play = function() {
-            video.play();
+        videoController.play = function(resume) {
+
+
             // #### Tracking ####
-	      	  p62601Event(6260115); 
-	      	 // ##################
+            // p62601Event(6260115); 
+           // ##################
+            video.play();
+            onEvent({event: resume ? "video_resume" : "video_play"});
         };
 
         videoController.pause = function() {
-            video.pause();
             // #### Tracking ####
-	      	 p62601Event(6260116); 
-	      	// ##################
+           // p62601Event(6260116); 
+          // ##################
+            video.pause();
+            onEvent({event: 'video_pause'});
         };
 
         videoController.togglePause = function() {
           if (video.paused) {
-            video.play();   
+            video.play();
           } else {
             video.pause();
           }
@@ -220,6 +225,7 @@
 
         videoController.restart = function() {
           video.currentTime = 0;
+          onEvent({event: 'video_restart'});
         };
 
         videoController.toggleControls = function() {
@@ -530,14 +536,10 @@
         if(!LISE_FLIPPED) {
           $('#lise_tips').animate({ top : 500, opacity: 0}, 325, 'linear');
           $('#lise_recipe').animate({ top : 0, opacity: 1}, 325, 'linear');
-          // ###TRACKING
-          p62601Event(6260109); 
         }
         else {
           $('#lise_tips').animate({ top : 40, opacity: 1}, 325, 'linear');
           $('#lise_recipe').animate({ top : -500, opacity: 0}, 325, 'linear');
-          // ###TRACKING
-          p62601Event(6260113); 
         }
         LISE_FLIPPED = !LISE_FLIPPED;
       };
@@ -547,13 +549,10 @@
         if(!FARMER_FLIPPED) {
           $('#farmer_tips').animate({ top : 500, opacity: 0}, 325, 'linear');
           $('#farmer_recipe').animate({ top : 0, opacity: 1}, 325, 'linear');
-          // ###TRACKING
-          p62601Event(6260110);
         }
         else {
           $('#farmer_tips').animate({ top : 40, opacity: 1}, 325, 'linear');
           $('#farmer_recipe').animate({ top : -500, opacity: 0}, 325, 'linear');
-          p62601Event(6260114);
         }
         FARMER_FLIPPED = !FARMER_FLIPPED;
       };
