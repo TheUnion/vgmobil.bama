@@ -112,6 +112,17 @@
   }
 
 
+  /**
+   *  Layout styles
+   * 
+   */
+
+  .stretchfill {
+    width   : 100%;
+    height  : 100%;
+  }
+
+
 
   /**
    *  Text styles
@@ -327,15 +338,23 @@
     text-align    : center;
     margin-left   : 40px;
     margin-right  : auto;
-    top           : 40px;
+    top           : 52px;
     width         : 80%;
   }
 
 
-  #arrow {
+  .arrow {
     position      : absolute;
     top           : 96px;
     left          : 392px;
+  }
+
+  .arrow.small {
+    position      : absolute;
+    top           : 16px;
+    left          : 416px;
+    width         : 27px;
+    height        : 48px;
   }
 
 
@@ -387,10 +406,10 @@
   .recipe_title {
     position: absolute;
     color: #333;
-    text-align: center;
+    text-align: left;
     font-size: 24px;
     font-weight: 700;
-    width: 456px;
+    width: auto;
     margin-left: 12px;
     text-transform: uppercase;
     top: 12px;
@@ -400,7 +419,7 @@
 
 
   .recipe_small {
-    margin-top: 0px;
+    margin-top: 8px;
     margin-right: 4px;
     margin-left: 12px;
     width : 448px;
@@ -433,33 +452,33 @@
   .muni_sign {
 
     position            : absolute;
-    overflow            : visible;
+    overflow            : hidden;
     left                : 300px;
-    top                 : 192px;
-    width               : 87px;
-    height              : 46px;
+    top                 : 174px;
+    width               : 132px;
+    height              : 71px;
 
-    color               : white;
-    font-family         : Arial, sans-serif;
-    font-weight         : 700;
-    font-size           : 14px;
 
     background-image    : url('../img/frosta_kommunevapen.png'), url('../img/kommuneskilt.png');
     background-repeat   : no-repeat;
     background-origin   : content-box;
-    background-position : 6px 6px, 4px 4px;
+    background-position : 12px 8px, 4px 4px;
   }
 
   #muni_sign_title {
-    position  : absolute;
-    top       : 3px;
-    left      : 24px;
+    position            : absolute;
+    color               : white;
+    font-family         : Arial, sans-serif;
+    font-weight         : 700;
+    font-size           : 16px;
+    top                 : 6px;
+    left                : 48px;
   }
 
   .farm_sign {
     overflow            : hidden;
     color               : #4c2b0c;
-    padding             : 4px;
+    padding             : 3px;
     font-family         : Abel, Helvetica, Arial, sans-serif;
     font-size           : 14px;
     font-weight         : 700;
@@ -480,27 +499,30 @@
     font-weight   : 700;
     color         : #4c2b0c;
     position      : absolute;
-    top           : 6px;
+    top           : 4px;
     left          : 12px;
   }
 
 
-  .drive_in_sign {
+
+  #drive_in_sign {
 
     color: #000;
     font-family     : "Arial Black", Arial, sans-serif;
     font-weight     : 700;
-    font-size       : 13px;
-    line-height     : 18px; 
+    font-size       : 14px;
+    line-height     : 15px; 
     text-transform  : uppercase;
   
     /*  We use the following to place text within a specific region of the bg image */
+    overflow        : hidden;
     position        : absolute;
-    left            : 226px;
-    top             : 112px;
+    left            : 172px;
+    top             : 177px;
     width           : 106px;
     height          : auto;
   }
+
 
 
   .final_sign {
@@ -544,7 +566,7 @@
     position            : absolute;
     width               : 492px; /* + (fence posts * post width) (12 * 19 == 228) */
     height              : 249px;
-    top                 : -12px;
+    top                 : -14px;
     left                : 0px;
     background-image    : url('../img/barn.png'), url('../img/fence.png');
     background-position : top left, bottom right;
@@ -554,7 +576,7 @@
 
   #farmer {
     position  : absolute;
-    top       : 114px;
+    top       : 122px;
     left      : 380px;
 
     z-index: 102;
@@ -574,11 +596,24 @@
 
 
   #farmer_tips {
+    margin    : 0;
+    padding   : 0;
     top : 0px;
-    left: 108px;
+    left: 128px;
     z-index: 10000;
     overflow : visible;
   }
+
+  #farmer_hello {
+    overflow  : hidden;
+    width     : 218px;
+  }
+
+  #lise_hello {
+    overflow  : hidden;
+    width     : 218px;
+  }
+
 
   #farmer_recipe {
     
@@ -593,17 +628,17 @@
 
 
   #farmer_text {
-    padding : 16px;
-    top     : 90px;
+    padding : 8px;
+    /*top     : 0px;*/
     /*background          : transparent;*/
   }
 
 
-
-
   #lise_tips {
     top : 0px;
-    left: 150px;
+    left: 120px;
+    height: 56px;
+    /*width: 229px;*/
     z-index: 10000;
     overflow            : visible;
   }
@@ -620,8 +655,8 @@
 
 
   #lise_text {
-    padding: 16px;
-    top                 : 90px;
+    /*padding: 16px;*/
+    top                 : 0px;
     /*background          : transparent;*/
   }
 
@@ -637,13 +672,13 @@
     color           : #000;
     font-family     : Arial, sans-serif;
     font-weight     : 900;
-    font-size       : 13px;
-    line-height     : 18px;
+    font-size       : 14px;
+    line-height     : 15px;
     text-transform  : uppercase;
     position        : absolute;
-    top             : 64px;
+    top             : 32px;
     left            : 200px;
-    height          : 200px;
+    height          : 176px;
     overflow        : hidden;
   }
 
@@ -662,9 +697,9 @@
   .btm {
     position      : absolute;
     background    : transparent url('../img/pop_up_btm.png') no-repeat;
-    top           : 128px;
-    left          : 0;
-    width         : 410px;
+    top           : 78px;
+    left          : 0px;
+    width         : 229px;
     height        : 68px;
     overflow      : hidden;
   }
@@ -689,7 +724,7 @@
     /*line-height   : 16px; */
     top           : 4px;
     height        : 56px;
-    width         : 219px;
+    width         : 229px;
     border-style  : solid solid none solid;
     border-width  : 1px;
     border-color  : #928c85;
@@ -721,12 +756,14 @@
     text-align          : center;
     font-weight         : 700;
     font-size           : 18px;
+    line-height         : 18px;
     color               : white;
     padding             : 3px 8px 3px 8px;
-    width               : 96px;
+    height              : auto;
+    width               : 200px;
     margin-right        : auto;
     margin-left         : auto;
-    margin-top          : 6px;
+    margin-top          : 20px;
     cursor              : pointer;
     background          : #004288;
     -moz-border-radius  : 4px;
@@ -796,7 +833,7 @@
 
 
 
-  #video1_container {
+  .video_container {
     -webkit-user-select : default;
        -moz-user-select : default;
             user-select : default;
@@ -816,15 +853,23 @@
   }
 
 
+  .shrunk {
+    left                : 128px; 
+    width               : 208px;
+    height              : 117px;   
+  }
+
+
+  .video {
+
+  }
+
   #video1 {
     position            : absolute;
     z-index             : 1002;
     margin              : 0;
     padding             : 0;
-    top                 : 0;
-    left                : 0;
-    width               : 416px;
-    height              : 234px;   
+    /*width : */
     
     -webkit-user-select : auto;
        -moz-user-select : auto;
@@ -963,25 +1008,27 @@
 
   #station5 {
     position      : absolute;
-    top           : 10px;
+    top           : 0px;
     left          : 7800px;
     width         : 468px;
-    height        : 300px;
-
+    height        : 244px;
   }
 
 
-  /* When we set bg image in a class with the same name as the id, we can load images on demand
-     by adding the class to the div. Activate this function by adding class "lazyload" to the div 
-     Make sure you do not override any background-properties in the # definition
+
+  /*  LAZYLOAD
+
+     When we set bg image in a class with the same name as the id, we can load images on demand
+     by adding the class "lazyload" to the div. Activate this function by adding class "lazyload" to the div 
+     Make sure you do not override any background properties from the class in the # definition
      */
+
   .station5 {
     background-image: url('../img/drive_in_sign.png');
-    background-position : center -30px;
+    background-position : center 32px;
     background-origin   : content-box;
-    background-repeat   : no-repeat;  
+    background-repeat   : no-repeat;
   }
-
 
 
   #station6 {
@@ -1058,6 +1105,36 @@
    * Animations 
    * 
    */
+
+
+
+/*
+  @-webkit-keyframes shrunk {
+    0% {-webkit-transform: scaleX(1) scaleY(1);}
+    50% {-webkit-transform: translateX(10px);}
+  }
+
+  @-moz-keyframes hint {
+    0%, 100% {-moz-transform: translateX(0);}
+    50% {-moz-transform: translateX(10px);}
+  }
+
+  @-o-keyframes hint {
+    0%, 100% {-o-transform: translateX(0);}
+    50% {-o-transform: translateX(10px);}
+  }
+  @keyframes hint {
+    0%, 100% {transform: translateX(0);}
+    50% {transform: translateX(10px);}
+  }
+*/
+  .hint {
+   -webkit-animation    : hint 0.4s ease-in-out infinite;
+       -moz-animation   : hint 0.4s ease-in-out infinite;
+         -o-animation   : hint 0.4s ease-in-out infinite;
+            animation   : hint 0.4s ease-in-out infinite;
+  }
+
 
 
 
