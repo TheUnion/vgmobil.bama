@@ -46,8 +46,45 @@
         CLICK_ENABLED = false;
       }
       
-
-      // # tracking code here
+      // ##############TRACKING IMPL:
+      if(eventObject.event.indexOf("start_interaction") === 0) {
+    	  p62601Event(6260100); 
+      }
+      
+      if(eventObject.event.indexOf("arrive_station3") === 0) {
+    	  p62601Event(6260101); 
+      }
+      
+      if(eventObject.event.indexOf("arrive_station4") === 0) {
+    	  p62601Event(6260102); 
+      }
+      
+      if(eventObject.event.indexOf("arrive_station6") === 0) {
+    	  p62601Event(6260103); 
+      }
+      
+      if(eventObject.event.indexOf("arrive_station7") === 0) {
+    	  p62601Event(6260104); 
+      }
+      
+      if(eventObject.event.indexOf("leave_station3") === 0) {
+    	  p62601Event(6260105); 
+      }
+      
+      if(eventObject.event.indexOf("leave_station4") === 0) {
+    	  p62601Event(6260106); 
+      }
+      
+      if(eventObject.event.indexOf("leave_station6") === 0) {
+    	  p62601Event(6260107); 
+      }
+      
+      if(eventObject.event.indexOf("leave_station7") === 0) {
+    	  p62601Event(6260108); 
+      }
+      
+      ///###########################
+      
         events.push(eventObject);
         // console.log(events);
       };
@@ -155,20 +192,23 @@
         videoController.element = video;
 
 
-        videoController.play = function(resume) {
-
-            onEvent({event: resume ? "video_resume" : "video_play"});
+        videoController.play = function() {
             video.play();
+            // #### Tracking ####
+	      	  p62601Event(6260115); 
+	      	 // ##################
         };
 
         videoController.pause = function() {
-            onEvent({event: 'video_pause'});
             video.pause();
+            // #### Tracking ####
+	      	 p62601Event(6260116); 
+	      	// ##################
         };
 
         videoController.togglePause = function() {
           if (video.paused) {
-            video.play();
+            video.play();   
           } else {
             video.pause();
           }
@@ -180,7 +220,6 @@
 
         videoController.restart = function() {
           video.currentTime = 0;
-          onEvent({event: 'video_restart'});
         };
 
         videoController.toggleControls = function() {
@@ -491,10 +530,14 @@
         if(!LISE_FLIPPED) {
           $('#lise_tips').animate({ top : 500, opacity: 0}, 325, 'linear');
           $('#lise_recipe').animate({ top : 0, opacity: 1}, 325, 'linear');
+          // ###TRACKING
+          p62601Event(6260109); 
         }
         else {
           $('#lise_tips').animate({ top : 40, opacity: 1}, 325, 'linear');
           $('#lise_recipe').animate({ top : -500, opacity: 0}, 325, 'linear');
+          // ###TRACKING
+          p62601Event(6260113); 
         }
         LISE_FLIPPED = !LISE_FLIPPED;
       };
@@ -504,10 +547,13 @@
         if(!FARMER_FLIPPED) {
           $('#farmer_tips').animate({ top : 500, opacity: 0}, 325, 'linear');
           $('#farmer_recipe').animate({ top : 0, opacity: 1}, 325, 'linear');
+          // ###TRACKING
+          p62601Event(6260110);
         }
         else {
           $('#farmer_tips').animate({ top : 40, opacity: 1}, 325, 'linear');
           $('#farmer_recipe').animate({ top : -500, opacity: 0}, 325, 'linear');
+          p62601Event(6260114);
         }
         FARMER_FLIPPED = !FARMER_FLIPPED;
       };
