@@ -1,6 +1,6 @@
-/**--------------+
- ---------*  Ba------sic setup. 
- *  -----------
+/**
+ *  Basic setup. 
+ *  
  *  We are assuming an iframe, obviously.
  *  Otherwise we would never touch these tags.
  *
@@ -18,19 +18,6 @@
     font-weight  : 700;
   	font-size    : 14px;
   }
-
-
-  h1 {
-    position     : relative;
-    width        : 300px;
-    margin       : 20px 0px 20px 50px;
-    font-family  : Georgia, serif;
-    font-size    : 60px;
-    line-height  : 65px;
-    font-weight  : 700;
-    color        : rgb(33, 169, 126);
-  }
-
 
 
   #debug {
@@ -55,8 +42,6 @@
   .code.reserved { color: #66D9EF; }
   .code.number   { color: #AE81FF; }
   .code.string   { color: #e6db74; }
-
-
 
 
 
@@ -113,15 +98,6 @@
     cursor            : auto;
   }
 
-  .box {
-    position          : absolute;
-    margin            : 0px auto 0px auto; 
-    padding           : 0px;
-    top               : 0px;
-    overflow          : hidden;
-    display           : inline; 
-  }
-
 
   .panel {
     float            : left;
@@ -139,14 +115,19 @@
    */
 
   .center {
+    text-align    : center;
     margin-right  : auto;
     margin-left   : auto;
   }
 
+  .air_above {
+    margin-top: 16px;
+  }
+
   .verybig {
-    text-align  : center;
-    font-size   : 52px;
-    line-height : 60px;
+    text-align    : center;
+    font-size     : 52px;
+    line-height   : 42px;
   }
 
   .big {
@@ -194,14 +175,19 @@
     width     : 665px;
   }
 
+  .delayed_load {
+    /*  just for grouping the divs where we will be loading images after initial user engagement */
+  }
 
+
+/*
   .mirror {
       -webkit-transform: matrix(-1, 0, 0, 1, 0, 0);
          -moz-transform: matrix(-1, 0, 0, 1, 0, 0);
            -o-transform: matrix(-1, 0, 0, 1, 0, 0);
               transform: matrix(-1, 0, 0, 1, 0, 0);
   }
-
+*/
 
 
 /**
@@ -235,13 +221,18 @@
          user-select     : none;
 
     pointer-events       : none;
-/*    background           : transparent url('../img/cloud1.png') no-repeat;
-    background-position  : 64px 128px;
-*/    position             : absolute;
+    position             : absolute;
     height               : 500px;
     z-index              : 2;
-
   }
+
+  .layer2 {
+    background-image     : url('../img/hill_middle_layer2.png'), url('../img/cloud1.png'), url('../img/cloud2.png');
+    background-repeat    : repeat-x, no-repeat, no-repeat; 
+    background-origin    : content-box;
+    background-position  : 0px 320px, 600px 64px, 800px 124px;
+  }
+
 
   #layer3 {
     -webkit-user-select  : none;
@@ -249,12 +240,17 @@
     pointer-events       : none;
     position             : absolute;
     height               : 500px;
-    background           : transparent url('../img/hill_middle_layer1.png') repeat-x;
-    background-position  : 0px 330px;
-    background-origin    : content-box;
     z-index              : 3;
 
   }
+
+  .layer3 {
+    background-image     : url('../img/hill_middle_layer1.png'), url('../img/cloud2.png');
+    background-position  : 0px 326px, 1000px 62px;
+    background-origin    : content-box;    
+    background-repeat    : repeat-x, no-repeat;    
+  }
+
 
   #layer4 {
     -webkit-user-select  : none;
@@ -276,7 +272,6 @@
     pointer-events        : auto;
     position              : absolute;
     height                : 500px;
-    background            : transparent;
 
     background-image      : url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
@@ -335,17 +330,24 @@
     margin-left   : auto;
     margin-right  : auto;
     left          : 64px;
-    top           : 80px;
+    top           : 128px;
     width         : 80%;
   }
 
-  #arrow {
+  .arrow {
     position      : absolute;
     top           : 176px;
     left          : 480px;
   }
 
 
+  .arrow.small {
+    position      : absolute;
+    top           : 24px;
+    left          : 524px;
+    width         : 27px;
+    height        : 48px;
+  }
 
 
   .recipe {
@@ -360,17 +362,28 @@
     z-index: 12001;
   }
 
-  .close_recipe {
-    position: absolute;
-    top : 24px;
-    left: 556px;
-    width: 44px;
-    height: 41px;
-    background-image: url('../img/close_white.png');
-    background-repeat: no-repeat;
-    background-position: top left;
-    z-index: 12002;
+  .close {
+    position  : absolute;
+    top       : 24px;
+    left      : 516px;
+    width     : 44px;
+    height    : 44px;
   }
+
+
+
+  .grey {
+    color   : #534741;
+    stroke  : #534741;
+    fill    : #534741;
+  }
+
+  .white {
+    color   : #ffffff;
+    stroke  : #ffffff;
+    fill    : #ffffff;
+  }
+
 
   .recipe_title {
     color: #333;
@@ -412,7 +425,7 @@
   #progress {
     margin: 0;
     padding: 0;
-    z-index: 3000;
+    z-index: 300;
     pointer-events : none;
   }
 
@@ -471,6 +484,23 @@
     left          : 12px;
   }
 
+
+  .drive_in_sign {
+
+    color: #000;
+    font-family     : "Arial Black", Arial, sans-serif;
+    font-weight     : 700;
+    font-size       : 13px;
+    line-height     : 18px; 
+    text-transform  : uppercase;
+  
+    /*  We use the following to place text within a specific region of the bg image */
+    position        : absolute;
+    left            : 226px;
+    top             : 312px;
+    width           : 106px;
+    height          : auto;
+  }
 
 
   .final_sign {
@@ -773,7 +803,7 @@
     display             : block; 
     margin              : 0px auto 0px auto; 
     padding             : 0;
-    top                 : 76px;
+    top                 : 81px;
     left                : 118px; 
     width               : 416px;
     height              : 234px;   
@@ -803,6 +833,7 @@
     -webkit-user-select : auto;
        -moz-user-select : auto;
             user-select : auto;
+    z-index             : 1002;
   }
 
 
@@ -852,11 +883,21 @@
   }
 
 
+  #flag {
+    position             : absolute;
+    width                : 54px;
+    height               : 36px;
+    left                 : 263px;
+    top                  : 72px;
+    z-index              : 90;
+  }
+
+
   #logo {
     position             : absolute;
-    width                : 85px;
-    height               : 30px;
-    left                 : 448px;
+    width                : 192px;
+    height               : 34px;
+    left                 : 356px;
     top                  : 0;
     z-index              : 90;
     margin               : 16px;
@@ -871,7 +912,8 @@
   .station {
     opacity     : 20%;
     color       : navy;
-    /*border-left : solid 1px #fff;*/
+    /* show where our stations begin */
+    /*border-left : dotted 1px #fff;*/
     font-size   : 72px;
     font-weight : bold;
     z-index     : 100;
@@ -932,8 +974,22 @@
     left          : 7800px;
     width         : 580px;
     height        : 500px;
-    background    : transparent; 
+
   }
+
+
+  /* When we set bg image in a class with the same name as the id, we can load images on demand
+     by adding the class to the div. Activate this function by adding class "lazyload" to the div 
+     Make sure you do not override any background-properties in the # definition
+     */
+  .station5 {
+    background-image: url('../img/drive_in_sign.png');
+    background-position : center 170px;
+    background-origin   : content-box;
+    background-repeat   : no-repeat;  
+  }
+
+
 
   #station6 {
     position            : absolute;
@@ -943,11 +999,17 @@
     height              : 500px;
     padding             : 0;
     margin              : 0;
+  }
+
+  /* class for lazyloading of bg images */
+  .station6 {
     background-image    : url('../img/drive_in_screen.png');
     background-position : 53px 76px;
     background-origin   : content-box;
     background-repeat   : no-repeat;  
   }
+
+
 
 
   #station7 {
