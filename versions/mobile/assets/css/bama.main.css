@@ -1,4 +1,4 @@
-/**
+	/**
  *  Basic setup. 
  *  
  *  We are assuming an iframe, obviously.
@@ -697,11 +697,13 @@
   .btm {
     position      : absolute;
     background    : transparent url('../img/pop_up_btm.png') no-repeat;
-    top           : 78px;
-    left          : 0px;
+    top           : 75px;
+    left          : 180px;
     width         : 229px;
     height        : 68px;
     overflow      : hidden;
+    z-index: 0;
+
   }
 
 
@@ -723,12 +725,12 @@
     text-align    : center;
     /*line-height   : 16px; */
     top           : 4px;
-    height        : 56px;
+    height        : 50px;
     width         : 229px;
-    border-style  : solid solid none solid;
+    /*border-style  : solid solid none solid;
     border-width  : 1px;
     border-color  : #928c85;
-    background    : #eee;
+    background    : #eee;*/
 
 
     -webkit-transform-style: preserve-3d;
@@ -758,11 +760,11 @@
     font-size           : 18px;
     line-height         : 18px;
     color               : white;
-    padding             : 3px 8px 3px 8px;
+    padding             : 8px 8px 8px 8px;
     height              : auto;
     width               : 200px;
     margin-right        : auto;
-    margin-left         : auto;
+    margin-left         : 30px;
     margin-top          : 20px;
     cursor              : pointer;
     background          : #004288;
@@ -832,6 +834,7 @@
 
 
 
+
   .video_container {
     -webkit-user-select : default;
        -moz-user-select : default;
@@ -842,13 +845,20 @@
     display             : block; 
     margin              : 0px auto 0px auto; 
     padding             : 0;
-    top                 : 15px;
-    left                : 60px;
-    width               : 267px;
-    height              : 148px;   
+    top                 : 4px;
+    left                : 24px; 
+    width               : 416px;
+    height              : 234px;   
     overflow            : hidden;
     background          : transparent; 
     z-index             : 1001;
+  }
+
+
+  .shrunk {
+    left                : 80px;
+    width               : 258px;
+    height              : 145px;   
   }
 
 
@@ -1036,7 +1046,7 @@
   /* class for lazyloading of bg images */
   .station6 {
     background-image    : url('../img/drive_in_screen.png');
-    background-position : 16px 12px;
+    background-position : top center;
     background-origin   : content-box;
     background-repeat   : no-repeat;  
   }
