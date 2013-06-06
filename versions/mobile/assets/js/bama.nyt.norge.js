@@ -168,10 +168,10 @@
 
         videoController.togglePause = function() {
           if (video.paused) {
-            video.classList.remove("shrunk");
+            // video.classList.remove("shrunk");
             video.play();
           } else {
-            video.classList.add("shrunk");
+            // video.classList.add("shrunk");
             video.pause();
           }
         };
@@ -324,35 +324,35 @@
 
 
         // a dirty little gollum of a hack
-        if( (clickpos>=4812) && (clickpos<=5042) ) {
-          if((click.clientY>232) && (click.clientY<282)){
+        if( (clickpos>=4750) && (clickpos<=4920) ) {
+          if((click.clientY>30) && (click.clientY<64)){
             flipFarmer();
             return;
           }
         }
         // it'ss hideousss
-        else if( (clickpos>=6380) && (clickpos<=6600) ) {
-          if((click.clientY>232) && (click.clientY<282)){
+        else if( (clickpos>=6310) && (clickpos<=6524) ) {
+          if((click.clientY>28) && (click.clientY<80)){
             flipLise();
             return;
           }
         }
         // we could probably come up with somthing more general, but not in the time available
         else if( (clickpos>=11111 && (clickpos<=11325) )) {
-          if((click.clientY>208) && (click.clientY<272)){
+          if((click.clientY>80) && (click.clientY<130)){
             console.log('fake-click: ' + link1.href);
             fakeClick(null, link1);
             return;
           }
-          else if((click.clientY>(276) && (click.clientY<((348))))){
+          else if((click.clientY>(132) && (click.clientY<((182))))){
             console.log('fake-click: ' + link2.href);
             fakeClick(null, link2);
             return;
           }
         }
         // click on video
-        else if( (clickpos>=(9224 + 118) && (clickpos<=(9224 + 118 + 416)) )) {
-          if((click.clientY>(86) && (click.clientY<((86 + 216))))){
+        else if( (clickpos>=(9224 + 147) && (clickpos<=(9224 + 147 + 170)) )) {
+          if((click.clientY>(43) && (click.clientY<((43 + 78))))){
             console.log('click on video: ' + link2.href);
             clickVideo();
             return;

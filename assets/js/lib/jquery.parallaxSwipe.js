@@ -32,9 +32,13 @@ var REQUESTED_POSITION  = false;
 /******/
 
 
+if (o.HORIZ==true) {
   var sliderW = parseInt(panel.css('width'),10) * panel.length;
   VIEWPORT=vw; edge='left'; panel.css('float','left'); plugin.css('width',sliderW); sliderLen = sliderW;
-
+} else {
+  var sliderH = parseInt(panel.css('height'),10) * panel.length;
+  VIEWPORT=vh; edge='top'; panel.css('float','none'); plugin.css('height',sliderH); sliderLen = sliderH;
+}
 plugin.css(edge,0);
 
 this.parallaxSwipe.getSize = function(i){ if (sliderW>'') { return sliderW; } else { return sliderH; }};
@@ -148,7 +152,6 @@ var mouseswipe=function(sliderLT) {
 
       plugin.css(edge,sliderLT + delta); //swipe right
       if (o.LAYER.length>0) {
-       
         $.each(o.LAYER, function(index, value) {
           // this is where we had a bug that screwed up tha hard stop, the "/value" bit had gone missing
           $('#layer'+(index+1)).css(edge,(sliderLT + delta)/value); //layer
@@ -156,7 +159,6 @@ var mouseswipe=function(sliderLT) {
 
       }
     }
-  }};
 
   debugdata += "sliderLT is " + sliderLT + "<br />_velocity is " + _velocity + "<br />REQUESTED_POSITION is " + REQUESTED_POSITION + "<br />bounce is " + bouncing;
   $('#position_data').html(debugdata);
@@ -187,12 +189,7 @@ var touchStart=function(e) { //mouse down
   /* ----  FIX  ----- */
    
   if (!_mouseDown) {
-    if (hasTouch) { 
-     // e.preventDefault(); 
-      e = event.touches[0]; 
-    } else if (!e) {
-        e = window.event; 
-      }
+    if (hasTouch) { e.preventDefault(); e = event.touches[0]; } else { if (!e) e = window.event; }
     if (elm.setCapture) {
       //elm.setCapture(); //if dragged outside of div
     } else {
@@ -200,34 +197,13 @@ var touchStart=function(e) { //mouse down
       window.addEventListener('mouseup', touchEnd, false);
     }
    
-   
+    if (o.HORIZ==true) {
       _mouseDownXY = _lastMouseDownXY = ie == true ? e.clientX : e.pageX;
       _mouseDownLT = document.getElementById(plugin.attr('id')).offsetLeft;
-    
-/****/
-//Adding variables to evaluate vertical swipe
-/*****/
-   
-      _verticalXY = _lastVerticalDownXY = ie == true ? e.clientY : e.pageY;
-      _verticalLT = document.getElementById(plugin.attr('id')).offsetTop;
-
-   console.log("touchStart");
-    console.log("_verticalXY "+_verticalXY+ " _verticalLT "+ _verticalLT);
-
-
-/******/
-//set the flags for the edges you cannot start swipe left if you have reached the left edge same for right
-     if(_mouseDownLT == 0){ 
-      leftEdge = true; 
-      //console.log("leftEdge set");
-    }else if ( _mouseDownLT <= -11420){
-      rightEdge = true;
-      //console.log("rightEdge set");
-      } else {
-        leftEdge = false;
-        rightEdge = false;
-      }
-/******/
+    } else {
+      _mouseDownXY = _lastMouseDownXY = ie == true ? e.clientY : e.pageY;
+      _mouseDownLT = document.getElementById(plugin.attr('id')).offsetTop;
+    }
 /******/
 //set the flags for the edges you cannot start swipe left if you have reached the left edge same for right
      if(_mouseDownLT == 0){ 
@@ -288,53 +264,40 @@ this.parallaxSwipe.setEdge = function (which) {
 
 
 var touchMove=function(e) { //mouse move
-
- 
+  
   if (_mouseDown) {
-
-    if (hasTouch) { 
-     //e.preventDefault(); 
-      tevent = event.touches[0]; 
-    } else if (!tevent) {
-        tevent = window.event; 
-    }
+    if (hasTouch) { e.preventDefault(); e = event.touches[0]; } else { if (!e) e = window.event; }
     if (ie == true) {
-      var MouseXY =  tevent.clientX ;
-      var VerticalXY = tevent.clientY;
+      var MouseXY = edge == 'left' ? e.clientX : e.clientY;
     } else {
-      var MouseXY = tevent.pageX ;
-      var VerticalXY = tevent.pageY;
+      var MouseXY = edge == 'left' ? e.pageX : e.pageY;
     }
 
-     var deltaX = MouseXY - _lastMouseDownXY;
-     var deltaY = VerticalXY - _lastVerticalDownXY;
-
-     if ( isHorizontalSwipe(deltaX,deltaY ) ) {
-
-         e.preventDefault(); 
-         console.log(' Horizontal Swipe ');
-             console.log("touchMove");
-    console.log("MouseXY "+MouseXY+ " VerticalXY "+ VerticalXY);
 /******/
 // consoleVar is the css value for the left parameter
     var consoleVar = _mouseDownLT + (MouseXY - _mouseDownXY);
 
 //If you are in the left edge and swipe left the layers won't move, or if you are swiping to the left from a different position than the edge it will also stop the movement of layers same for the right
     if (leftEdge && consoleVar>0 || (consoleVar>0)){
-      //console.log("moving over the left edge");
+//      console.log("moving over the left edge");
       rightEdge = false;
     }else if (rightEdge && consoleVar <-11420 || ( consoleVar< -11420)) {
       //-1800 is the width of the layer number of stations * width of each station here 3x900
-     // console.log("moving over the right edge");
+      // console.log("moving over the right edge");
       leftEdge = false;
       }
       else {
 /******/
-    plugin.css(edge, _mouseDownLT + (MouseXY - _mouseDownXY));
+    var
+      whereTo = (_mouseDownLT + (MouseXY - _mouseDownXY));
+
+    sliderLT = sliderLT + ((whereTo-sliderLT)*0.9);
+
+        
+    plugin.css(edge, whereTo);
     if (o.LAYER.length>0) {
       $.each(o.LAYER, function(index, value) {
         $('#layer'+(index+1)).css(edge, whereTo/value); //layer
-        
         
       });
     }
@@ -347,20 +310,6 @@ var touchMove=function(e) { //mouse move
 
   }
 /******/
-              
-      }
-      else{
-        console.log('NOT Horizontal Swipe');
-        
-        //horizontalCount = false;
-        e.stopPropagation();
-        
-      }
-
-
-
-
-
   }
 };
 
@@ -376,24 +325,6 @@ var touchEnd=function(e) { //mouse up
     }
   }
 };
-
-var isHorizontalSwipe = function ( deltaMov, deltaMovY) { // evaluate swipe direction
-                
-        var horzSwipe;
-
-        if (deltaMovY == 0) {
-            horzSwipe=true;
-
-        }else if ((deltaMov/deltaMovY) <= 0.37 && (deltaMov/deltaMovY) >= -0.37 ){
-            
-            horzSwipe= false;
-
-          } else {
-             horzSwipe= true;
-          }
-         
-        return horzSwipe;
-      }; 
 
   hasTouch = 'ontouchstart' in window;
   plugin.bind('mousedown touchstart', function(event){ touchStart(event); }); 
