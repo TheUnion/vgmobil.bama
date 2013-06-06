@@ -1,6 +1,8 @@
-
-/**
- *  Basic setup
+	/**
+ *  Basic setup. 
+ *  
+ *  We are assuming an iframe, obviously.
+ *  Otherwise we would never touch these tags.
  *
  */
 
@@ -10,47 +12,59 @@
     margin       : 0;
     padding      : 0;
   	background   : rgb(230, 250, 250);
-  	color        : white;
+  	color        : #4e4e4e;
   	line-height  : 1.5;
-  	font-family  : Abel, Cabin, Ubuntu, Helvetica, sans-serif;
+  	font-family  : Abel, sans-serif;
     font-weight  : 700;
   	font-size    : 14px;
   }
 
 
-  h1 {
-    position     : relative;
-    width        : 300px;
-    margin       : 20px 0px 20px 50px;
-    font-family  : Georgia, serif;
-    font-size    : 60px;
-    line-height  : 65px;
-    font-weight  : 700;
-    color        : rgb(33, 169, 126);
+  #debug {
+    position  : absolute;
+    top       : 300px;
+    width     : 800px;
+  }
+
+
+  .code {
+    font-family : monospace;
+    font-weight : 700;
+    font-size   : 12px;
+    color       : #f8f8f2;
+  }
+
+
+/* monokai, obviously */
+  .code.comment  { color: #75715e; }
+  .code.keyword  { color: #f92672; }
+  .code.default  { color: #f8f8f2; }
+  .code.reserved { color: #66D9EF; }
+  .code.number   { color: #AE81FF; }
+  .code.string   { color: #e6db74; }
+
+
+
+  /* The ugly */
+
+  .hwaccel {  
+    /* Supposedly this forces activation of HW-acceleration on iOS Safari */
+    -webkit-transform: translateZ(0); 
+  }
+
+
+  @media 
+    (-webkit-min-device-pixel-ratio: 2), 
+    (min-resolution: 192dppx) { 
+      /* Retina-specific stuff here */
   }
 
 
 
-
-    /* The ugly */
-
-    .hwaccel {  
-      -webkit-transform: translateZ(0); 
-    }
-
-
-@media 
-  (-webkit-min-device-pixel-ratio: 2), 
-  (min-resolution: 192dpi) { 
-    /* Retina-specific stuff here */
-}
-
-
-
-/**
- *  Our classes
- *
- */
+  /**
+   *  Our classes
+   *
+   */
 
 
   .parallax_layer {
@@ -58,9 +72,12 @@
     /*  Group all the parallax layers with this class */
     -webkit-user-select  : none;
        -moz-user-select  : none;
+            user-select  : none;
     pointer-events       : none;
   }
 
+
+/*  Is this actually used anywhere? 
 
   .para {
     position : relative;
@@ -68,7 +85,9 @@
     padding  : 10px;
   }
 
- 
+ */
+
+
   .container {
     position          : absolute;
     left              : 0px; 
@@ -76,20 +95,11 @@
     margin            : 0px auto 0px auto; 
     padding           : 0px;
     top               : 0px;
-    width             : 580px;
-    height            : 500px;
+    width             : 468px;
+    height            : 300px;
     background        : transparent;
     overflow          : hidden;
-    cursor            : default;
-  }
-
-  .box {
-    position          : absolute;
-    margin            : 0px auto 0px auto; 
-    padding           : 0px;
-    top               : 0px;
-    overflow          : hidden;
-    display           : inline; 
+    cursor            : auto;
   }
 
 
@@ -103,23 +113,64 @@
 
 
   /**
-   *  Some text styles
+   *  Layout styles
+   * 
+   */
+
+  .stretchfill {
+    width   : 100%;
+    height  : 100%;
+  }
+
+
+
+  /**
+   *  Text styles
    *
    */
 
-
   .center {
-    
-
+    text-align    : center;
+    margin-right  : auto;
+    margin-left   : auto;
   }
+
+  .air_above {
+    margin-top: 16px;
+  }
+
+
+  .verybig {
+/*    text-align    : center;
+    font-size     : 52px;
+    line-height   : 42px;
+*/
+
+    /* same as "big", in the mobile version */
+    text-align  : center;
+    font-size   : 34px;
+    line-height : 32px;
+  }
+
 
   .big {
-    font-size   : 32px;
-    line-height : 34px;
+    text-align  : center;
+    font-size   : 34px;
+    line-height : 32px;
   }
+
+  .gray {
+    color: #4e4e4e;
+  }
+
 
   .red {
     color: #d42;
+  }
+
+
+  .blue {
+    color: #014289;
   }
 
 
@@ -143,18 +194,9 @@
     float     : left;
     display   : inline-block;
     overflow  : hidden;
-    top       : 320px;
+    top       : 120px;
     width     : 665px;
   }
-
-
-  .mirror {
-      -webkit-transform: matrix(-1, 0, 0, 1, 0, 0);
-         -moz-transform: matrix(-1, 0, 0, 1, 0, 0);
-           -o-transform: matrix(-1, 0, 0, 1, 0, 0);
-              transform: matrix(-1, 0, 0, 1, 0, 0);
-  }
-
 
 
 /**
@@ -166,8 +208,8 @@
   	-webkit-user-select  : none;
   	-moz-user-select     : none;
   	position             : absolute;
-    height               : 500px;
-    width                : 12000px
+    height               : 300px;
+    width                : 12000px;
   	cursor               : move;
     z-index              : 500;
   }
@@ -176,8 +218,9 @@
   	-webkit-user-select  : none;
   	-moz-user-select     : none;
   	position             : absolute;
-    height               : 500px;
-    background           : transparent url('../img/sky_bg_small.png') repeat-x;
+    height               : 300px;
+    background           : transparent url('../img/sky_bg.png') repeat-x;
+    background-position  : 0px -180px;
     pointer-events       : none;
     z-index              : 1;
   }
@@ -185,28 +228,37 @@
   #layer2 {
   	-webkit-user-select  : none;
   	-moz-user-select     : none;
-    pointer-events       : none;
-	
-    position             : absolute;
-    height               : 500px;
-  	background           : transparent url('../img/hill_middle_layer2_small.png') repeat-x;
-    background-position  : 0px 320px;
-    background-origin    : content-box;
-    z-index              : 2;
+         user-select     : none;
 
+    pointer-events       : none;
+    position             : absolute;
+    height               : 300px;
+    z-index              : 2;
   }
+
+  .layer2 {
+    background-image     : url('../img/hill_middle_layer2.png');
+    background-repeat    : repeat-x; 
+    background-origin    : content-box;
+    background-position  : 0px 156px;
+  }
+
 
   #layer3 {
     -webkit-user-select  : none;
     -moz-user-select     : none;
     pointer-events       : none;
     position             : absolute;
-    height               : 500px;
-    background           : transparent url('../img/hill_middle_layer1_small.png') repeat-x;
-    background-position  : 0px 330px;
-    background-origin    : content-box;
+    height               : 300px;
     z-index              : 3;
 
+  }
+
+  .layer3 {
+    background-image     : url('../img/hill_middle_layer1.png');
+    background-position  : 0px 336px;
+    background-origin    : content-box;    
+    background-repeat    : repeat-x;    
   }
 
 
@@ -216,46 +268,41 @@
     pointer-events       : none;
 
     position             : absolute;
-    height               : 500px;
- /*   background           : transparent url('../img/hill_front2_small.png') repeat-x;
-    background-position  : 0px 310px;
-    background-origin    : content-box;
- */   z-index              : 4;
-
+    height               : 300px;
+    z-index              : 4;
   }
 
 
 
   #layer5 {
-/*  This is our main layer, the one where everything happens
-*/    
-    -webkit-user-select   : none;
-    -moz-user-select      : none;
-    pointer-events        : none;
-    position              : absolute;
-    height                : 500px;
-    background            : transparent;
 
-    background-image      : url('../img/hill_front1_small.png'), url('../img/hill_front2_small.png'), 
-                            url('../img/hill_front1_small.png'), url('../img/hill_front2_small.png'), 
-                            url('../img/hill_front1_small.png'), url('../img/hill_front2_small.png'), 
-                            url('../img/hill_front1_small.png'), url('../img/hill_front2_small.png'), 
-                            url('../img/hill_front1_small.png'), url('../img/hill_front2_small.png'), 
-                            url('../img/hill_front1_small.png'), url('../img/hill_front2_small.png'), 
-                            url('../img/hill_front1_small.png'), url('../img/hill_front2_small.png'), 
-                            url('../img/hill_front1_small.png'), url('../img/hill_front2_small.png'), 
-                            url('../img/hill_front1_small.png'), url('../img/hill_front2_small.png'), 
-                            url('../img/hill_front1_small.png'), url('../img/hill_front2_small.png');
-    background-position   :     0px 310px,   768px 310px,   
-                             1536px 310px,  2304px 310px,   
-                             3072px 310px,  3840px 310px,   
-                             4608px 310px,  5376px 310px,   
-                             6144px 310px,  6912px 310px,
-                             7680px 310px,  8448px 310px,   
-                             9216px 310px,  9984px 310px,   
-                            10752px 310px, 11520px 310px,   
-                            12288px 310px, 13056px 310px,   
-                            13824px 310px, 14592px 310px;
+  /*  This is our main layer, the one where everything happens  */    
+    -webkit-user-select   : auto;
+    -moz-user-select      : auto;
+    pointer-events        : auto;
+    position              : absolute;
+    height                : 300px;
+
+    background-image      : url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png');
+    background-position   :     0px 127px,   768px 127px,   
+                             1536px 127px,  2304px 127px,   
+                             3072px 127px,  3840px 127px,   
+                             4608px 127px,  5376px 127px,   
+                             6144px 127px,  6912px 127px,
+                             7680px 127px,  8448px 127px,   
+                             9216px 127px,  9984px 127px,   
+                            10752px 127px, 11520px 127px,   
+                            12288px 127px, 13056px 127px,   
+                            13824px 127px, 14592px 127px;
     background-repeat     : no-repeat;
     background-origin     : content-box;
     z-index               : 5;
@@ -270,8 +317,8 @@
     position            : absolute;
     top                 : 10px;
     left                : 900px;
-    width               : 580px;
-    height              : 500px;
+    width               : 468px;
+    height              : 300px;
     pointer-events      : none;
     z-index             : 1000;
 
@@ -279,24 +326,114 @@
 
 
 
-
 /**
- *  This is our sprites and scene/gfx elements
+ *  sprites and scene/gfx elements
  *
  */
 
-  #arrow {
+  #intro_text {
+    color         : #4e4e4e;
+    font-family   : Abel, sans-serif;
+    font-weight   : 400;
+    text-align    : center;
+    margin-left   : 40px;
+    margin-right  : auto;
+    top           : 52px;
+    width         : 80%;
+  }
 
+
+  .arrow {
+    position      : absolute;
+    top           : 96px;
+    left          : 392px;
+  }
+
+  .arrow.small {
+    position      : absolute;
+    top           : 16px;
+    left          : 416px;
+    width         : 27px;
+    height        : 48px;
   }
 
 
   .recipe {
-    background-color: #fefefb;
+    pointer-events    : auto;
+    font-family       : Abel, Helvetica, sans-serif;
+    color             : #333;
+    width             : 468px;
+    padding-left      : 12px;
+    
+    font-weight       : 400;
+    font-size         : 22px;
+    text-align        : left;
+    background-color  : #f7eee7;
+    z-index           : 12001;
+
+/*
+ 05.06 - Removed inline style in index.html:
+
+ style="width=580px; font-size: 22px; color: #555; padding-left: 40px; padding-right: 40px"
+
+ */
+
+  }
+
+  .close {
+    position  : absolute;
+    top       : 24px;
+    left      : 404px;
+    width     : 44px;
+    height    : 44px;
+  }
+
+
+
+  .grey {
+    color   : #534741;
+    stroke  : #534741;
+    fill    : #534741;
+  }
+
+  .white {
+    color   : #ffffff;
+    stroke  : #ffffff;
+    fill    : #ffffff;
+  }
+
+
+  .recipe_title {
+    position: absolute;
+    color: #333;
+    text-align: left;
+    font-size: 24px;
+    font-weight: 700;
+    width: auto;
+    margin-left: 12px;
+    text-transform: uppercase;
+    top: 12px;
+    left: 16px;
+    border-bottom: solid 1px #333;   
+  }
+
+
+  .recipe_small {
+    margin-top: 8px;
+    margin-right: 4px;
+    margin-left: 12px;
+    width : 448px;
+    color: #555;
+    font-family: Abel, sans-serif;
+    text-align: left;
+    font-size: 22px;
+    font-weight: 400;
   }
 
 
   .sprite {
     position: absolute;
+    background-repeat: no-repeat;
   }
 
   .gfx {
@@ -307,72 +444,251 @@
   #progress {
     margin: 0;
     padding: 0;
-    z-index: 3000;
+    z-index: 300;
     pointer-events : none;
   }
 
 
+  .muni_sign {
 
-  #frosta_sign {
-    left: 300px;
-    top: 300px;
+    position            : absolute;
+    overflow            : hidden;
+    left                : 300px;
+    top                 : 174px;
+    width               : 132px;
+    height              : 71px;
+
+
+    background-image    : url('../img/frosta_kommunevapen.png'), url('../img/kommuneskilt.png');
+    background-repeat   : no-repeat;
+    background-origin   : content-box;
+    background-position : 12px 8px, 4px 4px;
   }
+
+  #muni_sign_title {
+    position            : absolute;
+    color               : white;
+    font-family         : Arial, sans-serif;
+    font-weight         : 700;
+    font-size           : 16px;
+    top                 : 6px;
+    left                : 48px;
+  }
+
+  .farm_sign {
+    overflow            : hidden;
+    color               : #4c2b0c;
+    padding             : 3px;
+    font-family         : Abel, Helvetica, Arial, sans-serif;
+    font-size           : 14px;
+    font-weight         : 700;
+    background          : transparent url('../img/wood_sign_arrow.png') no-repeat;
+    background-position : top left;
+    top                 : 184px;
+    width               : 213px;
+    left                : 128px;
+    height              : 72px;
+    background-origin   : content-box;
+    position            : absolute;
+  }
+
+
+
+  #farm_sign_title {
+    font-family   : Helvetica, Arial, sans-serif;
+    font-weight   : 700;
+    color         : #4c2b0c;
+    position      : absolute;
+    top           : 4px;
+    left          : 12px;
+  }
+
+
+
+  #drive_in_sign {
+
+    color: #000;
+    font-family     : "Arial Black", Arial, sans-serif;
+    font-weight     : 700;
+    font-size       : 14px;
+    line-height     : 15px; 
+    text-transform  : uppercase;
+  
+    /*  We use the following to place text within a specific region of the bg image */
+    overflow        : hidden;
+    position        : absolute;
+    left            : 172px;
+    top             : 177px;
+    width           : 106px;
+    height          : auto;
+  }
+
+
+
+  .final_sign {
+    overflow            : hidden;
+    color               : #4c2b0c;
+    padding             : 4px;
+    font-family         : Abel, Helvetica, Arial, sans-serif;
+    font-size           : 24px;
+    text-align          : center;
+    line-height         : 54px;
+    font-weight         : 700;
+
+
+    background          : transparent url('../img/wood_sign_big.png') no-repeat;
+    background-position : top left;
+    top                 : 64px;
+    width               : 253px;
+    left                : 64px;
+    height              : 176px;
+    margin-left         : 40px;
+    margin-right        : auto;
+    background-origin   : content-box;
+    position            : absolute;
+  }
+
+
+
+  #final_sign_title {
+    font-family   : Helvetica, Arial, sans-serif;
+    font-weight   : 700;
+    color         : #4c2b0c;
+    position      : absolute;
+    top           : 6px;
+    left          : 12px;
+  }
+
+
+
 
   #barn {
-
+    position            : absolute;
+    width               : 492px; /* + (fence posts * post width) (12 * 19 == 228) */
+    height              : 249px;
+    top                 : -14px;
+    left                : 0px;
+    background-image    : url('../img/barn.png'), url('../img/fence.png');
+    background-position : top left, bottom right;
+    background-repeat   : no-repeat, repeat-x;
+    background-origin   : content-box;
   }
 
-  #farmer_small {
-    position: absolute;
-    top: 302px;
+  #farmer {
+    position  : absolute;
+    top       : 122px;
+    left      : 380px;
+
     z-index: 102;
   }
 
   #tractor {
     position  : absolute;
-    top       :  212px;
+    left      : 0px;
+    top       : 40px;
   }
 
   #farmer_large {
-    display: none;    
+    /*display: none;    */
   }
 
-  #lise_large {
-    display: none;    
+
+
+
+  #farmer_tips {
+    margin    : 0;
+    padding   : 0;
+    top : 0px;
+    left: 128px;
+    z-index: 10000;
+    overflow : visible;
   }
 
-  #lise_small {
+  #farmer_hello {
+    overflow  : hidden;
+    width     : 218px;
+  }
+
+  #lise_hello {
+    overflow  : hidden;
+    width     : 218px;
+  }
+
+
+  #farmer_recipe {
+    
+    position: absolute;
+    top : -300px;
+    left: 0;
+    height: 300px;
+    width: 100%;
+    opacity: 0;
+    z-index: 10000;
+  }
+
+
+  #farmer_text {
+    padding : 8px;
+    /*top     : 0px;*/
+    /*background          : transparent;*/
+  }
+
+
+  #lise_tips {
+    top : 0px;
+    left: 120px;
+    height: 56px;
+    /*width: 229px;*/
+    z-index: 10000;
+    overflow            : visible;
+  }
+
+  #lise_recipe {
+    position: absolute;
+    top : -300px;
+    left: 0;
+    width: 468px;
+    height: 300px;
+    opacity: 0;
+    z-index: 10000;
+  }
+
+
+  #lise_text {
+    /*padding: 16px;*/
+    top                 : 0px;
+    /*background          : transparent;*/
+  }
+
+
+  #lise {
     position  : absolute;
-    top       : 302px;    
+    top       : 102px;    
+    left      : 324px;    
     z-index   : 102;
   }
 
   #drivein_sign {
-    
+    color           : #000;
+    font-family     : Arial, sans-serif;
+    font-weight     : 900;
+    font-size       : 14px;
+    line-height     : 15px;
+    text-transform  : uppercase;
+    position        : absolute;
+    top             : 32px;
+    left            : 200px;
+    height          : 176px;
+    overflow        : hidden;
   }
 
-  #drivein_screen {
-    
-  }
-
-
-  .woodsign {
-    overflow    : visible;
-    color       : #443;
-    padding     : 4px;
-    font-family : "Just Another Hand", Helvetica, Arial, sans-serif;
-    font-size   : 13px;
-    font-weight : 400;
-    background  : transparent url('../img/wood_sign_arrow.png') no-repeat;
-    background-position : top left;
-    width       : 213px;
-    height      : 94px;
-    /*background-origin   : content-box;*/
+/*  #drivein_screen {
     position: absolute;
-
-
+    top: 114px;
+    left: 0px;
+    z-index: 99;
   }
-
+*/
 
   .callout {
     height: auto;
@@ -381,9 +697,13 @@
   .btm {
     position      : absolute;
     background    : transparent url('../img/pop_up_btm.png') no-repeat;
-    width         : 410px;
+    top           : 75px;
+    left          : 180px;
+    width         : 229px;
     height        : 68px;
     overflow      : hidden;
+    z-index: 0;
+
   }
 
 
@@ -397,31 +717,20 @@
   .snakkeboble {
     position      : absolute;
     display       : block;
-    color         : #1B1B1C;
-    font-family   : Abel, Cabin, Futura, Helvetica, sans-serif;
+    color         : #333;
+    font-family   : Abel, Futura, Helvetica, sans-serif;
     font-weight   : 400;
-    margin-top    : 111px;
-    margin-bottom : 68px;
+    font-size     : 24px;
     padding       : 4px;
     text-align    : center;
-    width         : 400px;
-    border-style  : solid solid none solid;
+    /*line-height   : 16px; */
+    top           : 4px;
+    height        : 50px;
+    width         : 229px;
+    /*border-style  : solid solid none solid;
     border-width  : 1px;
-    border-color  : #bbb;
-    background    : #eee;
-
-/*    
-    -webkit-box-shadow : 0 0 5px rgba(255, 255, 255, 1) inset; 
-       -moz-box-shadow : 0 0 5px rgba(255, 255, 255, 1) inset; 
-        -ms-box-shadow : 0 0 5px rgba(255, 255, 255, 1) inset; 
-         -o-box-shadow : 0 0 5px rgba(255, 255, 255, 1) inset; 
-            box-shadow : 0 0 5px rgba(255, 255, 255, 1) inset;
-    -webkit-box-shadow    : 1px 1px -1px -1px #fff inset;
-       -moz-box-shadow    : 1px 1px -1px -1px #fff inset;
-        -ms-box-shadow    : 1px 1px -1px -1px #fff inset;
-         -o-box-shadow    : 1px 1px -1px -1px #fff inset;
-            box-shadow    : 1px 1px -1px -1px #fff inset;
-*/    
+    border-color  : #928c85;
+    background    : #eee;*/
 
 
     -webkit-transform-style: preserve-3d;
@@ -444,22 +753,33 @@
 
 
   .btn {
-    webkit-user-select  : none;
-    moz-user-select     : none;
-    pointer-events      : visible;
+    pointer-events      : auto;
+    text-decoration     : none;
     text-align          : center;
+    font-weight         : 700;
+    font-size           : 18px;
+    line-height         : 18px;
     color               : white;
-    padding             : 8px;
-    width               : 96px;
+    padding             : 8px 8px 8px 8px;
+    height              : auto;
+    width               : 200px;
     margin-right        : auto;
-    margin-left         : auto;
-    /*background-color    : #004288;*/
+    margin-left         : 30px;
+    margin-top          : 20px;
     cursor              : pointer;
     background          : #004288;
-    -moz-border-radius  : 3px;
-      -o-border-radius  : 3px;
-         border-radius  : 3px;
+    -moz-border-radius  : 4px;
+      -o-border-radius  : 4px;
+         border-radius  : 4px;
   }
+
+  .btn_close {
+    display   : block;
+    position  : absolute;
+    left      : 400px;
+    top       : 12px;
+  }
+
 
 
   .snakkeboble.flip.front{
@@ -479,7 +799,6 @@
 
 
    .snakkeboble.back {
-      float: none;
       position: absolute;
       top: 0;
       left: 0;
@@ -492,17 +811,18 @@
         -ms-transform: rotateY(-180deg) scaleX(2.0) scaleY(2.0);
          -o-transform: rotateY(-180deg) scaleX(2.0) scaleY(2.0);
             transform: rotateY(-180deg) scaleX(2.0) scaleY(2.0);
+
+    -webkit-backface-visibility: hidden;
+       -moz-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+         -o-backface-visibility: hidden;
+            backface-visibility: hidden;
     }
 
     
     .snakkeboble.flip.back {
       z-index: 1000;
 
-      -webkit-backface-visibility: hidden;
-         -moz-backface-visibility: hidden;
-          -ms-backface-visibility: hidden;
-           -o-backface-visibility: hidden;
-              backface-visibility: hidden;
 
       -webkit-transform: rotateX(0deg) rotateY(0deg);
          -moz-transform: rotateX(0deg) rotateY(0deg);
@@ -515,46 +835,68 @@
 
 
 
-  #video1_container {
-    -webkit-user-select : none;
-       -moz-user-select : none;
-            user-select : none;
-    pointer-events      : none;
-    position            : relative; 
+  .video_container {
+    -webkit-user-select : default;
+       -moz-user-select : default;
+            user-select : default;
+    pointer-events      : auto;
+
+    position            : absolute; 
     display             : block; 
     margin              : 0px auto 0px auto; 
-    padding             : 0px;
-    top                 : 0px;
-    left                : 2000px; 
+    padding             : 0;
+    top                 : 4px;
+    left                : 24px; 
+    width               : 416px;
+    height              : 234px;   
     overflow            : hidden;
     background          : transparent; 
     z-index             : 1001;
   }
 
 
+  .shrunk {
+    left                : 80px;
+    width               : 258px;
+    height              : 145px;   
+  }
+
+
+  .video {
+
+  }
+
   #video1 {
-    z-index           : 1002;
-    width             : 416px;
-    height            : 234px;   
-    cursor            : default;
-    pointer-events    : default;
+    position            : absolute;
+    z-index             : 1002;
+    margin              : 0;
+    padding             : 0;
+    /*width : */
+    
+    -webkit-user-select : auto;
+       -moz-user-select : auto;
+            user-select : auto;
+    pointer-events      : auto;
+
+    cursor              : auto;
+    pointer-events      : auto;
+    -webkit-user-select : auto;
+       -moz-user-select : auto;
+            user-select : auto;
+    z-index             : 1002;
   }
 
 
-
-
-
-
-  #road {
-    position             : absolute; 
-    background           : transparent url('../img/road_small.png') repeat-x;
-    background-position  : 0px 0px;
-    top                  : 428px; 
-    height               : 72px;
-    width                : 100%;
-    z-index              : 91;
+  .road {
+    position              : absolute; 
+    background-image      : url('../img/road.png');
+    background-repeat     : repeat-x;
+    background-position   : top left;
+    top                   : 244px; 
+    height                : 55px;
+    width                 : 100%;
+    z-index               : 91;
   }
-
 
 
   #layer_player {
@@ -562,7 +904,7 @@
     -moz-user-select     : none;
     pointer-events       : none;
     position             : absolute;
-    height               : 500px;
+    height               : 300px;
     z-index              : 100;
   }
 
@@ -579,18 +921,29 @@
 
   #car {
     position             : absolute;
-    top                  : 364px;
-    left                 : 150px;
+    top                  : 164px;
+    left                 : 96px;
     background           : transparent;
     z-index              : 110;
   }
 
 
+  #flag {
+    position             : absolute;
+    width                : 54px;
+    height               : 36px;
+    left                 : 192px;
+
+    top                  : 12px;
+    z-index              : 90;
+  }
+
+
   #logo {
     position             : absolute;
-    width                : 85px;
-    height               : 30px;
-    left                 : 448px;
+    width                : 128px;
+    height               : 23px;
+    left                 : 300px;
     top                  : 0;
     z-index              : 90;
     margin               : 16px;
@@ -598,47 +951,40 @@
   }
 
 
-
-  #birds {
-    position  : absolute;
-    top       : 96px;
-    left      : 256px;
+  .clicktarget {
+    pointer-events: auto;
   }
 
-
   .station {
-    color       : black;
-    font-size   : 72px;
-    font-weight : bold;
     z-index     : 100;
   }
 
 
-  #intro {
+  #start {
     position        : absolute;
     top             : 0px;
     left            : 0px;
-    width           : 580px;
-    height          : 428px;
+    width           : 468px;
+    height          : 244px;
     background      : transparent; 
   }
 
 
   #station1 {
     position        : absolute;
-    top             : 10px;
-    left            : 2000px;
-    width           : 580px;
-    height          : 428px;
+    top             : 0px;
+    left            : 1600px;
+    width           : 468px;
+    height          : 244px;
     background      : transparent; 
   }
 
   #station2 {
     position        : absolute;
     top             : 10px;
-    left            : 4000px;
-    width           : 580px;
-    height          : 500px;
+    left            : 3200px;
+    width           : 468px;
+    height          : 300px;
     background      : transparent; 
   }
 
@@ -646,9 +992,9 @@
   #station3 {
     position      : absolute;
     top           : 10px;
-    left          : 6000px;
-    width         : 580px;
-    height        : 500px;
+    left          : 4606px;
+    width         : 468px;
+    height        : 300px;
     background    : transparent; 
   }
 
@@ -656,20 +1002,67 @@
   #station4 {
     position      : absolute;
     top           : 10px;
-    left          : 8000px;
-    width         : 580px;
-    height        : 500px;
+    left          : 6180px;
+    width         : 468px;
+    height        : 300px;
     background    : transparent; 
   }
 
   #station5 {
     position      : absolute;
-    top           : 10px;
-    left          : 10000px;
-    width         : 580px;
-    height        : 500px;
-    background    : transparent; 
+    top           : 0px;
+    left          : 7800px;
+    width         : 468px;
+    height        : 244px;
   }
+
+
+
+  /*  LAZYLOAD
+
+     When we set bg image in a class with the same name as the id, we can load images on demand
+     by adding the class "lazyload" to the div. Activate this function by adding class "lazyload" to the div 
+     Make sure you do not override any background properties from the class in the # definition
+     */
+
+  .station5 {
+    background-image: url('../img/drive_in_sign.png');
+    background-position : center 32px;
+    background-origin   : content-box;
+    background-repeat   : no-repeat;
+  }
+
+
+  #station6 {
+    position            : absolute;
+    top                 : 10px;
+    left                : 9224px;
+    width               : 468px;
+    height              : 300px;
+    padding             : 0;
+    margin              : 0;
+  }
+
+  /* class for lazyloading of bg images */
+  .station6 {
+    background-image    : url('../img/drive_in_screen.png');
+    background-position : top center;
+    background-origin   : content-box;
+    background-repeat   : no-repeat;  
+  }
+
+
+
+
+  #station7 {
+    position            : absolute;
+    top                 : 10px;
+    left                : 10924px;
+    width               : 468px;
+    height              : 300px;
+    background          : transparent;
+  }
+
 
 
 /**
@@ -709,10 +1102,88 @@
 
 
 
+
   /**
    * Animations 
    * 
    */
+
+
+
+/*
+  @-webkit-keyframes shrunk {
+    0% {-webkit-transform: scaleX(1) scaleY(1);}
+    50% {-webkit-transform: translateX(10px);}
+  }
+
+  @-moz-keyframes hint {
+    0%, 100% {-moz-transform: translateX(0);}
+    50% {-moz-transform: translateX(10px);}
+  }
+
+  @-o-keyframes hint {
+    0%, 100% {-o-transform: translateX(0);}
+    50% {-o-transform: translateX(10px);}
+  }
+  @keyframes hint {
+    0%, 100% {transform: translateX(0);}
+    50% {transform: translateX(10px);}
+  }
+*/
+  .hint {
+   -webkit-animation    : hint 0.4s ease-in-out infinite;
+       -moz-animation   : hint 0.4s ease-in-out infinite;
+         -o-animation   : hint 0.4s ease-in-out infinite;
+            animation   : hint 0.4s ease-in-out infinite;
+  }
+
+
+
+
+  @-webkit-keyframes hint {
+    0%, 100% {-webkit-transform: translateX(0);}
+    50% {-webkit-transform: translateX(10px);}
+  }
+
+  @-moz-keyframes hint {
+    0%, 100% {-moz-transform: translateX(0);}
+    50% {-moz-transform: translateX(10px);}
+  }
+
+  @-o-keyframes hint {
+    0%, 100% {-o-transform: translateX(0);}
+    50% {-o-transform: translateX(10px);}
+  }
+  @keyframes hint {
+    0%, 100% {transform: translateX(0);}
+    50% {transform: translateX(10px);}
+  }
+
+  .hint {
+   -webkit-animation    : hint 0.4s ease-in-out infinite;
+       -moz-animation   : hint 0.4s ease-in-out infinite;
+         -o-animation   : hint 0.4s ease-in-out infinite;
+            animation   : hint 0.4s ease-in-out infinite;
+  }
+
+  @-webkit-keyframes arrow {
+      50%  {left: 8px;}
+      100% {left: 16px;}
+  }
+  ​
+  @-moz-keyframes arrow {
+      0%   {left: 0px;}
+      50%  {left: 8px;}
+      100% {left: 16px;}
+  }
+''
+  @keyframes arrow {
+      0%   {left: 0px;}
+      50%  {left: 8px;}
+      100% {left: 16px;}
+  }
+
+
 
   @-webkit-keyframes slide {
       0%   {background-position: 0 0;}
@@ -823,7 +1294,7 @@
       70% { -webkit-transform: translateY(-2px); }
       80% { -webkit-transform: translateY(1px); }
       90% { -webkit-transform: translateY(0px); }
-    100% { -webkit-transform: translateY(0px); }
+     100% { -webkit-transform: translateY(0px); }
   }
 
   @-moz-keyframes wibble {
@@ -837,7 +1308,7 @@
       70% { -moz-transform: translateY(-2px); }
       80% { -moz-transform: translateY(1px); }
       90% { -moz-transform: translateY(0px); }
-    100% { -moz-transform: translateY(0px); }
+     100% { -moz-transform: translateY(0px); }
   }
 
   @-o-keyframes wibble {
@@ -851,7 +1322,7 @@
       70% { -o-transform: translateY(-2px); }
       80% { -o-transform: translateY(1px); }
       90% { -o-transform: translateY(0px); }
-    100% { -o-transform: translateY(0px); }
+     100% { -o-transform: translateY(0px); }
   }
 
   @keyframes wibble {
@@ -865,7 +1336,7 @@
       70% { transform: translateY(-2px); }
       80% { transform: translateY(1px); }
       90% { transform: translateY(0px); }
-    100% { transform: translateY(0px); }
+     100% { transform: translateY(0px); }
   }
 
   .wibble {
@@ -893,28 +1364,28 @@
 
   @-webkit-keyframes bounce {
     0%, 20%, 50%, 80%, 100% {-webkit-transform: translateX(0);}
-    40% {-webkit-transform: translateX(-20px);}
-    60% {-webkit-transform: translateX(-11px);}
+    40% {-webkit-transform: translateX(-10px);}
+    60% {-webkit-transform: translateX(-4px);}
   }
 
   @-moz-keyframes bounce {
     0%, 20%, 50%, 80%, 100% {-moz-transform: translateX(0);}
-    40% {-moz-transform: translateX(-20px);}
-    60% {-moz-transform: translateX(-11px);}
+    40% {-moz-transform: translateX(-10px);}
+    60% {-moz-transform: translateX(-4px);}
   }
 
   @-o-keyframes bounce {
     0%, 20%, 50%, 80%, 100% {-o-transform: translateX(0);}
-    40% {-o-transform: translateX(-20px);}
-    60% {-o-transform: translateX(-11px);}
+    40% {-o-transform: translateX(-10px);}
+    60% {-o-transform: translateX(-4px);}
   }
   @keyframes bounce {
     0%, 20%, 50%, 80%, 100% {transform: translateX(0);}
-    40% {transform: translateX(-20px);}
-    60% {transform: translateX(-11px);}
+    40% {transform: translateX(-10px);}
+    60% {transform: translateX(-4px);}
   }
 
-  .bounce {
+.bounce {
     -webkit-animation-name: bounce;
        -moz-animation-name: bounce;
          -o-animation-name: bounce;
@@ -936,37 +1407,65 @@
             animation    : slide 0.4s ease-in;
   }
 
-
-
-
-
-
-
-
-
-
-  /*
-
-  CSS inheritance from class to id
-
-  div.someBaseDiv,
-  #someInhertedDiv
-  {
-      margin-top:3px;
-      margin-left:auto;
-      margin-right:auto;
-      margin-bottom:0px;
-  }
-
-  This will tell your #someInhertedDiv to apply the same styles as div.someBaseDiv has. Then you extend this set of styles with more specific to your #someInhertedDiv:
-  #someInhertedDiv
-  {
-      background-image:url("images/worldsource/customBackground.gif");
-      background-repeat:no-repeat;
-      width:950px;
-      height:572px;
-  }
-
-   */
-  ​
-
+    .effect .flip-container {
+      -webkit-perspective: 1000;
+      -moz-perspective: 1000;
+      perspective: 1000;
+    }
+ 
+    .effect .flip-container:hover .flipper {
+      -webkit-transform: rotateY(180deg);
+      -moz-transform: rotateY(180deg);
+      transform: rotateY(180deg);
+    }
+ 
+    .effect .flipper {
+      -webkit-transition: 0.6s;
+      -webkit-transform-style: preserve-3d;
+ 
+      -moz-transition: 0.6s;
+      -moz-transform-style: preserve-3d;
+ 
+      transition: 0.6s;
+      transform-style: preserve-3d;
+    }
+ 
+    .effect .front, .effect .back {
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+ 
+    .effect .back {
+      -webkit-transform: rotateY(180deg);
+      -moz-transform: rotateY(180deg);
+      transform: rotateY(180deg);
+    }
+ 
+    .flip-container {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      bottom: 300px;
+      width: 468px;
+      background: transparent;
+      border: 0;
+    }
+ 
+    .front, .back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 320px;
+    }
+ 
+    .front {
+      background: transparent;
+      z-index: 2;
+    }
+ 
+    .back {
+      background: transparent;
+    }
+ 
