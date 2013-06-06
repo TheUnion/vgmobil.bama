@@ -13,13 +13,8 @@
       var onEvent = function (eventObject) {
 
 
-        if(!INITIALIZED) {
+        if(!this.INITIALIZED) {
           startSession();
-        }
-
-        if(eventObject.event.indexOf("leave_station7") === 0) {
-          console.log("leaving at #7, setting right edge.");
-          $('#parallax').parallaxSwipe.setEdge("right");
         }
 
         updateLazyloaders(eventObject.event);
@@ -53,6 +48,8 @@
         }
         
         if(eventObject.event.indexOf("arrive_station7") === 0) {
+          console.log("leaving at #7, setting right edge.");
+          $('#parallax').parallaxSwipe.setEdge("right");
           p62601Event(6260104); 
         }
         
@@ -65,6 +62,7 @@
         }
         
         if(eventObject.event.indexOf("leave_station6") === 0) {
+          stopVideo();
           p62601Event(6260107); 
         }
         
@@ -135,6 +133,7 @@
 
           // skip those elements that should load on demand
           if (LAZY_LOADERS[i].classList.contains('ondemand')) {
+            //skip those marked for manual load / automatic loading on event with data-load-event attribute
             continue;            
           }
           LAZY_LOADERS[i].classList.add(LAZY_LOADERS[i].id);
@@ -167,6 +166,26 @@
 
 
 
+      var stopVideo = function(id) {
+        var
+          videoElement = document.getElementById(id || 'video1');
+
+        
+        if (!videoElement) {
+          return false;
+        }
+        if(!VIDEO_CONTROLLER) {
+          if(false === (VIDEO_CONTROLLER = HTMLVideo(videoElement))){
+            return false;
+          }
+        }
+        
+        VIDEO_CONTROLLER.stop();
+        return true;
+      };
+
+
+
 
 
 /**
@@ -190,6 +209,9 @@
 
           videoController.element = video;
 
+          videoController.onended = function(e) {
+                onEvent({event: "video_finished"});
+              }
 
           videoController.play = function(resume) {
 
@@ -201,6 +223,9 @@
               onEvent({event: resume ? "video_resume" : "video_play"});
           };
 
+
+
+
           videoController.pause = function() {
               // #### Tracking ####
              // p62601Event(6260116); 
@@ -208,6 +233,16 @@
               video.pause();
               onEvent({event: 'video_pause'});
           };
+
+          videoController.stop = function() {
+              // #### Tracking ####
+              // p62601Event(6260116); 
+              // ##################
+              video.pause();
+              video.currentTime = 0;
+              onEvent({event: 'video_stop'});
+          };
+
 
           videoController.togglePause = function() {
             if (video.paused) {

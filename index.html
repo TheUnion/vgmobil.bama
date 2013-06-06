@@ -55,7 +55,7 @@
 
 
   <div class="container" onselectstart="return false;">
-    <div id="layer5" class="parallax_layer"> <!-- our scene layer -->
+    <div id="layer5" class="parallax_layer lazyload ondemand" data-load-event="start_interaction"> <!-- our scene layer -->
       <div class="panel">
         <div id="start">
           <div id="flag">
@@ -76,7 +76,7 @@
 
 
         <div id="station1" class="station">
-          <div id="muni_sign" class="muni_sign"><span id="muni_sign_title">Frosta</span></div>
+          <div id="muni_sign" class="muni_sign lazyload ondemand" data-load-event="start_interaction"><span id="muni_sign_title">Frosta</span></div>
         </div>
 
         <div id="station2" class="station">
@@ -146,7 +146,7 @@
 
         <div id="station7" class="station lazyload ondemand" data-load-event="arrive_station6">
 
-          <div id="final_sign" class="final_sign">
+          <div id="final_sign" class="final_sign lazyload ondemand" data-load-event="arrive_station6">
             <span class="btn clicktarget"><a id="link1" class="btn" target="_blank" href="http://www.bama.no/norsk/oppskrift/salat_gronn.html">Oppskrifter på salat</a></span><br />
             <span class="btn clicktarget"><a id="link2" class="btn" target="_blank" href="http://www.bama.no/norsk/sesong/juni.html">Dette er i sesong nå</a> </span>
           </div>

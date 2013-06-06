@@ -283,6 +283,16 @@
     position              : absolute;
     height                : 300px;
 
+    background-image      : url('../img/hill_front1.png');
+    background-position   : 0px 127px;
+    background-repeat     : no-repeat;
+    background-origin     : content-box;
+    z-index               : 5;
+  }
+
+
+  .layer5 {
+
     background-image      : url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
@@ -305,8 +315,10 @@
                             13824px 127px, 14592px 127px;
     background-repeat     : no-repeat;
     background-origin     : content-box;
-    z-index               : 5;
   }
+
+
+
 
 
 
@@ -449,7 +461,7 @@
   }
 
 
-  .muni_sign {
+  #muni_sign {
 
     position            : absolute;
     overflow            : hidden;
@@ -464,6 +476,14 @@
     background-origin   : content-box;
     background-position : 12px 8px, 4px 4px;
   }
+
+  .muni_sign {
+    background-image    : url('../img/frosta_kommunevapen.png'), url('../img/kommuneskilt.png');
+    background-repeat   : no-repeat;
+    background-origin   : content-box;
+    background-position : 12px 8px, 4px 4px;
+  }
+
 
   #muni_sign_title {
     position            : absolute;

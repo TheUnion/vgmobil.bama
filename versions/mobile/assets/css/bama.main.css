@@ -832,7 +832,6 @@
 
 
 
-
   .video_container {
     -webkit-user-select : default;
        -moz-user-select : default;
@@ -843,20 +842,13 @@
     display             : block; 
     margin              : 0px auto 0px auto; 
     padding             : 0;
-    top                 : 4px;
-    left                : 24px; 
-    width               : 416px;
-    height              : 234px;   
+    top                 : 15px;
+    left                : 60px;
+    width               : 267px;
+    height              : 148px;   
     overflow            : hidden;
     background          : transparent; 
     z-index             : 1001;
-  }
-
-
-  .shrunk {
-    left                : 80px;
-    width               : 258px;
-    height              : 145px;   
   }
 
 
@@ -1044,7 +1036,7 @@
   /* class for lazyloading of bg images */
   .station6 {
     background-image    : url('../img/drive_in_screen.png');
-    background-position : top center;
+    background-position : 16px 12px;
     background-origin   : content-box;
     background-repeat   : no-repeat;  
   }
