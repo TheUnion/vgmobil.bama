@@ -435,25 +435,27 @@
     position            : absolute;
     overflow            : visible;
     left                : 300px;
-    top                 : 371px;
-    width               : 87px;
-    height              : 46px;
+    top                 : 347px;
+    width               : 132px;
+    height              : 71px;
 
     color               : white;
     font-family         : Arial, sans-serif;
     font-weight         : 700;
-    font-size           : 10px;
 
     background-image    : url('../img/frosta_kommunevapen.png'), url('../img/kommuneskilt.png');
     background-repeat   : no-repeat;
     background-origin   : content-box;
-    background-position : 2px 2px, top left;
+    background-position : 6px 4px, top left;
   }
 
   #muni_sign_title {
+
+    font-size : 16px;
     position  : absolute;
     top       : 3px;
-    left      : 24px;
+    left      : 32px;
+
   }
 
   .farm_sign {

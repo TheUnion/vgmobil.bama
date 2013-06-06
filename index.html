@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />  
   <title>Bama - Nyt Norge </title>
   <link href='http://fonts.googleapis.com/css?family=Abel:400,700' rel='stylesheet' type='text/css'>  
-  <!-- <link href="assets/css/parallaxVertical.css" rel="stylesheet" type="text/css" /> -->
   <link href="assets/css/bama.main.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -34,14 +33,14 @@
   </div>
 
   <div class="container" onselectstart="return false;">
-    <div id="layer2" class="parallax_layer lazyload"> <!-- middle layer #2 -->
+    <div id="layer2" class="parallax_layer lazyload ondemand" data-load-event="start_interaction"> <!-- middle layer #2 -->
       <div class="panel">
       </div>
     </div>
   </div>
 
   <div class="container" onselectstart="return false;">
-    <div id="layer3" class="parallax_layer lazyload">  <!-- middle layer #1 -->
+    <div id="layer3" class="parallax_layer lazyload ondemand" data-load-event="start_interaction">  <!-- middle layer #1 -->
       <div class="panel">
       </div>
     </div>
@@ -86,7 +85,7 @@
           </div>
         </div>
 
-        <div id="station3" class="station ondemand" data-load-event="start_interaction">
+        <div id="station3" class="station lazyload ondemand" data-load-event="start_interaction">
           <!-- <img id="barn" class="sprite hires" src="assets/img/barn.png"> -->
           <div id="barn" class="sprite"></div>
           <img id="farmer" class="sprite" src="assets/img/farmer_small.png">
@@ -152,7 +151,6 @@
             <span class="btn clicktarget"><a id="link2" class="btn" target="_blank" href="http://www.bama.no/norsk/sesong/juni.html">Dette er i sesong nå</a> </span>
           </div>
           
-        <!-- this is the div containing the road tiles -->
         </div>
         <div id="road" class="road">
         </div>
@@ -177,7 +175,7 @@
 
 
       <div id="lise_recipe" class="center recipe clicktarget">
-        <img src="assets/img/salat_caesar.jpg" />
+        <img src="assets/img/salat_soppsalat.jpg" />
         <svg version="1.1" id="Layer_1" class="close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
            width="44px" height="44px" stroke="#ffffff" fill="#ffffff" viewBox="0 0 44 44" style="enable-background:new 0 0 44 44;" xml:space="preserve">
           <path d="M21.936,1.501c11.299,0,20.492,9.193,20.492,20.493c0,11.299-9.192,20.492-20.492,20.492
@@ -192,7 +190,7 @@
           <span class="recipe_title" style="font-size: 20px;">LUN SOPPSALAT MED VALNØTTER OG RUCCULA</span><br />
           <p class="recipe_small">
 Stek renset, delt, assortert sopp i litt olje i en stor stekepanne. Grovhakk noen valnøtter og rist dem gylne i en tørr stekepanne. 
- Bland sammen stekt sopp, valnøtter, finsnittet sjalottløk, gressløk og bladpersille. Krydre med salt og pepper. Bland inn ruccula og olivenolje. Topp med tynne skiver parmesan.
+Bland sammen stekt sopp, valnøtter, finsnittet sjalottløk, gressløk og bladpersille. Krydre med salt og pepper. Bland inn ruccula og olivenolje. Topp med tynne skiver parmesan.
         </p>
         </div>
       </div>
@@ -220,7 +218,7 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste salater. Og 
   </div>
 
 
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>  
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
   <script type="text/javascript" language="javascript">$.getScript("http://pliing.se/PliingAd/AdJs?app=no_vg_bama_tracking&id=1&no=" +new Date().getTime());</script>  
   <script src="assets/js/lib/jquery.parallaxSwipe.js"></script>
   <!--script src="assets/js/lib/jquery.flip.js"></script-->
