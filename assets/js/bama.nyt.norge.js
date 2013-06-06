@@ -13,80 +13,79 @@
       var onEvent = function (eventObject) {
 
 
-      if(!INITIALIZED) {
-        startSession();
-      }
+        if(!INITIALIZED) {
+          startSession();
+        }
 
-      if(eventObject.event.indexOf("leave_station7") === 0) {
-        console.log("leaving at #7, setting right edge.");
-        $('#parallax').parallaxSwipe.setEdge("right");
-      }
+        if(eventObject.event.indexOf("leave_station7") === 0) {
+          console.log("leaving at #7, setting right edge.");
+          $('#parallax').parallaxSwipe.setEdge("right");
+        }
 
-      // check if any lazyloaders have requested to start loading on this event
-      updateLazyloaders(eventObject.event);
+        updateLazyloaders(eventObject.event);
 
-      if(eventObject.event.indexOf("arrive_station") === 0) {
-        console.log("enabling clicks on event " + eventObject.event);
-        CLICK_ENABLED = true;
-      }
-      else if(eventObject.event.indexOf("leave_station") === 0) {
-        console.log("disabling clicks on event " + eventObject.event);
-        CLICK_ENABLED = false;
-      }
-      
-      console.log("Tracking event: " + eventObject.event);
-// ##############TRACKING IMPL:
-      if(eventObject.event.indexOf("start_interaction") === 0) {
+        if(eventObject.event.indexOf("arrive_station") === 0) {
+          console.log("enabling clicks on event " + eventObject.event);
+          CLICK_ENABLED = true;
+        }
+        else if(eventObject.event.indexOf("leave_station") === 0) {
+          console.log("disabling clicks on event " + eventObject.event);
+          CLICK_ENABLED = false;
+        }
+        
+        console.log("Tracking event: " + eventObject.event);
+        // ##############TRACKING IMPL:
+        if(eventObject.event.indexOf("start_interaction") === 0) {
 
-        p62601Event(6260100); 
-      }
-      
-      if(eventObject.event.indexOf("arrive_station3") === 0) {
-        p62601Event(6260101); 
-      }
-      
-      if(eventObject.event.indexOf("arrive_station4") === 0) {
-        p62601Event(6260102); 
-      }
-      
-      if(eventObject.event.indexOf("arrive_station6") === 0) {
-        p62601Event(6260103); 
-      }
-      
-      if(eventObject.event.indexOf("arrive_station7") === 0) {
-        p62601Event(6260104); 
-      }
-      
-      if(eventObject.event.indexOf("leave_station3") === 0) {
-        p62601Event(6260105); 
-      }
-      
-      if(eventObject.event.indexOf("leave_station4") === 0) {
-        p62601Event(6260106); 
-      }
-      
-      if(eventObject.event.indexOf("leave_station6") === 0) {
-        p62601Event(6260107); 
-      }
-      
-      if(eventObject.event.indexOf("leave_station7") === 0) {
-        p62601Event(6260108); 
-      }
+          p62601Event(6260100); 
+        }
+        
+        if(eventObject.event.indexOf("arrive_station3") === 0) {
+          p62601Event(6260101); 
+        }
+        
+        if(eventObject.event.indexOf("arrive_station4") === 0) {
+          p62601Event(6260102); 
+        }
+        
+        if(eventObject.event.indexOf("arrive_station6") === 0) {
+          p62601Event(6260103); 
+        }
+        
+        if(eventObject.event.indexOf("arrive_station7") === 0) {
+          p62601Event(6260104); 
+        }
+        
+        if(eventObject.event.indexOf("leave_station3") === 0) {
+          p62601Event(6260105); 
+        }
+        
+        if(eventObject.event.indexOf("leave_station4") === 0) {
+          p62601Event(6260106); 
+        }
+        
+        if(eventObject.event.indexOf("leave_station6") === 0) {
+          p62601Event(6260107); 
+        }
+        
+        if(eventObject.event.indexOf("leave_station7") === 0) {
+          p62601Event(6260108); 
+        }
 
-      /* EDIT: jt@kroma.no --- moved video event trackers from videocontroller to onEvent() */ 
+        /* EDIT: jt@kroma.no --- moved video event trackers from videocontroller to onEvent() */ 
 
-      if(eventObject.event.indexOf("video_play") === 0 || eventObject.event.indexOf("video_resume") === 0) {
-        p62601Event(6260115); 
-      }
-      if(eventObject.event.indexOf("video_pause") === 0) {
-        p62601Event(6260116); 
-      }
+        if(eventObject.event.indexOf("video_play") === 0 || eventObject.event.indexOf("video_resume") === 0) {
+          p62601Event(6260115); 
+        }
+        if(eventObject.event.indexOf("video_pause") === 0) {
+          p62601Event(6260116); 
+        }
 
-      
-      ///###########################
-      // # tracking code here
-        events.push(eventObject);
-        // console.log(events);
+        
+        ///###########################
+        // # tracking code here
+          events.push(eventObject);
+          // console.log(events);
       };
 
 
@@ -183,77 +182,77 @@
 
       var HTMLVideo = function(elem) {
 
-      try {
+        try {
 
-        var 
-          video           = typeof elem === "string" ? document.getElementById(elem) : elem,
-          videoController = {};
+          var 
+            video           = typeof elem === "string" ? document.getElementById(elem) : elem,
+            videoController = {};
 
-        videoController.element = video;
-
-
-        videoController.play = function(resume) {
+          videoController.element = video;
 
 
-            // #### Tracking ####
-            // p62601Event(6260115); 
-           // ##################
-            video.play();
-            onEvent({event: resume ? "video_resume" : "video_play"});
-        };
+          videoController.play = function(resume) {
 
-        videoController.pause = function() {
-            // #### Tracking ####
-           // p62601Event(6260116); 
-          // ##################
-            video.pause();
-            onEvent({event: 'video_pause'});
-        };
 
-        videoController.togglePause = function() {
-          if (video.paused) {
-            video.play();
-          } else {
-            video.pause();
+              // #### Tracking ####
+              // p62601Event(6260115); 
+             // ##################
+              video.play();
+              onEvent({event: resume ? "video_resume" : "video_play"});
+          };
+
+          videoController.pause = function() {
+              // #### Tracking ####
+             // p62601Event(6260116); 
+            // ##################
+              video.pause();
+              onEvent({event: 'video_pause'});
+          };
+
+          videoController.togglePause = function() {
+            if (video.paused) {
+              video.play();
+            } else {
+              video.pause();
+            }
+          };
+
+          videoController.skip = function(value) {
+            video.currentTime += value;
+          };
+
+          videoController.restart = function() {
+            video.currentTime = 0;
+            onEvent({event: 'video_restart'});
+          };
+
+          videoController.toggleControls = function() {
+            if (video.hasAttribute("controls")) {
+              this.hideControls();
+            } else {
+              this.showControls();
+            }
           }
-        };
 
-        videoController.skip = function(value) {
-          video.currentTime += value;
-        };
+          videoController.showControls = function(){
+            video.setAttribute("controls", "controls");   
+          };
 
-        videoController.restart = function() {
-          video.currentTime = 0;
-          onEvent({event: 'video_restart'});
-        };
+          videoController.hideControls = function(){
+            video.removeAttribute("controls")   
+          };
 
-        videoController.toggleControls = function() {
-          if (video.hasAttribute("controls")) {
-            this.hideControls();
-          } else {
-            this.showControls();
-          }
+          videoController.setPoster = function(img) {
+            video.setAttribute("poster", img);   
+          };
+
+        }
+        catch(e) {
+          videoController = null;
+          throw(e);
         }
 
-        videoController.showControls = function(){
-          video.setAttribute("controls", "controls");   
-        };
-
-        videoController.hideControls = function(){
-          video.removeAttribute("controls")   
-        };
-
-        videoController.setPoster = function(img) {
-          video.setAttribute("poster", img);   
-        };
-
-      }
-      catch(e) {
-        videoController = null;
-        throw(e);
-      }
-
-      return videoController;
+        return videoController;
       };
 
 
@@ -304,35 +303,6 @@
 
 
 
-// <div onclick="alert('Container clicked')">
-//     <div onclick="fakeClick(event, this.getElementsByTagName('a')[0])"><a id="link2" href="#" onclick="alert('foo')">Embedded Link</a></div>
-// </div>
-
-
-
-      
-
-/*-----------------------------------------------------------------------------------------------*/
-//   ----  fake-click:
-
-
-// <div onclick="alert('Container clicked')">
-//   <a id="link" href="#" onclick="alert((event.target || event.srcElement).innerHTML)">Normal link</a>
-// </div>
-
-// <button type="button" onclick="fakeClick(event, document.getElementById('link'))">
-//   Fake Click on Normal Link
-// </button>
-
-// <br /><br />
-
-// <div onclick="alert('Container clicked')">
-//      <a id="link2" href="#" onclick="alert('foo')">Embedded Link</a></div>
-// </div>
-
-// <button type="button" onclick="fakeClick(event, document.getElementById('link2'))">Fake Click on Embedded Link</button>
-
-
 
 /*-----------------------------------------------------------------------------------------------*/
 
@@ -356,12 +326,10 @@
 
         if(LISE_FLIPPED) {
           flipLise();
-//          return;
         }
 
         if(FARMER_FLIPPED) {
           flipFarmer();
- //         return;
         }
 
 
