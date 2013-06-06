@@ -1,14 +1,26 @@
-/**--------------+
- ---------*  Ba------sic setup. 
- *  -----------
+/**
+ *  Basic setup. 
+ *  
  *  We are assuming an iframe, obviously.
  *  Otherwise we would never touch these tags.
  *
  */
 
 
+
+  body {
+    margin       : 0;
+    padding      : 0;
+  	background   : rgb(230, 250, 250);
+  	color        : #4e4e4e;
+  	line-height  : 1.5;
+  	font-family  : Abel, sans-serif;
+    font-weight  : 700;
+  	font-size    : 14px;
+  }
+
+
   #debug {
-    display: none;
     position  : absolute;
     top       : 500px;
     width     : 800px;
@@ -30,49 +42,6 @@
   .code.reserved { color: #66D9EF; }
   .code.number   { color: #AE81FF; }
   .code.string   { color: #e6db74; }
-
-
-
-
-
-
-  body {
-    margin       : 0;
-    padding      : 0;
-  	background   : rgb(230, 250, 250);
-  	color        : #4e4e4e;
-  	line-height  : 1.5;
-  	font-family  : Abel, Cabin, Helvetica, Arial, sans-serif;
-    font-weight  : 700;
-  	font-size    : 14px;
-  }
-
-
-  h1 {
-    position     : relative;
-    width        : 300px;
-    margin       : 20px 0px 20px 50px;
-    font-family  : Georgia, serif;
-    font-size    : 60px;
-    line-height  : 65px;
-    font-weight  : 700;
-    color        : rgb(33, 169, 126);
-  }
-
-
-#debugoutput {    
-  display: none;
-}
-
-#debug_info {    
-  display: none;
-}
-
-
-#touchoutput {    
-  display: none;
-}
-
 
 
 
@@ -129,15 +98,6 @@
     cursor            : auto;
   }
 
-  .box {
-    position          : absolute;
-    margin            : 0px auto 0px auto; 
-    padding           : 0px;
-    top               : 0px;
-    overflow          : hidden;
-    display           : inline; 
-  }
-
 
   .panel {
     float            : left;
@@ -155,14 +115,19 @@
    */
 
   .center {
+    text-align    : center;
     margin-right  : auto;
     margin-left   : auto;
   }
 
+  .air_above {
+    margin-top: 16px;
+  }
+
   .verybig {
-    text-align  : center;
-    font-size   : 52px;
-    line-height : 60px;
+    text-align    : center;
+    font-size     : 52px;
+    line-height   : 42px;
   }
 
   .big {
@@ -210,14 +175,19 @@
     width     : 665px;
   }
 
+  .delayed_load {
+    /*  just for grouping the divs where we will be loading images after initial user engagement */
+  }
 
+
+/*
   .mirror {
       -webkit-transform: matrix(-1, 0, 0, 1, 0, 0);
          -moz-transform: matrix(-1, 0, 0, 1, 0, 0);
            -o-transform: matrix(-1, 0, 0, 1, 0, 0);
               transform: matrix(-1, 0, 0, 1, 0, 0);
   }
-
+*/
 
 
 /**
@@ -251,13 +221,18 @@
          user-select     : none;
 
     pointer-events       : none;
-    background           : transparent url('../img/cloud1.png') no-repeat;
-    background-position  : 64px 128px;
     position             : absolute;
     height               : 500px;
     z-index              : 2;
-
   }
+
+  .layer2 {
+    background-image     : url('../img/hill_middle_layer2.png'), url('../img/cloud1.png'), url('../img/cloud2.png');
+    background-repeat    : repeat-x, no-repeat, no-repeat; 
+    background-origin    : content-box;
+    background-position  : 0px 320px, 600px 64px, 800px 124px;
+  }
+
 
   #layer3 {
     -webkit-user-select  : none;
@@ -265,12 +240,17 @@
     pointer-events       : none;
     position             : absolute;
     height               : 500px;
-    background           : transparent url('../img/hill_middle_layer1.png') repeat-x;
-    background-position  : 0px 330px;
-    background-origin    : content-box;
     z-index              : 3;
 
   }
+
+  .layer3 {
+    background-image     : url('../img/hill_middle_layer1.png'), url('../img/cloud2.png');
+    background-position  : 0px 326px, 1000px 62px;
+    background-origin    : content-box;    
+    background-repeat    : repeat-x, no-repeat;    
+  }
+
 
   #layer4 {
     -webkit-user-select  : none;
@@ -279,25 +259,38 @@
 
     position             : absolute;
     height               : 500px;
- /*   background           : transparent url('../img/hill_front2.png') repeat-x;
-    background-position  : 0px 310px;
-    background-origin    : content-box;
- */   z-index              : 4;
-
+    z-index              : 4;
   }
 
 
 
+  #foreground {
+    position: absolute;
+    top: 311px;
+    left:0px;
+  }
+
   #layer5 {
-/*  This is our main layer, the one where everything happens
-*/    
+
+  /*  This is our main layer, the one where everything happens  */    
     -webkit-user-select   : auto;
     -moz-user-select      : auto;
     pointer-events        : auto;
     position              : absolute;
     height                : 500px;
-    background            : transparent;
+    z-index               : 5;
+  }
 
+
+  .lazystart {
+    background-image      : url('../img/hill_front1.png'), url('../img/hill_front1.png'); 
+    background-repeat     : no-repeat;
+    background-origin     : content-box;
+    background-position   : 0px 311px, 768px 311px;   
+  }
+
+
+  .layer5 {
     background-image      : url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
@@ -307,7 +300,7 @@
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
-                            url('../img/hill_front1.png'), url('../img/hill_front2.png');
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png') !important;
     background-position   :     0px 311px,   768px 311px,   
                              1536px 311px,  2304px 311px,   
                              3072px 311px,  3840px 311px,   
@@ -317,12 +310,10 @@
                              9216px 311px,  9984px 311px,   
                             10752px 311px, 11520px 311px,   
                             12288px 311px, 13056px 311px,   
-                            13824px 311px, 14592px 311px;
-    background-repeat     : no-repeat;
-    background-origin     : content-box;
-    z-index               : 5;
+                            13824px 311px, 14592px 311px !important;
+    background-repeat     : no-repeat !important;
+    background-origin     : content-box !important;
   }
-
 
 
   #layer6 {
@@ -343,7 +334,7 @@
 
 
 /**
- *  This is our sprites and scene/gfx elements
+ *  sprites and scene/gfx elements
  *
  */
 
@@ -355,35 +346,91 @@
     margin-left   : auto;
     margin-right  : auto;
     left          : 64px;
-    top           : 80px;
+    top           : 128px;
     width         : 80%;
   }
 
-  #arrow {
+  .arrow {
     position      : absolute;
     top           : 176px;
     left          : 480px;
   }
 
 
-  .stripe {
-    height: 1px;
-    border-top : solid 1px #333;
+  .arrow.small {
+    position      : absolute;
+    top           : 24px;
+    left          : 524px;
+    width         : 27px;
+    height        : 48px;
   }
+
 
   .recipe {
     pointer-events: auto;
     font-family: Abel, Helvetica, sans-serif;
-    color: #555;
+    color: #333;
+    width: 480px;
     font-weight: 700;
+    font-size: 22px;
     text-align: left;
-    background-color: #fefefb;
+    background-color: #f7eee7;
     z-index: 12001;
+  }
+
+  .close {
+    position  : absolute;
+    top       : 24px;
+    left      : 516px;
+    width     : 44px;
+    height    : 44px;
+  }
+
+
+
+  .grey {
+    color   : #534741;
+    stroke  : #534741;
+    fill    : #534741;
+  }
+
+  .white {
+    color   : #ffffff;
+    stroke  : #ffffff;
+    fill    : #ffffff;
+  }
+
+
+  .recipe_title {
+    color: #333;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+    width: 480px;
+    margin-left: 12px;
+    text-transform: uppercase;
+    margin-top: 40px;
+    padding-bottom: 8px;
+    border-bottom: solid 1px #333;   
+  }
+
+
+  .recipe_small {
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 12px;
+    color: #555;
+    font-family: Abel, sans-serif;
+    text-align: left;
+    font-size: 22px;
+    font-weight: 400;
   }
 
 
   .sprite {
     position: absolute;
+    background-repeat: no-repeat;
   }
 
   .gfx {
@@ -394,55 +441,59 @@
   #progress {
     margin: 0;
     padding: 0;
-    z-index: 3000;
+    z-index: 300;
     pointer-events : none;
   }
 
 
-  .muni_sign {
-
+  #muni_sign {
     position            : absolute;
     overflow            : visible;
     left                : 300px;
-    top                 : 371px;
-    width               : 87px;
-    height              : 46px;
+    top                 : 347px;
+    width               : 132px;
+    height              : 71px;
 
     color               : white;
     font-family         : Arial, sans-serif;
     font-weight         : 700;
-    font-size           : 10px;
+    font-size           : 16px;
+  }
 
+
+  .muni_sign {
     background-image    : url('../img/frosta_kommunevapen.png'), url('../img/kommuneskilt.png');
     background-repeat   : no-repeat;
     background-origin   : content-box;
-    background-position : 2px 2px, top left;
+    background-position : 6px 4px, top center;
   }
 
   #muni_sign_title {
     position  : absolute;
     top       : 3px;
-    left      : 24px;
+    left      : 40px;
   }
 
-  .farm_sign {
+  #farm_sign {
     overflow            : visible;
     color               : #4c2b0c;
     padding             : 4px;
-    font-family         : Abel, Cabin, Helvetica, Arial, sans-serif;
+    font-family         : Abel, Helvetica, Arial, sans-serif;
     font-size           : 12px;
     font-weight         : 700;
-    background          : transparent url('../img/wood_sign_arrow.png') no-repeat;
-    background-position : top left;
     top                 : 366px;
     width               : 213px;
     left                : 128px;
     height              : 94px;
-    background-origin   : content-box;
     position            : absolute;
   }
 
 
+  .farm_sign {
+    background          : transparent url('../img/wood_sign_arrow.png') no-repeat;
+    background-position : top left;
+    background-origin   : content-box;
+    }
 
   #farm_sign_title {
     font-family   : Helvetica, Arial, sans-serif;
@@ -454,23 +505,48 @@
   }
 
 
+  .drive_in_sign {
 
-  .final_sign {
+    color: #000;
+    font-family     : "Arial Black", Arial, sans-serif;
+    font-weight     : 700;
+    font-size       : 13px;
+    line-height     : 18px; 
+    text-transform  : uppercase;
+  
+    /*  We use the following to place text within a specific region of the bg image */
+    position        : absolute;
+    left            : 226px;
+    top             : 312px;
+    width           : 106px;
+    height          : auto;
+  }
+
+
+  #final_sign {
     overflow            : visible;
     color               : #4c2b0c;
     padding             : 4px;
     font-family         : Abel, Helvetica, Arial, sans-serif;
     font-size           : 24px;
+    text-align          : center;
     line-height         : 54px;
     font-weight         : 700;
-    background          : transparent url('../img/wood_sign_big.png') no-repeat;
-    background-position : top left;
     top                 : 212px;
     width               : 253px;
     left                : 128px;
     height              : 204px;
-    background-origin   : content-box;
+    margin-left         : 40px;
+    margin-right        : auto;
     position            : absolute;
+  }
+
+
+
+  .final_sign {
+    background          : transparent url('../img/wood_sign_big.png') no-repeat;
+    background-position : top left;
+    background-origin   : content-box;
   }
 
 
@@ -493,53 +569,91 @@
     height              : 249px;
     top                 : 171px;
     left                : 0px;
+  }
+
+
+  .barn {
     background-image    : url('../img/barn.png'), url('../img/fence.png');
     background-position : top left, bottom right;
     background-repeat   : no-repeat, repeat-x;
     background-origin   : content-box;
   }
 
+
   #farmer {
     position  : absolute;
     top       : 302px;
     left      : 380px;
-
+    width     : 73px;
+    height    : 127px;
     z-index: 102;
+  }
+
+  .farmer {
+    background-image: url('../img/farmer_small.png');
+    background-origin: content-box;
+    background-position: 0px 0px;
+    top       : 302px;
+    left      : 380px;
+    width     : 73px;
+    height    : 127px;
   }
 
   #tractor {
     position  : absolute;
     left      : 0px;
     top       : 240px;
+    width     : 269px;
+    height    : 198px;
   }
 
-  #farmer_large {
-    /*display: none;    */
+
+  .tractor {
+    background-image    : url('../img/tractor.png');
+    background-origin   : content-box;
+    background-position : top left;
+    width               : 269px;
+    height              : 198px;
   }
 
 
 
 
+  
   #farmer_tips {
+    top       : 40px;
+    left      : 208px;
+    width: 246px;
+    height : 112px;
+
+    z-index   : 10000;
+    overflow  : visible;
+  }
+
+  .farmer_tips {
     background-image: url('../img/farmer_large.png');
     background-repeat: no-repeat;
-    background-position: top left;
+    background-position: 0px 0px;
     background-origin: content-box;
-    top : 40px;
-    left: 208px;
-    z-index: 10000;
-    overflow            : visible;
+    width: 246px;
+    height : 112px;
   }
 
+
   #farmer_recipe {
+    
+    position: absolute;
     top : -500px;
     left: 0;
+    height: 500px;
+    width: 100%;
     opacity: 0;
     z-index: 10000;
   }
 
 
   #farmer_text {
+    padding: 16px;
     top                 : 90px;
     /*background          : transparent;*/
   }
@@ -548,25 +662,36 @@
 
 
   #lise_tips {
-    background-image: url('../img/lise_large.png');
-    background-repeat: no-repeat;
-    background-position: top left;
-    background-origin: content-box;
-    top : 40px;
-    left: 150px;
-    z-index: 10000;
-    overflow            : visible;
+    top       : 40px;
+    left      : 150px;
+    width     : 246px;
+    height    : 112px;
+    z-index   : 10000;
+    overflow  : visible;
   }
 
+  .lise_tips {
+    background-image: url('../img/lise_large.png');
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+    background-origin: content-box;
+  }
+
+
+
   #lise_recipe {
+    position: absolute;
     top : -500px;
     left: 0;
+    width: 580px;
+    height: 500px;
     opacity: 0;
     z-index: 10000;
   }
 
 
   #lise_text {
+    padding: 16px;
     top                 : 90px;
     /*background          : transparent;*/
   }
@@ -576,8 +701,63 @@
     position  : absolute;
     top       : 302px;    
     left      : 324px;    
+    width     : 77px;
+    height    : 126px;
     z-index   : 102;
   }
+
+  .lise {
+    position  : absolute;
+    top       : 302px;    
+    left      : 324px;    
+    width     : 77px;
+    height    : 126px;
+    z-index   : 102;
+
+    background-image    : url('../img/lise_small.png');
+    background-position : top left;
+    background-origin   : content-box;
+  }
+
+
+
+        <img src="assets/img/salat_tips.jpg" />
+
+
+  #farmer_salat {
+    top       : 0px;
+    left      : 0px;
+    width     : 580px;
+    height    : 145px;
+  }
+
+
+  .farmer_salat {
+    background-image: url('../img/salat_tips.jpg');
+    background-origin: content-box;
+    background-position: top left;
+    width     : 580px;
+    height    : 145px;
+  }
+
+
+
+  #lise_salat {
+    top       : 0px;
+    left      : 0px;
+    width     : 580px;
+    height    : 145px;
+  }
+
+
+  .lise_salat {
+    background-image: url('../img/salat_soppsalat.jpg');
+    background-origin: content-box;
+    background-position: top left;
+    width     : 580px;
+    height    : 145px;
+  }
+
 
   #drivein_sign {
     color           : #000;
@@ -603,10 +783,12 @@
     height: auto;
   }
 
+
+
   .btm {
     position      : absolute;
     background    : transparent url('../img/pop_up_btm.png') no-repeat;
-    top           : 227px;
+    top           : 226px;
     left          : 0;
     width         : 410px;
     height        : 68px;
@@ -659,12 +841,13 @@
 
 
   .btn {
-    /*pointer-events      : visible;*/
+    pointer-events      : auto;
+    text-decoration     : none;
     text-align          : center;
     font-weight         : 700;
     font-size           : 18px;
     color               : white;
-    padding             : 4px;
+    padding             : 4px 12px 4px 12px;
     width               : 96px;
     margin-right        : auto;
     margin-left         : auto;
@@ -740,7 +923,7 @@
     display             : block; 
     margin              : 0px auto 0px auto; 
     padding             : 0;
-    top                 : 76px;
+    top                 : 81px;
     left                : 118px; 
     width               : 416px;
     height              : 234px;   
@@ -770,6 +953,7 @@
     -webkit-user-select : auto;
        -moz-user-select : auto;
             user-select : auto;
+    z-index             : 1002;
   }
 
 
@@ -783,20 +967,6 @@
     width                 : 100%;
     z-index               : 91;
   }
-
-/*
-  .road.dirt {
-    position              : absolute; 
- a   overflow              : visible;
-    background-repeat     : repeat-x;
-    background-image      : url('../img/road_farm.png');
-    background-position   : -144px 0px;
-    top                   : 417px; 
-    height                : 71px;
-    width                 : 710px;
-    z-index               : 92;
-  }
-*/
 
 
   #layer_player {
@@ -828,11 +998,21 @@
   }
 
 
+  #flag {
+    position             : absolute;
+    width                : 54px;
+    height               : 36px;
+    left                 : 263px;
+    top                  : 72px;
+    z-index              : 90;
+  }
+
+
   #logo {
     position             : absolute;
-    width                : 85px;
-    height               : 30px;
-    left                 : 448px;
+    width                : 192px;
+    height               : 34px;
+    left                 : 356px;
     top                  : 0;
     z-index              : 90;
     margin               : 16px;
@@ -840,9 +1020,15 @@
   }
 
 
+  .clicktarget {
+    pointer-events: auto;
+  }
+
   .station {
     opacity     : 20%;
     color       : navy;
+    /* show where our stations begin */
+    /*border-left : dotted 1px #fff;*/
     font-size   : 72px;
     font-weight : bold;
     z-index     : 100;
@@ -903,8 +1089,22 @@
     left          : 7800px;
     width         : 580px;
     height        : 500px;
-    background    : transparent; 
+
   }
+
+
+  /* When we set bg image in a class with the same name as the id, we can load images on demand
+     by adding the class to the div. Activate this function by adding class "lazyload" to the div 
+     Make sure you do not override any background-properties in the # definition
+     */
+  .station5 {
+    background-image: url('../img/drive_in_sign.png');
+    background-position : center 170px;
+    background-origin   : content-box;
+    background-repeat   : no-repeat;  
+  }
+
+
 
   #station6 {
     position            : absolute;
@@ -912,11 +1112,19 @@
     left                : 9224px;
     width               : 580px;
     height              : 500px;
+    padding             : 0;
+    margin              : 0;
+  }
+
+  /* class for lazyloading of bg images */
+  .station6 {
     background-image    : url('../img/drive_in_screen.png');
     background-position : 53px 76px;
     background-origin   : content-box;
     background-repeat   : no-repeat;  
   }
+
+
 
 
   #station7 {
@@ -1258,7 +1466,7 @@
     60% {transform: translateX(-11px);}
   }
 
-------------------''  .bounce {-''
+  .bounce {
     -webkit-animation-name: bounce;
        -moz-animation-name: bounce;
          -o-animation-name: bounce;
