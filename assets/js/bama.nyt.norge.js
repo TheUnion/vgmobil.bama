@@ -1,12 +1,23 @@
   $(document).ready(function () {
 
 //   $(document).bind("dragstart", function() { return false; });
+
+ // p62602Event(6260211);
    
     var 
       INITIALIZED = false,
       VIDEO_CONTROLLER = null;
 
     $(function() {
+
+
+      var setInitialized = function() {
+        INITIALIZED = true;
+      }
+
+      var initialized = function() {
+        return INITIALIZED;
+      }
 
       // this is where we send all trackable events
       var onEvent = function (eventObject) {
@@ -26,11 +37,11 @@
         // ##############TRACKING IMPL:
         if(eventObject.event.indexOf("start_interaction") === 0) {
 
-          p62601Event(6260100); 
+          p62602Event(6260200); 
         }
         
         if(eventObject.event.indexOf("arrive_station3") === 0) {
-          p62601Event(6260101); 
+          p62602Event(6260201); 
         }
         
         if(eventObject.event.indexOf("arrive_station4") === 0) {
@@ -38,43 +49,79 @@
           console.log('Trying to set poster');
 
           setPoster('assets/img/poster.jpg')
-          p62601Event(6260102); 
+          p62602Event(6260202); 
         }
         
         if(eventObject.event.indexOf("arrive_station6") === 0) {
-          p62601Event(6260103); 
+          p62602Event(6260203); 
         }
         
         if(eventObject.event.indexOf("arrive_station7") === 0) {
           console.log("arriving at #7, setting right edge.");
           $('#parallax').parallaxSwipe.setEdge("right");
-          p62601Event(6260104); 
+          p62602Event(6260204); 
         }
         
         if(eventObject.event.indexOf("leave_station3") === 0) {
-          p62601Event(6260105); 
+          p62602Event(6260205); 
         }
         
         if(eventObject.event.indexOf("leave_station4") === 0) {
-          p62601Event(6260106); 
+          p62602Event(6260206); 
         }
         
         if(eventObject.event.indexOf("leave_station6") === 0) {
           stopVideo();
-          p62601Event(6260107); 
+          p62602Event(6260207); 
         }
         
         if(eventObject.event.indexOf("leave_station7") === 0) {
-          p62601Event(6260108); 
+          p62602Event(6260208); 
         }
+
+
+
+        /* EDIT: jt@kroma.no --- addded event trackers from Adssets() */ 
+
+// console.log('fake-click: ' + link2.href);
+
+        if(eventObject.event.indexOf("click_lise") === 0) {
+          p62602Event(6260209); 
+        }
+        if(eventObject.event.indexOf("click_farmer") === 0) {
+          p62602Event(6260210); 
+        }
+
+        if(eventObject.event.indexOf("click_link1") === 0) {
+          console.log("Opening link1");
+          p62602Event(6260211); 
+        }
+        if(eventObject.event.indexOf("click_link2") === 0) {
+          console.log("Opening link2");
+          p62602Event(6260212); 
+        }
+
+        if(eventObject.event.indexOf("close_lise") === 0) {
+          p62602Event(6260213); 
+        }
+        if(eventObject.event.indexOf("close_farmer") === 0) {
+          p62602Event(6260214); 
+        }
+
 
         /* EDIT: jt@kroma.no --- moved video event trackers from videocontroller to onEvent() */ 
 
         if(eventObject.event.indexOf("video_play") === 0 || eventObject.event.indexOf("video_resume") === 0) {
-          p62601Event(6260115); 
+          p62602Event(6260215); 
         }
+
         if(eventObject.event.indexOf("video_pause") === 0) {
-          p62601Event(6260116); 
+          p62602Event(6260216); 
+        }
+
+
+        if(eventObject.event.indexOf("video_finish") === 0) {
+          p62602Event(6260220); 
         }
 
         
@@ -111,7 +158,7 @@
 
       var startSession = function() {
 
-        if(!!INITIALIZED){
+        if(initialized()){
           console.log("Already initialized, escaping");
           return;
         }
@@ -230,7 +277,7 @@
 
 
               // #### Tracking ####
-              // p62601Event(6260115); 
+              // p62602Event(6260215); 
              // ##################
               video.play();
               onEvent({event: resume ? "video_resume" : "video_play"});
@@ -241,7 +288,7 @@
 
           videoController.pause = function() {
               // #### Tracking ####
-             // p62601Event(6260116); 
+             // p62602Event(6260216); 
             // ##################
               video.pause();
               onEvent({event: 'video_pause'});
@@ -249,7 +296,7 @@
 
           videoController.stop = function() {
               // #### Tracking ####
-              // p62601Event(6260116); 
+              // p62602Event(6260216); 
               // ##################
               video.pause();
               video.currentTime = 0;
@@ -399,13 +446,15 @@
         // we could probably come up with somthing more general, but not in the time available
         else if( (clickpos>=11111 && (clickpos<=11325) )) {
           if((click.clientY>208) && (click.clientY<272)){
-            console.log('fake-click: ' + link1.href);
-            fakeClick(null, link1);
+            // console.log('fake-click: ' + link1.href);
+            onEvent({event: "click_link1"});
+            // fakeClick(null, link1);
             return;
           }
           else if((click.clientY>(276) && (click.clientY<((348))))){
-            console.log('fake-click: ' + link2.href);
-            fakeClick(null, link2);
+            // console.log('fake-click: ' + link2.href);
+            onEvent({event: "click_link2"});
+            // fakeClick(null, link2);
             return;
           }
         }
@@ -435,7 +484,7 @@
         var
           result = getClickedElement(click);
 
-        if(!!INITIALIZED){
+        if(initialized()){
           return;
         }
       startSession();
@@ -551,10 +600,12 @@
 
       var flipLise = function() {
         if(!LISE_FLIPPED) {
+          onEvent({event: "click_lise"});
           $('#lise_tips').animate({ top : 500, opacity: 0}, 325, 'linear');
           $('#lise_recipe').animate({ top : 0, opacity: 1}, 325, 'linear');
         }
         else {
+          onEvent({event: "close_lise"});
           $('#lise_tips').animate({ top : 40, opacity: 1}, 325, 'linear');
           $('#lise_recipe').animate({ top : -500, opacity: 0}, 325, 'linear');
         }
@@ -564,10 +615,12 @@
 
       var flipFarmer = function() {
         if(!FARMER_FLIPPED) {
+          onEvent({event: "click_farmer"});
           $('#farmer_tips').animate({ top : 500, opacity: 0}, 325, 'linear');
           $('#farmer_recipe').animate({ top : 0, opacity: 1}, 325, 'linear');
         }
         else {
+          onEvent({event: "click_farmer"});
           $('#farmer_tips').animate({ top : 40, opacity: 1}, 325, 'linear');
           $('#farmer_recipe').animate({ top : -500, opacity: 0}, 325, 'linear');
         }
@@ -752,7 +805,7 @@
               result.clientX = x0;
               result.clientY = y0;
               console.log(result);
-            }            
+            }
 
 
           // document.getElementById('touchoutput').innerHTML += 'touchstart_parallax:' + dump + "px <br />";
@@ -787,7 +840,6 @@
           onClicked(result);
           return true; 
         });
-
 
 
     $('.recipe').bind('selectstart', function (e) { 
