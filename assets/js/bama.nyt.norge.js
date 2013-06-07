@@ -1,26 +1,15 @@
   $(document).ready(function () {
 
-   $(document).bind("dragstart", function() { return false; });
+//   $(document).bind("dragstart", function() { return false; });
    
+    var 
+      INITIALIZED = false,
+      VIDEO_CONTROLLER = null;
+
     $(function() {
-
-      var 
-        INITIALIZED = false;
-
-
 
       // this is where we send all trackable events
       var onEvent = function (eventObject) {
-
-
-        if(!INITIALIZED) {
-          startSession();
-        }
-
-        if(eventObject.event.indexOf("leave_station7") === 0) {
-          console.log("leaving at #7, setting right edge.");
-          $('#parallax').parallaxSwipe.setEdge("right");
-        }
 
         updateLazyloaders(eventObject.event);
 
@@ -45,6 +34,10 @@
         }
         
         if(eventObject.event.indexOf("arrive_station4") === 0) {
+
+          console.log('Trying to set poster');
+
+          setPoster('assets/img/poster.jpg')
           p62601Event(6260102); 
         }
         
@@ -53,6 +46,8 @@
         }
         
         if(eventObject.event.indexOf("arrive_station7") === 0) {
+          console.log("arriving at #7, setting right edge.");
+          $('#parallax').parallaxSwipe.setEdge("right");
           p62601Event(6260104); 
         }
         
@@ -65,6 +60,7 @@
         }
         
         if(eventObject.event.indexOf("leave_station6") === 0) {
+          stopVideo();
           p62601Event(6260107); 
         }
         
@@ -106,6 +102,7 @@
 
           if (eventName === ONDEMAND_LOADERS[i].getAttribute("data-load-event")) {
             console.log("loading bg for " + ONDEMAND_LOADERS[i].id + " on event " + eventName);
+            // ONDEMAND_LOADERS[i].classList.remove('lazystart');
             ONDEMAND_LOADERS[i].classList.add(ONDEMAND_LOADERS[i].id);
           }
         }
@@ -114,19 +111,15 @@
 
       var startSession = function() {
 
+        if(!!INITIALIZED){
+          console.log("Already initialized, escaping");
+          return;
+        }
 
         // populate our lazyload arrays
         LAZY_LOADERS      = document.getElementsByClassName('lazyload');
         ONDEMAND_LOADERS  = document.getElementsByClassName('lazyload ondemand');
 
-
-        if(this.INITIALIZED === true) {
-          console.log("startSession: already initialized, escaping ...")
-          return;
-        };
-
-        console.log("Starting user session ...")
-        console.log("Loading bg images ...");
         // load extra backgrounds on first user interaction
         for(var i = 0, count = LAZY_LOADERS.length; i < count; i++) {
           // by convention, the lazyloadee will be a class of the same name as the lazyloader's id
@@ -135,16 +128,36 @@
 
           // skip those elements that should load on demand
           if (LAZY_LOADERS[i].classList.contains('ondemand')) {
+            //skip those marked for manual load / automatic loading on event with data-load-event attribute
             continue;            
           }
           LAZY_LOADERS[i].classList.add(LAZY_LOADERS[i].id);
         }
-        this.INITIALIZED = true;
-
         var
           userEvent = { event: 'start_interaction', message: 'First swipe detected.', target: null, time: (new Date()).getTime()};
         onEvent(userEvent);
       };
+
+
+
+
+      var setPoster = function(img) {
+        var
+          videoElement = document.getElementById('video1');
+        
+        if (!videoElement) {
+          return false;
+        }
+        if(!VIDEO_CONTROLLER) {
+          if(false === (VIDEO_CONTROLLER = HTMLVideo(videoElement))){
+            return false;
+          }
+        }
+        
+        VIDEO_CONTROLLER.setPoster(img);
+        return true;
+
+      }
 
 
       var clickVideo = function(id) {
@@ -162,6 +175,25 @@
         }
         
         VIDEO_CONTROLLER.togglePause();
+        return true;
+      };
+
+
+      var stopVideo = function(id) {
+        var
+          videoElement = document.getElementById(id || 'video1');
+
+        
+        if (!videoElement) {
+          return false;
+        }
+        if(!VIDEO_CONTROLLER) {
+          if(false === (VIDEO_CONTROLLER = HTMLVideo(videoElement))){
+            return false;
+          }
+        }
+        
+        VIDEO_CONTROLLER.stop();
         return true;
       };
 
@@ -190,6 +222,9 @@
 
           videoController.element = video;
 
+          videoController.onended = function(e) {
+                onEvent({event: "video_finished"});
+              }
 
           videoController.play = function(resume) {
 
@@ -201,6 +236,9 @@
               onEvent({event: resume ? "video_resume" : "video_play"});
           };
 
+
+
+
           videoController.pause = function() {
               // #### Tracking ####
              // p62601Event(6260116); 
@@ -208,6 +246,16 @@
               video.pause();
               onEvent({event: 'video_pause'});
           };
+
+          videoController.stop = function() {
+              // #### Tracking ####
+              // p62601Event(6260116); 
+              // ##################
+              video.pause();
+              video.currentTime = 0;
+              onEvent({event: 'video_stop'});
+          };
+
 
           videoController.togglePause = function() {
             if (video.paused) {
@@ -243,6 +291,7 @@
           };
 
           videoController.setPoster = function(img) {
+            console.log('Applying poster image: ' + img);
             video.setAttribute("poster", img);   
           };
 
@@ -386,10 +435,11 @@
         var
           result = getClickedElement(click);
 
-        if(!result){
-          
-
+        if(!!INITIALIZED){
+          return;
         }
+      startSession();
+
       };
 
 
@@ -684,9 +734,6 @@
             trueX = 0,
             trueY = 0;
 
-          if(!this.INITIALIZED) {
-            startSession();
-          }
 
           var x = e.originalEvent.touches[0].pageX;//relative position of html,body document
           var y = e.originalEvent.touches[0].pageY;//relative position of html,body document
@@ -722,6 +769,7 @@
             },
             dump = '',
             trueX = 0, trueY = 0;
+
 
             if(typeof result.offsetLeft ==="number") {
               result.clientX = e.clientX;

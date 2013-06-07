@@ -74,4 +74,11 @@
       error_unknown       : "Error Unknown"
     }
 ```
+-----
+
+detect tablet or mobile:
+```javascript
+    var ismobile = (/iphone|ipod|android|blackberry|opera|mini|windows\sce|palm|smartphone|iemobile/i.test(navigator.userAgent.toLowerCase()));
+    var istablet = (/ipad|android|android 3.0|xoom|sch-i800|playbook|tablet|kindle/i.test(navigator.userAgent.toLowerCase()));
+```
 

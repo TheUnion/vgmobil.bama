@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />  
   <title>Bama - Nyt Norge </title>
   <link href='http://fonts.googleapis.com/css?family=Abel:400,700' rel='stylesheet' type='text/css'>  
-  <!-- <link href="assets/css/parallaxVertical.css" rel="stylesheet" type="text/css" /> -->
   <link href="assets/css/bama.main.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -34,14 +33,14 @@
   </div>
 
   <div class="container" onselectstart="return false;">
-    <div id="layer2" class="parallax_layer lazyload"> <!-- middle layer #2 -->
+    <div id="layer2" class="parallax_layer lazyload ondemand" data-load-event="start_interaction"> <!-- middle layer #2 -->
       <div class="panel">
       </div>
     </div>
   </div>
 
   <div class="container" onselectstart="return false;">
-    <div id="layer3" class="parallax_layer lazyload">  <!-- middle layer #1 -->
+    <div id="layer3" class="parallax_layer lazyload ondemand" data-load-event="start_interaction">  <!-- middle layer #1 -->
       <div class="panel">
       </div>
     </div>
@@ -56,7 +55,7 @@
 
 
   <div class="container" onselectstart="return false;">
-    <div id="layer5" class="parallax_layer"> <!-- our scene layer -->
+    <div id="layer5" class="parallax_layer lazyload ondemand" data-load-event="start_interaction"> <!-- our scene layer -->
       <div class="panel">
         <div id="start">
           <div id="flag">
@@ -66,6 +65,8 @@
 
           <div class="arrow animated continuous hint"><img class="hires" src="assets/img/arrow.png" /></div>
           
+          <div id="foreground"><img src="assets/img/hill_front1.png" alt="" /></div>
+
           <div id="intro_text" class="sprite">
             <span class="verybig blue">Nå kommer de<br />norske salatene!</span>
             <span class="big gray regular">
@@ -77,22 +78,23 @@
 
 
         <div id="station1" class="station">
-          <div id="muni_sign" class="muni_sign"><span id="muni_sign_title">Frosta</span></div>
+          <div id="muni_sign" class="lazyload ondemand" data-load-event="start_interaction"><span id="muni_sign_title">Frosta</span></div>
         </div>
 
         <div id="station2" class="station">
-          <div id="farm_sign" class="farm_sign">
+          <div id="farm_sign" class="lazyload ondemand" data-load-event="start_interaction">
             <span id="farm_sign_title">Bondegård</span>
           </div>
         </div>
 
-        <div id="station3" class="station ondemand" data-load-event="start_interaction">
+        <div id="station3" class="station lazyload ondemand" data-load-event="start_interaction">
           <!-- <img id="barn" class="sprite hires" src="assets/img/barn.png"> -->
-          <div id="barn" class="sprite"></div>
-          <img id="farmer" class="sprite" src="assets/img/farmer_small.png">
-
+          <div id="barn" class="sprite lazyload ondemand" data-load-event="start_interaction"></div>
+          
+          <div id="farmer" class="sprite lazyload ondemand" data-load-event="start_interaction"></div>
+          
           <div id="farmer_hello">
-            <div id="farmer_tips" class="front sprite farmer_tips clicktarget">
+            <div id="farmer_tips" class="sprite clicktarget lazyload ondemand" data-load-event="start_interaction">
               <!-- <img id="farmer_large" src="assets/img/farmer_large.png" /> -->
               <!-- <img id="close_button" src="assets/img/close_grey.png" /> -->
               <div id="farmer_tekst" class="snakkeboble center"><span class="bold">Hei</span>, vil du vite hvorfor norske salater er de beste?
@@ -100,15 +102,13 @@
               </div>
               <div class="btm"></div>
             </div>
-
-
-            </div>
+          </div>
         </div>
 
 
         <div id="station4" class="station">
           <div id="lise_hello" class="interactive">
-            <div id="lise_tips" class="front sprite lise_tips clicktarget">
+            <div id="lise_tips" class="sprite clicktarget lazyload ondemand" data-load-event="arrive_station3">
               <!-- <img id="lise_large" src="assets/img/lise_large.png" /> -->
               <!-- <img id="close_button" src="assets/img/close_grey.png" /> -->
               <div id="lise_tekst" class="snakkeboble center"><span class="bold">Hei</span>, her har du en god oppskrift på salat fra meg.
@@ -120,20 +120,17 @@
 
           </div>
 
-          <img id="tractor" class="sprite hires" src="assets/img/tractor.png">
-          <img id="lise" class="hires" src="assets/img/lise_small.png">
-          <!-- <div id="lise_tips" class="front face sprite snakkeboble">
-          </div>
-           -->
+          <div id="tractor" class="sprite hires lazyload ondemand" data-load-event="arrive_station3"></div>
+          <div id="lise" class="face sprite lazyload ondemand" data-load-event="arrive_station3"></div>
         </div>
 
-        <div id="station5" class="station lazyload ondemand" data-load-event="arrive_station3">
+        <div id="station5" class="station lazyload ondemand" data-load-event="arrive_station4">
           <div class="drive_in_sign center">Nå kommer<br />salatene!</div>
         </div>
 
         <div id="station6" class="station lazyload ondemand" data-load-event="arrive_station5">
           <div id="video1_container">
-            <video id="video1" class="interactive" width="416" height="234" controls poster="assets/img/poster.jpg">
+            <video id="video1" class="interactive" width="416" height="234" controls>
               <source src="assets/video/video1.webm" type="video/webm">
               <source src="assets/video/video1.mp4" type="video/mp4">
               <source src="assets/video/video1.ogv" type="video/theora">
@@ -147,7 +144,7 @@
 
         <div id="station7" class="station lazyload ondemand" data-load-event="arrive_station6">
 
-          <div id="final_sign" class="final_sign">
+          <div id="final_sign" class="lazyload ondemand" data-load-event="arrive_station6">
             <span class="btn clicktarget"><a id="link1" class="btn" target="_blank" href="http://www.bama.no/norsk/oppskrift/salat_gronn.html">Oppskrifter på salat</a></span><br />
             <span class="btn clicktarget"><a id="link2" class="btn" target="_blank" href="http://www.bama.no/norsk/sesong/juni.html">Dette er i sesong nå</a> </span>
           </div>
@@ -177,7 +174,8 @@
 
 
       <div id="lise_recipe" class="center recipe clicktarget">
-        <img src="assets/img/salat_caesar.jpg" />
+        <div id="lise_salat" class="lazyload ondemand" data-load-event="arrive_station3"></div> 
+
         <svg version="1.1" id="Layer_1" class="close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
            width="44px" height="44px" stroke="#ffffff" fill="#ffffff" viewBox="0 0 44 44" style="enable-background:new 0 0 44 44;" xml:space="preserve">
           <path d="M21.936,1.501c11.299,0,20.492,9.193,20.492,20.493c0,11.299-9.192,20.492-20.492,20.492
@@ -207,7 +205,9 @@ Stek renset, delt, assortert sopp i litt olje i en stor stekepanne. Grovhakk noe
           <line style="fill:none;stroke: #534741; stroke-width:1.3944;stroke-linecap:round;stroke-miterlimit:10;" x1="11.882" y1="11.766" x2="31.867" y2="31.75"/>
           <line style="fill:none;stroke: #534741; stroke-width:1.3944;stroke-linecap:round;stroke-miterlimit:10;" x1="31.867" y1="11.766" x2="11.882" y2="31.75"/>
         </svg>
-        <img src="assets/img/salat_tips.jpg" />
+        
+        <div id="farmer_salat" class="lazyload ondemand" data-load-event="arrive_station3"></div> 
+        
         <div class="recipe" style="width=580px; font-size: 22px; color: #555; padding-left: 40px; padding-right: 40px">
           <span class="recipe_title">SALATDYRKING I NORGE</span><br />
           <span class="recipe_small"><p>
@@ -220,12 +220,11 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste salater. Og 
   </div>
 
 
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>  
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
   <script type="text/javascript" language="javascript">$.getScript("http://pliing.se/PliingAd/AdJs?app=no_vg_bama_tracking&id=1&no=" +new Date().getTime());</script>  
   <script src="assets/js/lib/jquery.parallaxSwipe.js"></script>
   <!--script src="assets/js/lib/jquery.flip.js"></script-->
   <script async src="assets/js/bama.nyt.norge.js"></script>
-
 
   <div id="position_data">position_data</div>
 
@@ -233,8 +232,6 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste salater. Og 
   <p><span id="debug_info"></span></p>
   <div id="debugoutput"></div>
   <div id="touchoutput" style="position: absolute; top: 500px;">TouchOutput</div>
-
-
 
 </body>
 </html>
