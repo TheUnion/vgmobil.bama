@@ -430,9 +430,7 @@
 
 
       var enableSwipe = function () {
-
         $("#parallax").parallaxSwipe.SWIPE_ENABLED = true;          
-
       }
 
 

@@ -60,7 +60,13 @@
         _velocity = 0.2 * (REQUESTED_POSITION - sliderLT);
 
         if((sliderLT - _velocity) < -REQUESTED_POSITION){
-          sliderLT = Math.round(REQUESTED_POSITION);
+
+          sliderLT = Math.round(sliderLT + _velocity);
+          if(Math.abs(_velocity) <= 5) {
+            sliderLT = Math.round(REQUESTED_POSITION);
+            _velocity = 0;
+            REQUESTED_POSITION = false;
+          }
 
           plugin.css(edge,sliderLT);
           if (o.LAYER.length>0) {
