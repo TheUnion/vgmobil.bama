@@ -2,8 +2,6 @@
 
 //   $(document).bind("dragstart", function() { return false; });
 
- // p62602Event(6260211);
-   
     var 
       INITIALIZED = false,
       VIDEO_CONTROLLER = null;
@@ -25,18 +23,13 @@
         updateLazyloaders(eventObject.event);
 
         if(eventObject.event.indexOf("arrive_station") === 0) {
-          console.log("enabling clicks on event " + eventObject.event);
           CLICK_ENABLED = true;
         }
         else if(eventObject.event.indexOf("leave_station") === 0) {
-          console.log("disabling clicks on event " + eventObject.event);
           CLICK_ENABLED = false;
         }
         
-        console.log("Tracking event: " + eventObject.event);
-        // ##############TRACKING IMPL:
         if(eventObject.event.indexOf("start_interaction") === 0) {
-
           p62602Event(6260200); 
         }
         
@@ -45,8 +38,6 @@
         }
         
         if(eventObject.event.indexOf("arrive_station4") === 0) {
-
-          console.log('Trying to set poster');
 
           setPoster('assets/img/poster.jpg')
           p62602Event(6260202); 
@@ -57,7 +48,7 @@
         }
         
         if(eventObject.event.indexOf("arrive_station7") === 0) {
-          console.log("arriving at #7, setting right edge.");
+
           $('#parallax').parallaxSwipe.setEdge("right");
           p62602Event(6260204); 
         }
@@ -78,12 +69,6 @@
         if(eventObject.event.indexOf("leave_station7") === 0) {
           p62602Event(6260208); 
         }
-
-
-
-        /* EDIT: jt@kroma.no --- addded event trackers from Adssets() */ 
-
-// console.log('fake-click: ' + link2.href);
 
         if(eventObject.event.indexOf("click_lise") === 0) {
           p62602Event(6260209); 
@@ -108,9 +93,6 @@
           p62602Event(6260214); 
         }
 
-
-        /* EDIT: jt@kroma.no --- moved video event trackers from videocontroller to onEvent() */ 
-
         if(eventObject.event.indexOf("video_play") === 0 || eventObject.event.indexOf("video_resume") === 0) {
           p62602Event(6260215); 
         }
@@ -119,16 +101,11 @@
           p62602Event(6260216); 
         }
 
-
         if(eventObject.event.indexOf("video_finish") === 0) {
           p62602Event(6260220); 
         }
 
-        
-        ///###########################
-        // # tracking code here
-          events.push(eventObject);
-          // console.log(events);
+        events.push(eventObject);
       };
 
 
@@ -148,8 +125,6 @@
           // check if any of our on-demand loadees want to load on this event
 
           if (eventName === ONDEMAND_LOADERS[i].getAttribute("data-load-event")) {
-            console.log("loading bg for " + ONDEMAND_LOADERS[i].id + " on event " + eventName);
-            // ONDEMAND_LOADERS[i].classList.remove('lazystart');
             ONDEMAND_LOADERS[i].classList.add(ONDEMAND_LOADERS[i].id);
           }
         }
@@ -158,7 +133,7 @@
 
       var startSession = function() {
 
-        if(initialized()){
+        if(initialized()) {
           console.log("Already initialized, escaping");
           return;
         }
@@ -180,8 +155,12 @@
           }
           LAZY_LOADERS[i].classList.add(LAZY_LOADERS[i].id);
         }
+
+        setInitialized(true);
+
         var
           userEvent = { event: 'start_interaction', message: 'First swipe detected.', target: null, time: (new Date()).getTime()};
+
         onEvent(userEvent);
       };
 
@@ -203,14 +182,12 @@
         
         VIDEO_CONTROLLER.setPoster(img);
         return true;
-
       }
 
 
       var clickVideo = function(id) {
         var
           videoElement = document.getElementById(id || 'video1');
-
         
         if (!videoElement) {
           return false;
@@ -247,7 +224,6 @@
 
 
 
-
 /**
  *  HTMLVideo
  *  
@@ -257,7 +233,6 @@
  * @returns videoElement or null
  * 
  */
-
 
       var HTMLVideo = function(elem) {
 
@@ -274,35 +249,20 @@
               }
 
           videoController.play = function(resume) {
-
-
-              // #### Tracking ####
-              // p62602Event(6260215); 
-             // ##################
               video.play();
               onEvent({event: resume ? "video_resume" : "video_play"});
           };
 
-
-
-
           videoController.pause = function() {
-              // #### Tracking ####
-             // p62602Event(6260216); 
-            // ##################
               video.pause();
               onEvent({event: 'video_pause'});
           };
 
           videoController.stop = function() {
-              // #### Tracking ####
-              // p62602Event(6260216); 
-              // ##################
               video.pause();
               video.currentTime = 0;
               onEvent({event: 'video_stop'});
           };
-
 
           videoController.togglePause = function() {
             if (video.paused) {
@@ -338,7 +298,6 @@
           };
 
           videoController.setPoster = function(img) {
-            console.log('Applying poster image: ' + img);
             video.setAttribute("poster", img);   
           };
 
@@ -359,8 +318,6 @@
           targetpos = (target.offset.left + target.position.left),
           distance = 0;
 
-
-
         distance = Math.abs(clickpos - targetpos);
         return (distance<TOLERANCE);
       };
@@ -370,7 +327,7 @@
 
 /**
  * fakeClick : trigger a click event on a   <a href target>   -> a workaround for creating new windows from javascript 
- * without bothering the popup blocker thingsies
+ * without bothering the popup blocking thingsies
  *
  * This method was created by <http://stackoverflow.com/users/45433/crescent-fresh>
  * <http://stackoverflow.com/questions/1421584/how-can-i-simulate-a-click-to-an-anchor-tag/1421968#1421968>
@@ -379,8 +336,6 @@
  * 
  */   var fakeClick = function (event, anchorObj) {
       
-        console.log('fake-clicked: ' + anchorObj.href);
-
         if (anchorObj.click) {
           anchorObj.click()
         } else if(document.createEvent) {
@@ -398,12 +353,7 @@
       };
 
 
-
-
 /*-----------------------------------------------------------------------------------------------*/
-
-
-
 
       var getClickedElement = function (click) {
 
@@ -443,18 +393,14 @@
             return;
           }
         }
-        // we could probably come up with somthing more general, but not in the time available
+        // we could probably come up with something more general, but not in the time available
         else if( (clickpos>=11111 && (clickpos<=11325) )) {
           if((click.clientY>208) && (click.clientY<272)){
-            // console.log('fake-click: ' + link1.href);
             onEvent({event: "click_link1"});
-            // fakeClick(null, link1);
             return;
           }
           else if((click.clientY>(276) && (click.clientY<((348))))){
-            // console.log('fake-click: ' + link2.href);
             onEvent({event: "click_link2"});
-            // fakeClick(null, link2);
             return;
           }
         }
@@ -467,15 +413,6 @@
           }
         }
 
-
-
-
-        // for(var idx in clicktargets) {
-        //   target = clicktargets[idx];
-        //   if(hitTest(target, click)) {
-        //     return true;
-        //   }
-        // }
       return false;
       };
 
@@ -497,9 +434,6 @@
         $("#parallax").parallaxSwipe.SWIPE_ENABLED = true;          
 
       }
-
-
-
 
 
 
@@ -529,17 +463,10 @@
         ROAD_DECAY        = 0.9, // when leaving station
         ROAD_MOUSE_DECAY  = 0.9, // when leaving station
 
-        // STATION_SPEED     = 0.75, // when approaching station
-        // ROAD_SPEED        = 0.9, // when leaving station
-        // DECAY             = 0.75, // when approaching station
-        // MOUSEDOWN_DECAY   = 0.75, // when approaching station
-        // ROAD_DECAY        = 0.9, // when leaving station
-        // ROAD_MOUSE_DECAY  = 0.9, // when leaving station
-
         LISE_FLIPPED      = false,
         FARMER_FLIPPED    = false,
         TOLERANCE         = 100,
-
+        SWIPE_TOLERANCE   = 60,
 
         //store triggers as they occur
         triggers          = [],
@@ -629,7 +556,6 @@
 
 
 
-
       /**
        *  progresstimer()
        *
@@ -653,7 +579,13 @@
 
         if(!!position) {
           currentpos = startpos - position.left;
-
+          if(currentpos > SWIPE_TOLERANCE) {
+            if(!initialized()) {
+              startSession();
+              //setInitialized();
+              console.log("We have started interaction");
+            }
+          }
           // for..in normally not acceptable, but ok with this few elements
           var counter = 0, startAtIndex = 3;
           for (var key in stations) {
@@ -683,7 +615,7 @@
                   onEvent({ event: 'arrive_' + key, message: 'arriving at station ' + key, target: currentstation, time: time});
                   currentstation = key;
 
-                  // don't slow down at these stations
+                  // don't stop at these stations
                   if(counter === 5){
                     continue;
                   }
@@ -732,39 +664,16 @@
 
 
 
-
-
 /**
  *  Initialization 
  * 
  */
-
 
     // Hide the address bar in Mobile Safari
     setTimeout(function(){
       window.scrollTo(0, 1);
     }, 0);
 
-
-
-    /**
-     *  Swap to hi-res images for Retina displays
-     */
-    
-    // if (window.devicePixelRatio == 2) {
-    //   var images = $("img.hires");
-
-    //   /* loop through the images and make them hi-res */
-    //   for(var i = 0; i < images.length; i++) {
-
-    //     /* create new image name */
-    //     var imageType = images[i].src.substr(-4);
-    //     var imageName = images[i].src.substr(0, images[i].src.length - 4).replace('/img/', '/img/retina/');
-    //     imageName += "@2x" + imageType;
-    //     /* load retina image */
-    //     images[i].src = imageName; 
-    //   }
-    // }
 
 
     $("#parallax").parallaxSwipe( { DECAY: ROAD_DECAY, MOUSEDOWN_DECAY: ROAD_MOUSE_DECAY, SPEED_SPRING: ROAD_SPEED, BOUNCE_SPRING:0.1, 
@@ -808,9 +717,7 @@
             }
 
 
-          // document.getElementById('touchoutput').innerHTML += 'touchstart_parallax:' + dump + "px <br />";
-          
-          onClicked(result);
+          // onClicked(result);
 
           return true; });
 
@@ -823,29 +730,52 @@
             dump = '',
             trueX = 0, trueY = 0;
 
-
             if(typeof result.offsetLeft ==="number") {
               result.clientX = e.clientX;
               result.clientY = e.clientY;
-
 
               dump = "offsetLeft: " + e.target.offsetLeft + "\n";
               dump += "clientX: " + e.clientX + "\n";
               dump += "clientY: " + e.clientY + "\n";
               trueX = -result.offsetLeft + e.clientX + "\n";
               dump += "trueX: " + trueX + "\n";
-
             }            
 
-          onClicked(result);
           return true; 
         });
 
 
-    $('.recipe').bind('selectstart', function (e) { 
-      return true; });
+
+    $('#parallax').bind('touchmove', function (e) { 
+          var
+            result = {
+              offsetLeft : e.target['offsetLeft'],
+              offsetTop  : e.target['offsetTop']
+            };
+
+            if(typeof result.offsetLeft ==="number") {
+              result.clientX = e.clientX;
+              result.clientY = e.clientY;
+
+              dump = "offsetLeft: " + e.target.offsetLeft + "\n";
+              dump += "clientX: " + e.clientX + "\n";
+              dump += "clientY: " + e.clientY + "\n";
+              trueX = -result.offsetLeft + e.clientX + "\n";
+              dump += "trueX: " + trueX + "\n";
+            }            
+
+          return true; 
+        });
+
+
+    //window.removeEventListener('mousemove', touchMove, false);
+    //
+    //
+
+
+      $('.recipe').bind('selectstart', function (e) { 
+        return true; });
 
     initializetimer();
-
     });
   });

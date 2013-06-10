@@ -56,9 +56,9 @@ This will tell your #someInheritedDiv to apply the same styles as div.someBaseDi
         background-repeat:no-repeat;
         width:950px;
         height:572px;
-    } 
+    }
+​
 
-  ​
 
 ###Storyboard
 

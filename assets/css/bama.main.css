@@ -244,6 +244,7 @@
 
   }
 
+
   .layer3 {
     background-image     :  url('../img/cloud2.png'), 
                             url('../img/hill_middle_layer1_top1.png'), 
@@ -275,12 +276,12 @@
   }
 
 
-
   #foreground {
     position: absolute;
     top: 311px;
     left:0px;
   }
+
 
   #layer5 {
 
@@ -362,6 +363,7 @@
     width         : 80%;
   }
 
+
   .arrow {
     position      : absolute;
     top           : 176px;
@@ -390,6 +392,7 @@
     z-index: 12001;
   }
 
+
   .close {
     position  : absolute;
     top       : 24px;
@@ -405,6 +408,7 @@
     stroke  : #534741;
     fill    : #534741;
   }
+
 
   .white {
     color   : #ffffff;
