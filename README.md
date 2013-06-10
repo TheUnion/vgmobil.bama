@@ -4,8 +4,6 @@ Parallax scrolling "journey" by swiping horizontally, presenting local Norwegian
 
 
 
-
-
 ####Uses
 
 jQuery
