@@ -16,8 +16,8 @@ Uses assets from root version where possible
 
 
 ####Links
-* [Mobile version - Kroma development server]("http://kromaviews.no:8080/dev/games/bama/versions/mobile/iframe.html")
-* [Desktop version - Kroma development server]("http://kromaviews.no:8080/dev/games/bama/iframe.html")
+* [Mobile version - Kroma development server]("http://enfield.no:8080/dev/games/bama/versions/mobile/iframe.html")
+* [Desktop version - Kroma development server]("http://enfield.no:8080/dev/games/bama/iframe.html")
 
 
 

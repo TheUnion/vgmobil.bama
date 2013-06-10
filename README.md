@@ -68,16 +68,16 @@ This will tell your #someInheritedDiv to apply the same styles as div.someBaseDi
 ####STORYBOARD
 
 INTRO
-![Intro](http://www.kromaviews.no/dev/games/bama/assets/img/storyboard/bilreise_intro.jpg)
+![Intro](http://www.views.no/dev/games/bama/assets/img/storyboard/bilreise_intro.jpg)
 STATION 1 
-![Station #1](http://www.kromaviews.no/dev/games/bama/assets/img/storyboard/bilreise_station1.jpg)
+![Station #1](http://www.views.no/dev/games/bama/assets/img/storyboard/bilreise_station1.jpg)
 STATION 2 
-![Station #2](http://www.kromaviews.no/dev/games/bama/assets/img/storyboard/bilreise_station2.jpg)
+![Station #2](http://www.views.no/dev/games/bama/assets/img/storyboard/bilreise_station2.jpg)
 STATION 3 
-![Station #3](http://www.kromaviews.no/dev/games/bama/assets/img/storyboard/bilreise_station3.jpg)
+![Station #3](http://www.views.no/dev/games/bama/assets/img/storyboard/bilreise_station3.jpg)
 STATION 4 
-![Station #4](http://www.kromaviews.no/dev/games/bama/assets/img/storyboard/bilreise_station4.jpg)
+![Station #4](http://www.views.no/dev/games/bama/assets/img/storyboard/bilreise_station4.jpg)
 STATION 5 
-![Station #5](http://www.kromaviews.no/dev/games/bama/assets/img/storyboard/bilreise_station5.jpg)
+![Station #5](http://www.views.no/dev/games/bama/assets/img/storyboard/bilreise_station5.jpg)
 STATION 6 
-![Station #6](http://www.kromaviews.no/dev/games/bama/assets/img/storyboard/bilreise_station6.jpg)
+![Station #6](http://www.views.no/dev/games/bama/assets/img/storyboard/bilreise_station6.jpg)

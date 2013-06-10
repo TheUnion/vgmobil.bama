@@ -245,10 +245,22 @@
   }
 
   .layer3 {
-    background-image     : url('../img/hill_middle_layer1.png'), url('../img/cloud2.png');
-    background-position  : 0px 326px, 1000px 62px;
+    background-image     :  url('../img/cloud2.png'), 
+                            url('../img/hill_middle_layer1_top1.png'), 
+                            url('../img/hill_middle_layer1_top2.png'),
+                            url('../img/hill_middle_layer1_top3.png'), 
+                            url('../img/hill_middle_layer1_top4_sheep.png'), 
+                            url('../img/hill_middle_layer1_top5_cows.png'),
+                            url('../img/hill_middle_layer1.png');
+    background-position  :  1000px 62px,
+                             780px 256px,
+                            1440px 256px,
+                            2064px 252px,
+                            2756px 256px,
+                            3372px 252px,
+                            0px 326px;
     background-origin    : content-box;    
-    background-repeat    : repeat-x, no-repeat;    
+    background-repeat    : no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, repeat-x;    
   }
 
 
@@ -1241,10 +1253,10 @@
   }
 
   .hint {
-   -webkit-animation    : hint 0.2s ease-in-out infinite;
-       -moz-animation   : hint 0.2s ease-in-out infinite;
-         -o-animation   : hint 0.2s ease-in-out infinite;
-            animation   : hint 0.2s ease-in-out infinite;
+   -webkit-animation    : hint 0.5s ease-in-out infinite;
+       -moz-animation   : hint 0.5s ease-in-out infinite;
+         -o-animation   : hint 0.5s ease-in-out infinite;
+            animation   : hint 0.5s ease-in-out infinite;
   }
 
   @-webkit-keyframes arrow {

@@ -1196,10 +1196,10 @@
   }
 */
   .hint {
-   -webkit-animation    : hint 0.4s ease-in-out infinite;
-       -moz-animation   : hint 0.4s ease-in-out infinite;
-         -o-animation   : hint 0.4s ease-in-out infinite;
-            animation   : hint 0.4s ease-in-out infinite;
+   -webkit-animation    : hint 0.6s ease-in-out infinite;
+       -moz-animation   : hint 0.6s ease-in-out infinite;
+         -o-animation   : hint 0.6s ease-in-out infinite;
+            animation   : hint 0.6s ease-in-out infinite;
   }
 
 

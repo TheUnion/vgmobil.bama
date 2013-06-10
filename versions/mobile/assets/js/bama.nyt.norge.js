@@ -211,7 +211,6 @@
         }
         
         VIDEO_CONTROLLER.setPoster(img);
-        console.log("MAYBE WORKED");
         return true;
 
       }
