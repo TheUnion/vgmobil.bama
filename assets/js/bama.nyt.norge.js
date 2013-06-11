@@ -1,6 +1,6 @@
   $(document).ready(function () {
 
-//   $(document).bind("dragstart", function() { return false; });
+   $(document).bind("dragstart", function() { return false; });
 
     var 
       INITIALIZED = false,
@@ -9,25 +9,83 @@
     $(function() {
 
 
+
+      var changeStartScreenAnimation = function (animation, delay, repeat, time) {
+
+        var
+          animation = animation || 'bounce',
+          delay     = delay     || 5000,
+          repeat    = repeat    || false,
+          time      = time      || false;
+
+        if(initialized()) {
+          return;
+        }
+        setStartScreenAnimation(animation, repeat, time);
+
+        if(repeat) {
+          setTimeout(changeStartScreenAnimation, delay, animation, delay, repeat, time);
+        }
+      };
+
+
+      var removeStartScreenAnimation = function (animation) {
+        var
+          animation = animation || false;
+
+        console.log("Stopping animation, car is: " + car);
+        car.classList.remove('animated');
+        if(animation) {
+          console.log("Removing animation: " + animation);
+          car.classList.remove(animation);
+        }
+      };
+
+
+      var setStartScreenAnimation = function (animation, repeat, time) {
+        var
+          animation = animation || 'bounce',
+          repeat    = repeat    || false,
+          time      = time      || false;
+
+        car.classList.add(animation);
+        console.log("car is : " + car + ", requested animation : " + animation);
+        console.log("repeat is : " + repeat);
+        if(time) {
+          setTimeout(removeStartScreenAnimation, time, animation);
+        }
+      };
+
+
       var setInitialized = function() {
         INITIALIZED = true;
-      }
+      };
 
       var initialized = function() {
         return INITIALIZED;
-      }
+      };
+
+      var isAndroid = function () {
+        return navigator.userAgent.toLowerCase().indexOf("android") > -1; //&& ua.indexOf("mobile");
+      };
+
+      var openLink = function (link)  {
+        if(isAndroid()) {
+          // Android won't accept our fake-click hack
+          console.log("Opening link the android way: " + link.href);
+          window.open(link.href);
+        }
+        else {
+          console.log("Opening link the fake-click way: " + link.href);
+          fakeClick(null, link);        
+        }
+      };
+
 
       // this is where we send all trackable events
       var onEvent = function (eventObject) {
 
         updateLazyloaders(eventObject.event);
-
-        if(eventObject.event.indexOf("arrive_station") === 0) {
-          CLICK_ENABLED = true;
-        }
-        else if(eventObject.event.indexOf("leave_station") === 0) {
-          CLICK_ENABLED = false;
-        }
         
         if(eventObject.event.indexOf("start_interaction") === 0) {
           p62602Event(6260200); 
@@ -106,6 +164,9 @@
         }
 
         events.push(eventObject);
+
+        console.log("Event triggered: " + eventObject.event);
+
       };
 
 
@@ -166,7 +227,6 @@
 
 
 
-
       var setPoster = function(img) {
         var
           videoElement = document.getElementById('video1');
@@ -182,7 +242,7 @@
         
         VIDEO_CONTROLLER.setPoster(img);
         return true;
-      }
+      };
 
 
       var clickVideo = function(id) {
@@ -335,6 +395,8 @@
  * To call programmatically, probably just fakeClick(null, <a>)
  * 
  */   var fakeClick = function (event, anchorObj) {
+
+        console.log("Faking a click");
       
         if (anchorObj.click) {
           anchorObj.click()
@@ -357,11 +419,6 @@
 
       var getClickedElement = function (click) {
 
-        // escape early
-        if(!CLICK_ENABLED) {
-          return;
-        }
-
         var
           target        = null,
           sceneLeft     = scene.getBoundingClientRect().left,
@@ -380,15 +437,15 @@
 
 
         // a dirty little gollum of a hack
-        if( (clickpos>=4812) && (clickpos<=5042) ) {
-          if((click.clientY>232) && (click.clientY<282)){
+        if( (clickpos>=(4606 + 280)) && (clickpos<=(4606 + 280 + 125)) ) {
+          if((click.clientY>230) && (click.clientY<275)){
             flipFarmer();
             return;
           }
         }
         // it'ss hideousss
-        else if( (clickpos>=6380) && (clickpos<=6600) ) {
-          if((click.clientY>232) && (click.clientY<282)){
+        else if( (clickpos>=(6180 + 300)) && (clickpos<=(6180 + 300 + 125)) ) {
+          if((click.clientY>240) && (click.clientY<285)){
             flipLise();
             return;
           }
@@ -396,10 +453,12 @@
         // we could probably come up with something more general, but not in the time available
         else if( (clickpos>=11111 && (clickpos<=11325) )) {
           if((click.clientY>208) && (click.clientY<272)){
+            openLink(link1);
             onEvent({event: "click_link1"});
             return;
           }
           else if((click.clientY>(276) && (click.clientY<((348))))){
+            openLink(link2);
             onEvent({event: "click_link2"});
             return;
           }
@@ -420,18 +479,12 @@
       var onClicked = function(click) {
         var
           result = getClickedElement(click);
-
-        if(initialized()){
-          return;
-        }
-      startSession();
-
       };
 
 
       var enableSwipe = function () {
         $("#parallax").parallaxSwipe.SWIPE_ENABLED = true;          
-      }
+      };
 
 
 
@@ -474,6 +527,8 @@
         VIDEO_CONTROLLER  = null;
         CLICK_ENABLED     = false;
 
+        car               = document.getElementById('car'),
+
         debugpanel        = document.getElementById('debugoutput'),
         parallax          = document.getElementById('parallax'),
         scene             = document.getElementById('layer5'),
@@ -504,15 +559,15 @@
         // what. Even if the event is captured by enemy code, we can re-fire it
         // programmatically
 
-        for(var i = 0, count = list.length; i < count; i++) {
-          clicktargets[list[i].id] = {
-            element : list[i],
-            offset : $(list[i]).offset(),
-            position : $(list[i]).position(),
-            width : list[i].offsetWidth,
-            height : list[i].offsetHeight
-            }
-          }
+        // for(var i = 0, count = list.length; i < count; i++) {
+        //   clicktargets[list[i].id] = {
+        //     element : list[i],
+        //     offset : $(list[i]).offset(),
+        //     position : $(list[i]).position(),
+        //     width : list[i].offsetWidth,
+        //     height : list[i].offsetHeight
+        //     }
+        //   }
 
 
 
@@ -572,7 +627,6 @@
             startdate = (new Date()).toString();
             starttime = (new Date()).getTime();
             starttimetext = (new Date()).getTime().toString();
-            //console.log("");
           }
 
         if(!!position) {
@@ -580,8 +634,7 @@
           if(currentpos > SWIPE_TOLERANCE) {
             if(!initialized()) {
               startSession();
-              //setInitialized();
-              console.log("We have started interaction");
+              console.log("Interaction detected, preloading initiated");
             }
           }
           // for..in normally not acceptable, but ok with this few elements
@@ -601,6 +654,7 @@
               }
               if(Math.abs(x) > (STATION_MARGIN + 250)) {
                 if( (currentstation === key) ) {
+                  console.log ("x is: " + x);
                   $('#parallax').parallaxSwipe.setSpeed(ROAD_SPEED, ROAD_DECAY, ROAD_MOUSE_DECAY);
                   var
                     userEvent = { event: 'leave_' + key, message: 'leaving station ' + key, target: currentstation, time: time};
@@ -645,6 +699,9 @@
           count = stations.length;
         }
         timer = setInterval(progresstimer, UPDATE_INTERVAL);
+        
+        //start default animation loop for start screen
+        changeStartScreenAnimation("bounce", 8000, true, 3000);
       };
 
 
@@ -684,91 +741,22 @@
     $('.parallax_layer').css('width',layerWidth);
 
 
-    $('#parallax').bind('touchstart', function (e) { 
-         var
-            result = {
-              offsetLeft : e.target['offsetLeft'],
-              offsetTop  : e.target['offsetTop']
-            },
-            dump = '',
-            trueX = 0,
-            trueY = 0;
+    $('#parallax').bind('click', function (e) { 
+        var
+          result = {
+            offsetLeft : e.target['offsetLeft'],
+            offsetTop  : e.target['offsetTop']
+          };
 
+        if(typeof result.offsetLeft ==="number") {
+          result.clientX = e.clientX;
+          result.clientY = e.clientY;
+        }            
 
-          var x = e.originalEvent.touches[0].pageX;//relative position of html,body document
-          var y = e.originalEvent.touches[0].pageY;//relative position of html,body document
-          
-          var x0 = x - window.scrollX;
-          var y0 = y - window.scrollY;
+        onClicked(result);
+        return true; 
+      });
 
-
-            if(typeof result.offsetLeft !== "number") {
-              console.log('no offset');
-              dump = "offsetLeft: " + e.target.offsetLeft + "<br />";
-            }
-            else {
-              result.x = x;
-              result.y = y;
-              result.clientX = x0;
-              result.clientY = y0;
-              console.log(result);
-            }
-
-
-          // onClicked(result);
-
-          return true; });
-
-    $('#parallax').bind('mousedown', function (e) { 
-          var
-            result = {
-              offsetLeft : e.target['offsetLeft'],
-              offsetTop  : e.target['offsetTop']
-            },
-            dump = '',
-            trueX = 0, trueY = 0;
-
-            if(typeof result.offsetLeft ==="number") {
-              result.clientX = e.clientX;
-              result.clientY = e.clientY;
-
-              dump = "offsetLeft: " + e.target.offsetLeft + "\n";
-              dump += "clientX: " + e.clientX + "\n";
-              dump += "clientY: " + e.clientY + "\n";
-              trueX = -result.offsetLeft + e.clientX + "\n";
-              dump += "trueX: " + trueX + "\n";
-            }            
-
-          return true; 
-        });
-
-
-
-    $('#parallax').bind('touchmove', function (e) { 
-          var
-            result = {
-              offsetLeft : e.target['offsetLeft'],
-              offsetTop  : e.target['offsetTop']
-            };
-
-            if(typeof result.offsetLeft ==="number") {
-              result.clientX = e.clientX;
-              result.clientY = e.clientY;
-
-              dump = "offsetLeft: " + e.target.offsetLeft + "\n";
-              dump += "clientX: " + e.clientX + "\n";
-              dump += "clientY: " + e.clientY + "\n";
-              trueX = -result.offsetLeft + e.clientX + "\n";
-              dump += "trueX: " + trueX + "\n";
-            }            
-
-          return true; 
-        });
-
-
-    //window.removeEventListener('mousemove', touchMove, false);
-    //
-    //
 
 
       $('.recipe').bind('selectstart', function (e) { 

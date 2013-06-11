@@ -17,15 +17,14 @@
 
 
 
-  /*** -- FIX  -- ***/
   //flags to indicate if the layers have reached the edges
   var leftEdge  = true;
   var rightEdge = false;
-  /******/
+  var REQUESTED_POSITION = false;
 
 
-    var sliderW = parseInt(panel.css('width'),10) * panel.length;
-    VIEWPORT    = vw; edge='left'; panel.css('float','left'); plugin.css('width',sliderW); sliderLen = sliderW;
+  var sliderW = parseInt(panel.css('width'),10) * panel.length;
+  VIEWPORT    = vw; edge='left'; panel.css('float','left'); plugin.css('width',sliderW); sliderLen = sliderW;
 
   plugin.css(edge,0);
 
@@ -45,7 +44,8 @@
 
 
     // this is our animation loop, so escape early if there's nothing to do
-    if (_mouseDown) {
+    if (_mouseDown && !REQUESTED_POSITION && (sliderLT > -10924)) {
+      console.log("sliderLT:" + sliderLT);
       _velocity *= o.MOUSEDOWN_DECAY;
     } else {
       _velocity *= o.DECAY;
@@ -65,6 +65,7 @@
           if(Math.abs(_velocity) <= 5) {
             sliderLT = Math.round(REQUESTED_POSITION);
             _velocity = 0;
+            console.log("We have reached position " + REQUESTED_POSITION);
             REQUESTED_POSITION = false;
           }
 
@@ -154,8 +155,9 @@
 
 
   var touchStart=function(e) { 
-
-    REQUESTED_POSITION = false;
+    if(!!REQUESTED_POSITION) {
+      return;
+    }
 
     if (!_mouseDown) {
       if (hasTouch) { 
@@ -175,19 +177,14 @@
         _mouseDownXY = _lastMouseDownXY = ie == true ? e.clientX : e.pageX;
         _mouseDownLT = document.getElementById(plugin.attr('id')).offsetLeft;
       
-  /****/
-  //Adding variables to evaluate vertical swipe
-  /*****/
-     
+        //variables to evaluate vertical swipe
         _verticalXY = _lastVerticalDownXY = ie == true ? e.clientY : e.pageY;
         _verticalLT = document.getElementById(plugin.attr('id')).offsetTop;
 
-
-
-      //set the flags for the edges you cannot start swipe left if you have reached the left edge, same for right
+      //set the flags for the edges so you cannot start swipe left if you have reached the left edge, same for right
       if(_mouseDownLT == 0) { 
         leftEdge = true; 
-      } else if ( _mouseDownLT <= -11420) {
+      } else if ( _mouseDownLT <= -10924) {
         rightEdge = true;
         } else {
           leftEdge = false;
@@ -204,6 +201,13 @@
     Custom adaptations to plugin
 
    */
+
+
+
+  this.parallaxSwipe.stop = function() { 
+    _velocity = 0;
+  };
+
 
   this.parallaxSwipe.setSpeed = function(newspring, decay, mousedecay) { 
     var
@@ -271,10 +275,13 @@
 
       if (leftEdge && consoleVar>0 || (consoleVar>0)) {
         rightEdge = false;
-      } else if (rightEdge && consoleVar <-11420 || ( consoleVar< -11420)) {
+      } else if (rightEdge && consoleVar <-10924 || ( consoleVar< -10924)) {
         leftEdge = false;
         }
         else {
+          if(MouseXY -_mouseDownXY > 10924) {
+            // mouseXY = mouseXY - (10924 - (MouseXY -_mouseDownXY));
+          }
           plugin.css(edge, _mouseDownLT + (MouseXY - _mouseDownXY));
           if (o.LAYER.length>0) {
             $.each(o.LAYER, function(index, value) {
@@ -308,26 +315,25 @@
 
 
   var isHorizontalSwipe = function ( deltaMov, deltaMovY) { // evaluate swipe direction
-                  
-          var horzSwipe;
+            
+    var 
+      horzSwipe;
 
-          if (deltaMovY == 0) {
-              horzSwipe=true;
+    if (deltaMovY == 0) {
+        horzSwipe=true;
+    } else if ((deltaMov/deltaMovY) <= 0.37 && (deltaMov/deltaMovY) >= -0.37 ){
+        horzSwipe= false;
+      } else {
+         horzSwipe= true;
+      }
+    return horzSwipe;
+  }; 
 
-          }else if ((deltaMov/deltaMovY) <= 0.37 && (deltaMov/deltaMovY) >= -0.37 ){
-              
-              horzSwipe= false;
-
-            } else {
-               horzSwipe= true;
-            }
-           
-          return horzSwipe;
-        }; 
 
     hasTouch = 'ontouchstart' in window;
     plugin.bind('mousedown touchstart', function(event){ touchStart(event); }); 
     plugin.bind('mousemove touchmove', function(event){ touchMove(event); }); 
     plugin.bind('mouseup touchend', function(event){ touchEnd(event); });
   }
-  })(jQuery)
+
+})(jQuery);

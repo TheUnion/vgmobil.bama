@@ -599,7 +599,7 @@
   #farmer {
     position  : absolute;
     top       : 302px;
-    left      : 380px;
+    left      : 432px;
     width     : 73px;
     height    : 127px;
     z-index: 102;
@@ -610,7 +610,7 @@
     background-origin: content-box;
     background-position: 0px 0px;
     top       : 302px;
-    left      : 380px;
+    left      : 432px;
     width     : 73px;
     height    : 127px;
   }
@@ -638,7 +638,7 @@
   
   #farmer_tips {
     top       : 40px;
-    left      : 208px;
+    left      : 228px;
     width: 246px;
     height : 112px;
 
@@ -669,22 +669,20 @@
 
 
   #farmer_text {
-    padding: 16px;
-    top                 : 90px;
-    /*background          : transparent;*/
+    padding       : 16px;
+    top           : 90px;
   }
 
 
-
-
   #lise_tips {
-    top       : 40px;
-    left      : 150px;
+    top       : 50px;
+    left      : 248px;
     width     : 246px;
     height    : 112px;
     z-index   : 10000;
     overflow  : visible;
   }
+
 
   .lise_tips {
     background-image: url('../img/lise_large.png');
@@ -692,7 +690,6 @@
     background-position: 0px 0px;
     background-origin: content-box;
   }
-
 
 
   #lise_recipe {
@@ -716,16 +713,17 @@
   #lise {
     position  : absolute;
     top       : 302px;    
-    left      : 324px;    
+    left      : 432px;    
     width     : 77px;
     height    : 126px;
     z-index   : 102;
   }
 
+
   .lise {
     position  : absolute;
     top       : 302px;    
-    left      : 324px;    
+    left      : 432px;    
     width     : 77px;
     height    : 126px;
     z-index   : 102;
@@ -734,10 +732,6 @@
     background-position : top left;
     background-origin   : content-box;
   }
-
-
-
-        <img src="assets/img/salat_tips.jpg" />
 
 
   #farmer_salat {
@@ -1461,32 +1455,33 @@
 
   @-webkit-keyframes bounce {
     0%, 20%, 50%, 80%, 100% {-webkit-transform: translateX(0);}
-    40% {-webkit-transform: translateX(-20px);}
-    60% {-webkit-transform: translateX(-11px);}
+    40% {-webkit-transform: translateY(-4px);}
+    60% {-webkit-transform: translateY(-9px);}
   }
 
   @-moz-keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {-moz-transform: translateX(0);}
-    40% {-moz-transform: translateX(-20px);}
-    60% {-moz-transform: translateX(-11px);}
+    0%, 20%, 50%, 80%, 100% {-moz-transform: translateY(0);}
+    40% {-moz-transform: translateY(-4px);}
+    60% {-moz-transform: translateY(-9px);}
   }
 
   @-o-keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {-o-transform: translateX(0);}
-    40% {-o-transform: translateX(-20px);}
-    60% {-o-transform: translateX(-11px);}
+    0%, 20%, 50%, 80%, 100% {-o-transform: translateY(0);}
+    40% {-o-transform: translateY(-4px);}
+    60% {-o-transform: translateY(-9px);}
   }
   @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {transform: translateX(0);}
-    40% {transform: translateX(-20px);}
-    60% {transform: translateX(-11px);}
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-4px);}
+    60% {transform: translateY(-9px);}
   }
 
+
   .bounce {
-    -webkit-animation-name: bounce;
-       -moz-animation-name: bounce;
-         -o-animation-name: bounce;
-            animation-name: bounce;
+   -webkit-animation    : bounce 0.5s ease-in infinite;
+       -moz-animation   : bounce 0.5s ease-in infinite;
+         -o-animation   : bounce 0.5s ease-in infinite;
+            animation   : bounce 0.5s ease-in infinite;
   }
 
 

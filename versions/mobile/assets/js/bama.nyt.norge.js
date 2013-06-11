@@ -6,42 +6,87 @@
     $(function() {
 
 
+      var changeStartScreenAnimation = function (animation, delay, repeat, time) {
+
+        var
+          animation = animation || 'bounce',
+          delay     = delay     || 5000,
+          repeat    = repeat    || false,
+          time      = time      || false;
+
+        if(initialized()) {
+          return;
+        }
+
+        setStartScreenAnimation(animation, repeat, time);
+
+        if(repeat) {
+          setTimeout(changeStartScreenAnimation, delay, animation, delay, repeat, time);
+        }
+
+      };
+
+
+      var removeStartScreenAnimation = function (animation) {
+        var
+          animation = animation || false;
+
+        console.log("Stopping animation, car is: " + car);
+        car.classList.remove('animated');
+        if(animation) {
+          console.log("Removing animation: " + animation);
+          car.classList.remove(animation);
+        }
+      };
+
+
+      var setStartScreenAnimation = function (animation, repeat, time) {
+        var
+          animation = animation || 'bounce',
+          repeat    = repeat    || false,
+          time      = time      || false;
+
+        car.classList.add(animation);
+        console.log("car is : " + car + ", requested animation : " + animation);
+        console.log("repeat is : " + repeat);
+        if(time) {
+          setTimeout(removeStartScreenAnimation, time, animation);
+        }
+      };
+
+
+
+
       var setInitialized = function() {
         INITIALIZED = true;
-      }
+      };
 
       var initialized = function() {
         return INITIALIZED;
-      }
+      };
 
       var isAndroid = function () {
         return navigator.userAgent.toLowerCase().indexOf("android") > -1; //&& ua.indexOf("mobile");
-      }
+      };
 
 
       var openLink = function (link)  {
-        if(isAndroid) {
-          // Android won't accept our hack
-          window.location = link.href;
+        if(isAndroid()) {
+          // Android won't accept our fake-click hack
+          console.log("Opening link the android way: " + link.href);
+          window.open(link.href);
+          // window.location = link.href;
         }
         else {
+          console.log("Opening link the fake-click way: " + link.href);
           fakeClick(null, link);        
         }
-      }
+      };
 
      // this is where we send all trackable events
       var onEvent = function (eventObject) {
 
         updateLazyloaders(eventObject.event);
-
-        if(eventObject.event.indexOf("arrive_station") === 0) {
-          console.log("enabling clicks on event " + eventObject.event);
-          CLICK_ENABLED = true;
-        }
-        else if(eventObject.event.indexOf("leave_station") === 0) {
-          console.log("disabling clicks on event " + eventObject.event);
-          CLICK_ENABLED = false;
-        }
         
         console.log("Tracking event: " + eventObject.event);
         // ##############TRACKING IMPL:
@@ -68,7 +113,6 @@
         
         if(eventObject.event.indexOf("arrive_station7") === 0) {
           console.log("arriving at #7, setting right edge.");
-          $('#parallax').parallaxSwipe.setEdge("right");
           p62601Event(6260104); 
         }
         
@@ -131,18 +175,13 @@
         if(eventObject.event.indexOf("video_finish") === 0) {
           p62601Event(6260120); 
         }
-
         
-        ///###########################
-        // # tracking code here
-          events.push(eventObject);
-          // console.log(events);
+        events.push(eventObject);
       };
 
 
 
       var updateLazyloaders = function (eventName) {
-
         var 
           eventName = eventName || false,
           loadEvent = false;
@@ -155,8 +194,6 @@
           // check if any of our on-demand loadees want to load on this event
 
           if (eventName === ONDEMAND_LOADERS[i].getAttribute("data-load-event")) {
-            console.log("loading bg for " + ONDEMAND_LOADERS[i].id + " on event " + eventName);
-            // ONDEMAND_LOADERS[i].classList.remove('lazystart');
             ONDEMAND_LOADERS[i].classList.add(ONDEMAND_LOADERS[i].id);
           }
         }
@@ -198,14 +235,11 @@
         var
           videoElement = document.getElementById('video1');
 
-        console.log("Setting POSTER");
         if (!videoElement) {
-          console.log("No VIDEOELEMENTR");
           return false;
         }
         if(!VIDEO_CONTROLLER) {
           if(false === (VIDEO_CONTROLLER = HTMLVideo(videoElement))){
-            console.log("STILL NO CONTROLLLER");
             return false;
           }
         }
@@ -213,7 +247,7 @@
         VIDEO_CONTROLLER.setPoster(img);
         return true;
 
-      }
+      };
 
 
       var clickVideo = function(id) {
@@ -295,17 +329,11 @@
 
 
           videoController.pause = function() {
-              // #### Tracking ####
-             // p62601Event(6260116); 
-            // ##################
               video.pause();
               onEvent({event: 'video_pause'});
           };
 
           videoController.stop = function() {
-              // #### Tracking ####
-              // p62601Event(6260116); 
-              // ##################
               video.pause();
               video.currentTime = 0;
               onEvent({event: 'video_stop'});
@@ -415,11 +443,6 @@
 
       var getClickedElement = function (click) {
 
-        // // escape early
-        // if(!CLICK_ENABLED) {
-        //   return;
-        // }
-
         var
           target        = null,
           sceneLeft     = scene.getBoundingClientRect().left,
@@ -430,88 +453,63 @@
 
         if(LISE_FLIPPED) {
           flipLise();
-//          return;
         }
 
         if(FARMER_FLIPPED) {
           flipFarmer();
- //         return;
         }
 
 
         // a dirty little gollum of a hack
-        if( (clickpos>=4750) && (clickpos<=4920) ) {
-          if((click.clientY>45) && (click.clientY<100)){
+        if( (clickpos>=4780) && (clickpos<=5000) ) {
+          if((click.clientY>30) && (click.clientY<90)){
             flipFarmer();
             return;
           }
         }
         // it'ss hideousss
-        else if( (clickpos>=6310) && (clickpos<=6524) ) {
-          if((click.clientY>40) && (click.clientY<90)){
+        else if( (clickpos>=6340) && (clickpos<=6560) ) {
+          if((click.clientY>30) && (click.clientY<90)){
             flipLise();
             return;
           }
         }
         // we could probably come up with something more general, but not in the time available
         else if( (clickpos>=11050 && (clickpos<=11300) )) {
-          if((click.clientY>68) && (click.clientY<114)){
-            console.log('fake-click ('+click.clientX + ", " + click.clientY + ") : "  + link1.href);
+          if((click.clientY>40) && (click.clientY<95)){
+            onEvent({event: "click_link1"});
             openLink(link1);
             return;
           }
-          else if((click.clientY>(126) && (click.clientY<((176))))){
-            console.log('fake-click ('+click.clientX + ", " + click.clientY + ") : "  + link2.href);
-            fakeClick(null, link2);
+          else if((click.clientY>(100) && (click.clientY<((155))))){
+            onEvent({event: "click_link2"});
+            openLink(link2);
             return;
           }
         }
         // click on video
         else if( (clickpos>=(9224 + 106) && (clickpos<=(9224 + 106 + 263)) )) {
           if(click.clientY>66 && click.clientY<178){
-            console.log('click on video: ' + link2.href);
             clickVideo();
             return;
           }
         }
-
-
-
-
-        // for(var idx in clicktargets) {
-        //   target = clicktargets[idx];
-        //   if(hitTest(target, click)) {
-        //     return true;
-        //   }
-        // }
       return false;
       };
 
 
       var onClicked = function(click) {
-        var
-          result = getClickedElement(click);
-
-        if(initialized()){
-          return;
-        }
-      startSession();
+        return getClickedElement(click);
       };
 
 
       var enableSwipe = function () {
         $("#parallax").parallaxSwipe.SWIPE_ENABLED = true;          
-      }
+      };
 
 
 
-
-
-
-
-
-    //variables global to our scope
-
+      //variables global to our scope
       var 
         timer             = null,
         loaded            = null,
@@ -534,27 +532,20 @@
         ROAD_DECAY        = 0.9, // when leaving station
         ROAD_MOUSE_DECAY  = 0.9, // when leaving station
 
-        // STATION_SPEED     = 0.75, // when approaching station
-        // ROAD_SPEED        = 0.9, // when leaving station
-        // DECAY             = 0.75, // when approaching station
-        // MOUSEDOWN_DECAY   = 0.75, // when approaching station
-        // ROAD_DECAY        = 0.9, // when leaving station
-        // ROAD_MOUSE_DECAY  = 0.9, // when leaving station
-
         LISE_FLIPPED      = false,
         FARMER_FLIPPED    = false,
         TOLERANCE         = 100,
+        SWIPE_TOLERANCE   = 60,
 
+ 
         INITIALIZED       = false,
         VIDEO_CONTROLLER  = null;
-
 
         //store triggers as they occur
         triggers          = [],
         events            = [],
         LAZY_LOADERS      = null;
         ONDEMAND_LOADERS  = null; 
-        CLICK_ENABLED     = false;
 
         debugpanel        = document.getElementById('debugoutput'),
         parallax          = document.getElementById('parallax'),
@@ -599,12 +590,10 @@
 
 
 
-
 /**
  *  functions
  *
  */  
-
       var flipLise = function() {
         if(!LISE_FLIPPED) {
           onEvent({event: "click_lise"});
@@ -659,6 +648,19 @@
         if(!!position) {
           currentpos = startpos - position.left;
 
+          if(currentpos > SWIPE_TOLERANCE) {
+            if(!initialized()) {
+              startSession();
+              //setInitialized();
+              console.log("Interaction detected");
+            }
+          }
+
+          if(currentpos >= 11420) {
+            console.log("currentpos: " +  currentpos);
+            $('#parallax').parallaxSwipe.stop();
+            $('#parallax').parallaxSwipe.setEdge("right");
+          }
           // for..in normally not acceptable, but ok with this few elements
           var counter = 0, startAtIndex = 3;
           for (var key in stations) {
@@ -720,6 +722,9 @@
           count = stations.length;
         }
         timer = setInterval(progresstimer, UPDATE_INTERVAL);
+
+        //start default animation loop for start screen
+        changeStartScreenAnimation("bounce", 8000, true, 3000);
       };
 
 
@@ -737,13 +742,10 @@
 
 
 
-
-
 /**
  *  Initialization 
  * 
  */
-
 
     // Hide the address bar in Mobile Safari
     setTimeout(function(){
@@ -771,81 +773,29 @@
     //   }
     // }
 
-
     $("#parallax").parallaxSwipe( { DECAY: ROAD_DECAY, MOUSEDOWN_DECAY: ROAD_MOUSE_DECAY, SPEED_SPRING: ROAD_SPEED, BOUNCE_SPRING:0.1, 
           HORIZ:true, SNAPDISTANCE:20, DISABLELINKS: false, LAYER:[ 20, 20, 3.2, 1.6, 1, 0.9 ] });
-
 
     var layerWidth = $('#parallax').parallaxSwipe.getSize();
 
     // set width for all parallax stations
     $('.parallax_layer').css('width',layerWidth);
 
+    $('#parallax').bind('click', function (e) { 
+        var
+          result = {
+            offsetLeft : e.target['offsetLeft'],
+            offsetTop  : e.target['offsetTop']
+          };
 
-    $('#parallax').bind('touchstart', function (e) { 
-         var
-            result = {
-              offsetLeft : e.target['offsetLeft'],
-              offsetTop  : e.target['offsetTop']
-            },
-            dump = '',
-            trueX = 0,
-            trueY = 0;
+        if(typeof result.offsetLeft ==="number") {
+          result.clientX = e.clientX;
+          result.clientY = e.clientY;
+        }            
 
-
-          var x = e.originalEvent.touches[0].pageX;//relative position of html,body document
-          var y = e.originalEvent.touches[0].pageY;//relative position of html,body document
-          
-          var x0 = x - window.scrollX;
-          var y0 = y - window.scrollY;
-
-
-            if(typeof result.offsetLeft !== "number") {
-              console.log('no offset');
-              dump = "offsetLeft: " + e.target.offsetLeft + "<br />";
-            }
-            else {
-              result.x = x;
-              result.y = y;
-              result.clientX = x0;
-              result.clientY = y0;
-              console.log(result);
-            }            
-
-
-          // document.getElementById('touchoutput').innerHTML += 'touchstart_parallax:' + dump + "px <br />";
-          
-          onClicked(result);
-
-          return true; });
-
-    $('#parallax').bind('mousedown', function (e) { 
-          var
-            result = {
-              offsetLeft : e.target['offsetLeft'],
-              offsetTop  : e.target['offsetTop']
-            },
-            dump = '',
-            trueX = 0, trueY = 0;
-
-
-            if(typeof result.offsetLeft ==="number") {
-              result.clientX = e.clientX;
-              result.clientY = e.clientY;
-
-
-              dump = "offsetLeft: " + e.target.offsetLeft + "\n";
-              dump += "clientX: " + e.clientX + "\n";
-              dump += "clientY: " + e.clientY + "\n";
-              trueX = -result.offsetLeft + e.clientX + "\n";
-              dump += "trueX: " + trueX + "\n";
-
-            }            
-
-          onClicked(result);
-          return true; 
-        });
-
+        onClicked(result);
+        return true; 
+      });
 
 
     $('.recipe').bind('selectstart', function (e) { 

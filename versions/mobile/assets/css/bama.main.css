@@ -141,11 +141,6 @@
 
 
   .verybig {
-/*    text-align    : center;
-    font-size     : 52px;
-    line-height   : 42px;
-*/
-
     /* same as "big", in the mobile version */
     text-align  : center;
     font-size   : 34px;
@@ -254,6 +249,29 @@
 
   }
 
+
+  .layer3 {
+    background-image     :  url('../img/cloud2.png'), 
+                            url('../img/hill_middle_layer1_top1.png'), 
+                            url('../img/hill_middle_layer1_top2.png'),
+                            url('../img/hill_middle_layer1_top3.png'), 
+                            url('../img/hill_middle_layer1_top4_sheep.png'), 
+                            url('../img/hill_middle_layer1_top5_cows.png'),
+                            url('../img/hill_middle_layer1.png');
+    background-position  :  1000px 62px,
+                             780px 72px,
+                            1436px 72px,
+                            2064px 68px,
+                            2756px 72px,
+                            3372px 68px,
+                            0px 144px;
+    background-origin    : content-box;    
+    background-repeat    : no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, repeat-x;    
+  }
+
+
+
+/*
   .layer3 {
     background-image     : url('../img/hill_middle_layer1.png');
     background-position  : 0px 148px;
@@ -261,7 +279,7 @@
     background-repeat    : repeat-x;    
   }
 
-
+*/
   #layer4 {
     -webkit-user-select  : none;
     -moz-user-select     : none;
@@ -382,15 +400,8 @@
     text-align        : left;
     background-color  : #f7eee7;
     z-index           : 12001;
-
-/*
- 05.06 - Removed inline style in index.html:
-
- style="width=580px; font-size: 22px; color: #555; padding-left: 40px; padding-right: 40px"
-
- */
-
   }
+
 
   .close {
     position  : absolute;
@@ -407,6 +418,7 @@
     stroke  : #534741;
     fill    : #534741;
   }
+
 
   .white {
     color   : #ffffff;
@@ -447,6 +459,7 @@
     position: absolute;
     background-repeat: no-repeat;
   }
+
 
   .gfx {
     position: absolute;
@@ -545,17 +558,16 @@
     overflow            : hidden;
     color               : #4c2b0c;
     padding             : 4px;
+    margin-left         : 0px;
     font-family         : Abel, Helvetica, Arial, sans-serif;
     font-size           : 24px;
     text-align          : center;
     line-height         : 54px;
     font-weight         : 700;
-    top                 : 51px;
+    top                 : 27px;
     width               : 253px;
     left                : 80px;
-    height              : 176px;
-    margin-left         : 40px;
-    margin-right        : auto;
+    height              : 204px;
     position            : absolute;
   }
 
@@ -564,7 +576,7 @@
     background          : transparent url('../img/wood_sign_big.png') no-repeat;
     background-position : top center;
     width               : 253px;
-    height              : 176px;
+    height              : 204px;
     background-origin   : content-box;
   }
 
@@ -576,7 +588,7 @@
     color         : #4c2b0c;
     position      : absolute;
     top           : 6px;
-    left          : 12px;
+    left          : -16px;
   }
 
 
@@ -712,7 +724,7 @@
   #lise {
     position  : absolute;
     top       : 102px;    
-    left      : 324px;    
+    left      : 376px;    
     z-index   : 102;
     width     : 77px;
     height    : 126px;
@@ -762,7 +774,7 @@
     position      : absolute;
     background    : transparent url('../img/pop_up_btm.png') no-repeat;
     top           : 0px;
-    left          : 200px;
+    left          : 188px;
     width         : 27px;
     height        : 33px;
     overflow      : hidden;
@@ -789,6 +801,7 @@
     text-align    : center;
     /*line-height   : 16px; */
     top           : 4px;
+    left          : 32px;
     height        : 50px;
     width         : 229px;
     /*border-style  : solid solid none solid;
@@ -828,7 +841,7 @@
     height              : auto;
     width               : 200px;
     margin-right        : auto;
-    margin-left         : 30px;
+    margin-left         : auto;
     margin-top          : 20px;
     cursor              : pointer;
     background          : #004288;
@@ -1006,12 +1019,12 @@
 
   #logo {
     position             : absolute;
-    width                : 128px;
-    height               : 23px;
-    left                 : 300px;
-    top                  : 0;
+    width                : 110px;
+    height               : 20px;
+    top                  : 16px;
+    left                 : 128px;
+    text-align           : center;
     z-index              : 90;
-    margin               : 16px;
     cursor               : auto; 
   }
 
@@ -1195,13 +1208,6 @@
     50% {transform: translateX(10px);}
   }
 */
-  .hint {
-   -webkit-animation    : hint 0.6s ease-in-out infinite;
-       -moz-animation   : hint 0.6s ease-in-out infinite;
-         -o-animation   : hint 0.6s ease-in-out infinite;
-            animation   : hint 0.6s ease-in-out infinite;
-  }
-
 
 
 
@@ -1224,12 +1230,15 @@
     50% {transform: translateX(10px);}
   }
 
+
   .hint {
-   -webkit-animation    : hint 0.4s ease-in-out infinite;
-       -moz-animation   : hint 0.4s ease-in-out infinite;
-         -o-animation   : hint 0.4s ease-in-out infinite;
-            animation   : hint 0.4s ease-in-out infinite;
+   -webkit-animation    : hint 0.6s ease-in-out infinite;
+       -moz-animation   : hint 0.6s ease-in-out infinite;
+         -o-animation   : hint 0.6s ease-in-out infinite;
+            animation   : hint 0.6s ease-in-out infinite;
   }
+
+
 
   @-webkit-keyframes arrow {
       50%  {left: 8px;}
@@ -1429,33 +1438,35 @@
 
   @-webkit-keyframes bounce {
     0%, 20%, 50%, 80%, 100% {-webkit-transform: translateX(0);}
-    40% {-webkit-transform: translateX(-10px);}
-    60% {-webkit-transform: translateX(-4px);}
+    40% {-webkit-transform: translateY(-4px);}
+    60% {-webkit-transform: translateY(-9px);}
   }
 
   @-moz-keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {-moz-transform: translateX(0);}
-    40% {-moz-transform: translateX(-10px);}
-    60% {-moz-transform: translateX(-4px);}
+    0%, 20%, 50%, 80%, 100% {-moz-transform: translateY(0);}
+    40% {-moz-transform: translateY(-4px);}
+    60% {-moz-transform: translateY(-9px);}
   }
 
   @-o-keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {-o-transform: translateX(0);}
-    40% {-o-transform: translateX(-10px);}
-    60% {-o-transform: translateX(-4px);}
+    0%, 20%, 50%, 80%, 100% {-o-transform: translateY(0);}
+    40% {-o-transform: translateY(-4px);}
+    60% {-o-transform: translateY(-9px);}
   }
   @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {transform: translateX(0);}
-    40% {transform: translateX(-10px);}
-    60% {transform: translateX(-4px);}
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-4px);}
+    60% {transform: translateY(-9px);}
   }
 
-.bounce {
-    -webkit-animation-name: bounce;
-       -moz-animation-name: bounce;
-         -o-animation-name: bounce;
-            animation-name: bounce;
+
+  .bounce {
+   -webkit-animation    : bounce 0.5s ease-in infinite;
+       -moz-animation   : bounce 0.5s ease-in infinite;
+         -o-animation   : bounce 0.5s ease-in infinite;
+            animation   : bounce 0.5s ease-in infinite;
   }
+
 
 
 
@@ -1466,10 +1477,10 @@
          -o-transform: skewX(165deg) scaleY(1.2) translateY(-10px);
             transform: skewX(165deg) scaleY(1.2) translateY(-10px);
 
-    -webkit-animation    : slide 0.4s ease-in;
-       -moz-animation    : slide 0.4s ease-in;
-         -o-animation    : slide 0.4s ease-in;
-            animation    : slide 0.4s ease-in;
+    -webkit-animation    : slide 0.6s ease-in;
+       -moz-animation    : slide 0.6s ease-in;
+         -o-animation    : slide 0.6s ease-in;
+            animation    : slide 0.6s ease-in;
   }
 
     .effect .flip-container {
