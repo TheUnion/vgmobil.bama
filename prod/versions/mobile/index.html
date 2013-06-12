@@ -32,14 +32,14 @@
   </div>
 
   <div class="container" onselectstart="return false;">
-    <div id="layer2" class="parallax_layer lazyload"> <!-- middle layer #2 -->
+    <div id="layer2" class="parallax_layer lazyload ondemand" data-load-event="start_interaction"> <!-- middle layer #2 -->
       <div class="panel">
       </div>
     </div>
   </div>
 
   <div class="container" onselectstart="return false;">
-    <div id="layer3" class="parallax_layer lazyload">  <!-- middle layer #1 -->
+    <div id="layer3" class="parallax_layer lazyload ondemand" data-load-event="start_interaction">  <!-- middle layer #1 -->
       <div class="panel">
       </div>
     </div>
@@ -52,13 +52,12 @@
     </div>
   </div>
 
-
   <div class="container" onselectstart="return false;">
-    <div id="layer5" class="parallax_layer"> <!-- our scene layer -->
+    <div id="layer5" class="parallax_layer lazystart lazyload ondemand" data-load-event="start_interaction"> <!-- our scene layer -->
       <div class="panel">
         <div id="start">
-          <div id="flag">
-            <img class="hires" src="assets/img/flag.png" />
+          <div id="logo">
+            <img class="hires center" src="assets/img/bama_logo.svg" />
           </div>
           <div class="arrow animated continuous hint"><img class="hires" src="assets/img/arrow.png" /></div>
           <div id="intro_text" class="sprite">
@@ -71,29 +70,28 @@
 
 
         <div id="station1" class="station">
-          <div id="muni_sign" class="muni_sign"><span id="muni_sign_title">Frosta</span></div>
+          <div id="muni_sign" class="lazyload ondemand" data-load-event="start_interaction"><span id="muni_sign_title">Frosta</span></div>
         </div>
 
         <div id="station2" class="station">
-          <div id="farm_sign" class="farm_sign">
+          <div id="farm_sign" class="lazyload ondemand" data-load-event="start_interaction">
             <span id="farm_sign_title">Bondegård</span>
           </div>
         </div>
 
-        <div id="station3" class="station ondemand" data-load-event="start_interaction">
+        <div id="station3" class="station lazyload ondemand" data-load-event="start_interaction">
           <div class="arrow small animated continuous hint"><img class="hires stretchfill" src="assets/img/arrow.png" /></div>
-          <div id="barn" class="sprite"></div>
-          <img id="farmer" class="sprite" src="assets/img/farmer_small.png">
+          <div id="barn" class="sprite lazyload ondemand" data-load-event="start_interaction"></div>
+          <div id="farmer" class="sprite lazyload ondemand" data-load-event="start_interaction"></div>
 
           <div id="farmer_hello">
             <div id="farmer_tips" class="sprite farmer_tips clicktarget">
-              <div id="farmer_text" class="snakkeboble center"><div class="btn">Trykk her for salattips!</div>
+              <div id="farmer_text" class="snakkeboble center">
+                <div class="btn">Trykk her for <br />salattips!</div>
+                <div class="btm" style="top:76px"></div>
               </div>
-              <div class="btm"></div>
             </div>
-
-
-            </div>
+          </div>
         </div>
 
 
@@ -101,24 +99,25 @@
           <div class="arrow small animated continuous hint"><img class="hires stretchfill" src="assets/img/arrow.png" /></div>
           <div id="lise_hello" class="interactive">
             <div id="lise_tips" class="sprite lise_tips clicktarget">
-              <div id="lise_text" class="snakkeboble center"><div class="btn" style="top:12px">Trykk her for salatoppskrift!</div>
+              <div id="lise_text" class="snakkeboble center">
+                <div class="btn" style="top:12px">Trykk her for<br />salatoppskrift!</div>
+                <div class="btm" style="top:76px"></div>
               </div>
-              <div class="btm" style="top:64px;"></div>
             </div>
           </div>
 
-          <img id="tractor" class="sprite hires" src="assets/img/tractor.png">
-          <img id="lise" class="hires" src="assets/img/lise_small.png">
+          <div id="tractor" class="sprite hires lazyload ondemand" data-load-event="arrive_station3"></div>
+          <div id="lise" class="sprite lazyload ondemand" data-load-event="arrive_station3"></div>
         </div>
 
-        <div id="station5" class="station lazyload ondemand" data-load-event="arrive_station3">
-          <div id="drive_in_sign" class="center">Nå kommer<br />salatene!</div>
-        </div>
+          <div id="station5" class="station lazyload ondemand" data-load-event="arrive_station4">
+            <div id="drive_in_sign" class="center">Nå kommer<br />salatene!</div>
+          </div>
 
         <div id="station6" class="station lazyload ondemand" data-load-event="arrive_station5">
           <div class="arrow small animated continuous hint"><img class="hires stretchfill" src="assets/img/arrow.png" /></div>
           <div class="video_container">
-            <video id="video1" class="video animated shrunk interactive stretchfill" controls poster="assets/img/poster.jpg">
+            <video id="video1" class="video animated shrunk interactive stretchfill" controls preload="none">
               <source src="assets/video/video1.webm" type="video/webm">
               <source src="assets/video/video1.mp4" type="video/mp4">
               <source src="assets/video/video1.ogv" type="video/theora">
@@ -131,7 +130,7 @@
 
         <div id="station7" class="station lazyload ondemand" data-load-event="arrive_station6">
 
-          <div id="final_sign" class="final_sign">
+        <div id="final_sign" class="lazyload ondemand" data-load-event="arrive_station6">
             <span class="btn clicktarget"><a id="link1" class="btn" target="_blank" href="http://www.bama.no/norsk/oppskrift/salat_gronn.html">Oppskrifter på salat</a></span><br />
             <span class="btn clicktarget"><a id="link2" class="btn" target="_blank" href="http://www.bama.no/norsk/sesong/juni.html">Dette er i sesong nå</a> </span>
           </div>
@@ -158,7 +157,7 @@
 
   <div class="container" onselectstart="return false;">
     <div id="layer_player" class="parallax_layer interactive">
-      <img id="car" class="hires animated continuous" src="assets/img/car.png" width="283" height="126" />
+      <img id="car" class="hires animated bounce continuous" src="assets/img/car.png" width="283" height="126" />
 
 
       <div id="lise_recipe" class="center recipe clicktarget">
@@ -187,6 +186,7 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste salater. Og 
 
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+  <script type="text/javascript" language="javascript">$.getScript("http://pliing.se/PliingAd/AdJs?app=no_vg_bama_tracking&id=1&no=" +new Date().getTime());</script>  
   <script src="assets/js/lib/jquery.parallaxSwipe.js"></script>
   <script async src="assets/js/bama.nyt.norge.js"></script>
 

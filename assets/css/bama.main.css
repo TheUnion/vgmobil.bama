@@ -330,7 +330,6 @@
 
 
   #layer6 {
-
     -webkit-user-select : none;
     -moz-user-select    : none;
     position            : absolute;
@@ -340,9 +339,7 @@
     height              : 500px;
     pointer-events      : none;
     z-index             : 1000;
-
   }
-
 
 
 
@@ -373,8 +370,8 @@
 
   .arrow.small {
     position      : absolute;
-    top           : 24px;
-    left          : 524px;
+    top           : 160px;
+    left          : 504px;
     width         : 27px;
     height        : 48px;
   }
@@ -400,7 +397,6 @@
     width     : 44px;
     height    : 44px;
   }
-
 
 
   .grey {
@@ -484,11 +480,13 @@
     background-position : 6px 4px, top center;
   }
 
+
   #muni_sign_title {
     position  : absolute;
     top       : 3px;
     left      : 40px;
   }
+
 
   #farm_sign {
     overflow            : visible;
@@ -933,8 +931,8 @@
     display             : block; 
     margin              : 0px auto 0px auto; 
     padding             : 0;
-    top                 : 81px;
-    left                : 118px; 
+    top                 : 78px;
+    left                : 66px; 
     width               : 416px;
     height              : 234px;   
     overflow            : hidden;
@@ -1129,7 +1127,7 @@
   /* class for lazyloading of bg images */
   .station6 {
     background-image    : url('../img/drive_in_screen.png');
-    background-position : 53px 76px;
+    background-position : 0px 72px;
     background-origin   : content-box;
     background-repeat   : no-repeat;  
   }

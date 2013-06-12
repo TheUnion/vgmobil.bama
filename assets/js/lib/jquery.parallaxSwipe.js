@@ -185,6 +185,9 @@
       if(_mouseDownLT == 0) { 
         leftEdge = true; 
       } else if ( _mouseDownLT <= -10924) {
+        if ( _mouseDownLT < -10924) {
+          _velocity = -0.3;
+        }
         rightEdge = true;
         } else {
           leftEdge = false;
@@ -276,6 +279,7 @@
       if (leftEdge && consoleVar>0 || (consoleVar>0)) {
         rightEdge = false;
       } else if (rightEdge && consoleVar <-10924 || ( consoleVar< -10924)) {
+        console.log("consoleVar: " + consoleVar + ", deltaX: " + deltaX);
         leftEdge = false;
         }
         else {

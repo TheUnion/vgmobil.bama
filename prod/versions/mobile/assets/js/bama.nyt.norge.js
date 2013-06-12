@@ -2,61 +2,193 @@
 
    $(document).bind("dragstart", function() { return false; });
    
+
     $(function() {
 
-      var 
-        INITIALIZED = false;
 
 
-
-      // this is where we send all trackable events
-      var onEvent = function (eventObject) {
+      window.onerror = logError;
 
 
-      if(!INITIALIZED) {
-        startSession();
-      }
+      var logError = function (error) {
+        var
+          msg = "JavaScript ERROR:\n" + error.message;
 
-      if(eventObject.event.indexOf("leave_station7") === 0) {
-        console.log("leaving at #7, setting right edge.");
-        $('#parallax').parallaxSwipe.setEdge("right");
-      }
-      else {
-        console.log("ignoring event " + eventObject.event);
-      }
-
-      if(eventObject.event.indexOf("arrive_station7") === 0) {
-        console.log("arriving at #7, setting right edge.");
-        $('#parallax').parallaxSwipe.setEdge("right");
-      }
-      else {
-        console.log("ignoring event " + eventObject.event);
-      }
+        for ( var key in error ) {
+          msg += key + " : " + error[key] + "\n";
+        }
+        console.log(msg);
+      };
 
 
-      // check if any lazyloaders have requested to start loading on this event
-      updateLazyloaders(eventObject.event);
+      var changeStartScreenAnimation = function (animation, delay, repeat, time) {
 
-      if(eventObject.event.indexOf("arrive_station") === 0) {
-        console.log("enabling clicks on event " + eventObject.event);
-        CLICK_ENABLED = true;
-      }
-      else if(eventObject.event.indexOf("leave_station") === 0) {
-        console.log("disabling clicks on event " + eventObject.event);
-        CLICK_ENABLED = false;
-      }
-      
+        var
+          animation = animation || 'bounce',
+          delay     = delay     || 5000,
+          repeat    = repeat    || false,
+          time      = time      || false;
 
-      // # tracking code here
-        events.push(eventObject);
-        // console.log(events);
+        if(initialized()) {
+          return;
+        }
+
+        setStartScreenAnimation(animation, repeat, time);
+
+        if(repeat) {
+          setTimeout(changeStartScreenAnimation, delay, animation, delay, repeat, time);
+        }
+
+      };
+
+
+      var removeStartScreenAnimation = function (animation) {
+        var
+          animation = animation || false;
+
+        console.log("Stopping animation, car is: " + car);
+        car.classList.remove('animated');
+        if(animation) {
+          console.log("Removing animation: " + animation);
+          car.classList.remove(animation);
+        }
+      };
+
+
+      var setStartScreenAnimation = function (animation, repeat, time) {
+        var
+          animation = animation || 'bounce',
+          repeat    = repeat    || false,
+          time      = time      || false;
+
+        car.classList.add(animation);
+        console.log("car is : " + car + ", requested animation : " + animation);
+        console.log("repeat is : " + repeat);
+        if(time) {
+          setTimeout(removeStartScreenAnimation, time, animation);
+        }
       };
 
 
 
 
-      var updateLazyloaders = function (eventName) {
+      var setInitialized = function() {
+        INITIALIZED = true;
+      };
 
+      var initialized = function() {
+        return INITIALIZED;
+      };
+
+      var isAndroid = function () {
+        return navigator.userAgent.toLowerCase().indexOf("android") > -1; //&& ua.indexOf("mobile");
+      };
+
+
+      var openLink = function (link)  {
+        if(isAndroid()) {
+          // Android won't accept our fake-click hack
+          console.log("Opening link the android way: " + link.href);
+          window.open(link.href);
+          // window.location = link.href;
+        }
+        else {
+          console.log("Opening link the fake-click way: " + link.href);
+          fakeClick(null, link);        
+        }
+      };
+
+     // this is where we send all trackable events
+      var onEvent = function (eventObject) {
+
+        updateLazyloaders(eventObject.event);
+        
+        console.log("Tracking event: " + eventObject.event);
+
+        try {
+          if(eventObject.event.indexOf("start_interaction") === 0) {
+
+            p62601Event(6260100); 
+          }
+          
+          if(eventObject.event.indexOf("arrive_station3") === 0) {
+            p62601Event(6260101); 
+          }
+          
+          if(eventObject.event.indexOf("arrive_station4") === 0) {
+            setPoster('assets/img/poster.jpg')
+            p62601Event(6260102); 
+          }
+          
+          if(eventObject.event.indexOf("arrive_station6") === 0) {
+            p62601Event(6260103); 
+          }
+          
+          if(eventObject.event.indexOf("arrive_station7") === 0) {
+            p62601Event(6260104); 
+          }
+          
+          if(eventObject.event.indexOf("leave_station3") === 0) {
+            p62601Event(6260105); 
+          }
+          
+          if(eventObject.event.indexOf("leave_station4") === 0) {
+            p62601Event(6260106); 
+          }
+          
+          if(eventObject.event.indexOf("leave_station6") === 0) {
+            stopVideo();
+            p62601Event(6260107); 
+          }
+          
+          if(eventObject.event.indexOf("leave_station7") === 0) {
+            p62601Event(6260108); 
+          }
+
+          if(eventObject.event.indexOf("click_lise") === 0) {
+            p62601Event(6260109); 
+          }
+          if(eventObject.event.indexOf("click_farmer") === 0) {
+            p62601Event(6260110); 
+          }
+
+          if(eventObject.event.indexOf("click_link1") === 0) {
+            p62601Event(6260111); 
+          }
+          if(eventObject.event.indexOf("click_link2") === 0) {
+            p62601Event(6260112); 
+          }
+
+          if(eventObject.event.indexOf("close_lise") === 0) {
+            p62601Event(6260113); 
+          }
+          if(eventObject.event.indexOf("close_farmer") === 0) {
+            p62601Event(6260114); 
+          }
+
+          if(eventObject.event.indexOf("video_play") === 0 || eventObject.event.indexOf("video_resume") === 0) {
+            p62601Event(6260115); 
+          }
+
+          if(eventObject.event.indexOf("video_pause") === 0) {
+            p62601Event(6260116); 
+          }
+
+          if(eventObject.event.indexOf("video_finish") === 0) {
+            p62601Event(6260120); 
+          }
+
+        }
+        catch(e) {
+          logError(e);
+        }
+        
+        events.push(eventObject);
+      };
+
+
+
+      var updateLazyloaders = function (eventName) {
         var 
           eventName = eventName || false,
           loadEvent = false;
@@ -69,7 +201,6 @@
           // check if any of our on-demand loadees want to load on this event
 
           if (eventName === ONDEMAND_LOADERS[i].getAttribute("data-load-event")) {
-            console.log("loading bg for " + ONDEMAND_LOADERS[i].id + " on event " + eventName);
             ONDEMAND_LOADERS[i].classList.add(ONDEMAND_LOADERS[i].id);
           }
         }
@@ -78,19 +209,15 @@
 
       var startSession = function() {
 
+        if(initialized()){
+          console.log("Already initialized, escaping");
+          return;
+        }
 
         // populate our lazyload arrays
         LAZY_LOADERS      = document.getElementsByClassName('lazyload');
         ONDEMAND_LOADERS  = document.getElementsByClassName('lazyload ondemand');
 
-
-        if(this.INITIALIZED === true) {
-          console.log("startSession: already initialized, escaping ...")
-          return;
-        };
-
-        console.log("Starting user session ...")
-        console.log("Loading bg images ...");
         // load extra backgrounds on first user interaction
         for(var i = 0, count = LAZY_LOADERS.length; i < count; i++) {
           // by convention, the lazyloadee will be a class of the same name as the lazyloader's id
@@ -99,15 +226,34 @@
 
           // skip those elements that should load on demand
           if (LAZY_LOADERS[i].classList.contains('ondemand')) {
+            //skip those marked for manual load / automatic loading on event with data-load-event attribute
             continue;            
           }
           LAZY_LOADERS[i].classList.add(LAZY_LOADERS[i].id);
         }
-        this.INITIALIZED = true;
 
+          setInitialized();
+          onEvent({ event: 'start_interaction', message: 'First swipe detected.', target: null, time: (new Date()).getTime()});
+      };
+
+
+
+      var setPoster = function(img) {
         var
-          userEvent = { event: 'start_interaction', message: 'First swipe detected.', target: null, time: (new Date()).getTime()};
-        onEvent(userEvent);
+          videoElement = document.getElementById('video1');
+
+        if (!videoElement) {
+          return false;
+        }
+        if(!VIDEO_CONTROLLER) {
+          if(false === (VIDEO_CONTROLLER = HTMLVideo(videoElement))){
+            return false;
+          }
+        }
+        
+        VIDEO_CONTROLLER.setPoster(img);
+        return true;
+
       };
 
 
@@ -130,6 +276,25 @@
       };
 
 
+      var stopVideo = function(id) {
+        var
+          videoElement = document.getElementById(id || 'video1');
+
+        
+        if (!videoElement) {
+          return false;
+        }
+        if(!VIDEO_CONTROLLER) {
+          if(false === (VIDEO_CONTROLLER = HTMLVideo(videoElement))){
+            return false;
+          }
+        }
+        
+        VIDEO_CONTROLLER.stop();
+        return true;
+      };
+
+
 
 
 
@@ -146,72 +311,87 @@
 
       var HTMLVideo = function(elem) {
 
-      try {
+        try {
 
-        var 
-          video           = typeof elem === "string" ? document.getElementById(elem) : elem,
-          videoController = {};
+          var 
+            video           = typeof elem === "string" ? document.getElementById(elem) : elem,
+            videoController = {};
 
-        videoController.element = video;
+          videoController.element = video;
+
+          videoController.onended = function(e) {
+                onEvent({event: "video_finished"});
+              }
+
+          videoController.play = function(resume) {
+
+              // #### Tracking ####
+              // p62601Event(6260115); 
+             // ##################
+              video.play();
+              onEvent({event: resume ? "video_resume" : "video_play"});
+          };
 
 
-        videoController.play = function(resume) {
 
-            onEvent({event: resume ? "video_resume" : "video_play"});
-            video.play();
-        };
 
-        videoController.pause = function() {
-            onEvent({event: 'video_pause'});
-            video.pause();
-        };
+          videoController.pause = function() {
+              video.pause();
+              onEvent({event: 'video_pause'});
+          };
 
-        videoController.togglePause = function() {
-          if (video.paused) {
-            // video.classList.remove("shrunk");
-            video.play();
-          } else {
-            // video.classList.add("shrunk");
-            video.pause();
+          videoController.stop = function() {
+              video.pause();
+              video.currentTime = 0;
+              onEvent({event: 'video_stop'});
+          };
+
+
+          videoController.togglePause = function() {
+            if (video.paused) {
+              video.play();
+            } else {
+              video.pause();
+            }
+          };
+
+          videoController.skip = function(value) {
+            video.currentTime += value;
+          };
+
+          videoController.restart = function() {
+            video.currentTime = 0;
+            onEvent({event: 'video_restart'});
+          };
+
+          videoController.toggleControls = function() {
+            if (video.hasAttribute("controls")) {
+              this.hideControls();
+            } else {
+              this.showControls();
+            }
           }
-        };
 
-        videoController.skip = function(value) {
-          video.currentTime += value;
-        };
+          videoController.showControls = function(){
+            video.setAttribute("controls", "controls");   
+          };
 
-        videoController.restart = function() {
-          video.currentTime = 0;
-          onEvent({event: 'video_restart'});
-        };
+          videoController.hideControls = function(){
+            video.removeAttribute("controls")   
+          };
 
-        videoController.toggleControls = function() {
-          if (video.hasAttribute("controls")) {
-            this.hideControls();
-          } else {
-            this.showControls();
-          }
+          videoController.setPoster = function(img) {
+            console.log('Applying poster image: ' + img);
+            video.setAttribute("poster", img);   
+          };
+
+        }
+        catch(e) {
+          videoController = null;
+          throw(e);
         }
 
-        videoController.showControls = function(){
-          video.setAttribute("controls", "controls");   
-        };
-
-        videoController.hideControls = function(){
-          video.removeAttribute("controls")   
-        };
-
-        videoController.setPoster = function(img) {
-          video.setAttribute("poster", img);   
-        };
-
-      }
-      catch(e) {
-        videoController = null;
-        throw(e);
-      }
-
-      return videoController;
+        return videoController;
       };
 
 
@@ -262,35 +442,6 @@
 
 
 
-// <div onclick="alert('Container clicked')">
-//     <div onclick="fakeClick(event, this.getElementsByTagName('a')[0])"><a id="link2" href="#" onclick="alert('foo')">Embedded Link</a></div>
-// </div>
-
-
-
-      
-
-/*-----------------------------------------------------------------------------------------------*/
-//   ----  fake-click:
-
-
-// <div onclick="alert('Container clicked')">
-//   <a id="link" href="#" onclick="alert((event.target || event.srcElement).innerHTML)">Normal link</a>
-// </div>
-
-// <button type="button" onclick="fakeClick(event, document.getElementById('link'))">
-//   Fake Click on Normal Link
-// </button>
-
-// <br /><br />
-
-// <div onclick="alert('Container clicked')">
-//      <a id="link2" href="#" onclick="alert('foo')">Embedded Link</a></div>
-// </div>
-
-// <button type="button" onclick="fakeClick(event, document.getElementById('link2'))">Fake Click on Embedded Link</button>
-
-
 
 /*-----------------------------------------------------------------------------------------------*/
 
@@ -298,11 +449,6 @@
 
 
       var getClickedElement = function (click) {
-
-        // escape early
-        if(!CLICK_ENABLED) {
-          return;
-        }
 
         var
           target        = null,
@@ -314,90 +460,63 @@
 
         if(LISE_FLIPPED) {
           flipLise();
-//          return;
         }
 
         if(FARMER_FLIPPED) {
           flipFarmer();
- //         return;
         }
 
 
         // a dirty little gollum of a hack
-        if( (clickpos>=4750) && (clickpos<=4920) ) {
-          if((click.clientY>30) && (click.clientY<64)){
+        if( (clickpos>=4780) && (clickpos<=5000) ) {
+          if((click.clientY>30) && (click.clientY<90)){
             flipFarmer();
             return;
           }
         }
         // it'ss hideousss
-        else if( (clickpos>=6310) && (clickpos<=6524) ) {
-          if((click.clientY>28) && (click.clientY<80)){
+        else if( (clickpos>=6340) && (clickpos<=6560) ) {
+          if((click.clientY>30) && (click.clientY<90)){
             flipLise();
             return;
           }
         }
-        // we could probably come up with somthing more general, but not in the time available
-        else if( (clickpos>=11111 && (clickpos<=11325) )) {
-          if((click.clientY>80) && (click.clientY<130)){
-            console.log('fake-click: ' + link1.href);
-            fakeClick(null, link1);
+        // we could probably come up with something more general, but not in the time available
+        else if( (clickpos>=11050 && (clickpos<=11300) )) {
+          if((click.clientY>40) && (click.clientY<95)){
+            onEvent({event: "click_link1"});
+            openLink(link1);
             return;
           }
-          else if((click.clientY>(132) && (click.clientY<((182))))){
-            console.log('fake-click: ' + link2.href);
-            fakeClick(null, link2);
+          else if((click.clientY>(100) && (click.clientY<((155))))){
+            onEvent({event: "click_link2"});
+            openLink(link2);
             return;
           }
         }
         // click on video
-        else if( (clickpos>=(9224 + 147) && (clickpos<=(9224 + 147 + 170)) )) {
-          if((click.clientY>(43) && (click.clientY<((43 + 78))))){
-            console.log('click on video: ' + link2.href);
+        else if( (clickpos>=(9224 + 106) && (clickpos<=(9224 + 106 + 263)) )) {
+          if(click.clientY>66 && click.clientY<178){
             clickVideo();
             return;
           }
         }
-
-
-
-
-        // for(var idx in clicktargets) {
-        //   target = clicktargets[idx];
-        //   if(hitTest(target, click)) {
-        //     return true;
-        //   }
-        // }
       return false;
       };
 
 
       var onClicked = function(click) {
-        var
-          result = getClickedElement(click);
-
-        if(!result){
-          
-
-        }
+        return getClickedElement(click);
       };
 
 
       var enableSwipe = function () {
-
         $("#parallax").parallaxSwipe.SWIPE_ENABLED = true;          
-
-      }
-
+      };
 
 
 
-
-
-
-
-    //variables global to our scope
-
+      //variables global to our scope
       var 
         timer             = null,
         loaded            = null,
@@ -420,25 +539,20 @@
         ROAD_DECAY        = 0.9, // when leaving station
         ROAD_MOUSE_DECAY  = 0.9, // when leaving station
 
-        // STATION_SPEED     = 0.75, // when approaching station
-        // ROAD_SPEED        = 0.9, // when leaving station
-        // DECAY             = 0.75, // when approaching station
-        // MOUSEDOWN_DECAY   = 0.75, // when approaching station
-        // ROAD_DECAY        = 0.9, // when leaving station
-        // ROAD_MOUSE_DECAY  = 0.9, // when leaving station
-
         LISE_FLIPPED      = false,
         FARMER_FLIPPED    = false,
         TOLERANCE         = 100,
+        SWIPE_TOLERANCE   = 60,
 
+ 
+        INITIALIZED       = false,
+        VIDEO_CONTROLLER  = null;
 
         //store triggers as they occur
         triggers          = [],
         events            = [],
         LAZY_LOADERS      = null;
         ONDEMAND_LOADERS  = null; 
-        VIDEO_CONTROLLER  = null;
-        CLICK_ENABLED     = false;
 
         debugpanel        = document.getElementById('debugoutput'),
         parallax          = document.getElementById('parallax'),
@@ -483,20 +597,20 @@
 
 
 
-
 /**
  *  functions
  *
  */  
-
       var flipLise = function() {
         if(!LISE_FLIPPED) {
-          $('#lise_tips').animate({ top : 500, opacity: 0}, 325, 'linear');
+          onEvent({event: "click_lise"});
+          $('#lise_tips').animate({ top : 300, opacity: 0}, 325, 'linear');
           $('#lise_recipe').animate({ top : 0, opacity: 1}, 325, 'linear');
         }
         else {
-          $('#lise_tips').animate({ top : 40, opacity: 1}, 325, 'linear');
-          $('#lise_recipe').animate({ top : -500, opacity: 0}, 325, 'linear');
+          onEvent({event: "close_lise"});
+          $('#lise_tips').animate({ top : 0, opacity: 1}, 325, 'linear');
+          $('#lise_recipe').animate({ top : -300, opacity: 0}, 325, 'linear');
         }
         LISE_FLIPPED = !LISE_FLIPPED;
       };
@@ -504,17 +618,17 @@
 
       var flipFarmer = function() {
         if(!FARMER_FLIPPED) {
-          $('#farmer_tips').animate({ top : 500, opacity: 0}, 325, 'linear');
+          onEvent({event: "click_farmer"});
+          $('#farmer_tips').animate({ top : 300, opacity: 0}, 325, 'linear');
           $('#farmer_recipe').animate({ top : 0, opacity: 1}, 325, 'linear');
         }
         else {
-          $('#farmer_tips').animate({ top : 40, opacity: 1}, 325, 'linear');
-          $('#farmer_recipe').animate({ top : -500, opacity: 0}, 325, 'linear');
+          onEvent({event: "close_farmer"});
+          $('#farmer_tips').animate({ top : 0, opacity: 1}, 325, 'linear');
+          $('#farmer_recipe').animate({ top : -300, opacity: 0}, 325, 'linear');
         }
         FARMER_FLIPPED = !FARMER_FLIPPED;
       };
-
-
 
 
       /**
@@ -541,6 +655,19 @@
         if(!!position) {
           currentpos = startpos - position.left;
 
+          if(currentpos > SWIPE_TOLERANCE) {
+            if(!initialized()) {
+              startSession();
+              //setInitialized();
+              console.log("Interaction detected");
+            }
+          }
+
+          if(currentpos >= 11420) {
+            console.log("currentpos: " +  currentpos);
+            $('#parallax').parallaxSwipe.stop();
+            $('#parallax').parallaxSwipe.setEdge("right");
+          }
           // for..in normally not acceptable, but ok with this few elements
           var counter = 0, startAtIndex = 3;
           for (var key in stations) {
@@ -602,6 +729,9 @@
           count = stations.length;
         }
         timer = setInterval(progresstimer, UPDATE_INTERVAL);
+
+        //start default animation loop for start screen
+        changeStartScreenAnimation("bounce", 8000, true, 3000);
       };
 
 
@@ -619,13 +749,10 @@
 
 
 
-
-
 /**
  *  Initialization 
  * 
  */
-
 
     // Hide the address bar in Mobile Safari
     setTimeout(function(){
@@ -653,84 +780,29 @@
     //   }
     // }
 
-
     $("#parallax").parallaxSwipe( { DECAY: ROAD_DECAY, MOUSEDOWN_DECAY: ROAD_MOUSE_DECAY, SPEED_SPRING: ROAD_SPEED, BOUNCE_SPRING:0.1, 
           HORIZ:true, SNAPDISTANCE:20, DISABLELINKS: false, LAYER:[ 20, 20, 3.2, 1.6, 1, 0.9 ] });
-
 
     var layerWidth = $('#parallax').parallaxSwipe.getSize();
 
     // set width for all parallax stations
     $('.parallax_layer').css('width',layerWidth);
 
+    $('#parallax').bind('click', function (e) { 
+        var
+          result = {
+            offsetLeft : e.target['offsetLeft'],
+            offsetTop  : e.target['offsetTop']
+          };
 
-    $('#parallax').bind('touchstart', function (e) { 
-         var
-            result = {
-              offsetLeft : e.target['offsetLeft'],
-              offsetTop  : e.target['offsetTop']
-            },
-            dump = '',
-            trueX = 0,
-            trueY = 0;
+        if(typeof result.offsetLeft ==="number") {
+          result.clientX = e.clientX;
+          result.clientY = e.clientY;
+        }            
 
-          if(!INITIALIZED) {
-            INITIALIZED = true;
-            startSession();
-          }
-
-          var x = e.originalEvent.touches[0].pageX;//relative position of html,body document
-          var y = e.originalEvent.touches[0].pageY;//relative position of html,body document
-          
-          var x0 = x - window.scrollX;
-          var y0 = y - window.scrollY;
-
-
-            if(typeof result.offsetLeft !== "number") {
-              console.log('no offset');
-              dump = "offsetLeft: " + e.target.offsetLeft + "<br />";
-            }
-            else {
-              result.x = x;
-              result.y = y;
-              result.clientX = x0;
-              result.clientY = y0;
-              console.log(result);
-            }            
-
-
-          // document.getElementById('touchoutput').innerHTML += 'touchstart_parallax:' + dump + "px <br />";
-          
-          onClicked(result);
-
-          return true; });
-
-    $('#parallax').bind('mousedown', function (e) { 
-          var
-            result = {
-              offsetLeft : e.target['offsetLeft'],
-              offsetTop  : e.target['offsetTop']
-            },
-            dump = '',
-            trueX = 0, trueY = 0;
-
-            if(typeof result.offsetLeft ==="number") {
-              result.clientX = e.clientX;
-              result.clientY = e.clientY;
-
-
-              dump = "offsetLeft: " + e.target.offsetLeft + "\n";
-              dump += "clientX: " + e.clientX + "\n";
-              dump += "clientY: " + e.clientY + "\n";
-              trueX = -result.offsetLeft + e.clientX + "\n";
-              dump += "trueX: " + trueX + "\n";
-
-            }            
-
-          onClicked(result);
-          return true; 
-        });
-
+        onClicked(result);
+        return true; 
+      });
 
 
     $('.recipe').bind('selectstart', function (e) { 

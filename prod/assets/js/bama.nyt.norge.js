@@ -1,92 +1,191 @@
   $(document).ready(function () {
 
    $(document).bind("dragstart", function() { return false; });
-   
+
+    var 
+      INITIALIZED = false,
+      VIDEO_CONTROLLER = null;
+
     $(function() {
 
-      var 
-        INITIALIZED = false;
 
+      window.onerror = logError;
+
+
+      var logError = function (error) {
+        var
+          msg = error.message;
+
+        for ( var key in error ) {
+          msg += key + " : " + error[key] + "\n";
+        }
+        console.log(msg);
+      };
+ 
+
+
+
+      var changeStartScreenAnimation = function (animation, delay, repeat, time) {
+
+        var
+          animation = animation || 'bounce',
+          delay     = delay     || 5000,
+          repeat    = repeat    || false,
+          time      = time      || false;
+
+        if(initialized()) {
+          return;
+        }
+        setStartScreenAnimation(animation, repeat, time);
+
+        if(repeat) {
+          setTimeout(changeStartScreenAnimation, delay, animation, delay, repeat, time);
+        }
+      };
+
+
+      var removeStartScreenAnimation = function (animation) {
+        var
+          animation = animation || false;
+
+//        car.classList.remove('animated');
+        if(animation) {
+          car.classList.remove(animation);
+        }
+      };
+
+
+      var setStartScreenAnimation = function (animation, repeat, time) {
+        var
+          animation = animation || 'bounce',
+          repeat    = repeat    || false,
+          time      = time      || false;
+
+        car.classList.add(animation);
+        if(time) {
+          setTimeout(removeStartScreenAnimation, time, animation);
+        }
+      };
+
+
+      var setInitialized = function() {
+        INITIALIZED = true;
+      };
+
+      var initialized = function() {
+        return INITIALIZED;
+      };
+
+      var isAndroid = function () {
+        return navigator.userAgent.toLowerCase().indexOf("android") > -1; //&& ua.indexOf("mobile");
+      };
+
+      var openLink = function (link)  {
+        if(isAndroid()) {
+          // Android won't accept our fake-click hack
+          console.log("Opening link the android way: " + link.href);
+          window.open(link.href);
+        }
+        else {
+          console.log("Opening link the fake-click way: " + link.href);
+          fakeClick(null, link);        
+        }
+      };
 
 
       // this is where we send all trackable events
       var onEvent = function (eventObject) {
 
+        updateLazyloaders(eventObject.event);
 
-      if(!INITIALIZED) {
-        startSession();
+      try {
+        if(eventObject.event.indexOf("start_interaction") === 0) {
+          p62602Event(6260200); 
+        }
+        
+        if(eventObject.event.indexOf("arrive_station3") === 0) {
+          p62602Event(6260201); 
+        }
+        
+        if(eventObject.event.indexOf("arrive_station4") === 0) {
+
+          setPoster('assets/img/poster.jpg')
+          p62602Event(6260202); 
+        }
+        
+        if(eventObject.event.indexOf("arrive_station6") === 0) {
+          p62602Event(6260203); 
+        }
+        
+        if(eventObject.event.indexOf("arrive_station7") === 0) {
+
+          $('#parallax').parallaxSwipe.setEdge("right");
+          p62602Event(6260204); 
+        }
+        
+        if(eventObject.event.indexOf("leave_station3") === 0) {
+          p62602Event(6260205); 
+        }
+        
+        if(eventObject.event.indexOf("leave_station4") === 0) {
+          p62602Event(6260206); 
+        }
+        
+        if(eventObject.event.indexOf("leave_station6") === 0) {
+          stopVideo();
+          p62602Event(6260207); 
+        }
+        
+        if(eventObject.event.indexOf("leave_station7") === 0) {
+          p62602Event(6260208); 
+        }
+
+        if(eventObject.event.indexOf("click_lise") === 0) {
+          p62602Event(6260209); 
+        }
+        if(eventObject.event.indexOf("click_farmer") === 0) {
+          p62602Event(6260210); 
+        }
+
+        if(eventObject.event.indexOf("click_link1") === 0) {
+          console.log("Opening link1");
+          p62602Event(6260211); 
+        }
+        if(eventObject.event.indexOf("click_link2") === 0) {
+          console.log("Opening link2");
+          p62602Event(6260212); 
+        }
+
+        if(eventObject.event.indexOf("close_lise") === 0) {
+          p62602Event(6260213); 
+        }
+        if(eventObject.event.indexOf("close_farmer") === 0) {
+          p62602Event(6260214); 
+        }
+
+        if(eventObject.event.indexOf("video_play") === 0 || eventObject.event.indexOf("video_resume") === 0) {
+          p62602Event(6260215); 
+        }
+
+        if(eventObject.event.indexOf("video_pause") === 0) {
+          p62602Event(6260216); 
+        }
+
+        if(eventObject.event.indexOf("video_finish") === 0) {
+          p62602Event(6260220); 
+        }
+
+      }
+      catch(e) {
+        logError(e);
       }
 
-      if(eventObject.event.indexOf("leave_station7") === 0) {
-        console.log("leaving at #7, setting right edge.");
-        $('#parallax').parallaxSwipe.setEdge("right");
-      }
 
-      // check if any lazyloaders have requested to start loading on this event
-      updateLazyloaders(eventObject.event);
 
-      if(eventObject.event.indexOf("arrive_station") === 0) {
-        console.log("enabling clicks on event " + eventObject.event);
-        CLICK_ENABLED = true;
-      }
-      else if(eventObject.event.indexOf("leave_station") === 0) {
-        console.log("disabling clicks on event " + eventObject.event);
-        CLICK_ENABLED = false;
-      }
-      
-      console.log("Tracking event: " + eventObject.event);
-// ##############TRACKING IMPL:
-      if(eventObject.event.indexOf("start_interaction") === 0) {
-
-        p62601Event(6260100); 
-      }
-      
-      if(eventObject.event.indexOf("arrive_station3") === 0) {
-        p62601Event(6260101); 
-      }
-      
-      if(eventObject.event.indexOf("arrive_station4") === 0) {
-        p62601Event(6260102); 
-      }
-      
-      if(eventObject.event.indexOf("arrive_station6") === 0) {
-        p62601Event(6260103); 
-      }
-      
-      if(eventObject.event.indexOf("arrive_station7") === 0) {
-        p62601Event(6260104); 
-      }
-      
-      if(eventObject.event.indexOf("leave_station3") === 0) {
-        p62601Event(6260105); 
-      }
-      
-      if(eventObject.event.indexOf("leave_station4") === 0) {
-        p62601Event(6260106); 
-      }
-      
-      if(eventObject.event.indexOf("leave_station6") === 0) {
-        p62601Event(6260107); 
-      }
-      
-      if(eventObject.event.indexOf("leave_station7") === 0) {
-        p62601Event(6260108); 
-      }
-
-      /* EDIT: jt@kroma.no --- moved video event trackers from videocontroller to onEvent() */ 
-
-      if(eventObject.event.indexOf("video_play") === 0 || eventObject.event.indexOf("video_resume") === 0) {
-        p62601Event(6260115); 
-      }
-      if(eventObject.event.indexOf("video_pause") === 0) {
-        p62601Event(6260116); 
-      }
-
-      
-      ///###########################
-      // # tracking code here
         events.push(eventObject);
-        // console.log(events);
+
+        console.log("Event triggered: " + eventObject.event);
+
       };
 
 
@@ -106,7 +205,6 @@
           // check if any of our on-demand loadees want to load on this event
 
           if (eventName === ONDEMAND_LOADERS[i].getAttribute("data-load-event")) {
-            console.log("loading bg for " + ONDEMAND_LOADERS[i].id + " on event " + eventName);
             ONDEMAND_LOADERS[i].classList.add(ONDEMAND_LOADERS[i].id);
           }
         }
@@ -115,19 +213,15 @@
 
       var startSession = function() {
 
+        if(initialized()) {
+          console.log("Already initialized, escaping");
+          return;
+        }
 
         // populate our lazyload arrays
         LAZY_LOADERS      = document.getElementsByClassName('lazyload');
         ONDEMAND_LOADERS  = document.getElementsByClassName('lazyload ondemand');
 
-
-        if(this.INITIALIZED === true) {
-          console.log("startSession: already initialized, escaping ...")
-          return;
-        };
-
-        console.log("Starting user session ...")
-        console.log("Loading bg images ...");
         // load extra backgrounds on first user interaction
         for(var i = 0, count = LAZY_LOADERS.length; i < count; i++) {
           // by convention, the lazyloadee will be a class of the same name as the lazyloader's id
@@ -136,22 +230,42 @@
 
           // skip those elements that should load on demand
           if (LAZY_LOADERS[i].classList.contains('ondemand')) {
+            //skip those marked for manual load / automatic loading on event with data-load-event attribute
             continue;            
           }
           LAZY_LOADERS[i].classList.add(LAZY_LOADERS[i].id);
         }
-        this.INITIALIZED = true;
+
+        setInitialized(true);
 
         var
           userEvent = { event: 'start_interaction', message: 'First swipe detected.', target: null, time: (new Date()).getTime()};
+
         onEvent(userEvent);
+      };
+
+
+      var setPoster = function(img) {
+        var
+          videoElement = document.getElementById('video1');
+        
+        if (!videoElement) {
+          return false;
+        }
+        if(!VIDEO_CONTROLLER) {
+          if(false === (VIDEO_CONTROLLER = HTMLVideo(videoElement))){
+            return false;
+          }
+        }
+        
+        VIDEO_CONTROLLER.setPoster(img);
+        return true;
       };
 
 
       var clickVideo = function(id) {
         var
           videoElement = document.getElementById(id || 'video1');
-
         
         if (!videoElement) {
           return false;
@@ -167,6 +281,24 @@
       };
 
 
+      var stopVideo = function(id) {
+        var
+          videoElement = document.getElementById(id || 'video1');
+
+        
+        if (!videoElement) {
+          return false;
+        }
+        if(!VIDEO_CONTROLLER) {
+          if(false === (VIDEO_CONTROLLER = HTMLVideo(videoElement))){
+            return false;
+          }
+        }
+        
+        VIDEO_CONTROLLER.stop();
+        return true;
+      };
+
 
 
 
@@ -180,80 +312,103 @@
  * 
  */
 
-
       var HTMLVideo = function(elem) {
 
-      try {
+        try {
 
-        var 
-          video           = typeof elem === "string" ? document.getElementById(elem) : elem,
-          videoController = {};
+          var 
+            video           = typeof elem === "string" ? document.getElementById(elem) : elem,
+            videoController = {},
+            loadedMetaData  = false;
 
-        videoController.element = video;
+            video.addEventListener("loadedmetadata", function() {
+                this.loadedMetaData = true;
+              }, false);
+
+            video.addEventListener("error", function(error) {
+                logError(error);
+              }, false);
 
 
-        videoController.play = function(resume) {
+          videoController.element = video;
+
+          videoController.onended = function(e) {
+                onEvent({event: "video_finished"});
+              }
+
+          videoController.play = function(resume) {
+              video.play();
+              onEvent({event: resume ? "video_resume" : "video_play"});
+          };
+
+          videoController.pause = function() {
+              video.pause();
+              onEvent({event: 'video_pause'});
+          };
+
+          videoController.stop = function() {
+              if(video.playing) {
+                video.pause();
+  //              video.currentTime = 0;
+                onEvent({event: 'video_stop'});
+              }
+          };
+
+          videoController.togglePause = function() {
+            if (video.paused) {
+              video.play();
+            } else {
+              video.pause();
+            }
+          };
 
 
-            // #### Tracking ####
-            // p62601Event(6260115); 
-           // ##################
-            video.play();
-            onEvent({event: resume ? "video_resume" : "video_play"});
-        };
+          videoController.skip = function(value) {
+            video.currentTime += value;
+          };
 
-        videoController.pause = function() {
-            // #### Tracking ####
-           // p62601Event(6260116); 
-          // ##################
-            video.pause();
-            onEvent({event: 'video_pause'});
-        };
 
-        videoController.togglePause = function() {
-          if (video.paused) {
-            video.play();
-          } else {
-            video.pause();
+          videoController.reset = function () {
+            if(loadedMetaData) {
+              video.currentTime = 0;
+            }
+          };
+
+
+          videoController.restart = function() {
+            if(loadedMetaData ) {
+              video.currentTime = 0;
+              onEvent({event: 'video_restart'});
+            }
+          };
+
+          videoController.toggleControls = function() {
+            if (video.hasAttribute("controls")) {
+              this.hideControls();
+            } else {
+              this.showControls();
+            }
           }
-        };
 
-        videoController.skip = function(value) {
-          video.currentTime += value;
-        };
+          videoController.showControls = function(){
+            video.setAttribute("controls", "controls");   
+          };
 
-        videoController.restart = function() {
-          video.currentTime = 0;
-          onEvent({event: 'video_restart'});
-        };
+          videoController.hideControls = function(){
+            video.removeAttribute("controls")   
+          };
 
-        videoController.toggleControls = function() {
-          if (video.hasAttribute("controls")) {
-            this.hideControls();
-          } else {
-            this.showControls();
-          }
+          videoController.setPoster = function(img) {
+            video.setAttribute("poster", img);   
+          };
+
+        }
+        catch(e) {
+          videoController = null;
+          throw(e);
         }
 
-        videoController.showControls = function(){
-          video.setAttribute("controls", "controls");   
-        };
-
-        videoController.hideControls = function(){
-          video.removeAttribute("controls")   
-        };
-
-        videoController.setPoster = function(img) {
-          video.setAttribute("poster", img);   
-        };
-
-      }
-      catch(e) {
-        videoController = null;
-        throw(e);
-      }
-
-      return videoController;
+        return videoController;
       };
 
 
@@ -264,8 +419,6 @@
           targetpos = (target.offset.left + target.position.left),
           distance = 0;
 
-
-
         distance = Math.abs(clickpos - targetpos);
         return (distance<TOLERANCE);
       };
@@ -275,7 +428,7 @@
 
 /**
  * fakeClick : trigger a click event on a   <a href target>   -> a workaround for creating new windows from javascript 
- * without bothering the popup blocker thingsies
+ * without bothering the popup blocking thingsies
  *
  * This method was created by <http://stackoverflow.com/users/45433/crescent-fresh>
  * <http://stackoverflow.com/questions/1421584/how-can-i-simulate-a-click-to-an-anchor-tag/1421968#1421968>
@@ -283,9 +436,9 @@
  * To call programmatically, probably just fakeClick(null, <a>)
  * 
  */   var fakeClick = function (event, anchorObj) {
-      
-        console.log('fake-clicked: ' + anchorObj.href);
 
+        console.log("Faking a click");
+      
         if (anchorObj.click) {
           anchorObj.click()
         } else if(document.createEvent) {
@@ -303,48 +456,9 @@
       };
 
 
-
-// <div onclick="alert('Container clicked')">
-//     <div onclick="fakeClick(event, this.getElementsByTagName('a')[0])"><a id="link2" href="#" onclick="alert('foo')">Embedded Link</a></div>
-// </div>
-
-
-
-      
-
 /*-----------------------------------------------------------------------------------------------*/
-//   ----  fake-click:
-
-
-// <div onclick="alert('Container clicked')">
-//   <a id="link" href="#" onclick="alert((event.target || event.srcElement).innerHTML)">Normal link</a>
-// </div>
-
-// <button type="button" onclick="fakeClick(event, document.getElementById('link'))">
-//   Fake Click on Normal Link
-// </button>
-
-// <br /><br />
-
-// <div onclick="alert('Container clicked')">
-//      <a id="link2" href="#" onclick="alert('foo')">Embedded Link</a></div>
-// </div>
-
-// <button type="button" onclick="fakeClick(event, document.getElementById('link2'))">Fake Click on Embedded Link</button>
-
-
-
-/*-----------------------------------------------------------------------------------------------*/
-
-
-
 
       var getClickedElement = function (click) {
-
-        // escape early
-        if(!CLICK_ENABLED) {
-          return;
-        }
 
         var
           target        = null,
@@ -356,39 +470,37 @@
 
         if(LISE_FLIPPED) {
           flipLise();
-//          return;
         }
 
         if(FARMER_FLIPPED) {
           flipFarmer();
- //         return;
         }
 
 
         // a dirty little gollum of a hack
-        if( (clickpos>=4812) && (clickpos<=5042) ) {
-          if((click.clientY>232) && (click.clientY<282)){
+        if( (clickpos>=(4606 + 280)) && (clickpos<=(4606 + 280 + 125)) ) {
+          if((click.clientY>230) && (click.clientY<275)){
             flipFarmer();
             return;
           }
         }
         // it'ss hideousss
-        else if( (clickpos>=6380) && (clickpos<=6600) ) {
-          if((click.clientY>232) && (click.clientY<282)){
+        else if( (clickpos>=(6180 + 300)) && (clickpos<=(6180 + 300 + 125)) ) {
+          if((click.clientY>240) && (click.clientY<285)){
             flipLise();
             return;
           }
         }
-        // we could probably come up with somthing more general, but not in the time available
+        // we could probably come up with something more general, but not in the time available
         else if( (clickpos>=11111 && (clickpos<=11325) )) {
           if((click.clientY>208) && (click.clientY<272)){
-            console.log('fake-click: ' + link1.href);
-            fakeClick(null, link1);
+            openLink(link1);
+            onEvent({event: "click_link1"});
             return;
           }
           else if((click.clientY>(276) && (click.clientY<((348))))){
-            console.log('fake-click: ' + link2.href);
-            fakeClick(null, link2);
+            openLink(link2);
+            onEvent({event: "click_link2"});
             return;
           }
         }
@@ -401,15 +513,6 @@
           }
         }
 
-
-
-
-        // for(var idx in clicktargets) {
-        //   target = clicktargets[idx];
-        //   if(hitTest(target, click)) {
-        //     return true;
-        //   }
-        // }
       return false;
       };
 
@@ -417,22 +520,12 @@
       var onClicked = function(click) {
         var
           result = getClickedElement(click);
-
-        if(!result){
-          
-
-        }
       };
 
 
       var enableSwipe = function () {
-
         $("#parallax").parallaxSwipe.SWIPE_ENABLED = true;          
-
-      }
-
-
-
+      };
 
 
 
@@ -462,17 +555,10 @@
         ROAD_DECAY        = 0.9, // when leaving station
         ROAD_MOUSE_DECAY  = 0.9, // when leaving station
 
-        // STATION_SPEED     = 0.75, // when approaching station
-        // ROAD_SPEED        = 0.9, // when leaving station
-        // DECAY             = 0.75, // when approaching station
-        // MOUSEDOWN_DECAY   = 0.75, // when approaching station
-        // ROAD_DECAY        = 0.9, // when leaving station
-        // ROAD_MOUSE_DECAY  = 0.9, // when leaving station
-
         LISE_FLIPPED      = false,
         FARMER_FLIPPED    = false,
         TOLERANCE         = 100,
-
+        SWIPE_TOLERANCE   = 60,
 
         //store triggers as they occur
         triggers          = [],
@@ -481,6 +567,8 @@
         ONDEMAND_LOADERS  = null; 
         VIDEO_CONTROLLER  = null;
         CLICK_ENABLED     = false;
+
+        car               = document.getElementById('car'),
 
         debugpanel        = document.getElementById('debugoutput'),
         parallax          = document.getElementById('parallax'),
@@ -512,15 +600,15 @@
         // what. Even if the event is captured by enemy code, we can re-fire it
         // programmatically
 
-        for(var i = 0, count = list.length; i < count; i++) {
-          clicktargets[list[i].id] = {
-            element : list[i],
-            offset : $(list[i]).offset(),
-            position : $(list[i]).position(),
-            width : list[i].offsetWidth,
-            height : list[i].offsetHeight
-            }
-          }
+        // for(var i = 0, count = list.length; i < count; i++) {
+        //   clicktargets[list[i].id] = {
+        //     element : list[i],
+        //     offset : $(list[i]).offset(),
+        //     position : $(list[i]).position(),
+        //     width : list[i].offsetWidth,
+        //     height : list[i].offsetHeight
+        //     }
+        //   }
 
 
 
@@ -533,10 +621,12 @@
 
       var flipLise = function() {
         if(!LISE_FLIPPED) {
+          onEvent({event: "click_lise"});
           $('#lise_tips').animate({ top : 500, opacity: 0}, 325, 'linear');
           $('#lise_recipe').animate({ top : 0, opacity: 1}, 325, 'linear');
         }
         else {
+          onEvent({event: "close_lise"});
           $('#lise_tips').animate({ top : 40, opacity: 1}, 325, 'linear');
           $('#lise_recipe').animate({ top : -500, opacity: 0}, 325, 'linear');
         }
@@ -546,16 +636,17 @@
 
       var flipFarmer = function() {
         if(!FARMER_FLIPPED) {
+          onEvent({event: "click_farmer"});
           $('#farmer_tips').animate({ top : 500, opacity: 0}, 325, 'linear');
           $('#farmer_recipe').animate({ top : 0, opacity: 1}, 325, 'linear');
         }
         else {
+          onEvent({event: "click_farmer"});
           $('#farmer_tips').animate({ top : 40, opacity: 1}, 325, 'linear');
           $('#farmer_recipe').animate({ top : -500, opacity: 0}, 325, 'linear');
         }
         FARMER_FLIPPED = !FARMER_FLIPPED;
       };
-
 
 
 
@@ -577,12 +668,16 @@
             startdate = (new Date()).toString();
             starttime = (new Date()).getTime();
             starttimetext = (new Date()).getTime().toString();
-            //console.log("");
           }
 
         if(!!position) {
           currentpos = startpos - position.left;
-
+          if(currentpos > SWIPE_TOLERANCE) {
+            if(!initialized()) {
+              startSession();
+              console.log("Interaction detected, preloading initiated");
+            }
+          }
           // for..in normally not acceptable, but ok with this few elements
           var counter = 0, startAtIndex = 3;
           for (var key in stations) {
@@ -600,6 +695,7 @@
               }
               if(Math.abs(x) > (STATION_MARGIN + 250)) {
                 if( (currentstation === key) ) {
+                  console.log ("x is: " + x);
                   $('#parallax').parallaxSwipe.setSpeed(ROAD_SPEED, ROAD_DECAY, ROAD_MOUSE_DECAY);
                   var
                     userEvent = { event: 'leave_' + key, message: 'leaving station ' + key, target: currentstation, time: time};
@@ -612,7 +708,7 @@
                   onEvent({ event: 'arrive_' + key, message: 'arriving at station ' + key, target: currentstation, time: time});
                   currentstation = key;
 
-                  // don't slow down at these stations
+                  // don't stop at these stations
                   if(counter === 5){
                     continue;
                   }
@@ -644,6 +740,9 @@
           count = stations.length;
         }
         timer = setInterval(progresstimer, UPDATE_INTERVAL);
+        
+        //start default animation loop for start screen
+        changeStartScreenAnimation("bounce", 8000, true, 3000);
       };
 
 
@@ -661,39 +760,16 @@
 
 
 
-
-
 /**
  *  Initialization 
  * 
  */
-
 
     // Hide the address bar in Mobile Safari
     setTimeout(function(){
       window.scrollTo(0, 1);
     }, 0);
 
-
-
-    /**
-     *  Swap to hi-res images for Retina displays
-     */
-    
-    // if (window.devicePixelRatio == 2) {
-    //   var images = $("img.hires");
-
-    //   /* loop through the images and make them hi-res */
-    //   for(var i = 0; i < images.length; i++) {
-
-    //     /* create new image name */
-    //     var imageType = images[i].src.substr(-4);
-    //     var imageName = images[i].src.substr(0, images[i].src.length - 4).replace('/img/', '/img/retina/');
-    //     imageName += "@2x" + imageType;
-    //     /* load retina image */
-    //     images[i].src = imageName; 
-    //   }
-    // }
 
 
     $("#parallax").parallaxSwipe( { DECAY: ROAD_DECAY, MOUSEDOWN_DECAY: ROAD_MOUSE_DECAY, SPEED_SPRING: ROAD_SPEED, BOUNCE_SPRING:0.1, 
@@ -706,78 +782,27 @@
     $('.parallax_layer').css('width',layerWidth);
 
 
-    $('#parallax').bind('touchstart', function (e) { 
-         var
-            result = {
-              offsetLeft : e.target['offsetLeft'],
-              offsetTop  : e.target['offsetTop']
-            },
-            dump = '',
-            trueX = 0,
-            trueY = 0;
+    $('#parallax').bind('click', function (e) { 
+        var
+          result = {
+            offsetLeft : e.target['offsetLeft'],
+            offsetTop  : e.target['offsetTop']
+          };
 
-          if(!this.INITIALIZED) {
-            startSession();
-          }
+        if(typeof result.offsetLeft ==="number") {
+          result.clientX = e.clientX;
+          result.clientY = e.clientY;
+        }            
 
-          var x = e.originalEvent.touches[0].pageX;//relative position of html,body document
-          var y = e.originalEvent.touches[0].pageY;//relative position of html,body document
-          
-          var x0 = x - window.scrollX;
-          var y0 = y - window.scrollY;
-
-
-            if(typeof result.offsetLeft !== "number") {
-              console.log('no offset');
-              dump = "offsetLeft: " + e.target.offsetLeft + "<br />";
-            }
-            else {
-              result.x = x;
-              result.y = y;
-              result.clientX = x0;
-              result.clientY = y0;
-              console.log(result);
-            }            
-
-
-          // document.getElementById('touchoutput').innerHTML += 'touchstart_parallax:' + dump + "px <br />";
-          
-          onClicked(result);
-
-          return true; });
-
-    $('#parallax').bind('mousedown', function (e) { 
-          var
-            result = {
-              offsetLeft : e.target['offsetLeft'],
-              offsetTop  : e.target['offsetTop']
-            },
-            dump = '',
-            trueX = 0, trueY = 0;
-
-            if(typeof result.offsetLeft ==="number") {
-              result.clientX = e.clientX;
-              result.clientY = e.clientY;
-
-
-              dump = "offsetLeft: " + e.target.offsetLeft + "\n";
-              dump += "clientX: " + e.clientX + "\n";
-              dump += "clientY: " + e.clientY + "\n";
-              trueX = -result.offsetLeft + e.clientX + "\n";
-              dump += "trueX: " + trueX + "\n";
-
-            }            
-
-          onClicked(result);
-          return true; 
-        });
+        onClicked(result);
+        return true; 
+      });
 
 
 
-    $('.recipe').bind('selectstart', function (e) { 
-      return true; });
+      $('.recipe').bind('selectstart', function (e) { 
+        return true; });
 
     initializetimer();
-
     });
   });

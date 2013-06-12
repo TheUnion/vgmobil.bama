@@ -9,6 +9,21 @@
     $(function() {
 
 
+      window.onerror = logError;
+
+
+      var logError = function (error) {
+        var
+          msg = error.message;
+
+        for ( var key in error ) {
+          msg += key + " : " + error[key] + "\n";
+        }
+        alert(msg);
+      };
+ 
+
+
 
       var changeStartScreenAnimation = function (animation, delay, repeat, time) {
 
@@ -33,10 +48,8 @@
         var
           animation = animation || false;
 
-        console.log("Stopping animation, car is: " + car);
-        car.classList.remove('animated');
+//        car.classList.remove('animated');
         if(animation) {
-          console.log("Removing animation: " + animation);
           car.classList.remove(animation);
         }
       };
@@ -49,8 +62,6 @@
           time      = time      || false;
 
         car.classList.add(animation);
-        console.log("car is : " + car + ", requested animation : " + animation);
-        console.log("repeat is : " + repeat);
         if(time) {
           setTimeout(removeStartScreenAnimation, time, animation);
         }
@@ -86,7 +97,8 @@
       var onEvent = function (eventObject) {
 
         updateLazyloaders(eventObject.event);
-        
+
+      try {
         if(eventObject.event.indexOf("start_interaction") === 0) {
           p62602Event(6260200); 
         }
@@ -162,6 +174,13 @@
         if(eventObject.event.indexOf("video_finish") === 0) {
           p62602Event(6260220); 
         }
+
+      }
+      catch(e) {
+        logError(e);
+      }
+
+
 
         events.push(eventObject);
 
@@ -299,7 +318,17 @@
 
           var 
             video           = typeof elem === "string" ? document.getElementById(elem) : elem,
-            videoController = {};
+            videoController = {},
+            loadedMetaData  = false;
+
+            video.addEventListener("loadedmetadata", function() {
+                this.loadedMetaData = true;
+              }, false);
+
+            video.addEventListener("error", function(error) {
+                logError(error);
+              }, false);
+
 
           videoController.element = video;
 
@@ -318,9 +347,11 @@
           };
 
           videoController.stop = function() {
-              video.pause();
-              video.currentTime = 0;
-              onEvent({event: 'video_stop'});
+              if(video.playing) {
+                video.pause();
+  //              video.currentTime = 0;
+                onEvent({event: 'video_stop'});
+              }
           };
 
           videoController.togglePause = function() {
@@ -331,13 +362,24 @@
             }
           };
 
+
           videoController.skip = function(value) {
             video.currentTime += value;
           };
 
+
+          videoController.reset = function () {
+            if(loadedMetaData) {
+              video.currentTime = 0;
+            }
+          };
+
+
           videoController.restart = function() {
-            video.currentTime = 0;
-            onEvent({event: 'video_restart'});
+            if(loadedMetaData ) {
+              video.currentTime = 0;
+              onEvent({event: 'video_restart'});
+            }
           };
 
           videoController.toggleControls = function() {

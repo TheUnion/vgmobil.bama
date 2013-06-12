@@ -89,6 +89,7 @@
 
         <div id="station3" class="station lazyload ondemand" data-load-event="start_interaction">
           <!-- <img id="barn" class="sprite hires" src="assets/img/barn.png"> -->
+          <div class="arrow small animated continuous hint"><img class="hires" src="assets/img/arrow.png" /></div>
           <div id="barn" class="sprite lazyload ondemand" data-load-event="start_interaction"></div>
           
           <div id="farmer" class="sprite lazyload ondemand" data-load-event="start_interaction"></div>
@@ -107,6 +108,7 @@
 
 
         <div id="station4" class="station">
+          <div class="arrow small animated continuous hint"><img class="hires" src="assets/img/arrow.png" /></div>
           <div id="lise_hello" class="interactive">
             <div id="lise_tips" class="sprite clicktarget lazyload ondemand" data-load-event="arrive_station3">
               <!-- <img id="lise_large" src="assets/img/lise_large.png" /> -->
@@ -129,8 +131,9 @@
         </div>
 
         <div id="station6" class="station lazyload ondemand" data-load-event="arrive_station5">
+          <div class="arrow small animated continuous hint"><img class="hires stretchfill" src="assets/img/arrow.png" /></div>
           <div id="video1_container">
-            <video id="video1" class="interactive" width="416" height="234" controls>
+            <video id="video1" class="interactive" width="416" height="234" controls preload="none">
               <source src="assets/video/video1.webm" type="video/webm">
               <source src="assets/video/video1.mp4" type="video/mp4">
               <source src="assets/video/video1.ogv" type="video/theora">
@@ -143,7 +146,6 @@
 
 
         <div id="station7" class="station lazyload ondemand" data-load-event="arrive_station6">
-
           <div id="final_sign" class="lazyload ondemand" data-load-event="arrive_station6">
             <span class="btn clicktarget"><a id="link1" class="btn" target="_blank" href="http://www.bama.no/norsk/oppskrift/salat_gronn.html">Oppskrifter på salat</a></span><br />
             <span class="btn clicktarget"><a id="link2" class="btn" target="_blank" href="http://www.bama.no/norsk/sesong/juni.html">Dette er i sesong nå</a> </span>

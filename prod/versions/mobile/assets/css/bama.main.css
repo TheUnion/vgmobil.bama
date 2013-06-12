@@ -1,4 +1,4 @@
-/**
+	/**
  *  Basic setup. 
  *  
  *  We are assuming an iframe, obviously.
@@ -141,11 +141,6 @@
 
 
   .verybig {
-/*    text-align    : center;
-    font-size     : 52px;
-    line-height   : 42px;
-*/
-
     /* same as "big", in the mobile version */
     text-align  : center;
     font-size   : 34px;
@@ -240,7 +235,7 @@
     background-image     : url('../img/hill_middle_layer2.png');
     background-repeat    : repeat-x; 
     background-origin    : content-box;
-    background-position  : 0px 156px;
+    background-position  : 0px 140px;
   }
 
 
@@ -254,14 +249,37 @@
 
   }
 
+
+  .layer3 {
+    background-image     :  url('../img/cloud2.png'), 
+                            url('../img/hill_middle_layer1_top1.png'), 
+                            url('../img/hill_middle_layer1_top2.png'),
+                            url('../img/hill_middle_layer1_top3.png'), 
+                            url('../img/hill_middle_layer1_top4_sheep.png'), 
+                            url('../img/hill_middle_layer1_top5_cows.png'),
+                            url('../img/hill_middle_layer1.png');
+    background-position  :  1000px 62px,
+                             780px 72px,
+                            1436px 72px,
+                            2064px 68px,
+                            2756px 72px,
+                            3372px 68px,
+                            0px 144px;
+    background-origin    : content-box;    
+    background-repeat    : no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, repeat-x;    
+  }
+
+
+
+/*
   .layer3 {
     background-image     : url('../img/hill_middle_layer1.png');
-    background-position  : 0px 336px;
+    background-position  : 0px 148px;
     background-origin    : content-box;    
     background-repeat    : repeat-x;    
   }
 
-
+*/
   #layer4 {
     -webkit-user-select  : none;
     -moz-user-select     : none;
@@ -273,7 +291,6 @@
   }
 
 
-
   #layer5 {
 
   /*  This is our main layer, the one where everything happens  */    
@@ -282,17 +299,19 @@
     pointer-events        : auto;
     position              : absolute;
     height                : 300px;
-
-    background-image      : url('../img/hill_front1.png');
-    background-position   : 0px 127px;
-    background-repeat     : no-repeat;
-    background-origin     : content-box;
     z-index               : 5;
   }
 
 
-  .layer5 {
+  .lazystart {
+    background-image      : url('../img/hill_front1.png'), url('../img/hill_front1.png'); 
+    background-repeat     : no-repeat;
+    background-origin     : content-box;
+    background-position   : 0px 127px, 768px 127px;   
+  }
 
+
+  .layer5 {
     background-image      : url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
@@ -302,7 +321,7 @@
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
-                            url('../img/hill_front1.png'), url('../img/hill_front2.png');
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png') !important;
     background-position   :     0px 127px,   768px 127px,   
                              1536px 127px,  2304px 127px,   
                              3072px 127px,  3840px 127px,   
@@ -312,11 +331,10 @@
                              9216px 127px,  9984px 127px,   
                             10752px 127px, 11520px 127px,   
                             12288px 127px, 13056px 127px,   
-                            13824px 127px, 14592px 127px;
-    background-repeat     : no-repeat;
-    background-origin     : content-box;
+                            13824px 127px, 14592px 127px !important;
+    background-repeat     : no-repeat !important;
+    background-origin     : content-box !important;
   }
-
 
 
 
@@ -382,15 +400,8 @@
     text-align        : left;
     background-color  : #f7eee7;
     z-index           : 12001;
-
-/*
- 05.06 - Removed inline style in index.html:
-
- style="width=580px; font-size: 22px; color: #555; padding-left: 40px; padding-right: 40px"
-
- */
-
   }
+
 
   .close {
     position  : absolute;
@@ -407,6 +418,7 @@
     stroke  : #534741;
     fill    : #534741;
   }
+
 
   .white {
     color   : #ffffff;
@@ -448,6 +460,7 @@
     background-repeat: no-repeat;
   }
 
+
   .gfx {
     position: absolute;
   }
@@ -462,20 +475,14 @@
 
 
   #muni_sign {
-
     position            : absolute;
     overflow            : hidden;
     left                : 300px;
     top                 : 174px;
     width               : 132px;
     height              : 71px;
-
-
-    background-image    : url('../img/frosta_kommunevapen.png'), url('../img/kommuneskilt.png');
-    background-repeat   : no-repeat;
-    background-origin   : content-box;
-    background-position : 12px 8px, 4px 4px;
   }
+
 
   .muni_sign {
     background-image    : url('../img/frosta_kommunevapen.png'), url('../img/kommuneskilt.png');
@@ -483,7 +490,6 @@
     background-origin   : content-box;
     background-position : 12px 8px, 4px 4px;
   }
-
 
   #muni_sign_title {
     position            : absolute;
@@ -495,21 +501,25 @@
     left                : 48px;
   }
 
-  .farm_sign {
+  #farm_sign {
     overflow            : hidden;
     color               : #4c2b0c;
     padding             : 3px;
     font-family         : Abel, Helvetica, Arial, sans-serif;
     font-size           : 14px;
     font-weight         : 700;
-    background          : transparent url('../img/wood_sign_arrow.png') no-repeat;
-    background-position : top left;
     top                 : 184px;
     width               : 213px;
     left                : 128px;
     height              : 72px;
-    background-origin   : content-box;
     position            : absolute;
+  }
+
+
+  .farm_sign {
+    background          : transparent url('../img/wood_sign_arrow.png') no-repeat;
+    background-position : top left;
+    background-origin   : content-box;
   }
 
 
@@ -544,28 +554,30 @@
   }
 
 
-
-  .final_sign {
+  #final_sign {
     overflow            : hidden;
     color               : #4c2b0c;
     padding             : 4px;
+    margin-left         : 0px;
     font-family         : Abel, Helvetica, Arial, sans-serif;
     font-size           : 24px;
     text-align          : center;
     line-height         : 54px;
     font-weight         : 700;
-
-
-    background          : transparent url('../img/wood_sign_big.png') no-repeat;
-    background-position : top left;
-    top                 : 64px;
+    top                 : 27px;
     width               : 253px;
-    left                : 64px;
-    height              : 176px;
-    margin-left         : 40px;
-    margin-right        : auto;
-    background-origin   : content-box;
+    left                : 80px;
+    height              : 204px;
     position            : absolute;
+  }
+
+
+  .final_sign {
+    background          : transparent url('../img/wood_sign_big.png') no-repeat;
+    background-position : top center;
+    width               : 253px;
+    height              : 204px;
+    background-origin   : content-box;
   }
 
 
@@ -576,7 +588,7 @@
     color         : #4c2b0c;
     position      : absolute;
     top           : 6px;
-    left          : 12px;
+    left          : -16px;
   }
 
 
@@ -588,25 +600,53 @@
     height              : 249px;
     top                 : -14px;
     left                : 0px;
+  }
+
+
+  .barn {
     background-image    : url('../img/barn.png'), url('../img/fence.png');
     background-position : top left, bottom right;
     background-repeat   : no-repeat, repeat-x;
     background-origin   : content-box;
   }
 
+
+
+
   #farmer {
     position  : absolute;
     top       : 122px;
     left      : 380px;
-
+    width     : 73px;
+    height    : 127px;
     z-index: 102;
   }
+
+
+  .farmer {
+    background-image: url('../img/farmer_small.png');
+    background-origin: content-box;
+    background-position: 0px 0px;
+    width     : 73px;
+    height    : 127px;
+  }
+
 
   #tractor {
     position  : absolute;
     left      : 0px;
     top       : 40px;
   }
+
+
+ .tractor {
+    background-image    : url('../img/tractor.png');
+    background-origin   : content-box;
+    background-position : top left;
+    width               : 269px;
+    height              : 198px;
+  }
+
 
   #farmer_large {
     /*display: none;    */
@@ -684,9 +724,25 @@
   #lise {
     position  : absolute;
     top       : 102px;    
-    left      : 324px;    
+    left      : 376px;    
     z-index   : 102;
+    width     : 77px;
+    height    : 126px;
   }
+
+  .lise {
+    position  : absolute;
+    width     : 77px;
+    height    : 126px;
+    z-index   : 102;
+
+    background-image    : url('../img/lise_small.png');
+    background-position : top left;
+    background-origin   : content-box;
+  }
+
+
+
 
   #drivein_sign {
     color           : #000;
@@ -717,11 +773,13 @@
   .btm {
     position      : absolute;
     background    : transparent url('../img/pop_up_btm.png') no-repeat;
-    top           : 78px;
-    left          : 0px;
-    width         : 229px;
-    height        : 68px;
+    top           : 0px;
+    left          : 188px;
+    width         : 27px;
+    height        : 33px;
     overflow      : hidden;
+    z-index: 0;
+
   }
 
 
@@ -743,12 +801,13 @@
     text-align    : center;
     /*line-height   : 16px; */
     top           : 4px;
-    height        : 56px;
+    left          : 32px;
+    height        : 50px;
     width         : 229px;
-    border-style  : solid solid none solid;
+    /*border-style  : solid solid none solid;
     border-width  : 1px;
     border-color  : #928c85;
-    background    : #eee;
+    background    : #eee;*/
 
 
     -webkit-transform-style: preserve-3d;
@@ -778,7 +837,7 @@
     font-size           : 18px;
     line-height         : 18px;
     color               : white;
-    padding             : 3px 8px 3px 8px;
+    padding             : 8px 8px 8px 8px;
     height              : auto;
     width               : 200px;
     margin-right        : auto;
@@ -863,7 +922,7 @@
     display             : block; 
     margin              : 0px auto 0px auto; 
     padding             : 0;
-    top                 : 4px;
+    top                 : 15px;
     left                : 24px; 
     width               : 416px;
     height              : 234px;   
@@ -874,9 +933,10 @@
 
 
   .shrunk {
-    left                : 80px;
-    width               : 258px;
-    height              : 145px;   
+
+    left                : 84px;
+    width               : 265px;
+    height              : 148px;   
   }
 
 
@@ -959,12 +1019,12 @@
 
   #logo {
     position             : absolute;
-    width                : 128px;
-    height               : 23px;
-    left                 : 300px;
-    top                  : 0;
+    width                : 110px;
+    height               : 20px;
+    top                  : 16px;
+    left                 : 128px;
+    text-align           : center;
     z-index              : 90;
-    margin               : 16px;
     cursor               : auto; 
   }
 
@@ -1064,7 +1124,7 @@
   /* class for lazyloading of bg images */
   .station6 {
     background-image    : url('../img/drive_in_screen.png');
-    background-position : top center;
+    background-position : center 12px;
     background-origin   : content-box;
     background-repeat   : no-repeat;  
   }
@@ -1148,13 +1208,6 @@
     50% {transform: translateX(10px);}
   }
 */
-  .hint {
-   -webkit-animation    : hint 0.4s ease-in-out infinite;
-       -moz-animation   : hint 0.4s ease-in-out infinite;
-         -o-animation   : hint 0.4s ease-in-out infinite;
-            animation   : hint 0.4s ease-in-out infinite;
-  }
-
 
 
 
@@ -1177,12 +1230,15 @@
     50% {transform: translateX(10px);}
   }
 
+
   .hint {
-   -webkit-animation    : hint 0.4s ease-in-out infinite;
-       -moz-animation   : hint 0.4s ease-in-out infinite;
-         -o-animation   : hint 0.4s ease-in-out infinite;
-            animation   : hint 0.4s ease-in-out infinite;
+   -webkit-animation    : hint 0.6s ease-in-out infinite;
+       -moz-animation   : hint 0.6s ease-in-out infinite;
+         -o-animation   : hint 0.6s ease-in-out infinite;
+            animation   : hint 0.6s ease-in-out infinite;
   }
+
+
 
   @-webkit-keyframes arrow {
       50%  {left: 8px;}
@@ -1382,33 +1438,35 @@
 
   @-webkit-keyframes bounce {
     0%, 20%, 50%, 80%, 100% {-webkit-transform: translateX(0);}
-    40% {-webkit-transform: translateX(-10px);}
-    60% {-webkit-transform: translateX(-4px);}
+    40% {-webkit-transform: translateY(-4px);}
+    60% {-webkit-transform: translateY(-9px);}
   }
 
   @-moz-keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {-moz-transform: translateX(0);}
-    40% {-moz-transform: translateX(-10px);}
-    60% {-moz-transform: translateX(-4px);}
+    0%, 20%, 50%, 80%, 100% {-moz-transform: translateY(0);}
+    40% {-moz-transform: translateY(-4px);}
+    60% {-moz-transform: translateY(-9px);}
   }
 
   @-o-keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {-o-transform: translateX(0);}
-    40% {-o-transform: translateX(-10px);}
-    60% {-o-transform: translateX(-4px);}
+    0%, 20%, 50%, 80%, 100% {-o-transform: translateY(0);}
+    40% {-o-transform: translateY(-4px);}
+    60% {-o-transform: translateY(-9px);}
   }
   @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {transform: translateX(0);}
-    40% {transform: translateX(-10px);}
-    60% {transform: translateX(-4px);}
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-4px);}
+    60% {transform: translateY(-9px);}
   }
 
-.bounce {
-    -webkit-animation-name: bounce;
-       -moz-animation-name: bounce;
-         -o-animation-name: bounce;
-            animation-name: bounce;
+
+  .bounce {
+   -webkit-animation    : bounce 0.5s ease-in infinite;
+       -moz-animation   : bounce 0.5s ease-in infinite;
+         -o-animation   : bounce 0.5s ease-in infinite;
+            animation   : bounce 0.5s ease-in infinite;
   }
+
 
 
 
@@ -1419,10 +1477,10 @@
          -o-transform: skewX(165deg) scaleY(1.2) translateY(-10px);
             transform: skewX(165deg) scaleY(1.2) translateY(-10px);
 
-    -webkit-animation    : slide 0.4s ease-in;
-       -moz-animation    : slide 0.4s ease-in;
-         -o-animation    : slide 0.4s ease-in;
-            animation    : slide 0.4s ease-in;
+    -webkit-animation    : slide 0.6s ease-in;
+       -moz-animation    : slide 0.6s ease-in;
+         -o-animation    : slide 0.6s ease-in;
+            animation    : slide 0.6s ease-in;
   }
 
     .effect .flip-container {

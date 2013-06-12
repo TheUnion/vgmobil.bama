@@ -244,11 +244,24 @@
 
   }
 
+
   .layer3 {
-    background-image     : url('../img/hill_middle_layer1.png'), url('../img/cloud2.png');
-    background-position  : 0px 326px, 1000px 62px;
+    background-image     :  url('../img/cloud2.png'), 
+                            url('../img/hill_middle_layer1_top1.png'), 
+                            url('../img/hill_middle_layer1_top2.png'),
+                            url('../img/hill_middle_layer1_top3.png'), 
+                            url('../img/hill_middle_layer1_top4_sheep.png'), 
+                            url('../img/hill_middle_layer1_top5_cows.png'),
+                            url('../img/hill_middle_layer1.png');
+    background-position  :  1000px 62px,
+                             780px 256px,
+                            1440px 256px,
+                            2064px 252px,
+                            2756px 256px,
+                            3372px 252px,
+                            0px 326px;
     background-origin    : content-box;    
-    background-repeat    : repeat-x, no-repeat;    
+    background-repeat    : no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, repeat-x;    
   }
 
 
@@ -263,6 +276,12 @@
   }
 
 
+  #foreground {
+    position: absolute;
+    top: 311px;
+    left:0px;
+  }
+
 
   #layer5 {
 
@@ -272,7 +291,19 @@
     pointer-events        : auto;
     position              : absolute;
     height                : 500px;
+    z-index               : 5;
+  }
 
+
+  .lazystart {
+    background-image      : url('../img/hill_front1.png'), url('../img/hill_front1.png'); 
+    background-repeat     : no-repeat;
+    background-origin     : content-box;
+    background-position   : 0px 311px, 768px 311px;   
+  }
+
+
+  .layer5 {
     background-image      : url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
@@ -282,7 +313,7 @@
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
-                            url('../img/hill_front1.png'), url('../img/hill_front2.png');
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png') !important;
     background-position   :     0px 311px,   768px 311px,   
                              1536px 311px,  2304px 311px,   
                              3072px 311px,  3840px 311px,   
@@ -292,12 +323,10 @@
                              9216px 311px,  9984px 311px,   
                             10752px 311px, 11520px 311px,   
                             12288px 311px, 13056px 311px,   
-                            13824px 311px, 14592px 311px;
-    background-repeat     : no-repeat;
-    background-origin     : content-box;
-    z-index               : 5;
+                            13824px 311px, 14592px 311px !important;
+    background-repeat     : no-repeat !important;
+    background-origin     : content-box !important;
   }
-
 
 
   #layer6 {
@@ -334,6 +363,7 @@
     width         : 80%;
   }
 
+
   .arrow {
     position      : absolute;
     top           : 176px;
@@ -343,8 +373,8 @@
 
   .arrow.small {
     position      : absolute;
-    top           : 24px;
-    left          : 524px;
+    /*top           : 128px;*/
+    left          : 504px;
     width         : 27px;
     height        : 48px;
   }
@@ -362,6 +392,7 @@
     z-index: 12001;
   }
 
+
   .close {
     position  : absolute;
     top       : 24px;
@@ -371,12 +402,12 @@
   }
 
 
-
   .grey {
     color   : #534741;
     stroke  : #534741;
     fill    : #534741;
   }
+
 
   .white {
     color   : #ffffff;
@@ -430,33 +461,33 @@
   }
 
 
-  .muni_sign {
-
+  #muni_sign {
     position            : absolute;
     overflow            : visible;
     left                : 300px;
-    top                 : 371px;
+    top                 : 347px;
     width               : 132px;
     height              : 71px;
 
     color               : white;
     font-family         : Arial, sans-serif;
     font-weight         : 700;
+    font-size           : 16px;
+  }
 
+
+  .muni_sign {
     background-image    : url('../img/frosta_kommunevapen.png'), url('../img/kommuneskilt.png');
     background-repeat   : no-repeat;
     background-origin   : content-box;
-    background-position : 3px 3px, top left;
+    background-position : 6px 4px, top center;
   }
 
   #muni_sign_title {
-    font-size : 16px;
     position  : absolute;
     top       : 3px;
-    left      : 32px;
-
+    left      : 40px;
   }
-
 
   #farm_sign {
     overflow            : visible;
@@ -469,7 +500,6 @@
     width               : 213px;
     left                : 128px;
     height              : 94px;
-    background-origin   : content-box;
     position            : absolute;
   }
 
@@ -477,9 +507,8 @@
   .farm_sign {
     background          : transparent url('../img/wood_sign_arrow.png') no-repeat;
     background-position : top left;
-  }
-
-
+    background-origin   : content-box;
+    }
 
   #farm_sign_title {
     font-family   : Helvetica, Arial, sans-serif;
@@ -524,14 +553,15 @@
     height              : 204px;
     margin-left         : 40px;
     margin-right        : auto;
-    background-origin   : content-box;
     position            : absolute;
   }
+
 
 
   .final_sign {
     background          : transparent url('../img/wood_sign_big.png') no-repeat;
     background-position : top left;
+    background-origin   : content-box;
   }
 
 
@@ -554,43 +584,76 @@
     height              : 249px;
     top                 : 171px;
     left                : 0px;
+  }
+
+
+  .barn {
     background-image    : url('../img/barn.png'), url('../img/fence.png');
     background-position : top left, bottom right;
     background-repeat   : no-repeat, repeat-x;
     background-origin   : content-box;
   }
 
+
   #farmer {
     position  : absolute;
     top       : 302px;
-    left      : 380px;
-
+    left      : 432px;
+    width     : 73px;
+    height    : 127px;
     z-index: 102;
+  }
+
+  .farmer {
+    background-image: url('../img/farmer_small.png');
+    background-origin: content-box;
+    background-position: 0px 0px;
+    top       : 302px;
+    left      : 432px;
+    width     : 73px;
+    height    : 127px;
   }
 
   #tractor {
     position  : absolute;
     left      : 0px;
     top       : 240px;
+    width     : 269px;
+    height    : 198px;
   }
 
-  #farmer_large {
-    /*display: none;    */
+
+  .tractor {
+    background-image    : url('../img/tractor.png');
+    background-origin   : content-box;
+    background-position : top left;
+    width               : 269px;
+    height              : 198px;
   }
 
 
 
 
+  
   #farmer_tips {
+    top       : 40px;
+    left      : 228px;
+    width: 246px;
+    height : 112px;
+
+    z-index   : 10000;
+    overflow  : visible;
+  }
+
+  .farmer_tips {
     background-image: url('../img/farmer_large.png');
     background-repeat: no-repeat;
-    background-position: top left;
+    background-position: 0px 0px;
     background-origin: content-box;
-    top : 40px;
-    left: 208px;
-    z-index: 10000;
-    overflow            : visible;
+    width: 246px;
+    height : 112px;
   }
+
 
   #farmer_recipe {
     
@@ -605,24 +668,28 @@
 
 
   #farmer_text {
-    padding: 16px;
-    top                   : 90px;
-    /*background          : transparent;*/
+    padding       : 16px;
+    top           : 90px;
   }
-
-
 
 
   #lise_tips {
+    top       : 50px;
+    left      : 248px;
+    width     : 246px;
+    height    : 112px;
+    z-index   : 10000;
+    overflow  : visible;
+  }
+
+
+  .lise_tips {
     background-image: url('../img/lise_large.png');
     background-repeat: no-repeat;
-    background-position: top left;
+    background-position: 0px 0px;
     background-origin: content-box;
-    top : 40px;
-    left: 150px;
-    z-index: 10000;
-    overflow            : visible;
   }
+
 
   #lise_recipe {
     position: absolute;
@@ -645,9 +712,61 @@
   #lise {
     position  : absolute;
     top       : 302px;    
-    left      : 324px;    
+    left      : 432px;    
+    width     : 77px;
+    height    : 126px;
     z-index   : 102;
   }
+
+
+  .lise {
+    position  : absolute;
+    top       : 302px;    
+    left      : 432px;    
+    width     : 77px;
+    height    : 126px;
+    z-index   : 102;
+
+    background-image    : url('../img/lise_small.png');
+    background-position : top left;
+    background-origin   : content-box;
+  }
+
+
+  #farmer_salat {
+    top       : 0px;
+    left      : 0px;
+    width     : 580px;
+    height    : 145px;
+  }
+
+
+  .farmer_salat {
+    background-image: url('../img/salat_tips.jpg');
+    background-origin: content-box;
+    background-position: top left;
+    width     : 580px;
+    height    : 145px;
+  }
+
+
+
+  #lise_salat {
+    top       : 0px;
+    left      : 0px;
+    width     : 580px;
+    height    : 145px;
+  }
+
+
+  .lise_salat {
+    background-image: url('../img/salat_soppsalat.jpg');
+    background-origin: content-box;
+    background-position: top left;
+    width     : 580px;
+    height    : 145px;
+  }
+
 
   #drivein_sign {
     color           : #000;
@@ -673,10 +792,12 @@
     height: auto;
   }
 
+
+
   .btm {
     position      : absolute;
     background    : transparent url('../img/pop_up_btm.png') no-repeat;
-    top           : 227px;
+    top           : 226px;
     left          : 0;
     width         : 410px;
     height        : 68px;
@@ -811,8 +932,8 @@
     display             : block; 
     margin              : 0px auto 0px auto; 
     padding             : 0;
-    top                 : 81px;
-    left                : 118px; 
+    top                 : 78px;
+    left                : 66px; 
     width               : 416px;
     height              : 234px;   
     overflow            : hidden;
@@ -855,11 +976,6 @@
     width                 : 100%;
     z-index               : 91;
   }
-
-  .road.dirt {
-    background-image      : url('../img/road_farm.png');
-  }
-
 
 
   #layer_player {
@@ -1012,7 +1128,7 @@
   /* class for lazyloading of bg images */
   .station6 {
     background-image    : url('../img/drive_in_screen.png');
-    background-position : 53px 76px;
+    background-position : 0px 72px;
     background-origin   : content-box;
     background-repeat   : no-repeat;  
   }
@@ -1134,10 +1250,10 @@
   }
 
   .hint {
-   -webkit-animation    : hint 0.2s ease-in-out infinite;
-       -moz-animation   : hint 0.2s ease-in-out infinite;
-         -o-animation   : hint 0.2s ease-in-out infinite;
-            animation   : hint 0.2s ease-in-out infinite;
+   -webkit-animation    : hint 0.5s ease-in-out infinite;
+       -moz-animation   : hint 0.5s ease-in-out infinite;
+         -o-animation   : hint 0.5s ease-in-out infinite;
+            animation   : hint 0.5s ease-in-out infinite;
   }
 
   @-webkit-keyframes arrow {
@@ -1338,32 +1454,33 @@
 
   @-webkit-keyframes bounce {
     0%, 20%, 50%, 80%, 100% {-webkit-transform: translateX(0);}
-    40% {-webkit-transform: translateX(-20px);}
-    60% {-webkit-transform: translateX(-11px);}
+    40% {-webkit-transform: translateY(-4px);}
+    60% {-webkit-transform: translateY(-9px);}
   }
 
   @-moz-keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {-moz-transform: translateX(0);}
-    40% {-moz-transform: translateX(-20px);}
-    60% {-moz-transform: translateX(-11px);}
+    0%, 20%, 50%, 80%, 100% {-moz-transform: translateY(0);}
+    40% {-moz-transform: translateY(-4px);}
+    60% {-moz-transform: translateY(-9px);}
   }
 
   @-o-keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {-o-transform: translateX(0);}
-    40% {-o-transform: translateX(-20px);}
-    60% {-o-transform: translateX(-11px);}
+    0%, 20%, 50%, 80%, 100% {-o-transform: translateY(0);}
+    40% {-o-transform: translateY(-4px);}
+    60% {-o-transform: translateY(-9px);}
   }
   @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {transform: translateX(0);}
-    40% {transform: translateX(-20px);}
-    60% {transform: translateX(-11px);}
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-4px);}
+    60% {transform: translateY(-9px);}
   }
 
-------------------''  .bounce {-''
-    -webkit-animation-name: bounce;
-       -moz-animation-name: bounce;
-         -o-animation-name: bounce;
-            animation-name: bounce;
+
+  .bounce {
+   -webkit-animation    : bounce 0.5s ease-in infinite;
+       -moz-animation   : bounce 0.5s ease-in infinite;
+         -o-animation   : bounce 0.5s ease-in infinite;
+            animation   : bounce 0.5s ease-in infinite;
   }
 
 

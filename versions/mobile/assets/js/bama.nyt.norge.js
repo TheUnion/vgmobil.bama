@@ -6,6 +6,21 @@
     $(function() {
 
 
+
+      window.onerror = logError;
+
+
+      var logError = function (error) {
+        var
+          msg = "JavaScript ERROR:\n" + error.message;
+
+        for ( var key in error ) {
+          msg += key + " : " + error[key] + "\n";
+        }
+        alert(msg);
+      };
+
+
       var changeStartScreenAnimation = function (animation, delay, repeat, time) {
 
         var
@@ -89,91 +104,83 @@
         updateLazyloaders(eventObject.event);
         
         console.log("Tracking event: " + eventObject.event);
-        // ##############TRACKING IMPL:
-        if(eventObject.event.indexOf("start_interaction") === 0) {
 
-          p62601Event(6260100); 
-        }
-        
-        if(eventObject.event.indexOf("arrive_station3") === 0) {
-          p62601Event(6260101); 
-        }
-        
-        if(eventObject.event.indexOf("arrive_station4") === 0) {
+        try {
+          if(eventObject.event.indexOf("start_interaction") === 0) {
 
-          console.log('Trying to set poster');
+            p62601Event(6260100); 
+          }
+          
+          if(eventObject.event.indexOf("arrive_station3") === 0) {
+            p62601Event(6260101); 
+          }
+          
+          if(eventObject.event.indexOf("arrive_station4") === 0) {
+            setPoster('assets/img/poster.jpg')
+            p62601Event(6260102); 
+          }
+          
+          if(eventObject.event.indexOf("arrive_station6") === 0) {
+            p62601Event(6260103); 
+          }
+          
+          if(eventObject.event.indexOf("arrive_station7") === 0) {
+            p62601Event(6260104); 
+          }
+          
+          if(eventObject.event.indexOf("leave_station3") === 0) {
+            p62601Event(6260105); 
+          }
+          
+          if(eventObject.event.indexOf("leave_station4") === 0) {
+            p62601Event(6260106); 
+          }
+          
+          if(eventObject.event.indexOf("leave_station6") === 0) {
+            stopVideo();
+            p62601Event(6260107); 
+          }
+          
+          if(eventObject.event.indexOf("leave_station7") === 0) {
+            p62601Event(6260108); 
+          }
 
-          setPoster('assets/img/poster.jpg')
-          p62601Event(6260102); 
-        }
-        
-        if(eventObject.event.indexOf("arrive_station6") === 0) {
-          p62601Event(6260103); 
-        }
-        
-        if(eventObject.event.indexOf("arrive_station7") === 0) {
-          console.log("arriving at #7, setting right edge.");
-          p62601Event(6260104); 
-        }
-        
-        if(eventObject.event.indexOf("leave_station3") === 0) {
-          p62601Event(6260105); 
-        }
-        
-        if(eventObject.event.indexOf("leave_station4") === 0) {
-          p62601Event(6260106); 
-        }
-        
-        if(eventObject.event.indexOf("leave_station6") === 0) {
-          stopVideo();
-          p62601Event(6260107); 
-        }
-        
-        if(eventObject.event.indexOf("leave_station7") === 0) {
-          p62601Event(6260108); 
-        }
+          if(eventObject.event.indexOf("click_lise") === 0) {
+            p62601Event(6260109); 
+          }
+          if(eventObject.event.indexOf("click_farmer") === 0) {
+            p62601Event(6260110); 
+          }
 
+          if(eventObject.event.indexOf("click_link1") === 0) {
+            p62601Event(6260111); 
+          }
+          if(eventObject.event.indexOf("click_link2") === 0) {
+            p62601Event(6260112); 
+          }
 
+          if(eventObject.event.indexOf("close_lise") === 0) {
+            p62601Event(6260113); 
+          }
+          if(eventObject.event.indexOf("close_farmer") === 0) {
+            p62601Event(6260114); 
+          }
 
-        /* EDIT: jt@kroma.no --- addded event trackers from Adssets() */ 
+          if(eventObject.event.indexOf("video_play") === 0 || eventObject.event.indexOf("video_resume") === 0) {
+            p62601Event(6260115); 
+          }
 
-// console.log('fake-click: ' + link2.href);
+          if(eventObject.event.indexOf("video_pause") === 0) {
+            p62601Event(6260116); 
+          }
 
-        if(eventObject.event.indexOf("click_lise") === 0) {
-          p62601Event(6260109); 
+          if(eventObject.event.indexOf("video_finish") === 0) {
+            p62601Event(6260120); 
+          }
+
         }
-        if(eventObject.event.indexOf("click_farmer") === 0) {
-          p62601Event(6260110); 
-        }
-
-        if(eventObject.event.indexOf("click_link1") === 0) {
-          p62601Event(6260111); 
-        }
-        if(eventObject.event.indexOf("click_link2") === 0) {
-          p62601Event(6260112); 
-        }
-
-        if(eventObject.event.indexOf("close_lise") === 0) {
-          p62601Event(6260113); 
-        }
-        if(eventObject.event.indexOf("close_farmer") === 0) {
-          p62601Event(6260114); 
-        }
-
-
-        /* EDIT: jt@kroma.no --- moved video event trackers from videocontroller to onEvent() */ 
-
-        if(eventObject.event.indexOf("video_play") === 0 || eventObject.event.indexOf("video_resume") === 0) {
-          p62601Event(6260115); 
-        }
-
-        if(eventObject.event.indexOf("video_pause") === 0) {
-          p62601Event(6260116); 
-        }
-
-
-        if(eventObject.event.indexOf("video_finish") === 0) {
-          p62601Event(6260120); 
+        catch(e) {
+          logError(e);
         }
         
         events.push(eventObject);
