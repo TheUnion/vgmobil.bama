@@ -226,7 +226,6 @@
       };
 
 
-
       var setPoster = function(img) {
         var
           videoElement = document.getElementById('video1');
