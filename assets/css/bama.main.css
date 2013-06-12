@@ -1,4 +1,4 @@
-	/**
+/**
  *  Basic setup. 
  *  
  *  We are assuming an iframe, obviously.
@@ -22,7 +22,7 @@
 
   #debug {
     position  : absolute;
-    top       : 300px;
+    top       : 500px;
     width     : 800px;
   }
 
@@ -77,17 +77,13 @@
   }
 
 
-/*  Is this actually used anywhere? 
-
   .para {
     position : relative;
     width    : 280px;
     padding  : 10px;
   }
 
- */
-
-
+ 
   .container {
     position          : absolute;
     left              : 0px; 
@@ -95,8 +91,8 @@
     margin            : 0px auto 0px auto; 
     padding           : 0px;
     top               : 0px;
-    width             : 468px;
-    height            : 300px;
+    width             : 580px;
+    height            : 500px;
     background        : transparent;
     overflow          : hidden;
     cursor            : auto;
@@ -109,17 +105,6 @@
     padding          : 0px;
     width            : 12000px;
     background       : transparent;
-  }
-
-
-  /**
-   *  Layout styles
-   * 
-   */
-
-  .stretchfill {
-    width   : 100%;
-    height  : 100%;
   }
 
 
@@ -139,19 +124,11 @@
     margin-top: 16px;
   }
 
-
   .verybig {
-/*    text-align    : center;
+    text-align    : center;
     font-size     : 52px;
     line-height   : 42px;
-*/
-
-    /* same as "big", in the mobile version */
-    text-align  : center;
-    font-size   : 34px;
-    line-height : 32px;
   }
-
 
   .big {
     text-align  : center;
@@ -194,9 +171,23 @@
     float     : left;
     display   : inline-block;
     overflow  : hidden;
-    top       : 120px;
+    top       : 320px;
     width     : 665px;
   }
+
+  .delayed_load {
+    /*  just for grouping the divs where we will be loading images after initial user engagement */
+  }
+
+
+/*
+  .mirror {
+      -webkit-transform: matrix(-1, 0, 0, 1, 0, 0);
+         -moz-transform: matrix(-1, 0, 0, 1, 0, 0);
+           -o-transform: matrix(-1, 0, 0, 1, 0, 0);
+              transform: matrix(-1, 0, 0, 1, 0, 0);
+  }
+*/
 
 
 /**
@@ -208,7 +199,7 @@
   	-webkit-user-select  : none;
   	-moz-user-select     : none;
   	position             : absolute;
-    height               : 300px;
+    height               : 500px;
     width                : 12000px;
   	cursor               : move;
     z-index              : 500;
@@ -218,9 +209,8 @@
   	-webkit-user-select  : none;
   	-moz-user-select     : none;
   	position             : absolute;
-    height               : 300px;
+    height               : 500px;
     background           : transparent url('../img/sky_bg.png') repeat-x;
-    background-position  : 0px -180px;
     pointer-events       : none;
     z-index              : 1;
   }
@@ -232,15 +222,15 @@
 
     pointer-events       : none;
     position             : absolute;
-    height               : 300px;
+    height               : 500px;
     z-index              : 2;
   }
 
   .layer2 {
-    background-image     : url('../img/hill_middle_layer2.png');
-    background-repeat    : repeat-x; 
+    background-image     : url('../img/hill_middle_layer2.png'), url('../img/cloud1.png'), url('../img/cloud2.png');
+    background-repeat    : repeat-x, no-repeat, no-repeat; 
     background-origin    : content-box;
-    background-position  : 0px 156px;
+    background-position  : 0px 320px, 600px 64px, 800px 124px;
   }
 
 
@@ -249,16 +239,29 @@
     -moz-user-select     : none;
     pointer-events       : none;
     position             : absolute;
-    height               : 300px;
+    height               : 500px;
     z-index              : 3;
 
   }
 
+
   .layer3 {
-    background-image     : url('../img/hill_middle_layer1.png');
-    background-position  : 0px 336px;
+    background-image     :  url('../img/cloud2.png'), 
+                            url('../img/hill_middle_layer1_top1.png'), 
+                            url('../img/hill_middle_layer1_top2.png'),
+                            url('../img/hill_middle_layer1_top3.png'), 
+                            url('../img/hill_middle_layer1_top4_sheep.png'), 
+                            url('../img/hill_middle_layer1_top5_cows.png'),
+                            url('../img/hill_middle_layer1.png');
+    background-position  :  1000px 62px,
+                             780px 256px,
+                            1440px 256px,
+                            2064px 252px,
+                            2756px 256px,
+                            3372px 252px,
+                            0px 326px;
     background-origin    : content-box;    
-    background-repeat    : repeat-x;    
+    background-repeat    : no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, repeat-x;    
   }
 
 
@@ -268,10 +271,16 @@
     pointer-events       : none;
 
     position             : absolute;
-    height               : 300px;
+    height               : 500px;
     z-index              : 4;
   }
 
+
+  #foreground {
+    position: absolute;
+    top: 311px;
+    left:0px;
+  }
 
 
   #layer5 {
@@ -281,8 +290,20 @@
     -moz-user-select      : auto;
     pointer-events        : auto;
     position              : absolute;
-    height                : 300px;
+    height                : 500px;
+    z-index               : 5;
+  }
 
+
+  .lazystart {
+    background-image      : url('../img/hill_front1.png'), url('../img/hill_front1.png'); 
+    background-repeat     : no-repeat;
+    background-origin     : content-box;
+    background-position   : 0px 311px, 768px 311px;   
+  }
+
+
+  .layer5 {
     background-image      : url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
@@ -292,36 +313,32 @@
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
-                            url('../img/hill_front1.png'), url('../img/hill_front2.png');
-    background-position   :     0px 127px,   768px 127px,   
-                             1536px 127px,  2304px 127px,   
-                             3072px 127px,  3840px 127px,   
-                             4608px 127px,  5376px 127px,   
-                             6144px 127px,  6912px 127px,
-                             7680px 127px,  8448px 127px,   
-                             9216px 127px,  9984px 127px,   
-                            10752px 127px, 11520px 127px,   
-                            12288px 127px, 13056px 127px,   
-                            13824px 127px, 14592px 127px;
-    background-repeat     : no-repeat;
-    background-origin     : content-box;
-    z-index               : 5;
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png') !important;
+    background-position   :     0px 311px,   768px 311px,   
+                             1536px 311px,  2304px 311px,   
+                             3072px 311px,  3840px 311px,   
+                             4608px 311px,  5376px 311px,   
+                             6144px 311px,  6912px 311px,
+                             7680px 311px,  8448px 311px,   
+                             9216px 311px,  9984px 311px,   
+                            10752px 311px, 11520px 311px,   
+                            12288px 311px, 13056px 311px,   
+                            13824px 311px, 14592px 311px !important;
+    background-repeat     : no-repeat !important;
+    background-origin     : content-box !important;
   }
 
 
-
   #layer6 {
-
     -webkit-user-select : none;
     -moz-user-select    : none;
     position            : absolute;
     top                 : 10px;
     left                : 900px;
-    width               : 468px;
-    height              : 300px;
+    width               : 580px;
+    height              : 500px;
     pointer-events      : none;
     z-index             : 1000;
-
   }
 
 
@@ -336,58 +353,50 @@
     font-family   : Abel, sans-serif;
     font-weight   : 400;
     text-align    : center;
-    margin-left   : 40px;
+    margin-left   : auto;
     margin-right  : auto;
-    top           : 52px;
+    left          : 64px;
+    top           : 128px;
     width         : 80%;
   }
 
 
   .arrow {
     position      : absolute;
-    top           : 96px;
-    left          : 392px;
+    top           : 176px;
+    left          : 480px;
   }
+
 
   .arrow.small {
     position      : absolute;
-    top           : 16px;
-    left          : 416px;
+    top           : 160px;
+    left          : 504px;
     width         : 27px;
     height        : 48px;
   }
 
 
   .recipe {
-    pointer-events    : auto;
-    font-family       : Abel, Helvetica, sans-serif;
-    color             : #333;
-    width             : 468px;
-    padding-left      : 12px;
-    
-    font-weight       : 400;
-    font-size         : 22px;
-    text-align        : left;
-    background-color  : #f7eee7;
-    z-index           : 12001;
-
-/*
- 05.06 - Removed inline style in index.html:
-
- style="width=580px; font-size: 22px; color: #555; padding-left: 40px; padding-right: 40px"
-
- */
-
+    pointer-events: auto;
+    font-family: Abel, Helvetica, sans-serif;
+    color: #333;
+    width: 480px;
+    font-weight: 700;
+    font-size: 22px;
+    text-align: left;
+    background-color: #f7eee7;
+    z-index: 12001;
   }
+
 
   .close {
     position  : absolute;
     top       : 24px;
-    left      : 404px;
+    left      : 516px;
     width     : 44px;
     height    : 44px;
   }
-
 
 
   .grey {
@@ -395,6 +404,7 @@
     stroke  : #534741;
     fill    : #534741;
   }
+
 
   .white {
     color   : #ffffff;
@@ -404,25 +414,24 @@
 
 
   .recipe_title {
-    position: absolute;
     color: #333;
-    text-align: left;
-    font-size: 24px;
+    text-align: center;
+    font-size: 26px;
     font-weight: 700;
-    width: auto;
+    width: 480px;
     margin-left: 12px;
     text-transform: uppercase;
-    top: 12px;
-    left: 16px;
+    margin-top: 40px;
+    padding-bottom: 8px;
     border-bottom: solid 1px #333;   
   }
 
 
   .recipe_small {
-    margin-top: 8px;
-    margin-right: 4px;
-    margin-left: 12px;
-    width : 448px;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 12px;
     color: #555;
     font-family: Abel, sans-serif;
     text-align: left;
@@ -449,84 +458,87 @@
   }
 
 
-  .muni_sign {
-
+  #muni_sign {
     position            : absolute;
-    overflow            : hidden;
+    overflow            : visible;
     left                : 300px;
-    top                 : 174px;
+    top                 : 347px;
     width               : 132px;
     height              : 71px;
 
-
-    background-image    : url('../img/frosta_kommunevapen.png'), url('../img/kommuneskilt.png');
-    background-repeat   : no-repeat;
-    background-origin   : content-box;
-    background-position : 12px 8px, 4px 4px;
-  }
-
-  #muni_sign_title {
-    position            : absolute;
     color               : white;
     font-family         : Arial, sans-serif;
     font-weight         : 700;
     font-size           : 16px;
-    top                 : 6px;
-    left                : 48px;
   }
 
-  .farm_sign {
-    overflow            : hidden;
+
+  .muni_sign {
+    background-image    : url('../img/frosta_kommunevapen.png'), url('../img/kommuneskilt.png');
+    background-repeat   : no-repeat;
+    background-origin   : content-box;
+    background-position : 6px 4px, top center;
+  }
+
+
+  #muni_sign_title {
+    position  : absolute;
+    top       : 3px;
+    left      : 40px;
+  }
+
+
+  #farm_sign {
+    overflow            : visible;
     color               : #4c2b0c;
-    padding             : 3px;
+    padding             : 4px;
     font-family         : Abel, Helvetica, Arial, sans-serif;
-    font-size           : 14px;
+    font-size           : 12px;
     font-weight         : 700;
-    background          : transparent url('../img/wood_sign_arrow.png') no-repeat;
-    background-position : top left;
-    top                 : 184px;
+    top                 : 366px;
     width               : 213px;
     left                : 128px;
-    height              : 72px;
-    background-origin   : content-box;
+    height              : 94px;
     position            : absolute;
   }
 
 
+  .farm_sign {
+    background          : transparent url('../img/wood_sign_arrow.png') no-repeat;
+    background-position : top left;
+    background-origin   : content-box;
+    }
 
   #farm_sign_title {
     font-family   : Helvetica, Arial, sans-serif;
     font-weight   : 700;
     color         : #4c2b0c;
     position      : absolute;
-    top           : 4px;
+    top           : 6px;
     left          : 12px;
   }
 
 
-
-  #drive_in_sign {
+  .drive_in_sign {
 
     color: #000;
     font-family     : "Arial Black", Arial, sans-serif;
     font-weight     : 700;
-    font-size       : 14px;
-    line-height     : 15px; 
+    font-size       : 13px;
+    line-height     : 18px; 
     text-transform  : uppercase;
   
     /*  We use the following to place text within a specific region of the bg image */
-    overflow        : hidden;
     position        : absolute;
-    left            : 172px;
-    top             : 177px;
+    left            : 226px;
+    top             : 312px;
     width           : 106px;
     height          : auto;
   }
 
 
-
-  .final_sign {
-    overflow            : hidden;
+  #final_sign {
+    overflow            : visible;
     color               : #4c2b0c;
     padding             : 4px;
     font-family         : Abel, Helvetica, Arial, sans-serif;
@@ -534,18 +546,21 @@
     text-align          : center;
     line-height         : 54px;
     font-weight         : 700;
-
-
-    background          : transparent url('../img/wood_sign_big.png') no-repeat;
-    background-position : top left;
-    top                 : 64px;
+    top                 : 212px;
     width               : 253px;
-    left                : 64px;
-    height              : 176px;
+    left                : 128px;
+    height              : 204px;
     margin-left         : 40px;
     margin-right        : auto;
-    background-origin   : content-box;
     position            : absolute;
+  }
+
+
+
+  .final_sign {
+    background          : transparent url('../img/wood_sign_big.png') no-repeat;
+    background-position : top left;
+    background-origin   : content-box;
   }
 
 
@@ -566,61 +581,85 @@
     position            : absolute;
     width               : 492px; /* + (fence posts * post width) (12 * 19 == 228) */
     height              : 249px;
-    top                 : -14px;
+    top                 : 171px;
     left                : 0px;
+  }
+
+
+  .barn {
     background-image    : url('../img/barn.png'), url('../img/fence.png');
     background-position : top left, bottom right;
     background-repeat   : no-repeat, repeat-x;
     background-origin   : content-box;
   }
 
+
   #farmer {
     position  : absolute;
-    top       : 122px;
-    left      : 380px;
-
+    top       : 302px;
+    left      : 432px;
+    width     : 73px;
+    height    : 127px;
     z-index: 102;
+  }
+
+  .farmer {
+    background-image: url('../img/farmer_small.png');
+    background-origin: content-box;
+    background-position: 0px 0px;
+    top       : 302px;
+    left      : 432px;
+    width     : 73px;
+    height    : 127px;
   }
 
   #tractor {
     position  : absolute;
     left      : 0px;
-    top       : 40px;
+    top       : 240px;
+    width     : 269px;
+    height    : 198px;
   }
 
-  #farmer_large {
-    /*display: none;    */
+
+  .tractor {
+    background-image    : url('../img/tractor.png');
+    background-origin   : content-box;
+    background-position : top left;
+    width               : 269px;
+    height              : 198px;
   }
 
 
 
 
+  
   #farmer_tips {
-    margin    : 0;
-    padding   : 0;
-    top : 0px;
-    left: 128px;
-    z-index: 10000;
-    overflow : visible;
+    top       : 40px;
+    left      : 228px;
+    width: 246px;
+    height : 112px;
+
+    z-index   : 10000;
+    overflow  : visible;
   }
 
-  #farmer_hello {
-    overflow  : hidden;
-    width     : 218px;
-  }
-
-  #lise_hello {
-    overflow  : hidden;
-    width     : 218px;
+  .farmer_tips {
+    background-image: url('../img/farmer_large.png');
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+    background-origin: content-box;
+    width: 246px;
+    height : 112px;
   }
 
 
   #farmer_recipe {
     
     position: absolute;
-    top : -300px;
+    top : -500px;
     left: 0;
-    height: 300px;
+    height: 500px;
     width: 100%;
     opacity: 0;
     z-index: 10000;
@@ -628,58 +667,116 @@
 
 
   #farmer_text {
-    padding : 8px;
-    /*top     : 0px;*/
-    /*background          : transparent;*/
+    padding       : 16px;
+    top           : 90px;
   }
 
 
   #lise_tips {
-    top : 0px;
-    left: 120px;
-    height: 56px;
-    /*width: 229px;*/
-    z-index: 10000;
-    overflow            : visible;
+    top       : 50px;
+    left      : 248px;
+    width     : 246px;
+    height    : 112px;
+    z-index   : 10000;
+    overflow  : visible;
   }
+
+
+  .lise_tips {
+    background-image: url('../img/lise_large.png');
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+    background-origin: content-box;
+  }
+
 
   #lise_recipe {
     position: absolute;
-    top : -300px;
+    top : -500px;
     left: 0;
-    width: 468px;
-    height: 300px;
+    width: 580px;
+    height: 500px;
     opacity: 0;
     z-index: 10000;
   }
 
 
   #lise_text {
-    /*padding: 16px;*/
-    top                 : 0px;
+    padding: 16px;
+    top                 : 90px;
     /*background          : transparent;*/
   }
 
 
   #lise {
     position  : absolute;
-    top       : 102px;    
-    left      : 324px;    
+    top       : 302px;    
+    left      : 432px;    
+    width     : 77px;
+    height    : 126px;
     z-index   : 102;
   }
+
+
+  .lise {
+    position  : absolute;
+    top       : 302px;    
+    left      : 432px;    
+    width     : 77px;
+    height    : 126px;
+    z-index   : 102;
+
+    background-image    : url('../img/lise_small.png');
+    background-position : top left;
+    background-origin   : content-box;
+  }
+
+
+  #farmer_salat {
+    top       : 0px;
+    left      : 0px;
+    width     : 580px;
+    height    : 145px;
+  }
+
+
+  .farmer_salat {
+    background-image: url('../img/salat_tips.jpg');
+    background-origin: content-box;
+    background-position: top left;
+    width     : 580px;
+    height    : 145px;
+  }
+
+
+
+  #lise_salat {
+    top       : 0px;
+    left      : 0px;
+    width     : 580px;
+    height    : 145px;
+  }
+
+
+  .lise_salat {
+    background-image: url('../img/salat_soppsalat.jpg');
+    background-origin: content-box;
+    background-position: top left;
+    width     : 580px;
+    height    : 145px;
+  }
+
 
   #drivein_sign {
     color           : #000;
     font-family     : Arial, sans-serif;
     font-weight     : 900;
-    font-size       : 14px;
-    line-height     : 15px;
+    font-size       : 13px;
+    line-height     : 18px;
     text-transform  : uppercase;
     position        : absolute;
-    top             : 32px;
+    top             : 168px;
     left            : 200px;
-    height          : 176px;
-    overflow        : hidden;
   }
 
 /*  #drivein_screen {
@@ -694,16 +791,16 @@
     height: auto;
   }
 
+
+
   .btm {
     position      : absolute;
     background    : transparent url('../img/pop_up_btm.png') no-repeat;
-    top           : 75px;
-    left          : 180px;
-    width         : 229px;
+    top           : 226px;
+    left          : 0;
+    width         : 410px;
     height        : 68px;
     overflow      : hidden;
-    z-index: 0;
-
   }
 
 
@@ -720,17 +817,16 @@
     color         : #333;
     font-family   : Abel, Futura, Helvetica, sans-serif;
     font-weight   : 400;
-    font-size     : 24px;
+    font-size     : 18px;
     padding       : 4px;
     text-align    : center;
-    /*line-height   : 16px; */
-    top           : 4px;
-    height        : 50px;
-    width         : 229px;
-    /*border-style  : solid solid none solid;
+    top           : 110px;
+    height        : 108px;
+    width         : 219px;
+    border-style  : solid solid none solid;
     border-width  : 1px;
     border-color  : #928c85;
-    background    : #eee;*/
+    background    : #eee;
 
 
     -webkit-transform-style: preserve-3d;
@@ -758,28 +854,18 @@
     text-align          : center;
     font-weight         : 700;
     font-size           : 18px;
-    line-height         : 18px;
     color               : white;
-    padding             : 8px 8px 8px 8px;
-    height              : auto;
-    width               : 200px;
+    padding             : 4px 12px 4px 12px;
+    width               : 96px;
     margin-right        : auto;
-    margin-left         : 30px;
-    margin-top          : 20px;
+    margin-left         : auto;
+    margin-top          : 12px;
     cursor              : pointer;
     background          : #004288;
-    -moz-border-radius  : 4px;
-      -o-border-radius  : 4px;
-         border-radius  : 4px;
+    -moz-border-radius  : 6px;
+      -o-border-radius  : 6px;
+         border-radius  : 6px;
   }
-
-  .btn_close {
-    display   : block;
-    position  : absolute;
-    left      : 400px;
-    top       : 12px;
-  }
-
 
 
   .snakkeboble.flip.front{
@@ -820,7 +906,7 @@
     }
 
     
-    .snakkeboble.flip.back {
+    sg.snakkeboble.flip.back {
       z-index: 1000;
 
 
@@ -835,7 +921,7 @@
 
 
 
-  .video_container {
+  #video1_container {
     -webkit-user-select : default;
        -moz-user-select : default;
             user-select : default;
@@ -845,8 +931,8 @@
     display             : block; 
     margin              : 0px auto 0px auto; 
     padding             : 0;
-    top                 : 4px;
-    left                : 24px; 
+    top                 : 78px;
+    left                : 66px; 
     width               : 416px;
     height              : 234px;   
     overflow            : hidden;
@@ -855,23 +941,15 @@
   }
 
 
-  .shrunk {
-    left                : 80px;
-    width               : 258px;
-    height              : 145px;   
-  }
-
-
-  .video {
-
-  }
-
   #video1 {
     position            : absolute;
     z-index             : 1002;
     margin              : 0;
     padding             : 0;
-    /*width : */
+    top                 : 0;
+    left                : 0;
+    width               : 416px;
+    height              : 234px;   
     
     -webkit-user-select : auto;
        -moz-user-select : auto;
@@ -892,8 +970,8 @@
     background-image      : url('../img/road.png');
     background-repeat     : repeat-x;
     background-position   : top left;
-    top                   : 244px; 
-    height                : 55px;
+    top                   : 428px; 
+    height                : 71px;
     width                 : 100%;
     z-index               : 91;
   }
@@ -904,7 +982,7 @@
     -moz-user-select     : none;
     pointer-events       : none;
     position             : absolute;
-    height               : 300px;
+    height               : 500px;
     z-index              : 100;
   }
 
@@ -921,8 +999,8 @@
 
   #car {
     position             : absolute;
-    top                  : 164px;
-    left                 : 96px;
+    top                  : 364px;
+    left                 : 150px;
     background           : transparent;
     z-index              : 110;
   }
@@ -932,18 +1010,17 @@
     position             : absolute;
     width                : 54px;
     height               : 36px;
-    left                 : 192px;
-
-    top                  : 12px;
+    left                 : 263px;
+    top                  : 72px;
     z-index              : 90;
   }
 
 
   #logo {
     position             : absolute;
-    width                : 128px;
-    height               : 23px;
-    left                 : 300px;
+    width                : 192px;
+    height               : 34px;
+    left                 : 356px;
     top                  : 0;
     z-index              : 90;
     margin               : 16px;
@@ -956,6 +1033,12 @@
   }
 
   .station {
+    opacity     : 20%;
+    color       : navy;
+    /* show where our stations begin */
+    /*border-left : dotted 1px #fff;*/
+    font-size   : 72px;
+    font-weight : bold;
     z-index     : 100;
   }
 
@@ -964,18 +1047,18 @@
     position        : absolute;
     top             : 0px;
     left            : 0px;
-    width           : 468px;
-    height          : 244px;
+    width           : 580px;
+    height          : 428px;
     background      : transparent; 
   }
 
 
   #station1 {
     position        : absolute;
-    top             : 0px;
+    top             : 10px;
     left            : 1600px;
-    width           : 468px;
-    height          : 244px;
+    width           : 580px;
+    height          : 428px;
     background      : transparent; 
   }
 
@@ -983,8 +1066,8 @@
     position        : absolute;
     top             : 10px;
     left            : 3200px;
-    width           : 468px;
-    height          : 300px;
+    width           : 580px;
+    height          : 500px;
     background      : transparent; 
   }
 
@@ -993,8 +1076,8 @@
     position      : absolute;
     top           : 10px;
     left          : 4606px;
-    width         : 468px;
-    height        : 300px;
+    width         : 580px;
+    height        : 500px;
     background    : transparent; 
   }
 
@@ -1003,42 +1086,40 @@
     position      : absolute;
     top           : 10px;
     left          : 6180px;
-    width         : 468px;
-    height        : 300px;
+    width         : 580px;
+    height        : 500px;
     background    : transparent; 
   }
 
   #station5 {
     position      : absolute;
-    top           : 0px;
+    top           : 10px;
     left          : 7800px;
-    width         : 468px;
-    height        : 244px;
+    width         : 580px;
+    height        : 500px;
+
   }
 
 
-
-  /*  LAZYLOAD
-
-     When we set bg image in a class with the same name as the id, we can load images on demand
-     by adding the class "lazyload" to the div. Activate this function by adding class "lazyload" to the div 
-     Make sure you do not override any background properties from the class in the # definition
+  /* When we set bg image in a class with the same name as the id, we can load images on demand
+     by adding the class to the div. Activate this function by adding class "lazyload" to the div 
+     Make sure you do not override any background-properties in the # definition
      */
-
   .station5 {
     background-image: url('../img/drive_in_sign.png');
-    background-position : center 32px;
+    background-position : center 170px;
     background-origin   : content-box;
-    background-repeat   : no-repeat;
+    background-repeat   : no-repeat;  
   }
+
 
 
   #station6 {
     position            : absolute;
     top                 : 10px;
     left                : 9224px;
-    width               : 468px;
-    height              : 300px;
+    width               : 580px;
+    height              : 500px;
     padding             : 0;
     margin              : 0;
   }
@@ -1046,7 +1127,7 @@
   /* class for lazyloading of bg images */
   .station6 {
     background-image    : url('../img/drive_in_screen.png');
-    background-position : top center;
+    background-position : 0px 72px;
     background-origin   : content-box;
     background-repeat   : no-repeat;  
   }
@@ -1058,8 +1139,8 @@
     position            : absolute;
     top                 : 10px;
     left                : 10924px;
-    width               : 468px;
-    height              : 300px;
+    width               : 580px;
+    height              : 500px;
     background          : transparent;
   }
 
@@ -1109,34 +1190,42 @@
    */
 
 
-
-/*
-  @-webkit-keyframes shrunk {
-    0% {-webkit-transform: scaleX(1) scaleY(1);}
-    50% {-webkit-transform: translateX(10px);}
+  @-webkit-keyframes point {
+    0%, 50%, 100% {-webkit-transform: translateX(0);}
+    25% {-webkit-transform: translateX(20px);}
+    75% {-webkit-transform: translateX(-15px);}
   }
 
-  @-moz-keyframes hint {
-    0%, 100% {-moz-transform: translateX(0);}
-    50% {-moz-transform: translateX(10px);}
+  @-moz-keyframes point {
+    0%, 50%, 100% {-moz-transform: translateX(0);}
+    25% {-moz-transform: translateX(20px);}
+    75% {-moz-transform: translateX(-15px);}
   }
 
-  @-o-keyframes hint {
-    0%, 100% {-o-transform: translateX(0);}
-    50% {-o-transform: translateX(10px);}
+  @-o-keyframes point {
+    0%, 50%, 100% {-o-transform: translateX(0);}
+    25% {-o-transform: translateX(20px);}
+    75% {-o-transform: translateX(-15px);}
   }
-  @keyframes hint {
-    0%, 100% {transform: translateX(0);}
-    50% {transform: translateX(10px);}
-  }
-*/
-  .hint {
-   -webkit-animation    : hint 0.4s ease-in-out infinite;
-       -moz-animation   : hint 0.4s ease-in-out infinite;
-         -o-animation   : hint 0.4s ease-in-out infinite;
-            animation   : hint 0.4s ease-in-out infinite;
+  @keyframes point {
+    0%, 50%, 100% {transform: translateX(0);}
+    25% {transform: translateX(20px);}
+    75% {transform: translateX(-15px);}
   }
 
+  .point {
+/*    -webkit-animation-name: point;
+    -moz-animation-name: point;
+    -o-animation-name: point;
+    animation-name: point;*/
+
+    -webkit-animation    : point 0.8s ease-in-out infinite;
+       -moz-animation    : point 0.8s ease-in-out infinite;
+         -o-animation    : point 0.8s ease-in-out infinite;
+            animation    : point 0.8s ease-in-out infinite;
+
+
+  }
 
 
 
@@ -1160,10 +1249,10 @@
   }
 
   .hint {
-   -webkit-animation    : hint 0.4s ease-in-out infinite;
-       -moz-animation   : hint 0.4s ease-in-out infinite;
-         -o-animation   : hint 0.4s ease-in-out infinite;
-            animation   : hint 0.4s ease-in-out infinite;
+   -webkit-animation    : hint 0.5s ease-in-out infinite;
+       -moz-animation   : hint 0.5s ease-in-out infinite;
+         -o-animation   : hint 0.5s ease-in-out infinite;
+            animation   : hint 0.5s ease-in-out infinite;
   }
 
   @-webkit-keyframes arrow {
@@ -1364,32 +1453,33 @@
 
   @-webkit-keyframes bounce {
     0%, 20%, 50%, 80%, 100% {-webkit-transform: translateX(0);}
-    40% {-webkit-transform: translateX(-10px);}
-    60% {-webkit-transform: translateX(-4px);}
+    40% {-webkit-transform: translateY(-4px);}
+    60% {-webkit-transform: translateY(-9px);}
   }
 
   @-moz-keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {-moz-transform: translateX(0);}
-    40% {-moz-transform: translateX(-10px);}
-    60% {-moz-transform: translateX(-4px);}
+    0%, 20%, 50%, 80%, 100% {-moz-transform: translateY(0);}
+    40% {-moz-transform: translateY(-4px);}
+    60% {-moz-transform: translateY(-9px);}
   }
 
   @-o-keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {-o-transform: translateX(0);}
-    40% {-o-transform: translateX(-10px);}
-    60% {-o-transform: translateX(-4px);}
+    0%, 20%, 50%, 80%, 100% {-o-transform: translateY(0);}
+    40% {-o-transform: translateY(-4px);}
+    60% {-o-transform: translateY(-9px);}
   }
   @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {transform: translateX(0);}
-    40% {transform: translateX(-10px);}
-    60% {transform: translateX(-4px);}
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-4px);}
+    60% {transform: translateY(-9px);}
   }
 
-.bounce {
-    -webkit-animation-name: bounce;
-       -moz-animation-name: bounce;
-         -o-animation-name: bounce;
-            animation-name: bounce;
+
+  .bounce {
+   -webkit-animation    : bounce 0.5s ease-in infinite;
+       -moz-animation   : bounce 0.5s ease-in infinite;
+         -o-animation   : bounce 0.5s ease-in infinite;
+            animation   : bounce 0.5s ease-in infinite;
   }
 
 
@@ -1446,8 +1536,8 @@
       position: absolute;
       top: 0px;
       left: 0px;
-      bottom: 300px;
-      width: 468px;
+      bottom: 500px;
+      width: 580px;
       background: transparent;
       border: 0;
     }
