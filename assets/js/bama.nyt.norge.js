@@ -295,7 +295,7 @@
           }
         }
         
-        VIDEO_CONTROLLER.stop();
+        VIDEO_CONTROLLER.pause();
         return true;
       };
 
@@ -330,29 +330,36 @@
               }, false);
 
 
-          videoController.element = video;
+            video.addEventListener("play", function(e) {
+              onEvent({event: "video_play"});
+              }, false);
 
-          videoController.onended = function(e) {
-                onEvent({event: "video_finished"});
-              }
+
+            video.addEventListener("pause", function(e) {
+              onEvent({event: "video_stop"});
+              }, false);
+
+            video.addEventListener("ended", function(e) {
+              onEvent({event: "video_finished"});
+              }, false);
+
+
+          videoController.element = video;
 
           videoController.play = function(resume) {
               video.play();
-              onEvent({event: resume ? "video_resume" : "video_play"});
           };
 
           videoController.pause = function() {
               video.pause();
-              onEvent({event: 'video_pause'});
           };
 
           videoController.stop = function() {
               if(video.playing) {
                 video.pause();
-  //              video.currentTime = 0;
-                onEvent({event: 'video_stop'});
               }
           };
+
 
           videoController.togglePause = function() {
             if (video.paused) {
@@ -410,6 +417,7 @@
 
         return videoController;
       };
+
 
 
 

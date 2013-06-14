@@ -309,41 +309,53 @@
  */
 
 
+
       var HTMLVideo = function(elem) {
 
         try {
 
           var 
             video           = typeof elem === "string" ? document.getElementById(elem) : elem,
-            videoController = {};
+            videoController = {},
+            loadedMetaData  = false;
+
+            video.addEventListener("loadedmetadata", function() {
+                this.loadedMetaData = true;
+              }, false);
+
+            video.addEventListener("error", function(error) {
+                logError(error);
+              }, false);
+
+
+            video.addEventListener("play", function(e) {
+              onEvent({event: "video_play"});
+              }, false);
+
+
+            video.addEventListener("pause", function(e) {
+              onEvent({event: "video_stop"});
+              }, false);
+
+            video.addEventListener("ended", function(e) {
+              onEvent({event: "video_finished"});
+              }, false);
+
 
           videoController.element = video;
 
-          videoController.onended = function(e) {
-                onEvent({event: "video_finished"});
-              }
-
           videoController.play = function(resume) {
-
-              // #### Tracking ####
-              // p62601Event(6260115); 
-             // ##################
               video.play();
-              onEvent({event: resume ? "video_resume" : "video_play"});
           };
-
-
-
 
           videoController.pause = function() {
               video.pause();
-              onEvent({event: 'video_pause'});
           };
 
           videoController.stop = function() {
-              video.pause();
-              video.currentTime = 0;
-              onEvent({event: 'video_stop'});
+              if(video.playing) {
+                video.pause();
+              }
           };
 
 
@@ -355,13 +367,24 @@
             }
           };
 
+
           videoController.skip = function(value) {
             video.currentTime += value;
           };
 
+
+          videoController.reset = function () {
+            if(loadedMetaData) {
+              video.currentTime = 0;
+            }
+          };
+
+
           videoController.restart = function() {
-            video.currentTime = 0;
-            onEvent({event: 'video_restart'});
+            if(loadedMetaData ) {
+              video.currentTime = 0;
+              onEvent({event: 'video_restart'});
+            }
           };
 
           videoController.toggleControls = function() {
@@ -381,7 +404,6 @@
           };
 
           videoController.setPoster = function(img) {
-            console.log('Applying poster image: ' + img);
             video.setAttribute("poster", img);   
           };
 
