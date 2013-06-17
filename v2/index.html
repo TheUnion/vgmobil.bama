@@ -76,22 +76,36 @@
           </div>
         </div>
 
-
-        <div id="station1" class="station">
-          <div id="muni_sign" class="lazyload ondemand" data-load-event="start_interaction"><span id="muni_sign_title">Nøtteroy</span></div>
+        <div id="station1" class="station lazyload ondemand" data-load-event="start_interaction">
+          <div id="muni_sign" class="muni_sign lazyload ondemand" data-load-event="start_interaction"><span id="muni_sign_title">Nøtterøy</span></div>
         </div>
 
-        <div id="station2" class="station">
+        <div id="station2" class="station lazyload ondemand" data-load-event="start_interaction">
+          <div class="drive_in_sign center">Nå kommer<br />jordbærene!</div>
+        </div>
+
+        <div id="station3" class="station lazyload ondemand" data-load-event="start_interaction">
+          <div class="arrow small animated continuous hint"><img class="hires stretchfill" src="assets/img/arrow.png" /></div>
+          <div id="video1_container">
+            <video id="video1" class="interactive" width="416" height="234" controls preload="none">
+              <source src="assets/video/video1.webm" type="video/webm">
+              <source src="assets/video/video1.mp4" type="video/mp4">
+              <source src="assets/video/video1.ogv" type="video/theora">
+              Your browser does not support the video tag. 
+              You're using Internet Explorer, probably.
+            </video>
+          </div>
           <div id="farm_sign" class="lazyload ondemand" data-load-event="start_interaction">
             <span id="farm_sign_title">Bondegård</span>
           </div>
         </div>
 
-        <div id="station3" class="station lazyload ondemand" data-load-event="start_interaction">
+        <div id="station4" class="station">
           <!-- <img id="outbuilding" class="sprite hires" src="assets/img/outbuilding.png"> -->
           <div class="arrow small animated continuous hint"><img class="hires" src="assets/img/arrow.png" /></div>
+          <div id="fence" class="sprite lazyload ondemand" data-load-event="start_interaction"></div>
           <div id="outbuilding" class="sprite lazyload ondemand" data-load-event="start_interaction"></div>
-          
+
           <div id="farmer" class="sprite lazyload ondemand" data-load-event="start_interaction"></div>
           
           <div id="farmer_hello">
@@ -107,12 +121,10 @@
         </div>
 
 
-        <div id="station4" class="station">
+        <div id="station6" class="station">
           <div class="arrow small animated continuous hint"><img class="hires" src="assets/img/arrow.png" /></div>
           <div id="lise_hello" class="interactive">
             <div id="lise_tips" class="sprite clicktarget lazyload ondemand" data-load-event="arrive_station3">
-              <!-- <img id="lise_large" src="assets/img/lise_large.png" /> -->
-              <!-- <img id="close_button" src="assets/img/close_grey.png" /> -->
               <div id="lise_tekst" class="snakkeboble center"><span class="bold">Hei</span>, her har du en god oppskrift på jordbær fra meg.
               <br /> <div class="btn">Vær så god!</div>
               </div>
@@ -124,25 +136,6 @@
           <div id="stand" class="sprite hires lazyload ondemand" data-load-event="arrive_station3"></div>
           <div id="lise" class="face sprite lazyload ondemand" data-load-event="arrive_station3"></div>
         </div>
-
-        <div id="station5" class="station lazyload ondemand" data-load-event="arrive_station4">
-          <div class="drive_in_sign center">Nå kommer<br />jordbærene!</div>
-        </div>
-
-        <div id="station6" class="station lazyload ondemand" data-load-event="arrive_station5">
-          <div class="arrow small animated continuous hint"><img class="hires stretchfill" src="assets/img/arrow.png" /></div>
-          <div id="video1_container">
-            <video id="video1" class="interactive" width="416" height="234" controls preload="none">
-              <source src="assets/video/video1.webm" type="video/webm">
-              <source src="assets/video/video1.mp4" type="video/mp4">
-              <source src="assets/video/video1.ogv" type="video/theora">
-              Your browser does not support the video tag. 
-              You're using Internet Explorer, probably.
-            </video>
-          </div>
-
-        </div>
-
 
         <div id="station7" class="station lazyload ondemand" data-load-event="arrive_station6">
           <div id="final_sign" class="lazyload ondemand" data-load-event="arrive_station6">
@@ -221,20 +214,16 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste jordbærer. 
 
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-
-  <!-- <script
-src="http://pliing.se/PliingAd/AdJs?app=no_vg_bama_tracking_tablet&id=1&no=[randomNo]"></script> -->
-  <script type="text/javascript" language="javascript">$.getScript("http://pliing.se/PliingAd/AdJs?app=no_vg_bama_tracking_tablet&id=1&no=" +new Date().getTime());</script>  
+  <script type="text/javascript" language="javascript">$.getScript("http://pliing.se/PliingAd/AdJs?app=no_vg_bama_tracking_tablet&id=1&no=" +new Date().getTime());</script> 
   <script src="assets/js/lib/jquery.parallaxSwipe.js"></script>
-  <!--script src="assets/js/lib/jquery.flip.js"></script-->
   <script async src="assets/js/bama.nyt.norge.js"></script>
 
-
-  <div id="position_data">no position</div>
-  <div id="debuginfo">no debuginfo</div>
-    <!-- A quick-and-dirty console-like window on devices -->
+  <div id="position_data">position</div>
+  <div id="debuginfo">debuginfo</div>
+    
+  <!-- A quick-and-dirty console-like window on devices -->
   <div id="debugconsole" class="console">
-    <!-- Follow up with quick-and-dirty log -->
+    <!-- log lines -->
     <ul id="log" class="log"></ul>
   </div>
 

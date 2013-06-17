@@ -108,7 +108,6 @@
         var
           animation = animation || false;
 
-//        car.classList.remove('animated');
         if(animation) {
           car.classList.remove(animation);
         }
@@ -212,7 +211,6 @@
         }
         
         if(eventObject.event.indexOf("leave_station6") === 0) {
-          stopVideo();
           p62602Event(6260207); 
         }
         
@@ -254,19 +252,13 @@
         if(eventObject.event.indexOf("video_finish") === 0) {
           p62602Event(6260220); 
         }
-
       }
       catch(e) {
         logError(e);
       }
 
-
-
-        events.push(eventObject);
-
+       events.push(eventObject);
       };
-
-
 
 
       var updateLazyloaders = function (eventName) {
@@ -311,6 +303,9 @@
             //skip those marked for manual load / automatic loading on event with data-load-event attribute
             continue;            
           }
+
+          // add class with same name as the id, our convention for lazyloading
+          // images to load are specified as background images in the class definition
           LAZY_LOADERS[i].classList.add(LAZY_LOADERS[i].id);
         }
 
@@ -520,7 +515,7 @@
 
     var AJAX = {
 
-      req : XMLHttpRequest(),
+      req : new XMLHttpRequest(),
 
 
       __execute : function (msg, obj) {
@@ -671,21 +666,21 @@
           }
         }
         // we could probably come up with something more general, but not in the time available
-        else if( (clickpos>=11111 && (clickpos<=11325) )) {
-          if((click.clientY>208) && (click.clientY<272)){
+        else if( (clickpos>=7650 + 174 && (clickpos<=7650 + 170 + 232) )) {
+          if((click.clientY>230) && (click.clientY<282)){
             openLink(link1);
             onEvent({event: "click_link1"});
             return;
           }
-          else if((click.clientY>(276) && (click.clientY<((348))))){
+          else if((click.clientY>(286) && (click.clientY<((332))))){
             openLink(link2);
             onEvent({event: "click_link2"});
             return;
           }
         }
         // click on video
-        else if( (clickpos>=(9224 + 118) && (clickpos<=(9224 + 118 + 416)) )) {
-          if((click.clientY>(86) && (click.clientY<((86 + 216))))){
+        else if( (clickpos>=(3072 + 65) && (clickpos<=(3072 + 65 + 416)) )) {
+          if((click.clientY>(86) && (click.clientY<((86 + 236))))){ //allow 20px for controls, video is 216px tall
             console.log('click on video: ' + link2.href);
             clickVideo();
             return;
@@ -853,7 +848,7 @@
           if(currentpos > SWIPE_TOLERANCE) {
             if(!initialized()) {
               startSession();
-              console.log("Interaction detected, preloading initiated");
+              console.log("Interaction detected, preloading resources ..");
             }
           }
           // for..in normally not acceptable, but ok with this few elements
@@ -864,6 +859,8 @@
             if(++counter < startAtIndex) {
               continue;
             }
+
+
             x = (startpos - (stations[key].getBoundingClientRect().left - STATION_MARGIN));
             if(x<0) {
               break;
@@ -884,11 +881,6 @@
                 if(currentstation !== key) {
                   onEvent({ event: 'arrive_' + key, message: 'arriving at station ' + key, target: currentstation, time: time});
                   currentstation = key;
-
-                  // don't stop at these stations
-                  if(counter === 5){
-                    continue;
-                  }
 
                   var 
                     stationx = Math.round($("#" + currentstation).position().left);
@@ -921,7 +913,6 @@
         //start default animation loop for start screen
         changeStartScreenAnimation("bounce", 8000, true, 3000);
       };
-
 
 
 

@@ -63,17 +63,13 @@
   };
 
 
-
   var sliderW = parseInt(panel.css('width'),10) * panel.length;
   VIEWPORT    = vw; edge='left'; panel.css('float','left'); plugin.css('width',sliderW); sliderLen = sliderW;
 
   plugin.css(edge,0);
 
 
-
   this.parallaxSwipe.getSize = function(i){ if (sliderW>'') { return sliderW; } else { return sliderH; }};
-
-
 
 
 
@@ -111,7 +107,7 @@
 
 
     // this is our animation loop, so escape early if there's nothing to do
-    if (_mouseDown && !REQUESTED_POSITION && (sliderLT > -10924)) {
+    if (_mouseDown && !REQUESTED_POSITION && (sliderLT > -7650)) {
       _velocity *= o.MOUSEDOWN_DECAY;
     } else {
       _velocity *= o.DECAY;
@@ -160,9 +156,9 @@
         }
         return;
       } 
-      else if (sliderLT + sliderLen < -10924) {
+      else if (sliderLT + sliderLen < -7650) {
 
-        sliderLT  = -10924;
+        sliderLT  = -7650;
         _velocity = 0;
 
         bouncing  = (VIEWPORT - sliderLen - sliderLT) * o.BOUNCE_SPRING;
@@ -201,12 +197,9 @@
       }
 
 
-
-
     debugdata += "sliderLT is " + sliderLT + "<br />_velocity is " + _velocity + "<br />REQUESTED_POSITION is " + REQUESTED_POSITION + "<br />bounce is " + bouncing;
 
     $('#position_data').html(debugdata);
-
 
     updateDebugInfo();
     }
@@ -217,7 +210,7 @@
     var
       result = ( 
         window.requestAnimationFrame    || window.webkitRequestAnimationFrame || 
-        window.mozRequestAnimationFrame || window.oRequestAnimationFrame      || 
+        window.mozRequestAnimationFrame || 
         window.msRequestAnimationFrame  || function(callback) { window.setTimeout(callback, 1000 / 60); }
       );
 
@@ -269,8 +262,8 @@
       //set the flags for the edges so you cannot start swipe left if you have reached the left edge, same for right
       if(_mouseDownLT == 0) { 
         leftEdge = true; 
-      } else if ( _mouseDownLT <= -10924) {
-        if ( _mouseDownLT < -10924) {
+      } else if ( _mouseDownLT <= -7650) {
+        if ( _mouseDownLT < -7650) {
           _velocity = -0.3;
         }
         rightEdge = true;
@@ -289,7 +282,6 @@
     Custom adaptations to plugin
 
    */
-
 
 
   this.parallaxSwipe.stop = function() { 
@@ -366,13 +358,13 @@
       // from a different position than the edge it will also stop the movement of layers same for the right
       if (leftEdge && consoleVar>0 || (consoleVar>0)) {
         rightEdge = false;
-      } else if (rightEdge && consoleVar <-10924 || ( consoleVar< -10924)) {
+      } else if (rightEdge && consoleVar <-7650 || ( consoleVar< -7650)) {
         console.log("consoleVar: " + consoleVar + ", deltaX: " + deltaX);
         leftEdge = false;
         }
         else {
-          if(MouseXY -_mouseDownXY > 10924) {
-            MouseXY = MouseXY - (10924 - (MouseXY -_mouseDownXY));
+          if(MouseXY -_mouseDownXY > 7650) {
+            MouseXY = MouseXY - (7650 - (MouseXY -_mouseDownXY));
           }
           plugin.css(edge, _mouseDownLT + (MouseXY - _mouseDownXY));
           if (o.LAYER.length>0) {
