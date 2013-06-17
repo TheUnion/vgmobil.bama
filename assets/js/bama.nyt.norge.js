@@ -651,7 +651,7 @@
           $('#farmer_recipe').animate({ top : 0, opacity: 1}, 325, 'linear');
         }
         else {
-          onEvent({event: "click_farmer"});
+          onEvent({event: "close_farmer"});
           $('#farmer_tips').animate({ top : 40, opacity: 1}, 325, 'linear');
           $('#farmer_recipe').animate({ top : -500, opacity: 0}, 325, 'linear');
         }

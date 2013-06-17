@@ -21,8 +21,6 @@
       };
  
 
-
-
       var changeStartScreenAnimation = function (animation, delay, repeat, time) {
 
         var
@@ -378,7 +376,6 @@
               }
           };
 
-
           videoController.togglePause = function() {
             if (video.paused) {
               video.play();
@@ -473,10 +470,6 @@
             evt.initMouseEvent("click", true, true, window, 
                 0, 0, 0, 0, 0, false, false, false, false, 0, null); 
             var allowDefault = anchorObj.dispatchEvent(evt);
-            // you can check allowDefault for false to see if
-            // any handler called evt.preventDefault().
-            // Firefox will *not* redirect to anchorObj.href
-            // for you. However every other browser will.
           }
         }
       };
@@ -559,60 +552,61 @@
     //variables global to our scope
 
       var 
-        timer             = null,
-        loaded            = null,
-        startdate         = false,
-        starttime         = false,
-        stations          = {},
-        currentstation    = 'none',
-        currentspeed      = 0.9,
+        timer               = null,
+        loaded              = null,
+        startdate           = false,
+        starttime           = false,
+        stations            = {},
+        currentstation      = 'none',
+        currentspeed        = 0.9,
 
-        startpos          = 0,
-        currentpos        = 0,
-        sessionstart      = null,
-        UPDATE_INTERVAL   = 100, //millisec
-        STATION_MARGIN    = 416, // delta for when station becomes visible
+        startpos            = 0,
+        currentpos          = 0,
+        REQUESTED_POSITION  = null,
 
-        STATION_SPEED     = 0.75, // when approaching station
-        ROAD_SPEED        = 0.9, // when leaving station
-        DECAY             = 0.75, // when approaching station
-        MOUSEDOWN_DECAY   = 0.75, // when approaching station
-        ROAD_DECAY        = 0.9, // when leaving station
-        ROAD_MOUSE_DECAY  = 0.9, // when leaving station
+        sessionstart        = null,
+        UPDATE_INTERVAL     = 100, //millisec
+        STATION_MARGIN      = 600, // delta for when station becomes visible
 
-        LISE_FLIPPED      = false,
-        FARMER_FLIPPED    = false,
-        TOLERANCE         = 100,
-        SWIPE_TOLERANCE   = 60,
+        STATION_SPEED       = 0.75, // when approaching station
+        ROAD_SPEED          = 0.9, // when leaving station
+        DECAY               = 0.75, // when approaching station
+        MOUSEDOWN_DECAY     = 0.75, // when approaching station
+        ROAD_DECAY          = 0.9, // when leaving station
+        ROAD_MOUSE_DECAY    = 0.9, // when leaving station
+
+        LISE_FLIPPED        = false,
+        FARMER_FLIPPED      = false,
+        TOLERANCE           = 100,
+        SWIPE_TOLERANCE     = 60,
 
         //store triggers as they occur
-        triggers          = [],
-        events            = [],
-        LAZY_LOADERS      = null;
-        ONDEMAND_LOADERS  = null; 
-        VIDEO_CONTROLLER  = null;
-        CLICK_ENABLED     = false;
+        triggers            = [],
+        events              = [],
+        LAZY_LOADERS        = null,
+        ONDEMAND_LOADERS    = null, 
+        VIDEO_CONTROLLER    = null,
+        CLICK_ENABLED       = false,
 
-        car               = document.getElementById('car'),
+        car                 = document.getElementById('car'),
 
-        debugpanel        = document.getElementById('debugoutput'),
-        parallax          = document.getElementById('parallax'),
-        scene             = document.getElementById('layer5'),
+        debugpanel          = document.getElementById('debugoutput'),
+        parallax            = document.getElementById('parallax'),
+        scene               = document.getElementById('layer5'),
 
-        debugtrigger      = document.getElementById('debug_trigger'),
-        debuginfo         = document.getElementById('debug_info'),
+        debugtrigger        = document.getElementById('debug_trigger'),
+        debuginfo           = document.getElementById('debug_info'),
 
-        lise_recipe       = document.getElementById('lise_recipe'),
-        lise_hello        = document.getElementById('lise_hello'),
-        farmer_recipe     = document.getElementById('farmer_recipe'),
-        farmer_hello      = document.getElementById('farmer_hello'),
+        lise_recipe         = document.getElementById('lise_recipe'),
+        lise_hello          = document.getElementById('lise_hello'),
+        farmer_recipe       = document.getElementById('farmer_recipe'),
+        farmer_hello        = document.getElementById('farmer_hello'),
 
-        final_btn1        = document.getElementById('final_btn1'),
-        final_btn2        = document.getElementById('final_btn2'),
+        final_btn1          = document.getElementById('final_btn1'),
+        final_btn2          = document.getElementById('final_btn2'),
 
-        link1             = document.getElementById('link1');
-        link2             = document.getElementById('link2');
-
+        link1               = document.getElementById('link1'),
+        link2               = document.getElementById('link2'),
 
         clicktargets  = {};
 
@@ -705,8 +699,7 @@
           }
 
           if(currentpos < -10924) {
-
-            $('#parallax').parallaxSwipe.requestPosition(-10924);
+//            $('#parallax').parallaxSwipe.requestPosition(-10924);
           }
 
           // for..in normally not acceptable, but ok with this few elements
@@ -724,7 +717,8 @@
               if(!triggers[key]) {
                 triggers[key] = true;
               }
-              if(Math.abs(x) > (STATION_MARGIN)) {
+              if(Math.abs(x) > (STATION_MARGIN) + 468) {
+                // console.log("x: " + x + ", STATION_MARGIN: " + STATION_MARGIN);
                 if( (currentstation === key) ) {
                   $('#parallax').parallaxSwipe.setSpeed(ROAD_SPEED, ROAD_DECAY, ROAD_MOUSE_DECAY);
                   var
@@ -743,13 +737,18 @@
                     continue;
                   }
 
-
                   var 
                     stationx = Math.round($("#" + currentstation).position().left),
-                    direction = 
-                  console.log('Requesting position of ' + currentstation + " at " + stationx + ", offset: " + $("#" + currentstation).offset().left + ", position: " + $("#" + currentstation).position().left + ", startpos: " + startpos);
+                    direction = x;
 
-                  $('#parallax').parallaxSwipe.requestPosition(-stationx);
+                  if(-stationx < $('#parallax').parallaxSwipe.sliderLT) {
+                    console.log('Requesting position of ' + currentstation + " at " + stationx + ", offset: " + $("#" + currentstation).offset().left + ", position: " + $("#" + currentstation).position().left + ", startpos: " + startpos + ", direction: " + direction);
+
+                    $('#parallax').parallaxSwipe.requestPosition(-stationx);
+                  }
+                  else {
+                    console.log("NOT requesting position " + (-stationx) + " because it is lower than sliderLT @" + $('#parallax').parallaxSwipe.sliderLT);
+                  }
                 }
               }
             }
