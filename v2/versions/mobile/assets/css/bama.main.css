@@ -529,22 +529,22 @@
 
 
 
-  #drive_in_sign {
+  .drive_in_sign {
 
     color: #000;
     font-family     : "Arial Black", Arial, sans-serif;
-    font-weight     : 700;
-    font-size       : 14px;
+    font-weight     : 400;
+    font-size       : 12px;
     line-height     : 15px; 
     text-transform  : uppercase;
   
     /*  We use the following to place text within a specific region of the bg image */
     overflow        : hidden;
     position        : absolute;
-    left            : 172px;
-    top             : 177px;
-    width           : 106px;
-    height          : auto;
+    left            : -9px;
+    top             : 146px;
+    width           : 196px;
+    height          : 216px;
   }
 
 
@@ -768,15 +768,26 @@
     height: auto;
   }
 
+
+
+
+
   .btm {
     position      : absolute;
-    background    : transparent url('../img/pop_up_btm.png') no-repeat;
     top           : 0px;
     left          : 188px;
     width         : 27px;
     height        : 33px;
     overflow      : hidden;
     z-index       : 0;
+  }
+
+  .btm.red {
+    background    : transparent url('../img/pop_up_btm2.png') no-repeat;
+  }
+
+  .btm.red {
+    background    : transparent url('../img/pop_up_btm1.png') no-repeat;
   }
 
 
@@ -965,7 +976,6 @@
     left            : 0px;
     width           : 468px;
     height          : 244px;
-    background      : transparent; 
   }
 
 
@@ -975,7 +985,6 @@
     left            : 1600px;
     width           : 468px;
     height          : 244px;
-    background      : transparent; 
   }
 
 
@@ -984,9 +993,17 @@
     top             : 10px;
     left            : 2360px;
     width           : 468px;
-    height          : 300px;
-    background      : transparent; 
+    height          : 235px;
   }
+
+  .station2 {
+    overflow            : hidden;
+    background-image    : url('../img/drive_in_sign.png');
+    background-position : left top;
+    background-origin   : content-box;
+    background-repeat   : no-repeat;  
+  }
+
 
 
   #station3 {
@@ -995,8 +1012,8 @@
     left          : 3072px;
     width         : 468px;
     height        : 300px;
-    background    : transparent; 
   }
+
 
   /* class for lazyloading of bg images */
   .station3 {
@@ -1014,18 +1031,7 @@
     left          : 4606px;
     width         : 468px;
     height        : 300px;
-    background    : transparent; 
   }
-
-
-  #station5 {
-    position      : absolute;
-    top           : 0px;
-    left          : 7800px;
-    width         : 468px;
-    height        : 244px;
-  }
-
 
 
   /*  LAZYLOAD
@@ -1035,12 +1041,6 @@
      Make sure you do not override any background properties from the class in the # definition
      */
 
-  .station5 {
-    background-image    : url('../img/drive_in_sign.png');
-    background-position : center 32px;
-    background-origin   : content-box;
-    background-repeat   : no-repeat;
-  }
 
 
   #station6 {

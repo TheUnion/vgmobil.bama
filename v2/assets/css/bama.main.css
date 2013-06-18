@@ -793,7 +793,7 @@
 
 
   .lise_salat {
-    background-image    : url('../img/salat_soppsalat.jpg');
+    background-image    : url('../img/oppskrift_1160x290.jpg');
     background-origin   : content-box;
     background-position : top left;
     width               : 580px;
@@ -820,8 +820,8 @@
 
 
   .btm {
-    position      : absolute;
     background    : transparent url('../img/pop_up_btm.png') no-repeat;
+    position      : absolute;
     top           : 226px;
     left          : 0;
     width         : 410px;

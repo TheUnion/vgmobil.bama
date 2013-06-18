@@ -59,10 +59,10 @@
           <div id="logo">
             <img class="hires center" src="assets/img/bama_logo.svg" />
           </div>
-          <div class="arrow animated continuous hint"><img class="hires" src="assets/img/arrow.png" /></div>
+          <div class="arrow animated continuous hint"><img class="hires" src="assets/img/finger.png" /></div>
           <div id="intro_text" class="sprite">
             <span class="big gray regular">
-              <p class="air_above">Kjør bilen med fingeren og<br />opplev norske jordbær!</p>
+              <p class="air_above">Kjør bilen med fingeren<br />- opplev norske jordbær!</p>
             </span>
             </div>
           </div>
@@ -78,7 +78,7 @@
         </div>
 
         <div id="station3" class="station lazyload ondemand" data-load-event="start_interaction">
-          <div class="arrow small animated continuous hint"><img class="hires stretchfill" src="assets/img/arrow.png" /></div>
+          <div class="arrow small animated continuous hint"><img class="hires stretchfill" src="assets/img/finger.png" /></div>
           <div class="video_container">
             <video id="video1" class="video animated shrunk interactive stretchfill" controls preload="none">
               <source src="assets/video/video1.webm" type="video/webm">
@@ -91,14 +91,14 @@
         </div>
 
         <div id="station4" class="station lazyload ondemand" data-load-event="start_interaction">
-          <div class="arrow small animated continuous hint"><img class="hires stretchfill" src="assets/img/arrow.png" /></div>
+          <div class="arrow small animated continuous hint"><img class="hires stretchfill" src="assets/img/finger.png" /></div>
           <div id="outbuilding" class="sprite lazyload ondemand" data-load-event="start_interaction"></div>
           <div id="farmer" class="sprite lazyload ondemand" data-load-event="start_interaction"></div>
           <div id="farmer_hello">
             <div id="farmer_tips" class="sprite farmer_tips clicktarget">
               <div id="farmer_text" class="snakkeboble center">
-                <div class="btn"><span class="bold">Hei</span>, vil du vite hvorfor norske jordbær er de beste?</div>
-                <div class="btm" style="top:76px"></div>
+                <div class="btn blue">Visste du at nordmenn liker best jordbærsorten Korona?</div>
+                <div class="btm red" style="top:76px"></div>
               </div>
             </div>
           </div>
@@ -109,12 +109,12 @@
 
 
         <div id="station6" class="station">
-          <div class="arrow small animated continuous hint"><img class="hires stretchfill" src="assets/img/arrow.png" /></div>
+          <div class="arrow small animated continuous hint"><img class="hires stretchfill" src="assets/img/finger.png" /></div>
           <div id="lise_hello" class="interactive">
             <div id="lise_tips" class="sprite lise_tips clicktarget">
               <div id="lise_text" class="snakkeboble center">
-                <div class="btn" style="top:12px">Her har du en god oppskrift på jordbær fra meg.</div>
-                <div class="btm" style="top:76px"></div>
+                <div class="btn red" style="top:12px">Her har du en god oppskrift med jordbær fra meg.</div>
+                <div class="btm grey" style="top:76px"></div>
               </div>
             </div>
           </div>
@@ -131,8 +131,8 @@
         <div id="station7" class="station lazyload ondemand" data-load-event="arrive_station6">
 
         <div id="final_sign" class="lazyload ondemand" data-load-event="arrive_station6">
-            <span class="btn clicktarget"><a id="link1" class="btn" target="_blank" href="http://www.bama.no/norsk/oppskrift/salat_gronn.html">Oppskrifter på jordbær</a></span><br />
-            <span class="btn clicktarget"><a id="link2" class="btn" target="_blank" href="http://www.bama.no/norsk/sesong/juni.html">Dette er i sesong nå</a> </span>
+            <span class="btn clicktarget"><a id="link1" class="btn" target="_blank" href="http://www.bama.no/norsk/index.html">Oppskrifter med jordbær</a></span><br />
+            <span class="btn clicktarget"><a id="link2" class="btn" target="_blank" href="http://www.bama.no/norsk/sesong/juli.html">Dette er i sesong nå</a> </span>
           </div>
           
         <!-- this is the div containing the road tiles -->
@@ -163,10 +163,9 @@
       <div id="lise_recipe" class="center recipe clicktarget">
         <img src="assets/img/btn_close.svg" class="btn_close" width="44px" height="44px" />
         <div class="recipe">
-          <span class="recipe_title">LUN SOPPSALAT MED VALNØTTER</span><br />
+          <span class="recipe_title">FRUKTSPYD</span><br />
           <p class="recipe_small">
-            Stek renset, delt, assortert sopp i litt olje i en stor stekepanne. Grovhakk noen valnøtter og rist dem gylne i en tørr stekepanne. 
-            Bland sammen stekt sopp, valnøtter, finsnittet sjalottløk, gressløk og bladpersille. Krydre med salt og pepper. Bland inn ruccula og olivenolje. Topp med tynne skiver parmesan.
+            Del plommer i to og fjern steinene. Skjær epler i pene båter. For å hindre at eplebåter blir brune kan du gni snittflatene med litt sitron eller lime. Stikk fruktbiter, jordbær, bringebær og moreller på trepinner. Server fruktspydene liggende eller stående. Prøv også kombinasjonen små søte tomater, bringebær og jordbær!
         </p>
         </div>
       </div>
@@ -186,7 +185,53 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste salater. Og 
 
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-  <script type="text/javascript" language="javascript">$.getScript("http://pliing.se/PliingAd/AdJs?app=no_vg_bama_tracking&id=1&no=" + new Date().getTime()); </script>  
+  <!--script type="text/javascript" language="javascript">$.getScript("http://pliing.se/PliingAd/AdJs?app=no_vg_bama_tracking&id=1&no=" + new Date().getTime()); </script-->
+  <script type="text/javascript" language="javascript">
+
+      var onError = function (e) {
+        console.log ("There was an error loading script: " + this.src , e);
+      }
+
+      var onSuccess = function (e) {
+        console.log ("Successfully loaded script: " + this.src , e);
+      }
+
+      var requireScript = function ( file, async, defer, success, failure ) {
+        var 
+          cursor  = document.getElementsByTagName ("head")[0] || document.documentElement,
+          path    = file,
+          script  = document.createElement('script');
+
+        script.async      = async || true;
+        script.defer      = defer || false;
+        script.src        = file;
+        script.self       = script;
+        script.success    = success || false,
+        script.failure    = failure || false;
+
+        script.onload = function (event) {
+          if(this.success) {
+            this.success.call(event);
+          }
+        };
+
+        script.onerror = function (error) {
+          console.log('error loading script: ' + this.file, error);
+          if(this.failure) {
+
+            this.failure.call(error);
+          }
+        };
+
+        var
+          node = cursor.insertBefore(script, cursor.firstChild);
+        return !!node; 
+      };
+
+    // include script synchronously
+    requireScript ("http://pliing.se/PliingAd/AdJs?app=no_vg_bama_tracking_tablet&id=1&no=" +new Date().getTime(), false, false, onSuccess, onError);
+
+  </script>
   <script src="assets/js/lib/jquery.parallaxSwipe.js"></script>
   <script async src="assets/js/bama.nyt.norge.js"></script>
 
