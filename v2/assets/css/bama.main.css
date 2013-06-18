@@ -1,8 +1,10 @@
 /**
  *  Basic setup. 
- *  
+ *
+ *
+ * 
  *  We are assuming an iframe, obviously.
- *  Otherwise we would never touch these tags.
+ *  Otherwise we would never touch the basic tags.
  *
  */
 
@@ -18,7 +20,7 @@
 /*  temp elements for development */
 
   #debuginfo {
-    float: left;
+    float   : left;
   }
 
   #debugconsole {
@@ -86,7 +88,6 @@
    *
    */
 
-
   .parallax_layer {
     
     /*  Group all the parallax layers with this class */
@@ -146,11 +147,11 @@
 
 
   .air_above {
-    margin-top: 16px;
+    margin-top  : 16px;
   }
 
   .verybig {
-    color       : #555;
+    color         : #555;
     text-align    : center;
     font-size     : 40px;
     line-height   : 36px;
@@ -163,17 +164,17 @@
   }
 
   .gray {
-    color: #4e4e4e;
+    color   : #4e4e4e;
   }
 
 
   .red {
-    color: #d42;
+    color   : #d42;
   }
 
 
   .blue {
-    color: #014289;
+    color   : #014289;
   }
 
 
@@ -183,11 +184,11 @@
   }
 
   .bold {
-    font-weight: 700;
+    font-weight   : 700;
   }
 
   .regular {
-    font-weight: 400;
+    font-weight   : 400;
   }
 
   .horizontal {
@@ -299,9 +300,9 @@
 
 
   #foreground {
-    position: absolute;
-    top: 311px;
-    left:0px;
+    position  : absolute;
+    top       : 311px;
+    left      : 0px;
   }
 
 
@@ -335,7 +336,7 @@
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
-                            url('../img/hill_front1.png'), url('../img/hill_front2.png') !important;
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png');
     background-position   :     0px 311px,   768px 311px,   
                              1536px 311px,  2304px 311px,   
                              3072px 311px,  3840px 311px,   
@@ -345,9 +346,9 @@
                              9216px 311px,  9984px 311px,   
                             10752px 311px, 11520px 311px,   
                             12288px 311px, 13056px 311px,   
-                            13824px 311px, 14592px 311px !important;
-    background-repeat     : no-repeat !important;
-    background-origin     : content-box !important;
+                            13824px 311px, 14592px 311px;
+    background-repeat     : no-repeat;
+    background-origin     : content-box;
   }
 
 
@@ -436,47 +437,47 @@
 
 
   .recipe_title {
-    color: #333;
-    text-align: center;
-    font-size: 26px;
-    font-weight: 700;
-    width: 480px;
-    margin-left: 12px;
-    text-transform: uppercase;
-    margin-top: 40px;
-    padding-bottom: 8px;
-    border-bottom: solid 1px #333;   
+    color           : #333;
+    text-align      : center;
+    font-size       : 26px;
+    font-weight     : 700;
+    width           : 480px;
+    margin-left     : 12px;
+    text-transform  : uppercase;
+    margin-top      : 40px;
+    padding-bottom  : 8px;
+    border-bottom   : solid 1px #333;   
   }
 
 
   .recipe_small {
-    margin-top: 20px;
-    margin-right: auto;
-    margin-left: auto;
-    padding: 12px;
-    color: #555;
-    font-family: Abel, sans-serif;
-    text-align: left;
-    font-size: 22px;
-    font-weight: 400;
+    margin-top      : 20px;
+    margin-right    : auto;
+    margin-left     : auto;
+    padding         : 12px;
+    color           : #555;
+    font-family     : Abel, sans-serif;
+    text-align      : left;
+    font-size       : 22px;
+    font-weight     : 400;
   }
 
 
   .sprite {
-    position: absolute;
-    background-repeat: no-repeat;
+    position          : absolute;
+    background-repeat : no-repeat;
   }
 
   .gfx {
-    position: absolute;
+    position  : absolute;
   }
 
 
   #progress {
-    margin: 0;
-    padding: 0;
-    z-index: 300;
-    pointer-events : none;
+    margin          : 0;
+    padding         : 0;
+    z-index         : 300;
+    pointer-events  : none;
   }
 
 
@@ -545,7 +546,7 @@
 
 
   .drive_in_sign {
-    color: #000;
+    color           : #000;
     font-family     : "Arial Black", Arial, sans-serif;
     font-weight     : 700;
     font-size       : 12px;
@@ -610,7 +611,6 @@
     left                : 148px;
     width               : 320px;
     height              : 100px;
-    /*z-index             : 1;*/
   }
 
 
@@ -620,7 +620,6 @@
     height              : 249px;
     top                 : 169px;
     left                : 0px;
-    /*z-index             : 1;*/
   }
 
 
@@ -644,13 +643,13 @@
   }
 
   .farmer {
-    background-image: url('../img/farmer_small.png');
-    background-origin: content-box;
-    background-position: 0px 0px;
-    top       : 302px;
-    left      : 432px;
-    width     : 73px;
-    height    : 127px;
+    background-image      : url('../img/farmer_small.png');
+    background-origin     : content-box;
+    background-position   : 0px 0px;
+    top                   : 302px;
+    left                  : 432px;
+    width                 : 73px;
+    height                : 127px;
   }
 
   #stand {
@@ -682,24 +681,23 @@
   }
 
   .farmer_tips {
-    background-image: url('../img/farmer_large.png');
-    background-repeat: no-repeat;
-    background-position: 0px 0px;
-    background-origin: content-box;
-    width: 246px;
-    height : 112px;
+    background-image      : url('../img/farmer_large.png');
+    background-repeat     : no-repeat;
+    background-position   : 0px 0px;
+    background-origin     : content-box;
+    width                 : 246px;
+    height                : 112px;
   }
 
 
   #farmer_recipe {
-    
-    position: absolute;
-    top : -500px;
-    left: 0;
-    height: 500px;
-    width: 100%;
-    opacity: 0;
-    z-index: 10000;
+    position    : absolute;
+    top         : -500px;
+    left        : 0;
+    height      : 500px;
+    width       : 100%;
+    opacity     : 0;
+    z-index     : 10000;
   }
 
 
@@ -720,28 +718,27 @@
 
 
   .lise_tips {
-    background-image: url('../img/lise_large.png');
-    background-repeat: no-repeat;
-    background-position: 0px 0px;
-    background-origin: content-box;
+    background-image    : url('../img/lise_large.png');
+    background-repeat   : no-repeat;
+    background-position : 0px 0px;
+    background-origin   : content-box;
   }
 
 
   #lise_recipe {
-    position: absolute;
-    top : -500px;
-    left: 0;
-    width: 580px;
-    height: 500px;
-    opacity: 0;
-    z-index: 10000;
+    position    : absolute;
+    top         : -500px;
+    left        : 0;
+    width       : 580px;
+    height      : 500px;
+    opacity     : 0;
+    z-index     : 10000;
   }
 
 
   #lise_text {
-    padding: 16px;
+    padding             : 16px;
     top                 : 90px;
-    /*background          : transparent;*/
   }
 
 
@@ -778,11 +775,11 @@
 
 
   .farmer_salat {
-    background-image: url('../img/salat_tips.jpg');
-    background-origin: content-box;
-    background-position: top left;
-    width     : 580px;
-    height    : 145px;
+    background-image    : url('../img/salat_tips.jpg');
+    background-origin   : content-box;
+    background-position : top left;
+    width               : 580px;
+    height              : 145px;
   }
 
 
@@ -796,11 +793,11 @@
 
 
   .lise_salat {
-    background-image: url('../img/salat_soppsalat.jpg');
-    background-origin: content-box;
-    background-position: top left;
-    width     : 580px;
-    height    : 145px;
+    background-image    : url('../img/salat_soppsalat.jpg');
+    background-origin   : content-box;
+    background-position : top left;
+    width               : 580px;
+    height              : 145px;
   }
 
 
@@ -816,18 +813,10 @@
     left            : 760px;
   }
 
-/*  #drivein_screen {
-    position: absolute;
-    top: 114px;
-    left: 0px;
-    z-index: 99;
-  }
-*/
 
   .callout {
     height: auto;
   }
-
 
 
   .btm {
@@ -842,9 +831,9 @@
 
 
   .clean {
-    margin : 0;
-    padding: 0;
-    clear: left;
+    margin    : 0;
+    padding   : 0;
+    clear     : left;
   }
 
 
@@ -865,23 +854,11 @@
     border-color  : #928c85;
     background    : #eee;
 
-
-    -webkit-transform-style: preserve-3d;
-       -moz-transform-style: preserve-3d;
-         -o-transform-style: preserve-3d;
-            transform-style: preserve-3d;
-
     -webkit-transition: all 0.6s ease-in-out;
        -moz-transition: all 0.6s ease-in-out;
         -ms-transition: all 0.6s ease-in-out;
          -o-transition: all 0.6s ease-in-out;
             transition: all 0.6s ease-in-out;
-
-    -webkit-perspective: 400px;
-       -moz-perspective: 400px;
-        -ms-perspective: 400px;
-         -o-perspective: 400px;
-            perspective: 400px;
   }
 
 
@@ -903,58 +880,6 @@
       -o-border-radius  : 6px;
          border-radius  : 6px;
   }
-
-
-  .snakkeboble.flip.front{
-              z-index: 9000;
-    -webkit-transform: rotateY(180deg) scale(2.0);
-       -moz-transform: rotateY(180deg) scale(2.0);
-        -ms-transform: rotateY(180deg) scale(2.0);
-         -o-transform: rotateY(180deg) scale(2.0);
-            transform: rotateY(180deg) scale(2.0);
-
-    -webkit-backface-visibility: hidden;
-       -moz-backface-visibility: hidden;
-        -ms-backface-visibility: hidden;
-         -o-backface-visibility: hidden;
-            backface-visibility: hidden;
-  }
-
-
-   .snakkeboble.back {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 5001;
-      width: inherit;
-      height: inherit;
-      
-    -webkit-transform: rotateY(-180deg) scaleX(2.0) scaleY(2.0);
-       -moz-transform: rotateY(-180deg) scaleX(2.0) scaleY(2.0);
-        -ms-transform: rotateY(-180deg) scaleX(2.0) scaleY(2.0);
-         -o-transform: rotateY(-180deg) scaleX(2.0) scaleY(2.0);
-            transform: rotateY(-180deg) scaleX(2.0) scaleY(2.0);
-
-    -webkit-backface-visibility: hidden;
-       -moz-backface-visibility: hidden;
-        -ms-backface-visibility: hidden;
-         -o-backface-visibility: hidden;
-            backface-visibility: hidden;
-    }
-
-    
-    sg.snakkeboble.flip.back {
-      z-index: 1000;
-
-
-      -webkit-transform: rotateX(0deg) rotateY(0deg);
-         -moz-transform: rotateX(0deg) rotateY(0deg);
-          -ms-transform: rotateX(0deg) rotateY(0deg);
-           -o-transform: rotateX(0deg) rotateY(0deg);
-              transform: rotateX(0deg) rotateY(0deg);
-
-    }
-
 
 
 
@@ -988,11 +913,6 @@
     width               : 416px;
     height              : 234px;   
     
-    -webkit-user-select : auto;
-       -moz-user-select : auto;
-            user-select : auto;
-    pointer-events      : auto;
-
     cursor              : auto;
     pointer-events      : auto;
     -webkit-user-select : auto;
@@ -1069,6 +989,7 @@
     pointer-events: auto;
   }
 
+
   .station {
 
     overflow    : visible;
@@ -1100,8 +1021,6 @@
   }
 
 
-
-
   #station2 {    
     position      : absolute;
     top           : 180px;
@@ -1122,8 +1041,6 @@
     background-origin   : content-box;
     background-repeat   : no-repeat;  
   }
-
-
 
 
   #station3 {
@@ -1165,8 +1082,7 @@
   }
 
 
-
- #station7 {
+  #station7 {
     position            : absolute;
     top                 : 10px;
     left                : 7650px;
@@ -1181,8 +1097,6 @@
  *  Properties
  *  
  */
-
-
 
   .unselectable {
       -webkit-user-select: none;
@@ -1199,7 +1113,6 @@
    */
 
 
-
   .animated {
     transition: 0.1667s;
   }
@@ -1213,20 +1126,12 @@
             animation-iteration-count: infinite;
   }
 
-  .scroll_left {
-    -webkit-animation    : slide 0.2s linear infinite;
-       -moz-animation    : slide 0.2s linear infinite;
-            animation    : slide 0.2s linear infinite;
-  }
-
-
 
 
   /**
    * Animations 
    * 
    */
-
 
 
   @-webkit-keyframes hint {
@@ -1248,6 +1153,7 @@
     50% {transform: translateX(10px);}
   }
 
+
   .hint {
    -webkit-animation    : hint 0.5s ease-in-out infinite;
        -moz-animation   : hint 0.5s ease-in-out infinite;
@@ -1261,12 +1167,13 @@
       100% {left: 16px;}
   }
   ​
+
   @-moz-keyframes arrow {
        0%   {left: 0px;}
       50%  {left: 8px;}
       100% {left: 16px;}
   }
-''
+
   @keyframes arrow {
        0%   {left: 0px;}
       50%  {left: 8px;}
