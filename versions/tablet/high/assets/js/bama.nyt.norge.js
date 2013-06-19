@@ -3,90 +3,15 @@
    $(document).bind("dragstart", function() { return false; });
 
     var 
-      INITIALIZED       = false,
-      VIDEO_CONTROLLER  = null,
-      
-      // activate debugging
-      DEBUG             = true,
-
-      //dump stack trace on errors
-      DEBUG_STACKTRACE  = true;
-
+      INITIALIZED = false,
+      VIDEO_CONTROLLER = null;
 
     $(function() {
 
 
-      var stacktrace = function(error) {
-        return error.stack || "No stack trace available.";
-      };
-
-
-      window.onerror = function(message, url, line_num) {
-       
-        // Standard error information
-        var error = "<br /> JS Error: " + message + " from " + url + ":" + line_num;
-        error += "<br /> URL: " + document.URL;
-        
-        var user_agent = new UserAgent();
-        error += "<br /> Browser: " + user_agent.browser_name + " " + user_agent.browser_version + " | OS: " + user_agent.os + " | Platform: " + user_agent.platform;
-
-        debugLog(error);    
-        return false;
-      };
-
-
-      var logException = function (error) {
-        var
-          msg = error.message || false;
-
-        if(!!msg) {
-          //display file and line no. where error ovvurred
-          msg += error.fileName || " ";
-          msg +=  " ";
-
-          msg += error.lineNumber || " ";
-          msg +=  " - ";
-        }
-
-        if(DEBUG) {
-          // show stack trace
-          msg += stacktrace(error);
-        }
-
-        console.log(msg);
-        return;
-        debugLog(msg);
-      };
-
-
-
-      var sendLogData = function(message, extra) {
-        var
-          ajax = AJAX;
-
-        // ajax.send(message, extra);
-        message = "[LOG] " + message;
-
-        !!extra ? console.log(message, extra) : console.log(message);
-        // return;
-      };
-
-
-      var debugLog = function (line, obj) {
-
-        // output to console
-        !!obj ? console.log(line, obj) : console.log(line);
-
-        // append to our own debug log
-        if(DEBUG) {
-          $('#log').append('<li class="line"><pre><code>' + line + '</code></pre></li>');
-        }
-
-        sendLogData(line, !!obj ? JSON.stringify(obj) : null);
-      };
-
 
       var changeStartScreenAnimation = function (animation, delay, repeat, time) {
+
         var
           animation = animation || 'bounce',
           delay     = delay     || 5000,
@@ -108,7 +33,10 @@
         var
           animation = animation || false;
 
+        console.log("Stopping animation, car is: " + car);
+        car.classList.remove('animated');
         if(animation) {
+          console.log("Removing animation: " + animation);
           car.classList.remove(animation);
         }
       };
@@ -121,6 +49,8 @@
           time      = time      || false;
 
         car.classList.add(animation);
+        console.log("car is : " + car + ", requested animation : " + animation);
+        console.log("repeat is : " + repeat);
         if(time) {
           setTimeout(removeStartScreenAnimation, time, animation);
         }
@@ -152,32 +82,11 @@
       };
 
 
-      // this is where we catch all of our events, and where we send all trackable events
+      // this is where we send all trackable events
       var onEvent = function (eventObject) {
 
         updateLazyloaders(eventObject.event);
-
-        if(DEBUG) {
-
-          debugLog("[EVENT] " + eventObject.event);
-        // console.log("Event triggered: " + eventObject.event);
-        }
-
-
-            // WE ARE DISABLING THE TRACKING HERE, 
-            // BECAUSE WE DON'T WANT THE DEV VERSION 
-            // TO POLLUTE THE ANALYTICS OF THE LIVE VERSION
-            // 
-            // RE-ENABLE BEFORE PUBLISHING BY COMMENTING OUT
-            // THE RETURN STATEMENT IN THE LINE BELOW
-            return;
-
-
-      try {
-
-        /*
-        This entire section should be rewritten as a case statement
-         */
+        
         if(eventObject.event.indexOf("start_interaction") === 0) {
           p62602Event(6260200); 
         }
@@ -211,6 +120,7 @@
         }
         
         if(eventObject.event.indexOf("leave_station6") === 0) {
+          stopVideo();
           p62602Event(6260207); 
         }
         
@@ -252,13 +162,14 @@
         if(eventObject.event.indexOf("video_finish") === 0) {
           p62602Event(6260220); 
         }
-      }
-      catch(e) {
-        logError(e);
-      }
 
-       events.push(eventObject);
+        events.push(eventObject);
+
+        console.log("Event triggered: " + eventObject.event);
+
       };
+
+
 
 
       var updateLazyloaders = function (eventName) {
@@ -303,9 +214,6 @@
             //skip those marked for manual load / automatic loading on event with data-load-event attribute
             continue;            
           }
-
-          // add class with same name as the id, our convention for lazyloading
-          // images to load are specified as background images in the class definition
           LAZY_LOADERS[i].classList.add(LAZY_LOADERS[i].id);
         }
 
@@ -316,6 +224,7 @@
 
         onEvent(userEvent);
       };
+
 
 
       var setPoster = function(img) {
@@ -358,6 +267,7 @@
         var
           videoElement = document.getElementById(id || 'video1');
 
+        
         if (!videoElement) {
           return false;
         }
@@ -384,65 +294,35 @@
  * 
  */
 
-
-/**
- *  HTMLVideo
- *  
- *  A dirt simple video controller for the HTML5 video element
- *
- * @param {string or videoElement} [img] The video element, or its id
- * @returns videoElement or null
- * 
- */
-
       var HTMLVideo = function(elem) {
 
         try {
 
           var 
             video           = typeof elem === "string" ? document.getElementById(elem) : elem,
-            videoController = {},
-            loadedMetaData  = false;
-
-            video.addEventListener("loadedmetadata", function() {
-                this.loadedMetaData = true;
-              }, false);
-
-            video.addEventListener("error", function(error) {
-                logError(error);
-              }, false);
-
-
-            video.addEventListener("play", function(e) {
-              onEvent({event: "video_play"});
-              }, false);
-
-
-            video.addEventListener("pause", function(e) {
-              onEvent({event: "video_stop"});
-              }, false);
-
-            video.addEventListener("ended", function(e) {
-              onEvent({event: "video_finished"});
-              }, false);
-
+            videoController = {};
 
           videoController.element = video;
 
+          videoController.onended = function(e) {
+                onEvent({event: "video_finished"});
+              }
+
           videoController.play = function(resume) {
               video.play();
+              onEvent({event: resume ? "video_resume" : "video_play"});
           };
 
           videoController.pause = function() {
               video.pause();
+              onEvent({event: 'video_pause'});
           };
 
           videoController.stop = function() {
-              if(video.playing) {
-                video.pause();
-              }
+              video.pause();
+              video.currentTime = 0;
+              onEvent({event: 'video_stop'});
           };
-
 
           videoController.togglePause = function() {
             if (video.paused) {
@@ -452,24 +332,13 @@
             }
           };
 
-
           videoController.skip = function(value) {
             video.currentTime += value;
           };
 
-
-          videoController.reset = function () {
-            if(loadedMetaData) {
-              video.currentTime = 0;
-            }
-          };
-
-
           videoController.restart = function() {
-            if(loadedMetaData ) {
-              video.currentTime = 0;
-              onEvent({event: 'video_restart'});
-            }
+            video.currentTime = 0;
+            onEvent({event: 'video_restart'});
           };
 
           videoController.toggleControls = function() {
@@ -503,95 +372,11 @@
 
 
 
-/**
- *  AJAX helper
- *
- *  A light-weight HTML5 AJAX helper object
- *
- *  Just to keep it DRY
- * 
- */
-
-
-    var AJAX = {
-
-      req : new XMLHttpRequest(),
-
-
-      __execute : function (msg, obj) {
-        var
-          req     = this.req || XMLHttpRequest(),
-          request = null,
-          url     = "http://www.kromaviews.no:8080/dev/"
-
-        // request = { message: msg, extra: obj };
-
-        // req.open("GET", url, true);
-
-        // req.send();
-
-
-      // console.log(msg)
-
-
-      },
-
-
-      send : function (message, object) {
-  
-        this.__execute(message, object);
-      },
-
-      // progress on transfers from the server to the client (downloads)
-      updateProgress : function(e) {
-        if (e.lengthComputable) {
-          var percentComplete = e.loaded / e.total;
-          // ...
-        } else {
-          // Unable to compute progress information since the total size is unknown
-        }
-      },
-
-      transferComplete : function(e) {
-        console.log("The transfer is complete.");
-      },
-
-      transferFailed : function(e) {
-        console.log("An error occurred while transferring the file.");
-      },
-
-      transferCanceled : function(e) {
-        console.log("The transfer has been canceled by the user.");
-      },
-
-      loadEnd : function(e) {
-        console.log("The transfer finished (although we don't know if it succeeded or not).");
-      },
-
-      init : function () {
-        req.addEventListener("progress", updateProgress, false);
-        req.addEventListener("load", transferComplete, false);
-        req.addEventListener("loadend", loadEnd, false);
-        req.addEventListener("error", transferFailed, false);
-        req.addEventListener("abort", transferCanceled, false);
-      },
-
-      getHeaderTime : function () {
-        return this.getResponseHeader("Last-Modified"); // A valid GMTString date or null
-      }
-
-    }; 
-
-
-/*  --------------------  END OF AJAX helper  ----------------------*/
-
-
-
       var hitTest = function (target, click) {
         var 
-          clickpos  = Math.abs(click.offsetLeft + startpos) + click.clientX,
+          clickpos = Math.abs(click.offsetLeft + startpos) + click.clientX,
           targetpos = (target.offset.left + target.position.left),
-          distance  = 0;
+          distance = 0;
 
         distance = Math.abs(clickpos - targetpos);
         return (distance<TOLERANCE);
@@ -666,21 +451,21 @@
           }
         }
         // we could probably come up with something more general, but not in the time available
-        else if( (clickpos>=7650 + 174 && (clickpos<=7650 + 170 + 232) )) {
-          if((click.clientY>230) && (click.clientY<282)){
+        else if( (clickpos>=11111 && (clickpos<=11325) )) {
+          if((click.clientY>208) && (click.clientY<272)){
             openLink(link1);
             onEvent({event: "click_link1"});
             return;
           }
-          else if((click.clientY>(286) && (click.clientY<((332))))){
+          else if((click.clientY>(276) && (click.clientY<((348))))){
             openLink(link2);
             onEvent({event: "click_link2"});
             return;
           }
         }
         // click on video
-        else if( (clickpos>=(3072 + 65) && (clickpos<=(3072 + 65 + 416)) )) {
-          if((click.clientY>(86) && (click.clientY<((86 + 236))))){ //allow 20px for controls, video is 216px tall
+        else if( (clickpos>=(9224 + 118) && (clickpos<=(9224 + 118 + 416)) )) {
+          if((click.clientY>(86) && (click.clientY<((86 + 216))))){
             console.log('click on video: ' + link2.href);
             clickVideo();
             return;
@@ -748,7 +533,8 @@
         parallax          = document.getElementById('parallax'),
         scene             = document.getElementById('layer5'),
 
-        debuginfo         = document.getElementById('debuginfo'),
+        debugtrigger      = document.getElementById('debug_trigger'),
+        debuginfo         = document.getElementById('debug_info'),
 
         lise_recipe       = document.getElementById('lise_recipe'),
         lise_hello        = document.getElementById('lise_hello'),
@@ -848,7 +634,7 @@
           if(currentpos > SWIPE_TOLERANCE) {
             if(!initialized()) {
               startSession();
-              console.log("Interaction detected, preloading resources ..");
+              console.log("Interaction detected, preloading initiated");
             }
           }
           // for..in normally not acceptable, but ok with this few elements
@@ -859,8 +645,6 @@
             if(++counter < startAtIndex) {
               continue;
             }
-
-
             x = (startpos - (stations[key].getBoundingClientRect().left - STATION_MARGIN));
             if(x<0) {
               break;
@@ -870,6 +654,7 @@
               }
               if(Math.abs(x) > (STATION_MARGIN + 250)) {
                 if( (currentstation === key) ) {
+                  console.log ("x is: " + x);
                   $('#parallax').parallaxSwipe.setSpeed(ROAD_SPEED, ROAD_DECAY, ROAD_MOUSE_DECAY);
                   var
                     userEvent = { event: 'leave_' + key, message: 'leaving station ' + key, target: currentstation, time: time};
@@ -881,6 +666,11 @@
                 if(currentstation !== key) {
                   onEvent({ event: 'arrive_' + key, message: 'arriving at station ' + key, target: currentstation, time: time});
                   currentstation = key;
+
+                  // don't stop at these stations
+                  if(counter === 5){
+                    continue;
+                  }
 
                   var 
                     stationx = Math.round($("#" + currentstation).position().left);
@@ -915,6 +705,18 @@
       };
 
 
+      var debug = function (line, obj) {
+        var
+          caller = (!!arguments) ? arguments.callee.caller.name : false;
+
+        // prepend calling function name, if we know it
+        line = caller ? caller + "(): " + line : line;
+
+        // output to console
+        !!obj ? console.log(line, obj) : console.log(line);
+      };
+
+
 
 
 /**
@@ -929,15 +731,14 @@
 
 
 
-    $("#parallax").parallaxSwipe( { DECAY: ROAD_DECAY, MOUSEDOWN_DECAY: ROAD_MOUSE_DECAY, SPEED_SPRING: ROAD_SPEED, BOUNCE_SPRING:0.5, 
-          HORIZ:true, SNAPDISTANCE:20, DISABLELINKS: false, LAYER:[ 20, 12, 3.2, 1.6, 1, 1 ] });
+    $("#parallax").parallaxSwipe( { DECAY: ROAD_DECAY, MOUSEDOWN_DECAY: ROAD_MOUSE_DECAY, SPEED_SPRING: ROAD_SPEED, BOUNCE_SPRING:0.1, 
+          HORIZ:true, SNAPDISTANCE:20, DISABLELINKS: false, LAYER:[ 20, 20, 3.2, 1.6, 1, 0.9 ] });
 
 
-    var layerWidth = 8000;
-    // $('#parallax').parallaxSwipe.getSize();
+    var layerWidth = $('#parallax').parallaxSwipe.getSize();
 
     // set width for all parallax stations
-    $('.parallax_layer').css('width',layerWidth+1000);
+    $('.parallax_layer').css('width',layerWidth);
 
 
     $('#parallax').bind('click', function (e) { 
@@ -950,7 +751,7 @@
         if(typeof result.offsetLeft ==="number") {
           result.clientX = e.clientX;
           result.clientY = e.clientY;
-        }
+        }            
 
         onClicked(result);
         return true; 
@@ -959,208 +760,8 @@
 
 
       $('.recipe').bind('selectstart', function (e) { 
-        return false; });
+        return true; });
 
     initializetimer();
     });
   });
-
-
-/**
- *  DEBUG 
- *
- *  debug functions and helpers
- * 
- */
-
-
-
-
-/**
- *  UserAgent()
- *  
- *  https://github.com/caseyohara/user-agent/
- */
-
-  var UserAgent;
-
-  UserAgent = (function() {
-    var Browsers, OS, Platform, Versions, browser_name, browser_version, os, platform;
-    Versions = {
-      Firefox: /firefox\/([\d\w\.\-]+)/i,
-      IE: /msie\s([\d\.]+[\d])/i,
-      Chrome: /chrome\/([\d\w\.\-]+)/i,
-      Safari: /version\/([\d\w\.\-]+)/i,
-      Ps3: /([\d\w\.\-]+)\)\s*$/i,
-      Psp: /([\d\w\.\-]+)\)?\s*$/i
-    };
-    Browsers = {
-      Konqueror: /konqueror/i,
-      Chrome: /chrome/i,
-      Safari: /safari/i,
-      IE: /msie/i,
-      Opera: /opera/i,
-      PS3: /playstation 3/i,
-      PSP: /playstation portable/i,
-      Firefox: /firefox/i
-    };
-    OS = {
-      WindowsVista: /windows nt 6\.0/i,
-      Windows7: /windows nt 6\.1/i,
-      Windows8: /windows nt 6\.2/i,
-      Windows2003: /windows nt 5\.2/i,
-      WindowsXP: /windows nt 5\.1/i,
-      Windows2000: /windows nt 5\.0/i,
-      OSX: /os x (\d+)[._](\d+)/i,
-      Linux: /linux/i,
-      Wii: /wii/i,
-      PS3: /playstation 3/i,
-      PSP: /playstation portable/i,
-      Ipad: /\(iPad.*os (\d+)[._](\d+)/i,
-      Iphone: /\(iPhone.*os (\d+)[._](\d+)/i
-    };
-    Platform = {
-      Windows: /windows/i,
-      Mac: /macintosh/i,
-      Linux: /linux/i,
-      Wii: /wii/i,
-      Playstation: /playstation/i,
-      Ipad: /ipad/i,
-      Ipod: /ipod/i,
-      Iphone: /iphone/i,
-      Android: /android/i,
-      Blackberry: /blackberry/i
-    };
-    function UserAgent(source) {
-      if (source == null) {
-        source = navigator.userAgent;
-      }
-      this.source = source.replace(/^\s*/, '').replace(/\s*$/, '');
-      this.browser_name = browser_name(this.source);
-      this.browser_version = browser_version(this.source);
-      this.os = os(this.source);
-      this.platform = platform(this.source);
-    }
-    browser_name = function(string) {
-      switch (true) {
-        case Browsers.Konqueror.test(string):
-          return 'konqueror';
-        case Browsers.Chrome.test(string):
-          return 'chrome';
-        case Browsers.Safari.test(string):
-          return 'safari';
-        case Browsers.IE.test(string):
-          return 'ie';
-        case Browsers.Opera.test(string):
-          return 'opera';
-        case Browsers.PS3.test(string):
-          return 'ps3';
-        case Browsers.PSP.test(string):
-          return 'psp';
-        case Browsers.Firefox.test(string):
-          return 'firefox';
-        default:
-          return 'unknown';
-      }
-    };
-    browser_version = function(string) {
-      var regex;
-      switch (browser_name(string)) {
-        case 'chrome':
-          if (Versions.Chrome.test(string)) {
-            return RegExp.$1;
-          }
-          break;
-        case 'safari':
-          if (Versions.Safari.test(string)) {
-            return RegExp.$1;
-          }
-          break;
-        case 'firefox':
-          if (Versions.Firefox.test(string)) {
-            return RegExp.$1;
-          }
-          break;
-        case 'ie':
-          if (Versions.IE.test(string)) {
-            return RegExp.$1;
-          }
-          break;
-        case 'ps3':
-          if (Versions.Ps3.test(string)) {
-            return RegExp.$1;
-          }
-          break;
-        case 'psp':
-          if (Versions.Psp.test(string)) {
-            return RegExp.$1;
-          }
-          break;
-        default:
-          regex = /#{name}[\/ ]([\d\w\.\-]+)/i;
-          if (regex.test(string)) {
-            return RegExp.$1;
-          }
-      }
-    };
-    os = function(string) {
-      switch (true) {
-        case OS.WindowsVista.test(string):
-          return 'Windows Vista';
-        case OS.Windows7.test(string):
-          return 'Windows 7';
-        case OS.Windows2003.test(string):
-          return 'Windows 2003';
-        case OS.WindowsXP.test(string):
-          return 'Windows XP';
-        case OS.Windows2000.test(string):
-          return 'Windows 2000';
-        case OS.Linux.test(string):
-          return 'Linux';
-        case OS.Wii.test(string):
-          return 'Wii';
-        case OS.PS3.test(string):
-          return 'Playstation';
-        case OS.PSP.test(string):
-          return 'Playstation';
-        case OS.OSX.test(string):
-          return string.match(OS.OSX)[0].replace('_', '.');
-        case OS.Ipad.test(string):
-          return string.match(OS.Ipad)[0].replace('_', '.');
-        case OS.Iphone.test(string):
-          return string.match(OS.Iphone)[0].replace('_', '.');
-        default:
-          return 'unknown';
-      }
-    };
-    platform = function(string) {
-      switch (true) {
-        case Platform.Windows.test(string):
-          return "Microsoft Windows";
-        case Platform.Mac.test(string):
-          return "Apple Mac";
-        case Platform.Android.test(string):
-          return "Android";
-        case Platform.Blackberry.test(string):
-          return "Blackberry";
-        case Platform.Linux.test(string):
-          return "Linux";
-        case Platform.Wii.test(string):
-          return "Wii";
-        case Platform.Playstation.test(string):
-          return "Playstation";
-        case Platform.Ipad.test(string):
-          return "iPad";
-        case Platform.Ipod.test(string):
-          return "iPod";
-        case Platform.Iphone.test(string):
-          return "iPhone";
-        default:
-          return 'unknown';
-      }
-    };
-    return UserAgent;
-  })();
-
-
-
