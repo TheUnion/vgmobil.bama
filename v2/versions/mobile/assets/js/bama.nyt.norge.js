@@ -151,13 +151,23 @@
 
       // this is where we catch all of our events, and where we send all trackable events
       var onEvent = function (eventObject) {
+        var 
+          registerEvent = (typeof p62601Event ==="function") ? p62601Event : false;
 
+        eventObject.registered = false;
         updateLazyloaders(eventObject.event);
+
+
+        if(!registerEvent) {
+          HAS_CACHED_EVENTS = true;
+          eventObject.registered = false;
+          events.push(eventObject);
+
+        }
 
         if(DEBUG) {
 
           debugLog("[EVENT] " + eventObject.event);
-        // console.log("Event triggered: " + eventObject.event);
         }
 
 
@@ -169,91 +179,91 @@
             // THE RETURN STATEMENT IN THE LINE BELOW
             return;
 
-
       try {
 
         /*
         This entire section should be rewritten as a case statement
          */
         if(eventObject.event.indexOf("start_interaction") === 0) {
-          p62601Event(6260100); 
+          registerEvent(6260100); 
         }
         
         if(eventObject.event.indexOf("arrive_station3") === 0) {
-          p62601Event(6260101); 
+          registerEvent(6260101); 
         }
         
         if(eventObject.event.indexOf("arrive_station4") === 0) {
 
           setPoster('assets/img/poster.jpg')
-          p62601Event(6260102); 
+          registerEvent(6260102); 
         }
         
         if(eventObject.event.indexOf("arrive_station6") === 0) {
-          p62601Event(6260103); 
+          registerEvent(6260103); 
         }
         
         if(eventObject.event.indexOf("arrive_station7") === 0) {
 
           $('#parallax').parallaxSwipe.setEdge("right");
-          p62601Event(6260104); 
+          registerEvent(6260104); 
         }
         
         if(eventObject.event.indexOf("leave_station3") === 0) {
-          p62601Event(6260105); 
+          registerEvent(6260105); 
         }
         
         if(eventObject.event.indexOf("leave_station4") === 0) {
-          p62601Event(6260106); 
+          registerEvent(6260106); 
         }
         
         if(eventObject.event.indexOf("leave_station6") === 0) {
-          p62601Event(6260107); 
+          registerEvent(6260107); 
         }
         
         if(eventObject.event.indexOf("leave_station7") === 0) {
-          p62601Event(6260108); 
+          registerEvent(6260108); 
         }
 
         if(eventObject.event.indexOf("click_lise") === 0) {
-          p62601Event(6260109); 
+          registerEvent(6260109); 
         }
         if(eventObject.event.indexOf("click_farmer") === 0) {
-          p62601Event(6260110); 
+          registerEvent(6260110); 
         }
 
         if(eventObject.event.indexOf("click_link1") === 0) {
           console.log("Opening link1");
-          p62601Event(6260111); 
+          registerEvent(6260111); 
         }
         if(eventObject.event.indexOf("click_link2") === 0) {
           console.log("Opening link2");
-          p62601Event(6260112); 
+          registerEvent(6260112); 
         }
 
         if(eventObject.event.indexOf("close_lise") === 0) {
-          p62601Event(6260113); 
+          registerEvent(6260113); 
         }
         if(eventObject.event.indexOf("close_farmer") === 0) {
-          p62601Event(6260114); 
+          registerEvent(6260114); 
         }
 
         if(eventObject.event.indexOf("video_play") === 0 || eventObject.event.indexOf("video_resume") === 0) {
-          p62601Event(6260115); 
+          registerEvent(6260115); 
         }
 
         if(eventObject.event.indexOf("video_pause") === 0) {
-          p62601Event(6260116); 
+          registerEvent(6260116); 
         }
 
         if(eventObject.event.indexOf("video_finish") === 0) {
-          p62601Event(6260120); 
+          registerEvent(6260120); 
         }
       }
       catch(e) {
         logError(e);
       }
 
+       eventObject.registered = true;
        events.push(eventObject);
       };
 
@@ -510,16 +520,6 @@
           request = null,
           url     = "http://www.kromaviews.no:8080/dev/"
 
-        // request = { message: msg, extra: obj };
-
-        // req.open("GET", url, true);
-
-        // req.send();
-
-
-      // console.log(msg)
-
-
       },
 
 
@@ -564,13 +564,38 @@
       },
 
       getHeaderTime : function () {
-        return this.getResponseHeader("Last-Modified"); // A valid GMTString date or null
+        return req.getResponseHeader("Last-Modified"); // A valid GMTString date or null
       }
 
     }; 
 
 
 /*  --------------------  END OF AJAX helper  ----------------------*/
+
+
+
+/**
+ *  SessionHelper
+ *  
+ *  A dirt simple session tracker for HTML5
+ *
+ *  @returns sessionTracker object or null
+ * 
+ */
+
+      var sessionTracker = function() {
+
+
+
+
+        window.addEventListener ("resize", function (e) {
+          console.log("Resize: ", e);
+        });
+
+
+        return this;
+      };
+
 
 
 
@@ -640,7 +665,7 @@
         // a dirty little gollum of a hack
         if( (clickpos>=4606 + 170) && (clickpos<=4606 + 170 + 215) ) {
           if((click.clientY>40) && (click.clientY<90)){
-            flipFarmer();
+            // flipFarmer();
             return;
           }
         }
@@ -724,17 +749,18 @@
         //store triggers as they occur
         triggers          = [],
         events            = [],
-        LAZY_LOADERS      = null;
-        ONDEMAND_LOADERS  = null; 
-        VIDEO_CONTROLLER  = null;
-        CLICK_ENABLED     = false;
+        LAZY_LOADERS      = null,
+        ONDEMAND_LOADERS  = null, 
+        VIDEO_CONTROLLER  = null,
+        CLICK_ENABLED     = false,
+
+        HAS_CACHED_EVENTS = false,
 
         car               = document.getElementById('car'),
-
-        debugpanel        = document.getElementById('debugoutput'),
         parallax          = document.getElementById('parallax'),
         scene             = document.getElementById('layer5'),
 
+        debugpanel        = document.getElementById('debugoutput'),
         debuginfo         = document.getElementById('debuginfo'),
 
         lise_recipe       = document.getElementById('lise_recipe'),
@@ -745,14 +771,14 @@
         final_btn1        = document.getElementById('final_btn1'),
         final_btn2        = document.getElementById('final_btn2'),
 
-        link1             = document.getElementById('link1');
-        link2             = document.getElementById('link2');
+        link1             = document.getElementById('link1'),
+        link2             = document.getElementById('link2'),
+
+        clicktargets      = {};
 
 
-        clicktargets  = {};
-
-        // our clicktargets
-        var list = document.getElementsByClassName('clicktarget');
+        // // our clicktargets
+        // var list = document.getElementsByClassName('clicktarget');
 
         // when there's time, this can be expanded to a general solution
         // where we get the bounding client rect of the click target.
@@ -772,24 +798,21 @@
 
 
 
-
-
-/**
- *  functions
- *
- */  
-
+  /**
+   *  functions
+   *
+   */  
 
       var flipLise = function() {
         if(!LISE_FLIPPED) {
           onEvent({event: "click_lise"});
-          $('#lise_tips').animate({ top : 500, opacity: 0}, 325, 'linear');
+          $('#lise_tips').animate({ top : 300, opacity: 0}, 325, 'linear');
           $('#lise_recipe').animate({ top : 0, opacity: 1}, 325, 'linear');
         }
         else {
           onEvent({event: "close_lise"});
           $('#lise_tips').animate({ top : 40, opacity: 1}, 325, 'linear');
-          $('#lise_recipe').animate({ top : -500, opacity: 0}, 325, 'linear');
+          $('#lise_recipe').animate({ top : -300, opacity: 0}, 325, 'linear');
         }
         LISE_FLIPPED = !LISE_FLIPPED;
       };
@@ -798,13 +821,13 @@
       var flipFarmer = function() {
         if(!FARMER_FLIPPED) {
           onEvent({event: "click_farmer"});
-          $('#farmer_tips').animate({ top : 500, opacity: 0}, 325, 'linear');
+          $('#farmer_tips').animate({ top : 300, opacity: 0}, 325, 'linear');
           $('#farmer_recipe').animate({ top : 0, opacity: 1}, 325, 'linear');
         }
         else {
           onEvent({event: "click_farmer"});
           $('#farmer_tips').animate({ top : 40, opacity: 1}, 325, 'linear');
-          $('#farmer_recipe').animate({ top : -500, opacity: 0}, 325, 'linear');
+          $('#farmer_recipe').animate({ top : -300, opacity: 0}, 325, 'linear');
         }
         FARMER_FLIPPED = !FARMER_FLIPPED;
       };

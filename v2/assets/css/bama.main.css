@@ -131,7 +131,7 @@
 
 
   /**
-   *  Text styles
+   *  Text, layout styles
    *
    */
 
@@ -201,6 +201,12 @@
     top       : 320px;
     width     : 665px;
   }
+
+  .stretchfill {
+    width       : 100%;
+    height      : 100%;
+  }
+
 
 
 /*
@@ -386,30 +392,32 @@
 
   .arrow {
     position      : absolute;
-    top           : 176px;
-    left          : 480px;
+    top           : 216px;
+    left          : 468px;
+    width         : 96px;
+    height        : 62px;
   }
 
 
   .arrow.small {
     position      : absolute;
     top           : 160px;
-    left          : 504px;
-    width         : 27px;
-    height        : 48px;
+    left          : 496px;
+    width         : 48px;
+    height        : 31px;
   }
 
 
   .recipe {
-    pointer-events: auto;
-    font-family: Abel, Helvetica, sans-serif;
-    color: #333;
-    width: 480px;
-    font-weight: 700;
-    font-size: 22px;
-    text-align: left;
-    background-color: #f7eee7;
-    z-index: 12001;
+    pointer-events      : auto;
+    font-family         : Abel, Helvetica, sans-serif;
+    color               : #333;
+    width               : 480px;
+    font-weight         : 700;
+    font-size           : 22px;
+    text-align          : left;
+    background-color    : #f7eee7;
+    z-index             : 12001;
   }
 
 
@@ -562,6 +570,23 @@
   }
 
 
+
+
+  #stop_sign {
+    position            : absolute;
+    overflow            : hidden;
+    top                 : 265px;
+    left                : 480px;
+    width               : 58px;
+    height              : 153px;
+  }
+
+
+  .stop_sign {
+    background : transparent url('../img/stop.png') no-repeat;
+  }
+
+
   #final_sign {
     overflow            : visible;
     color               : #4c2b0c;
@@ -583,8 +608,8 @@
 
 
   .final_sign {
-    background-image    : url('../img/wood_sign_big.png'), url('../img/stop.png');
-    background-position : top left, 480px 0px;
+    background-image    : url('../img/wood_sign_big.png');
+    background-position : top left;
     background-origin   : content-box;
     background-repeat   : no-repeat;
   }
@@ -784,7 +809,7 @@
 
 
 
-  #lise_salat {
+  #lise_recipe_card {
     top       : 0px;
     left      : 0px;
     width     : 580px;
@@ -792,7 +817,7 @@
   }
 
 
-  .lise_salat {
+  .lise_recipe_card {
     background-image    : url('../img/oppskrift_1160x290.jpg');
     background-origin   : content-box;
     background-position : top left;
@@ -875,7 +900,7 @@
     margin-left         : auto;
     margin-top          : 12px;
     cursor              : pointer;
-    background          : #004288;
+    background          : #a71a28;
     -moz-border-radius  : 6px;
       -o-border-radius  : 6px;
          border-radius  : 6px;

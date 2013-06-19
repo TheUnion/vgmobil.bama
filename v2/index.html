@@ -60,7 +60,7 @@
             <img class="hires" src="assets/img/flag.png" />
           </div>
 
-          <div class="arrow animated continuous hint"><img class="hires" src="assets/img/finger.png" /></div>
+          <div class="arrow animated continuous hint"><img class="stretchfill" src="assets/img/finger.png" /></div>
           
           <div id="foreground"><img src="assets/img/hill_front1.png" alt="" /></div>
 
@@ -81,7 +81,7 @@
         </div>
 
         <div id="station3" class="station lazyload ondemand" data-load-event="start_interaction">
-          <div class="arrow small animated continuous hint"><img class="hires stretchfill" src="assets/img/finger.png" /></div>
+          <div class="arrow small animated continuous hint"><img class="stretchfill" src="assets/img/finger.png" /></div>
           <div id="video1_container">
             <video id="video1" class="interactive" width="416" height="234" controls preload="none">
               <source src="assets/video/video1.webm" type="video/webm">
@@ -99,7 +99,7 @@
 
         <div id="station4" class="station">
           <!-- <img id="outbuilding" class="sprite hires" src="assets/img/outbuilding.png"> -->
-          <div class="arrow small animated continuous hint"><img class="hires" src="assets/img/finger.png" /></div>
+          <div class="arrow small animated continuous hint"><img class="stretchfill" src="assets/img/finger.png" /></div>
           <div id="fence" class="sprite lazyload ondemand" data-load-event="start_interaction"></div>
           <div id="outbuilding" class="sprite lazyload ondemand" data-load-event="start_interaction"></div>
 
@@ -110,7 +110,7 @@
               <!-- <img id="farmer_large" src="assets/img/farmer_large.png" /> -->
               <!-- <img id="close_button" src="assets/img/close_grey.png" /> -->
               <div id="farmer_tekst" class="snakkeboble center">Visste du at nordmenn liker best jordbærsorten Korona?
-              <br /> <div class="btn">Trykk her!</div>
+              <!-- <br /> <div class="btn">Trykk her!</div> -->
               </div>
               <div class="btm"></div>
             </div>
@@ -119,10 +119,10 @@
 
 
         <div id="station6" class="station">
-          <div class="arrow small animated continuous hint"><img class="hires" src="assets/img/finger.png" /></div>
+          <div class="arrow small animated continuous hint"><img class="stretchfill" src="assets/img/finger.png" /></div>
           <div id="lise_hello" class="interactive">
             <div id="lise_tips" class="sprite clicktarget lazyload ondemand" data-load-event="arrive_station3">
-              <div id="lise_tekst" class="snakkeboble center"><span class="bold">Hei</span>, jeg heter Lise og her har du en oppskrift med jordbær fra meg.
+              <div id="lise_tekst" class="snakkeboble center"><span class="bold">Hei</span>, jeg heter Lise! Her har du en oppskrift med jordbær fra meg.
               <br /> <div class="btn">Trykk her!</div>
               </div>
               <div class="btm"></div>
@@ -130,7 +130,7 @@
 
           </div>
 
-          <div id="stand" class="sprite hires lazyload ondemand" data-load-event="arrive_station3"></div>
+          <div id="stand" class="sprite lazyload ondemand" data-load-event="arrive_station3"></div>
           <div id="lise" class="face sprite lazyload ondemand" data-load-event="arrive_station3"></div>
         </div>
 
@@ -139,6 +139,7 @@
             <span class="btn clicktarget"><a id="link1" class="btn" target="_blank" href="http://www.bama.no/norsk/index.html">Trykk for oppskrifter</a></span><br />
             <span class="btn clicktarget"><a id="link2" class="btn" target="_blank" href="http://www.bama.no/norsk/sesong/juli.html">Trykk for sesong</a> </span>
           </div>
+          <div id="stop_sign" class="lazyload ondemand" data-load-event="arrive_station6"></div>
           
         <!-- this is the div containing the road tiles -->
         </div>
@@ -161,11 +162,11 @@
 
   <div class="container" onselectstart="return false;">
     <div id="layer_player" class="parallax_layer interactive">
-      <img id="car" class="hires animated" src="assets/img/car.png" width="283" height="126" />
+      <img id="car" class="animated" src="assets/img/car.png" width="283" height="126" />
 
 
       <div id="lise_recipe" class="center recipe clicktarget">
-        <div id="lise_jordbær" class="lazyload ondemand" data-load-event="arrive_station3"></div> 
+        <div id="lise_recipe_card" class="lazyload ondemand" data-load-event="arrive_station4"></div> 
 
         <svg version="1.1" id="Layer_1" class="close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
            width="44px" height="44px" stroke="#ffffff" fill="#ffffff" viewBox="0 0 44 44" style="enable-background:new 0 0 44 44;" xml:space="preserve">
@@ -233,14 +234,16 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste jordbærer. 
         script.success    = success || false,
         script.failure    = failure || false;
 
+
         script.onload = function (e) {
           if(this.success) {
+            console.log("loaded script " + (this.async ? "synchronously, " : "asynchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src);
             this.success.call(e);
           }
         };
 
         script.onerror = function (err) {
-          console.log('error loading script: ', err);
+          console.log('error loading script ' + (this.async ? "synchronously, " : "asynchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src, err);
           if(this.failure) {
             this.failure.call(err);
           }
@@ -256,7 +259,7 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste jordbærer. 
 
   </script>
   <script src="assets/js/lib/jquery.parallaxSwipe.js"></script>
-  <script async src="assets/js/bama.nyt.norge.js"></script>
+  <script async defer src="assets/js/bama.nyt.norge.js"></script>
 
   <div id="position_data">position</div>
   <div id="debuginfo">debuginfo</div>

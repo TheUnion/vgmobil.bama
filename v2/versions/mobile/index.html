@@ -59,7 +59,7 @@
           <div id="logo">
             <img class="hires center" src="assets/img/bama_logo.svg" />
           </div>
-          <div class="arrow animated continuous hint"><img class="hires" src="assets/img/finger.png" /></div>
+          <div class="arrow animated continuous hint"><img class="stretchfill" src="assets/img/finger.png" /></div>
           <div id="intro_text" class="sprite">
             <span class="big gray regular">
               <p class="air_above">Kjør bilen med fingeren<br />- opplev norske jordbær!</p>
@@ -97,8 +97,8 @@
           <div id="farmer_hello">
             <div id="farmer_tips" class="sprite farmer_tips clicktarget">
               <div id="farmer_text" class="snakkeboble center">
-                <div class="btn blue">Visste du at nordmenn liker best jordbærsorten Korona?</div>
-                <div class="btm red" style="top:76px"></div>
+                <div class="btn">Visste du at nordmenn liker best jordbærsorten Korona?</div>
+                <div class="btm" style="top:76px"></div>
               </div>
             </div>
           </div>
@@ -113,13 +113,13 @@
           <div id="lise_hello" class="interactive">
             <div id="lise_tips" class="sprite lise_tips clicktarget">
               <div id="lise_text" class="snakkeboble center">
-                <div class="btn red" style="top:12px">Her har du en god oppskrift med jordbær fra meg.</div>
-                <div class="btm grey" style="top:76px"></div>
+                <div class="btn klikkbar" style="top:12px">Trykk her for oppskrift med jordbær.</div>
+                <div class="btm red" style="top:76px"></div>
               </div>
             </div>
           </div>
 
-          <div id="tractor" class="sprite hires lazyload ondemand" data-load-event="arrive_station3"></div>
+          <div id="stand" class="sprite hires lazyload ondemand" data-load-event="arrive_station3"></div>
           <div id="lise" class="sprite lazyload ondemand" data-load-event="arrive_station3"></div>
         </div>
 
@@ -131,9 +131,12 @@
         <div id="station7" class="station lazyload ondemand" data-load-event="arrive_station6">
 
         <div id="final_sign" class="lazyload ondemand" data-load-event="arrive_station6">
-            <span class="btn clicktarget"><a id="link1" class="btn" target="_blank" href="http://www.bama.no/norsk/index.html">Oppskrifter med jordbær</a></span><br />
-            <span class="btn clicktarget"><a id="link2" class="btn" target="_blank" href="http://www.bama.no/norsk/sesong/juli.html">Dette er i sesong nå</a> </span>
-          </div>
+            <span class="clicktarget"><a id="link1" class="btn klikkbar" target="_blank" href="http://www.bama.no/norsk/index.html">Trykk for oppskrifter</a></span><br />
+            <span class="clicktarget"><a id="link2" class="btn klikkbar" target="_blank" href="http://www.bama.no/norsk/sesong/juli.html">Trykk for sesong</a> </span>
+        </div>
+
+        <div id="stop_sign" class="lazyload ondemand" data-load-event="arrive_station6"></div>
+
           
         <!-- this is the div containing the road tiles -->
         </div>
@@ -202,24 +205,33 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste salater. Og 
           path    = file,
           script  = document.createElement('script');
 
+        // set parameter values, or default
         script.async      = async || true;
         script.defer      = defer || false;
-        script.src        = file;
-        script.self       = script;
         script.success    = success || false,
         script.failure    = failure || false;
 
-        script.onload = function (event) {
+        script.src        = file;
+        script.self       = script;
+
+
+        script.onload = function (e) {
           if(this.success) {
-            this.success.call(event);
+            console.log("loaded script " + (this.async ? "synchronously, " : "asynchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src);
+            this.success.call(e);
+          }
+          else {
+            console.log ("Successfully loaded script: " + this.src , e);
           }
         };
 
-        script.onerror = function (error) {
-          console.log('error loading script: ' + this.file, error);
+        script.onerror = function (err) {
+          console.log('error loading script ' + (this.async ? "synchronously, " : "asynchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src, err);
           if(this.failure) {
-
-            this.failure.call(error);
+            this.failure.call(err);
+          }
+          else {
+            console.log ("Error loading script: " + this.src , err);
           }
         };
 
@@ -233,7 +245,7 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste salater. Og 
 
   </script>
   <script src="assets/js/lib/jquery.parallaxSwipe.js"></script>
-  <script async src="assets/js/bama.nyt.norge.js"></script>
+  <script async defer src="assets/js/bama.nyt.norge.js"></script>
 
 
   <div id="position_data">no position</div>

@@ -24,11 +24,11 @@
       window.onerror = function(message, url, line_num) {
        
         // Standard error information
-        var error = "<br /> JS Error: " + message + " from " + url + ":" + line_num;
-        error += "<br /> URL: " + document.URL;
+        var error = "JS error: " + message + " @ " + url + ":" + line_num;
+        error += "url: " + document.URL;
         
         var user_agent = new UserAgent();
-        error += "<br /> Browser: " + user_agent.browser_name + " " + user_agent.browser_version + " | OS: " + user_agent.os + " | Platform: " + user_agent.platform;
+        error += "browser: " + user_agent.browser_name + " " + user_agent.browser_version + " | OS: " + user_agent.os + " | platform: " + user_agent.platform;
 
         debugLog(error);    
         return false;
@@ -65,10 +65,7 @@
           ajax = AJAX;
 
         // ajax.send(message, extra);
-        message = "[LOG] " + message;
-
-        !!extra ? console.log(message, extra) : console.log(message);
-        // return;
+        message = message;
       };
 
 
@@ -81,11 +78,10 @@
         if(DEBUG) {
           $('#log').append('<li class="line"><pre><code>' + line + '</code></pre></li>');
         }
-
-        sendLogData(line, !!obj ? JSON.stringify(obj) : null);
+        sendLogData(line, obj);
       };
 
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
       var changeStartScreenAnimation = function (animation, delay, repeat, time) {
         var
           animation = animation || 'bounce',
@@ -154,6 +150,9 @@
 
       // this is where we catch all of our events, and where we send all trackable events
       var onEvent = function (eventObject) {
+        var 
+          registerEvent = (typeof p62602Event ==="function") ? p62602Event : false;
+
 
         updateLazyloaders(eventObject.event);
 
@@ -173,84 +172,86 @@
             return;
 
 
+
+
       try {
 
         /*
         This entire section should be rewritten as a case statement
          */
         if(eventObject.event.indexOf("start_interaction") === 0) {
-          p62602Event(6260200); 
+          registerEvent(6260200); 
         }
         
         if(eventObject.event.indexOf("arrive_station3") === 0) {
-          p62602Event(6260201); 
+          registerEvent(6260201); 
         }
         
         if(eventObject.event.indexOf("arrive_station4") === 0) {
 
           setPoster('assets/img/poster.jpg')
-          p62602Event(6260202); 
+          registerEvent(6260202); 
         }
         
         if(eventObject.event.indexOf("arrive_station6") === 0) {
-          p62602Event(6260203); 
+          registerEvent(6260203); 
         }
         
         if(eventObject.event.indexOf("arrive_station7") === 0) {
 
           $('#parallax').parallaxSwipe.setEdge("right");
-          p62602Event(6260204); 
+          registerEvent(6260204); 
         }
         
         if(eventObject.event.indexOf("leave_station3") === 0) {
-          p62602Event(6260205); 
+          registerEvent(6260205); 
         }
         
         if(eventObject.event.indexOf("leave_station4") === 0) {
-          p62602Event(6260206); 
+          registerEvent(6260206); 
         }
         
         if(eventObject.event.indexOf("leave_station6") === 0) {
-          p62602Event(6260207); 
+          registerEvent(6260207); 
         }
         
         if(eventObject.event.indexOf("leave_station7") === 0) {
-          p62602Event(6260208); 
+          registerEvent(6260208); 
         }
 
         if(eventObject.event.indexOf("click_lise") === 0) {
-          p62602Event(6260209); 
+          registerEvent(6260209); 
         }
         if(eventObject.event.indexOf("click_farmer") === 0) {
-          p62602Event(6260210); 
+          registerEvent(6260210); 
         }
 
         if(eventObject.event.indexOf("click_link1") === 0) {
           console.log("Opening link1");
-          p62602Event(6260211); 
+          registerEvent(6260211); 
         }
         if(eventObject.event.indexOf("click_link2") === 0) {
           console.log("Opening link2");
-          p62602Event(6260212); 
+          registerEvent(6260212); 
         }
 
         if(eventObject.event.indexOf("close_lise") === 0) {
-          p62602Event(6260213); 
+          registerEvent(6260213); 
         }
         if(eventObject.event.indexOf("close_farmer") === 0) {
-          p62602Event(6260214); 
+          registerEvent(6260214); 
         }
 
         if(eventObject.event.indexOf("video_play") === 0 || eventObject.event.indexOf("video_resume") === 0) {
-          p62602Event(6260215); 
+          registerEvent(6260215); 
         }
 
         if(eventObject.event.indexOf("video_pause") === 0) {
-          p62602Event(6260216); 
+          registerEvent(6260216); 
         }
 
         if(eventObject.event.indexOf("video_finish") === 0) {
-          p62602Event(6260220); 
+          registerEvent(6260220); 
         }
       }
       catch(e) {
@@ -654,7 +655,7 @@
         // a dirty little gollum of a hack
         if( (clickpos>=(4606 + 280)) && (clickpos<=(4606 + 280 + 125)) ) {
           if((click.clientY>230) && (click.clientY<275)){
-            flipFarmer();
+            // flipFarmer();
             return;
           }
         }
@@ -985,7 +986,9 @@
   var UserAgent;
 
   UserAgent = (function() {
-    var Browsers, OS, Platform, Versions, browser_name, browser_version, os, platform;
+    var 
+      Browsers, OS, Platform, Versions, browser_name, browser_version, os, platform;
+
     Versions = {
       Firefox: /firefox\/([\d\w\.\-]+)/i,
       IE: /msie\s([\d\.]+[\d])/i,
@@ -994,6 +997,7 @@
       Ps3: /([\d\w\.\-]+)\)\s*$/i,
       Psp: /([\d\w\.\-]+)\)?\s*$/i
     };
+
     Browsers = {
       Konqueror: /konqueror/i,
       Chrome: /chrome/i,
@@ -1004,6 +1008,7 @@
       PSP: /playstation portable/i,
       Firefox: /firefox/i
     };
+
     OS = {
       WindowsVista: /windows nt 6\.0/i,
       Windows7: /windows nt 6\.1/i,
@@ -1019,6 +1024,7 @@
       Ipad: /\(iPad.*os (\d+)[._](\d+)/i,
       Iphone: /\(iPhone.*os (\d+)[._](\d+)/i
     };
+
     Platform = {
       Windows: /windows/i,
       Mac: /macintosh/i,
@@ -1031,16 +1037,18 @@
       Android: /android/i,
       Blackberry: /blackberry/i
     };
+
     function UserAgent(source) {
       if (source == null) {
         source = navigator.userAgent;
       }
-      this.source = source.replace(/^\s*/, '').replace(/\s*$/, '');
-      this.browser_name = browser_name(this.source);
-      this.browser_version = browser_version(this.source);
-      this.os = os(this.source);
-      this.platform = platform(this.source);
+      this.source           = source.replace(/^\s*/, '').replace(/\s*$/, '');
+      this.browser_name     = browser_name(this.source);
+      this.browser_version  = browser_version(this.source);
+      this.os               = os(this.source);
+      this.platform         = platform(this.source);
     }
+
     browser_name = function(string) {
       switch (true) {
         case Browsers.Konqueror.test(string):
@@ -1063,6 +1071,7 @@
           return 'unknown';
       }
     };
+
     browser_version = function(string) {
       var regex;
       switch (browser_name(string)) {
@@ -1103,6 +1112,7 @@
           }
       }
     };
+
     os = function(string) {
       switch (true) {
         case OS.WindowsVista.test(string):
@@ -1133,6 +1143,7 @@
           return 'unknown';
       }
     };
+
     platform = function(string) {
       switch (true) {
         case Platform.Windows.test(string):
@@ -1159,6 +1170,7 @@
           return 'unknown';
       }
     };
+
     return UserAgent;
   })();
 
