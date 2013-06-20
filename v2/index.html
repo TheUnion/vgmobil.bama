@@ -109,7 +109,7 @@
             <div id="farmer_tips" class="sprite clicktarget lazyload ondemand" data-load-event="start_interaction">
               <!-- <img id="farmer_large" src="assets/img/farmer_large.png" /> -->
               <!-- <img id="close_button" src="assets/img/close_grey.png" /> -->
-              <div id="farmer_tekst" class="snakkeboble center">Visste du at nordmenn liker best jordbærsorten Korona?
+              <div id="farmer_tekst" class="snakkeboble center"><p>Visste du at nordmenn liker best jordbærsorten Korona?</p>
               <!-- <br /> <div class="btn">Trykk her!</div> -->
               </div>
               <div class="btm"></div>
@@ -211,33 +211,42 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste jordbærer. 
 
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-  <script type="text/javascript" language="javascript">
+
+  <script>
 
       var onError = function (e) {
-        console.log ("There was an error loading script. ", e);
-      }
+        console.log("error loading script " + (this.async ? "synchronously, " : "asynchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src);
+      };
 
       var onSuccess = function (e) {
-        console.log ("Successfully loaded script. ", e);
-      }
+        console.log("loaded script " + (this.async ? "synchronously, " : "asynchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src);
+      };
 
       var requireScript = function ( file, async, defer, success, failure ) {
         var 
           cursor  = document.getElementsByTagName ("head")[0] || document.documentElement,
           path    = file,
-          script  = document.createElement('script');
+          script  = document.createElement('script'),
+          async   = async || false,
+          defer   = defer || false;
 
-        script.async      = async || true;
-        script.defer      = defer || false;
+
+        if(async) {
+          script.async = true;
+        }
+
+        if(defer) {
+          script.defer = true;
+        }
+
         script.src        = file;
         script.self       = script;
-        script.success    = success || false,
+        script.success    = success || false;
         script.failure    = failure || false;
 
 
         script.onload = function (e) {
           if(this.success) {
-            console.log("loaded script " + (this.async ? "synchronously, " : "asynchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src);
             this.success.call(e);
           }
         };
@@ -258,8 +267,9 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste jordbærer. 
     requireScript ("http://pliing.se/PliingAd/AdJs?app=no_vg_bama_tracking_tablet&id=1&no=" +new Date().getTime(), false, false, onSuccess, onError);
 
   </script>
-  <script src="assets/js/lib/jquery.parallaxSwipe.js"></script>
-  <script async defer src="assets/js/bama.nyt.norge.js"></script>
+
+  <script async src="assets/js/lib/jquery.parallaxSwipe.js"></script>
+  <script async src="assets/js/bama.nyt.norge.js"></script>
 
   <div id="position_data">position</div>
   <div id="debuginfo">debuginfo</div>

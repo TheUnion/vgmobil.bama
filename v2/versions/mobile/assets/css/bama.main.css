@@ -798,15 +798,13 @@
     height        : 33px;
     overflow      : hidden;
     z-index       : 0;
+    background    : transparent url('../img/pop_up_btm1.png') no-repeat;
   }
 
-  .btm.lise {
+  .btm.klikkbar {
     background    : transparent url('../img/pop_up_btm2.png') no-repeat;
   }
 
-  .btm.farmer {
-    background    : transparent url('../img/pop_up_btm1.png') no-repeat;
-  }
 
 
   .clean {

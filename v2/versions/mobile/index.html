@@ -98,7 +98,7 @@
             <div id="farmer_tips" class="sprite farmer_tips clicktarget">
               <div id="farmer_text" class="snakkeboble center">
                 <div class="btn">Visste du at nordmenn liker best jordbærsorten Korona?</div>
-                <div class="btm" style="top:76px"></div>
+                <div class="btm" style="top:98px"></div>
               </div>
             </div>
           </div>
@@ -114,7 +114,7 @@
             <div id="lise_tips" class="sprite lise_tips clicktarget">
               <div id="lise_text" class="snakkeboble center">
                 <div class="btn klikkbar" style="top:12px">Trykk her for oppskrift med jordbær.</div>
-                <div class="btm red" style="top:76px"></div>
+                <div class="btm klikkbar" style="top:76px"></div>
               </div>
             </div>
           </div>
@@ -189,49 +189,53 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste salater. Og 
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
   <!--script type="text/javascript" language="javascript">$.getScript("http://pliing.se/PliingAd/AdJs?app=no_vg_bama_tracking&id=1&no=" + new Date().getTime()); </script-->
-  <script type="text/javascript" language="javascript">
+  <script>
 
       var onError = function (e) {
-        console.log ("There was an error loading script: " + this.src , e);
-      }
+        console.log("error loading script " + (this.async ? "asynchronously, " : "asynchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src);
+      };
 
       var onSuccess = function (e) {
-        console.log ("Successfully loaded script: " + this.src , e);
-      }
+        console.log("loaded script " + (this.async ? "asynchronously, " : "asynchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src);
+      };
 
       var requireScript = function ( file, async, defer, success, failure ) {
         var 
           cursor  = document.getElementsByTagName ("head")[0] || document.documentElement,
-          path    = file,
-          script  = document.createElement('script');
+          script  = document.createElement('script'),
+          async   = async || false,
+          defer   = defer || false;
 
-        // set parameter values, or default
-        script.async      = async || true;
-        script.defer      = defer || false;
-        script.success    = success || false,
-        script.failure    = failure || false;
+
+        if(async) {
+          script.async = true;
+        }
+
+        if(defer) {
+          script.defer = true;
+        }
 
         script.src        = file;
         script.self       = script;
+        script.success    = success || false;
+        script.failure    = failure || false;
 
 
         script.onload = function (e) {
           if(this.success) {
-            console.log("loaded script " + (this.async ? "synchronously, " : "asynchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src);
             this.success.call(e);
           }
-          else {
-            console.log ("Successfully loaded script: " + this.src , e);
+          else{
+            console.log('success loading script ' + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src, err);
           }
         };
 
         script.onerror = function (err) {
-          console.log('error loading script ' + (this.async ? "synchronously, " : "asynchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src, err);
           if(this.failure) {
             this.failure.call(err);
           }
-          else {
-            console.log ("Error loading script: " + this.src , err);
+          else{
+            console.log('error loading script ' + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src, err);
           }
         };
 
@@ -244,7 +248,8 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste salater. Og 
     requireScript ("http://pliing.se/PliingAd/AdJs?app=no_vg_bama_tracking_tablet&id=1&no=" +new Date().getTime(), false, false, onSuccess, onError);
 
   </script>
-  <script src="assets/js/lib/jquery.parallaxSwipe.js"></script>
+
+  <script async defer src="assets/js/lib/jquery.parallaxSwipe.js"></script>
   <script async defer src="assets/js/bama.nyt.norge.js"></script>
 
 
