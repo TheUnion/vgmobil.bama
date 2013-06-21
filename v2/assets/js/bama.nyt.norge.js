@@ -30,7 +30,7 @@
         var user_agent = new UserAgent();
         error += "browser: " + user_agent.browser_name + " " + user_agent.browser_version + " | OS: " + user_agent.os + " | platform: " + user_agent.platform;
 
-        debugLog(error);    
+        debugLog(error, message);    
         return false;
       };
 
@@ -774,24 +774,33 @@
         // what. Even if the event is captured by enemy code, we can re-fire it
         // programmatically
 
-        // for(var i = 0, count = list.length; i < count; i++) {
-        //   clicktargets[list[i].id] = {
-        //     element : list[i],
-        //     offset : $(list[i]).offset(),
-        //     position : $(list[i]).position(),
-        //     width : list[i].offsetWidth,
-        //     height : list[i].offsetHeight
-        //     }
-        //   }
+        for(var i = 0, count = list.length; i < count; i++) {
+          clicktargets[list[i].id] = {
+            element : list[i],
+            offset : $(list[i]).offset(),
+            position : $(list[i]).position(),
+            width : list[i].offsetWidth,
+            height : list[i].offsetHeight,
+            boundingRect : list[i].getBoundingClientRect()
+            }
+
+          var
+            rect    = clicktargets[list[i].id].boundingRect,
+            target  = clicktargets[list[i].id];
+
+          console.log("clickTarget   : " + list[i].id + " @ " + rect.left + ", " + rect.top + " (" + rect.right + ", " + rect.bottom + ")");
+          console.log("position      : " + list[i].id + " @ " + target.position.left + ", " + target.position.top);
+          console.log("offset        : " + list[i].id + " @ " + target.offset.left + ", " + target.offset.top);
+          console.log("width, height : " + list[i].id + " @ " + target.width + ", " + target.height);
+          }
 
 
 
 
-
-/**
- *  functions
- *
- */  
+      /**
+       *  functions
+       *
+       */  
 
       var flipLise = function() {
         if(!LISE_FLIPPED) {
@@ -934,11 +943,10 @@
           HORIZ:true, SNAPDISTANCE:20, DISABLELINKS: false, LAYER:[ 20, 12, 3.2, 1.6, 1, 1 ] });
 
 
-    var layerWidth = 8000;
-    // $('#parallax').parallaxSwipe.getSize();
+    var layerWidth = $('#parallax').parallaxSwipe.getSize();
 
     // set width for all parallax stations
-    $('.parallax_layer').css('width',layerWidth+1000);
+    $('.parallax_layer').css('width',layerWidth);
 
 
     $('#parallax').bind('click', function (e) { 

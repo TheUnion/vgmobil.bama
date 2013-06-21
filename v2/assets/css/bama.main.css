@@ -980,11 +980,13 @@
 
 
   #car {
-    position             : absolute;
-    top                  : 364px;
-    left                 : 150px;
-    background           : transparent;
-    z-index              : 110;
+    -webkit-perspective           : 1000;
+    -webkit-backface-visibility   : hidden;   
+    position                      : absolute;
+    top                           : 364px;
+    left                          : 150px;
+    background                    : transparent;
+    z-index                       : 110;
   }
 
 

@@ -116,7 +116,6 @@
         }
         
         if(eventObject.event.indexOf("arrive_station7") === 0) {
-//          $('#parallax').parallaxSwipe.setEdge("right");
           p62602Event(6260204); 
         }
         

@@ -1,14 +1,43 @@
   $(document).ready(function () {
 
-   $(document).bind("dragstart", function() { return false; });
+    $(document).bind("dragstart", function() { return false; });
 
     var 
+
+      // activate debugging
+      DEBUG = true,
+
+      // define analytics events
+      // events are automatically sent to tracking server
+      EVENT = {
+          "start_interaction" : { id: 6260100, onEvent: false },
+
+          "arrive_station3"   : { id: 6260101, onEvent: false },
+          "arrive_station4"   : { id: 6260102, onEvent: function() { setPoster('assets/img/poster.jpg'); } },
+          "arrive_station6"   : { id: 6260103, onEvent: false },
+          "arrive_station7"   : { id: 6260104, onEvent: function() { $('#parallax').parallaxSwipe.setEdge("right"); } },
+
+          "leave_station3"    : { id: 6260105, onEvent: false },
+          "leave_station4"    : { id: 6260106, onEvent: false },
+          "leave_station6"    : { id: 6260107, onEvent: false },
+          "leave_station7"    : { id: 6260108, onEvent: false },
+
+          "click_lise"        : { id: 6260109, onEvent: false },
+          "click_farmer"      : { id: 6260110, onEvent: false },
+          "close_lise"        : { id: 6260113, onEvent: false },
+          "close_farmer"      : { id: 6260114, onEvent: false },
+
+          "click_link1"       : { id: 6260111, onEvent: function() { console.log("Opening link1"); } },
+          "click_link2"       : { id: 6260112, onEvent: function() { console.log("Opening link2"); } },
+
+          "video_play"        : { id: 6260115, onEvent: false },
+          "video_pause"       : { id: 6260116, onEvent: false },
+          "video_finish"      : { id: 6260120, onEvent: false }
+      },
+
       INITIALIZED       = false,
       VIDEO_CONTROLLER  = null,
       
-      // activate debugging
-      DEBUG             = true,
-
       //dump stack trace on errors
       DEBUG_STACKTRACE  = true;
 
@@ -152,119 +181,52 @@
       // this is where we catch all of our events, and where we send all trackable events
       var onEvent = function (eventObject) {
         var 
+          e             = EVENT[eventObject.event] || false,
           registerEvent = (typeof p62601Event ==="function") ? p62601Event : false;
 
         eventObject.registered = false;
         updateLazyloaders(eventObject.event);
 
 
+        // does our analytics reporting function exist ?
         if(!registerEvent) {
           HAS_CACHED_EVENTS = true;
           eventObject.registered = false;
           events.push(eventObject);
-
         }
 
         if(DEBUG) {
 
           debugLog("[EVENT] " + eventObject.event);
+          // WE ARE DISABLING THE TRACKING HERE, 
+          // BECAUSE WE DON'T WANT THE DEV VERSION 
+          // TO POLLUTE THE ANALYTICS OF THE LIVE VERSION
+          // 
+          // RE-ENABLE BEFORE PUBLISHING BY COMMENTING OUT
+          // THE RETURN STATEMENT IN THE LINE BELOW
+          return;
         }
 
+        try {
 
-            // WE ARE DISABLING THE TRACKING HERE, 
-            // BECAUSE WE DON'T WANT THE DEV VERSION 
-            // TO POLLUTE THE ANALYTICS OF THE LIVE VERSION
-            // 
-            // RE-ENABLE BEFORE PUBLISHING BY COMMENTING OUT
-            // THE RETURN STATEMENT IN THE LINE BELOW
+          if(!EVENT[eventObject.event]) {
+            console.log("Unknown event : " + eventObject.event);
             return;
+          }
 
-      try {
+          registerEvent(e.id);
 
-        /*
-        This entire section should be rewritten as a case statement
-         */
-        if(eventObject.event.indexOf("start_interaction") === 0) {
-          registerEvent(6260100); 
-        }
-        
-        if(eventObject.event.indexOf("arrive_station3") === 0) {
-          registerEvent(6260101); 
-        }
-        
-        if(eventObject.event.indexOf("arrive_station4") === 0) {
+          if(e.onEvent) {
+            e.onEvent.call();
+          }
 
-          setPoster('assets/img/poster.jpg')
-          registerEvent(6260102); 
         }
-        
-        if(eventObject.event.indexOf("arrive_station6") === 0) {
-          registerEvent(6260103); 
-        }
-        
-        if(eventObject.event.indexOf("arrive_station7") === 0) {
-
-          $('#parallax').parallaxSwipe.setEdge("right");
-          registerEvent(6260104); 
-        }
-        
-        if(eventObject.event.indexOf("leave_station3") === 0) {
-          registerEvent(6260105); 
-        }
-        
-        if(eventObject.event.indexOf("leave_station4") === 0) {
-          registerEvent(6260106); 
-        }
-        
-        if(eventObject.event.indexOf("leave_station6") === 0) {
-          registerEvent(6260107); 
-        }
-        
-        if(eventObject.event.indexOf("leave_station7") === 0) {
-          registerEvent(6260108); 
+        catch(e) {
+          logError(e);
         }
 
-        if(eventObject.event.indexOf("click_lise") === 0) {
-          registerEvent(6260109); 
-        }
-        if(eventObject.event.indexOf("click_farmer") === 0) {
-          registerEvent(6260110); 
-        }
-
-        if(eventObject.event.indexOf("click_link1") === 0) {
-          console.log("Opening link1");
-          registerEvent(6260111); 
-        }
-        if(eventObject.event.indexOf("click_link2") === 0) {
-          console.log("Opening link2");
-          registerEvent(6260112); 
-        }
-
-        if(eventObject.event.indexOf("close_lise") === 0) {
-          registerEvent(6260113); 
-        }
-        if(eventObject.event.indexOf("close_farmer") === 0) {
-          registerEvent(6260114); 
-        }
-
-        if(eventObject.event.indexOf("video_play") === 0 || eventObject.event.indexOf("video_resume") === 0) {
-          registerEvent(6260115); 
-        }
-
-        if(eventObject.event.indexOf("video_pause") === 0) {
-          registerEvent(6260116); 
-        }
-
-        if(eventObject.event.indexOf("video_finish") === 0) {
-          registerEvent(6260120); 
-        }
-      }
-      catch(e) {
-        logError(e);
-      }
-
-       eventObject.registered = true;
-       events.push(eventObject);
+        eventObject.registered = true;
+        events.push(eventObject);
       };
 
 
@@ -908,16 +870,16 @@
         }
 
         // a dirty little gollum of a hack
-        if( (clickpos>=4606 + 170) && (clickpos<=4606 + 170 + 215) ) {
-          if((click.clientY>40) && (click.clientY<90)){
+        if( (clickpos>=4606 + 180) && (clickpos<=4606 + 180 + 215) ) {
+          if((click.clientY>25) && (click.clientY<125)){
             // flipFarmer();
             return;
           }
         }
 
         // it'ss hideousss
-        else if( (clickpos>=6180 + 165) && (clickpos<= 6180 + 165 + 215) ) {
-          if((click.clientY>30) && (click.clientY<90)){
+        else if( (clickpos>=6180 + 175) && (clickpos<= 6180 + 175 + 215) ) {
+          if((click.clientY>15) && (click.clientY<115)){
             flipLise();
             return;
           }
@@ -974,15 +936,15 @@
         startpos          = 0,
         currentpos        = 0,
         sessionstart      = null,
-        UPDATE_INTERVAL   = 100, //millisec
-        STATION_MARGIN    = 400, // delta for when station becomes visible
+        UPDATE_INTERVAL   = 100,    // millisec
+        STATION_MARGIN    = 400,    // delta for when station becomes visible
 
-        STATION_SPEED     = 0.75, // when approaching station
-        ROAD_SPEED        = 0.9, // when leaving station
-        DECAY             = 0.75, // when approaching station
-        MOUSEDOWN_DECAY   = 0.75, // when approaching station
-        ROAD_DECAY        = 0.9, // when leaving station
-        ROAD_MOUSE_DECAY  = 0.9, // when leaving station
+        STATION_SPEED     = 0.75,   // speed when approaching station
+        ROAD_SPEED        = 0.9,    // speed when leaving station
+        DECAY             = 0.75,   // taper when approaching station
+        MOUSEDOWN_DECAY   = 0.75,   // taper when dragging
+        ROAD_DECAY        = 0.9,    // taper when leaving station
+        ROAD_MOUSE_DECAY  = 0.9,    // taper when dragging
 
         LISE_FLIPPED      = false,
         FARMER_FLIPPED    = false,
@@ -992,6 +954,7 @@
         //store triggers as they occur
         triggers          = [],
         events            = [],
+
         LAZY_LOADERS      = null,
         ONDEMAND_LOADERS  = null, 
         VIDEO_CONTROLLER  = null,
@@ -1176,12 +1139,6 @@
  * 
  */
 
-    // Hide the address bar in Mobile Safari
-    setTimeout(function(){
-      window.scrollTo(0, 1);
-    }, 0);
-
-
 
     $("#parallax").parallaxSwipe( { DECAY: ROAD_DECAY, MOUSEDOWN_DECAY: ROAD_MOUSE_DECAY, SPEED_SPRING: ROAD_SPEED, BOUNCE_SPRING:0.5, 
           HORIZ:true, SNAPDISTANCE:20, DISABLELINKS: false, LAYER:[ 20, 12, 3.2, 1.6, 1, 1 ] });
@@ -1209,7 +1166,6 @@
         onClicked(result);
         return true; 
       });
-
 
 
       $('.recipe').bind('selectstart', function (e) { 

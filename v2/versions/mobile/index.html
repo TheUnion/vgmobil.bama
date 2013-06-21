@@ -62,7 +62,7 @@
           <div class="arrow animated continuous hint"><img class="stretchfill" src="assets/img/finger.png" /></div>
           <div id="intro_text" class="sprite">
             <span class="big gray regular">
-              <p class="air_above">Kjør bilen med fingeren<br />- opplev norske jordbær!</p>
+              Kjør bilen med fingeren<br />- opplev norske jordbær!
             </span>
             </div>
           </div>
@@ -90,42 +90,41 @@
           </div>
         </div>
 
-        <div id="station4" class="station lazyload ondemand" data-load-event="start_interaction">
+        <div id="station4" class="station lazyload ondemand" data-load-event="arrive_station3">
           <div class="arrow small animated continuous hint"><img class="hires stretchfill" src="assets/img/finger.png" /></div>
-          <div id="outbuilding" class="sprite lazyload ondemand" data-load-event="start_interaction"></div>
-          <div id="farmer" class="sprite lazyload ondemand" data-load-event="start_interaction"></div>
+          <div id="outbuilding" class="sprite lazyload ondemand" data-load-event="arrive_station3"></div>
+          <div id="farmer" class="sprite lazyload ondemand" data-load-event="arrive_station3"></div>
           <div id="farmer_hello">
             <div id="farmer_tips" class="sprite farmer_tips clicktarget">
               <div id="farmer_text" class="snakkeboble center">
-                <div class="btn">Visste du at nordmenn liker best jordbærsorten Korona?</div>
-                <div class="btm" style="top:98px"></div>
+                <div class="btn larger">Visste du at nordmenn liker jordbærsorten Korona best?</div>
+                <div class="btm" style="top:104px;left:216px"></div>
               </div>
             </div>
           </div>
-          <div id="farm_sign" class="lazyload ondemand" data-load-event="start_interaction">
+          <div id="farm_sign" class="lazyload ondemand" data-load-event="arrive_station3">
             <span id="farm_sign_title">Bondegård</span>
           </div>
         </div>
 
 
-        <div id="station6" class="station">
+        <div id="station6" class="station lazyload ondemand" data-load-event="arrive_station4">
           <div class="arrow small animated continuous hint"><img class="hires stretchfill" src="assets/img/finger.png" /></div>
           <div id="lise_hello" class="interactive">
             <div id="lise_tips" class="sprite lise_tips clicktarget">
               <div id="lise_text" class="snakkeboble center">
-                <div class="btn klikkbar" style="top:12px">Trykk her for oppskrift med jordbær.</div>
-                <div class="btm klikkbar" style="top:76px"></div>
+                <div class="btn larger klikkbar" style="top:12px">Trykk her for oppskrift med jordbær.</div>
+                <div class="btm klikkbar" style="top:100px;left:204px"></div>
               </div>
             </div>
           </div>
 
-          <div id="stand" class="sprite hires lazyload ondemand" data-load-event="arrive_station3"></div>
-          <div id="lise" class="sprite lazyload ondemand" data-load-event="arrive_station3"></div>
+          <div id="stand" class="sprite hires lazyload ondemand" data-load-event="arrive_station4"></div>
+          <div id="lise" class="sprite lazyload ondemand" data-load-event="arrive_station4"></div>
         </div>
 
 
-        <div id="station6" class="station lazyload ondemand" data-load-event="arrive_station4">
-        </div>
+        
 
 
         <div id="station7" class="station lazyload ondemand" data-load-event="arrive_station6">
@@ -192,16 +191,17 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste salater. Og 
   <script>
 
       var onError = function (e) {
-        console.log("error loading script " + (this.async ? "asynchronously, " : "asynchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src);
+        console.log("error loading script " + (!!this.async ? "asynchronously, " : "synchronously, ") + ( !!this.defer ? "deferred: " : "not deferred: ") + this.url);
       };
 
-      var onSuccess = function (e) {
-        console.log("loaded script " + (this.async ? "asynchronously, " : "asynchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src);
+      var onSuccess = function () {
+        console.log("loaded script " + ( !!this.async ? "asynchronously, " : "synchronously, ") + ( !!this.defer ? "deferred: " : "not deferred: ") + this.url);
       };
 
       var requireScript = function ( file, async, defer, success, failure ) {
-        var 
+        var
           cursor  = document.getElementsByTagName ("head")[0] || document.documentElement,
+          url     = file,
           script  = document.createElement('script'),
           async   = async || false,
           defer   = defer || false;
@@ -215,27 +215,24 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste salater. Og 
           script.defer = true;
         }
 
-        script.src        = file;
         script.self       = script;
         script.success    = success || false;
         script.failure    = failure || false;
+        script.url        = url;
+        script.src        = file;
 
 
-        script.onload = function (e) {
+        script.onload = function () {
           if(this.success) {
-            this.success.call(e);
-          }
-          else{
-            console.log('success loading script ' + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src, err);
+            this.success.call();
           }
         };
 
+
         script.onerror = function (err) {
+          console.log('error loading script ' + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.url, err);
           if(this.failure) {
             this.failure.call(err);
-          }
-          else{
-            console.log('error loading script ' + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src, err);
           }
         };
 
@@ -249,8 +246,8 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste salater. Og 
 
   </script>
 
-  <script async defer src="assets/js/lib/jquery.parallaxSwipe.js"></script>
-  <script async defer src="assets/js/bama.nyt.norge.js"></script>
+  <script async src="assets/js/lib/jquery.parallaxSwipe.js"></script>
+  <script async src="assets/js/bama.nyt.norge.js"></script>
 
 
   <div id="position_data">no position</div>

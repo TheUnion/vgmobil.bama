@@ -151,7 +151,7 @@
   .big {
     text-align  : center;
     font-size   : 34px;
-    line-height : 32px;
+    line-height : 30px;
   }
 
   .gray {
@@ -257,35 +257,14 @@
                             url('../img/hill_middle_layer1_top4.png'), 
                             url('../img/hill_middle_layer1_top5_cows.png'),
                             url('../img/hill_middle_layer1.png');
-    background-position  :  1000px 62px,
-                             780px 72px,
-                            1436px 72px,
-                            2064px 68px,
-                            2756px 72px,
-                            0px 144px;
+    background-position  :  1000px  62px,
+                             780px  72px,
+                            1436px  72px,
+                            2064px  68px,
+                            2756px  72px,
+                               0px 144px;
     background-origin    : content-box;    
     background-repeat    : no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, repeat-x;    
-  }
-
-
-
-/*
-  .layer3 {
-    background-image     : url('../img/hill_middle_layer1.png');
-    background-position  : 0px 148px;
-    background-origin    : content-box;    
-    background-repeat    : repeat-x;    
-  }
-
-*/
-  #layer4 {
-    -webkit-user-select  : none;
-    -moz-user-select     : none;
-    pointer-events       : none;
-
-    position             : absolute;
-    height               : 300px;
-    z-index              : 4;
   }
 
 
@@ -336,7 +315,6 @@
 
 
   #layer6 {
-
     -webkit-user-select : none;
     -moz-user-select    : none;
     position            : absolute;
@@ -350,10 +328,10 @@
 
 
 
-/**
- *  sprites and scene/gfx elements
- *
- */
+  /**
+   *  sprites and scene/gfx elements
+   *
+   */
 
   #intro_text {
     color         : #4e4e4e;
@@ -374,6 +352,7 @@
     width         : 64px;
     height        : 42px;
   }
+
 
   .arrow.small {
     position      : absolute;
@@ -407,7 +386,6 @@
     width     : 44px;
     height    : 44px;
   }
-
 
 
   .grey {
@@ -682,7 +660,7 @@
     margin    : 0;
     padding   : 0;
     top       : 0px;
-    left      : 128px;
+    left      : 96px;
     z-index   : 10000;
     overflow  : visible;
   }
@@ -719,7 +697,7 @@
 
   #lise_tips {
     top       : 0px;
-    left      : 120px;
+    left      : 96px;
     height    : 56px;
     /*width     : 229px;*/
     z-index   : 10000;
@@ -788,8 +766,6 @@
 
 
 
-
-
   .btm {
     position      : absolute;
     top           : 0px;
@@ -820,15 +796,14 @@
     color         : #333;
     font-family   : Abel, Futura, Helvetica, sans-serif;
     font-weight   : 400;
-    font-size     : 24px;
+    font-size     : 32px;
     padding       : 4px;
     text-align    : center;
     top           : 4px;
     left          : 32px;
-    height        : 50px;
-    width         : 229px;
+    height        : 100px;
+    width         : 300px;
   }
-
 
 
   .btn {
@@ -839,12 +814,11 @@
     font-size           : 18px;
     line-height         : 18px;
     color               : #555;
-    padding             : 8px 8px 8px 8px;
+    padding             : 8px;
     height              : auto;
     width               : 200px;
     margin-right        : auto;
     margin-left         : auto;
-    margin-top          : 20px;
     cursor              : pointer;
     background          : #ece3dd;
     -moz-border-radius  : 4px;
@@ -853,9 +827,17 @@
   }
 
 
+  .btn.larger {
+    top           : 0px;
+    height        : 80px;
+    font-size     : 21px;
+    line-height   : 21px;
+  }
+
+
   .btn.klikkbar {
     color             : #fff;
-    background-color  : #c4020e;
+    background-color  : #3b8f1d;
   }
 
 
@@ -897,6 +879,7 @@
   .video {
 
   }
+
 
   #video1 {
     position            : absolute;
@@ -947,16 +930,19 @@
     background           : transparent;
     background-position  : bottom left;
     background-origin    : content-box;
+
     z-index              : 101;
   }
 
 
   #car {
-    position             : absolute;
-    top                  : 164px;
-    left                 : 96px;
-    background           : transparent;
-    z-index              : 110;
+    -webkit-perspective           : 1000;
+    -webkit-backface-visibility   : hidden;   
+    position                      : absolute;
+    top                           : 164px;
+    left                          : 96px;
+    background                    : transparent;
+    z-index                       : 110;
   }
 
 
@@ -975,7 +961,7 @@
     position             : absolute;
     width                : 110px;
     height               : 20px;
-    top                  : 16px;
+    top                  : 10px;
     left                 : 128px;
     text-align           : center;
     z-index              : 90;
@@ -1028,7 +1014,6 @@
   }
 
 
-
   #station3 {
     position      : absolute;
     top           : 10px;
@@ -1045,7 +1030,6 @@
     background-origin   : content-box;
     background-repeat   : no-repeat;  
   }
-
 
 
   #station4 {
@@ -1075,9 +1059,6 @@
     padding             : 0;
     margin              : 0;
   }
-
-
-
 
 
   #station7 {
@@ -1133,29 +1114,6 @@
    * Animations 
    * 
    */
-
-
-
-/*
-  @-webkit-keyframes shrunk {
-    0% {-webkit-transform: scaleX(1) scaleY(1);}
-    50% {-webkit-transform: translateX(10px);}
-  }
-
-  @-moz-keyframes hint {
-    0%, 100% {-moz-transform: translateX(0);}
-    50% {-moz-transform: translateX(10px);}
-  }
-
-  @-o-keyframes hint {
-    0%, 100% {-o-transform: translateX(0);}
-    50% {-o-transform: translateX(10px);}
-  }
-  @keyframes hint {
-    0%, 100% {transform: translateX(0);}
-    50% {transform: translateX(10px);}
-  }
-*/
 
 
 
@@ -1229,160 +1187,6 @@
 
   /* originally authored by Angelo Rohit - https://github.com/angelorohit */
 
-  @-webkit-keyframes woggle {
-      0% { -webkit-transform: skewX(0.9deg); }
-      10% { -webkit-transform: skewX(-0.8deg); }
-      20% { -webkit-transform: skewX(-0.3deg); }
-      30% { -webkit-transform: skewX(-0.6deg); }
-      40% { -webkit-transform: skewX(-0.5deg); }
-      50% { -webkit-transform: skewX(-0.4deg); }
-      60% { -webkit-transform: skewX(-0.7deg); }
-      70% { -webkit-transform: skewX(-0.2deg); }
-      80% { -webkit-transform: skewX(0.1deg); }
-      90% { -webkit-transform: skewX(0deg); }
-    100% { -webkit-transform: skewX(0deg); }
-  }
-
-  @-moz-keyframes woggle {
-      0% { -moz-transform: skewX(0.9deg); }
-      10% { -moz-transform: skewX(-0.8deg); }
-      20% { -moz-transform: skewX(-0.3deg); }
-      30% { -moz-transform: skewX(-0.6deg); }
-      40% { -moz-transform: skewX(-0.5deg); }
-      50% { -moz-transform: skewX(-0.4deg); }
-      60% { -moz-transform: skewX(-0.7deg); }
-      70% { -moz-transform: skewX(-0.2deg); }
-      80% { -moz-transform: skewX(0.1deg); }
-      90% { -moz-transform: skewX(0deg); }
-    100% { -moz-transform: skewX(0deg); }
-  }
-
-  @-o-keyframes woggle {
-      0% { -o-transform: skewX(0.9deg); }
-      10% { -o-transform: skewX(-0.8deg); }
-      20% { -o-transform: skewX(-0.3deg); }
-      30% { -o-transform: skewX(-0.6deg); }
-      40% { -o-transform: skewX(-0.5deg); }
-      50% { -o-transform: skewX(-0.4deg); }
-      60% { -o-transform: skewX(-0.7deg); }
-      70% { -o-transform: skewX(-0.2deg); }
-      80% { -o-transform: skewX(0.1deg); }
-      90% { -o-transform: skewX(0deg); }
-    100% { -o-transform: skewX(0deg); }
-  }
-
-  @keyframes woggle {
-      0% { transform: skewX(0.9deg); }
-      10% { transform: skewX(-0.8deg); }
-      20% { transform: skewX(-0.3deg); }
-      30% { transform: skewX(-0.6deg); }
-      40% { transform: skewX(-0.5deg); }
-      50% { transform: skewX(-0.4deg); }
-      60% { transform: skewX(-0.7deg); }
-      70% { transform: skewX(-0.2deg); }
-      80% { transform: skewX(0.1deg); }
-      90% { transform: skewX(0deg); }
-    100% { transform: skewX(0deg); }
-  }
-
-  .woggle {
-      -webkit-animation-name: woggle;
-      -moz-animation-name: woggle;
-      -o-animation-name: woggle;
-      animation-name: woggle;
-
-      -webkit-animation-timing-function: ease-in;
-      -moz-animation-timing-function: ease-in;
-      -o-animation-timing-function: ease-in;
-      animation-timing-function: ease-in;
-  }
-
-  .animated.woggle {
-      -webkit-animation-duration: 0.5s;
-      -moz-animation-duration: 0.5s;
-      -o-animation-duration: 0.5s;
-      animation-duration: 0.5s;
-  }
-
-
-  @-webkit-keyframes wibble {
-      0% { -webkit-transform: translateY(1px); }
-      10% { -webkit-transform: translateY(-2px); }
-      20% { -webkit-transform: translateY(1px); }
-      30% { -webkit-transform: translateY(-2px); }
-      40% { -webkit-transform: translateY(-5px); }
-      50% { -webkit-transform: translateY(-2px); }
-      60% { -webkit-transform: translateY(1px); }
-      70% { -webkit-transform: translateY(-2px); }
-      80% { -webkit-transform: translateY(1px); }
-      90% { -webkit-transform: translateY(0px); }
-     100% { -webkit-transform: translateY(0px); }
-  }
-
-  @-moz-keyframes wibble {
-      0% { -moz-transform: translateY(1px); }
-      10% { -moz-transform: translateY(-2px); }
-      20% { -moz-transform: translateY(1px); }
-      30% { -moz-transform: translateY(-2px); }
-      40% { -moz-transform: translateY(-5px); }
-      50% { -moz-transform: translateY(-2px); }
-      60% { -moz-transform: translateY(1px); }
-      70% { -moz-transform: translateY(-2px); }
-      80% { -moz-transform: translateY(1px); }
-      90% { -moz-transform: translateY(0px); }
-     100% { -moz-transform: translateY(0px); }
-  }
-
-  @-o-keyframes wibble {
-      0% { -o-transform: translateY(1px); }
-      10% { -o-transform: translateY(-2px); }
-      20% { -o-transform: translateY(1px); }
-      30% { -o-transform: translateY(-2px); }
-      40% { -o-transform: translateY(-5px); }
-      50% { -o-transform: translateY(-2px); }
-      60% { -o-transform: translateY(1px); }
-      70% { -o-transform: translateY(-2px); }
-      80% { -o-transform: translateY(1px); }
-      90% { -o-transform: translateY(0px); }
-     100% { -o-transform: translateY(0px); }
-  }
-
-  @keyframes wibble {
-      0% { transform: translateY(1px); }
-      10% { transform: translateY(-2px); }
-      20% { transform: translateY(1px); }
-      30% { transform: translateY(-2px); }
-      40% { transform: translateY(-5px); }
-      50% { transform: translateY(-2px); }
-      60% { transform: translateY(1px); }
-      70% { transform: translateY(-2px); }
-      80% { transform: translateY(1px); }
-      90% { transform: translateY(0px); }
-     100% { transform: translateY(0px); }
-  }
-
-  .wibble {
-      -webkit-animation-name: wibble;
-      -moz-animation-name: wibble;
-      -o-animation-name: wibble;
-      animation-name: wibble;
-
-      -webkit-animation-timing-function: ease-in;
-      -moz-animation-timing-function: ease-in;
-      -o-animation-timing-function: ease-in;
-      animation-timing-function: ease-in;
-
-  }
-
-  .animated.wibble {
-      -webkit-animation-duration: 0.3s;
-         -moz-animation-duration: 0.3s;
-           -o-animation-duration: 0.3s;
-              animation-duration: 0.3s;
-
-  }
-
-
 
   @-webkit-keyframes bounce {
     0%, 20%, 50%, 80%, 100% {-webkit-transform: translateX(0);}
@@ -1431,65 +1235,3 @@
             animation    : slide 0.6s ease-in;
   }
 
-    .effect .flip-container {
-      -webkit-perspective: 1000;
-      -moz-perspective: 1000;
-      perspective: 1000;
-    }
- 
-    .effect .flip-container:hover .flipper {
-      -webkit-transform: rotateY(180deg);
-      -moz-transform: rotateY(180deg);
-      transform: rotateY(180deg);
-    }
- 
-    .effect .flipper {
-      -webkit-transition: 0.6s;
-      -webkit-transform-style: preserve-3d;
- 
-      -moz-transition: 0.6s;
-      -moz-transform-style: preserve-3d;
- 
-      transition: 0.6s;
-      transform-style: preserve-3d;
-    }
- 
-    .effect .front, .effect .back {
-      -webkit-backface-visibility: hidden;
-      -moz-backface-visibility: hidden;
-      backface-visibility: hidden;
-    }
- 
-    .effect .back {
-      -webkit-transform: rotateY(180deg);
-      -moz-transform: rotateY(180deg);
-      transform: rotateY(180deg);
-    }
- 
-    .flip-container {
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      bottom: 300px;
-      width: 468px;
-      background: transparent;
-      border: 0;
-    }
- 
-    .front, .back {
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      width: 320px;
-    }
- 
-    .front {
-      background: transparent;
-      z-index: 2;
-    }
- 
-    .back {
-      background: transparent;
-    }
- 
