@@ -85,7 +85,7 @@
               <source src="assets/video/video1.mp4" type="video/mp4">
               <source src="assets/video/video1.ogv" type="video/theora">
               Your browser does not support the video tag. 
-              You're using Internet Explorer, probably?
+              You're using Internet Explorer, probably.
             </video>
           </div>
         </div>
@@ -107,7 +107,6 @@
           </div>
         </div>
 
-
         <div id="station6" class="station lazyload ondemand" data-load-event="arrive_station4">
           <div class="arrow small animated continuous hint"><img class="hires stretchfill" src="assets/img/finger.png" /></div>
           <div id="lise_hello" class="interactive">
@@ -123,10 +122,6 @@
           <div id="lise" class="sprite lazyload ondemand" data-load-event="arrive_station4"></div>
         </div>
 
-
-        
-
-
         <div id="station7" class="station lazyload ondemand" data-load-event="arrive_station6">
 
         <div id="final_sign" class="lazyload ondemand" data-load-event="arrive_station6">
@@ -135,15 +130,12 @@
         </div>
 
         <div id="stop_sign" class="lazyload ondemand" data-load-event="arrive_station6"></div>
-
           
         <!-- this is the div containing the road tiles -->
         </div>
         <div id="road" class="road">
         </div>
-
       </div>
-    
     </div>
 
 
@@ -154,7 +146,7 @@
         <div class="content">
         </div>
       </div>
-      </div>
+    </div>
   </div>
 
   <div class="container" onselectstart="return false;">
@@ -201,7 +193,6 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste salater. Og 
       var requireScript = function ( file, async, defer, success, failure ) {
         var
           cursor  = document.getElementsByTagName ("head")[0] || document.documentElement,
-          url     = file,
           script  = document.createElement('script'),
           async   = async || false,
           defer   = defer || false;
@@ -218,7 +209,7 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste salater. Og 
         script.self       = script;
         script.success    = success || false;
         script.failure    = failure || false;
-        script.url        = url;
+        script.url        = file;
         script.src        = file;
 
 
@@ -242,7 +233,7 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste salater. Og 
       };
 
     // include script synchronously
-    requireScript ("http://pliing.se/PliingAd/AdJs?app=no_vg_bama_tracking_tablet&id=1&no=" +new Date().getTime(), false, false, onSuccess, onError);
+    requireScript ("http://pliing.se/PliingAd/AdJs?app=no_vg_bama_tracking&id=1&no=" + new Date().getTime(), false, false, onSuccess, onError);
 
   </script>
 

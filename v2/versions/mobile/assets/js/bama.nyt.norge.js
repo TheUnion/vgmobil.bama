@@ -1,11 +1,14 @@
   $(document).ready(function () {
 
-    $(document).bind("dragstart", function() { return false; });
+    /**   CONFIG
+     *  
+     *    Set options for events, debugging, &c
+     */
+
 
     var 
-
       // activate debugging
-      DEBUG = true,
+      DEBUG = false,
 
       // define analytics events
       // events are automatically sent to tracking server
@@ -41,9 +44,26 @@
       //dump stack trace on errors
       DEBUG_STACKTRACE  = true;
 
+      if(DEBUG) {
+        // load debugger
+        requireScript("../../assets/js/lib/kroma.debugger.js", false, false, function(success) {}, function(error) {});
+      }
+
+    $(document).bind("dragstart", function() { return false; });
+
+
+    /**  END CONFIG  */
+
+
+
+    /** 
+     *  Self-invoking anonymous function 
+     *  
+     *  This is the meat of our code, there should be no data mixed in with this code, 
+     *  everything should be configurable through options objects above this line
+     */
 
     $(function() {
-
 
       var stacktrace = function(error) {
         return error.stack || "No stack trace available.";
@@ -69,11 +89,10 @@
           msg = error.message || false;
 
         if(!!msg) {
-          //display file and line no. where error ovvurred
-          msg += error.fileName || " ";
+          //display file and line no. where error occurred
+          msg += error.fileName || "";
           msg +=  " ";
-
-          msg += error.lineNumber || " ";
+          msg += error.lineNumber || "";
           msg +=  " - ";
         }
 
@@ -88,16 +107,6 @@
       };
 
 
-
-      var sendLogData = function(message, extra) {
-        var
-          ajax = AJAX;
-
-        // # create a simple event counter script to 
-        return;
-      };
-
-
       var debugLog = function (line, obj) {
 
         // output to console
@@ -108,7 +117,8 @@
           $('#log').append('<li class="line"><pre><code>' + line + '</code></pre></li>');
         }
 
-        sendLogData(line, !!obj ? JSON.stringify(obj) : null);
+        HTMLDebugger.send(line, !!obj ? JSON.stringify(obj) : null);
+        //  __sendLogData(line, !!obj ? JSON.stringify(obj) : null);
       };
 
 
@@ -193,6 +203,8 @@
           HAS_CACHED_EVENTS = true;
           eventObject.registered = false;
           events.push(eventObject);
+          console.log("Analytics script not loaded, buffering event: " + eventObject.event);
+          return;
         }
 
         if(DEBUG) {
@@ -222,7 +234,7 @@
 
         }
         catch(e) {
-          logError(e);
+          debugLog("Exception in function onEvent()", e);
         }
 
         eventObject.registered = true;
@@ -466,29 +478,22 @@
  *
  *  A light-weight HTML5 AJAX helper object
  *
- *  Just to keep it DRY
- * 
  */
 
 
     var AJAX = {
 
-      req : new XMLHttpRequest(),
-
-
       __execute : function (msg, obj) {
         var
-          req     = this.req || XMLHttpRequest(),
+          req     = new XMLHttpRequest(),
           request = null,
-          url     = "http://www.kromaviews.no:8080/dev/"
-
+          url     = "http://www.kromaviews.no:8080/dev/";
       },
 
 
       send : function (message, object) {
         this.__execute(message, object);
       },
-
 
       // progress on transfers from the server to the client (downloads)
       updateProgress : function(e) {
@@ -499,7 +504,6 @@
           // Unable to compute progress information since the total size is unknown
         }
       },
-
 
       transferComplete : function(e) {
         console.log("The transfer is complete.");
@@ -530,12 +534,6 @@
       }
 
     }; 
-
-
-/*  --------------------  END OF AJAX helper  ----------------------*/
-
-
-
 
 
 /**
@@ -735,9 +733,6 @@
   })();
 
 
-/*-----------------------------------------------------------------------------------------------*/
-
-
 
 /**
  *  SessionTracker
@@ -745,6 +740,7 @@
  *  A dirt simple session tracker for HTML5
  *
  *  @param {integer} [IDLE_TIME_OUT] [How long to wait for detection of idle state]
+ *  @param {integer} [TRACKING_INTERVAL] [Interval for statistics update function]
  *  @returns sessionTracker object or null
  * 
  */
@@ -819,16 +815,22 @@
 
 
 
+
+
 /**
  * fakeClick : trigger a click event on a   <a href target>   -> a workaround for creating new windows from javascript 
  * without bothering the popup blocking thingsies
  *
  * This method was created by <http://stackoverflow.com/users/45433/crescent-fresh>
+ * 
+ * See: 
  * <http://stackoverflow.com/questions/1421584/how-can-i-simulate-a-click-to-an-anchor-tag/1421968#1421968>
  *
- * To call programmatically, probably just fakeClick(null, <a>)
+ * To invoke, call fakeClick(null, <a>)
  * 
- */   var fakeClick = function (event, anchorObj) {
+ */
+
+      var fakeClick = function (event, anchorObj) {
 
         console.log("Faking a click");
       
@@ -1138,7 +1140,6 @@
  *  Initialization 
  * 
  */
-
 
     $("#parallax").parallaxSwipe( { DECAY: ROAD_DECAY, MOUSEDOWN_DECAY: ROAD_MOUSE_DECAY, SPEED_SPRING: ROAD_SPEED, BOUNCE_SPRING:0.5, 
           HORIZ:true, SNAPDISTANCE:20, DISABLELINKS: false, LAYER:[ 20, 12, 3.2, 1.6, 1, 1 ] });
