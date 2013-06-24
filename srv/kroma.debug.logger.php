@@ -15,6 +15,9 @@
   define('LOG_FILE',  "debug.log");
   define('LOG_PATH',  "/var/log/kroma/");
 
+  define('REDIS_SOCK', '/var/run/redis/redis.sock');
+
+
   $RESPONSE_FORMAT = null;
   $REQUEST_FORMAT  = isset($_REQUEST['format']) ? strtolower($_REQUEST['format']) : "json";
 
@@ -114,12 +117,50 @@
    */
 
   function publishLogEntry($entry) {
-    // $REDIS = new Redis();
+    $redis = new Redis(REDIS_SOCK);
   }
 
   function sendResponse ($reply) {
     print(json_encode($reply, JSON_PRETTY_PRINT));
   }
+
+
+
+  function publish($channel, $message=false) {
+
+    if($this->redis){
+      if(!$message) {
+        // we were invoked with only one param, so assume it's a message for default channel
+        $message = $channel;
+        $channel = $this->channel;
+      }
+      $this->redis->publish($channel, $message);
+    }
+    else {
+      $this->say("We have no redis object in function publish()\n");
+    }
+  }
+
+
+  function connectToRedis( $timeout = 5, $db = PI_APP ){
+    global $reply, $debug;
+    $redis = new Redis();
+    try{ 
+//      if(false===($redis->connect('127.0.0.1', 6379, $timeout))){
+      if(false===($redis->connect(REDIS_SOCK))){
+        $debug[] = 'Unable to connect to Redis';
+        return false;
+      }
+      $redis->select($db);
+      return $redis;
+    }
+    catch(RedisException $e){
+      $this->handleException($e);
+      return false;
+    }
+  }
+
+
 
 
   /**

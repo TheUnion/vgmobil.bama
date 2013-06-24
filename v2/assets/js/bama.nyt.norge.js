@@ -5,7 +5,7 @@
     var 
 
       // define analytics events
-      // events are automatically sent to tracking server
+      // events are automatically sent to tracking server as they occur
       EVENT = {
           "start_interaction" : { id: 6260200, onEvent: false },
 
@@ -32,9 +32,16 @@
           "video_finish"      : { id: 6260220, onEvent: false }
       },
 
-      HAS_CACHED_EVENTS = false,
 
-      INITIALIZED       = false,
+      SESSION           = {
+        // some private variables
+        HAS_CACHED_EVENTS : false,
+  
+        start             : new Date().getTime(),
+        url               : window.location,
+        INITIALIZED       : false
+      },
+
       VIDEO_CONTROLLER  = null,
       
       // activate debugging
@@ -55,11 +62,11 @@
       window.onerror = function(message, url, line_num) {
        
         // Standard error information
-        var error = "JS error: " + message + " @ " + url + ":" + line_num;
-        error += "url: " + document.URL;
+        var error = "Error : " + message + " @ " + url + ":" + line_num;
+        error += "\nurl: " + document.URL;
         
         var user_agent = new UserAgent();
-        error += "browser: " + user_agent.browser_name + " " + user_agent.browser_version + " | OS: " + user_agent.os + " | platform: " + user_agent.platform;
+        error += "\nbrowser: " + user_agent.browser_name + " " + user_agent.browser_version + " | OS: " + user_agent.os + " | platform: " + user_agent.platform;
 
         debugLog(error, message);    
         return false;
@@ -155,11 +162,11 @@
 
 
       var setInitialized = function() {
-        INITIALIZED = true;
+        SESSION.INITIALIZED = true;
       };
 
       var initialized = function() {
-        return INITIALIZED;
+        return SESSION.INITIALIZED;
       };
 
       var isAndroid = function () {
@@ -191,20 +198,20 @@
 
         // does our analytics reporting function exist ?
         if(!registerEvent) {
-          HAS_CACHED_EVENTS       = true;
-          eventObject.registered  = false;
+          SESSION.HAS_CACHED_EVENTS = true;
+          eventObject.registered    = false;
           events.push(eventObject);
           console.log("Analytics script not loaded, buffering event: " + eventObject.event);
           return;
         }
         else {
-          if(HAS_CACHED_EVENTS) {
+          if(SESSION.HAS_CACHED_EVENTS) {
             for( var i = 0, count = events.length; i < count; i++ ) {
               console.log("registering delayed event: " + events[i].event + " (" + EVENT[events[i].event].id + ")");
               setTimeout(registerEvent(EVENT[events[i].event].id), 200);
               events[i].registered  = true;
             }
-            HAS_CACHED_EVENTS     = false;
+            SESSION.HAS_CACHED_EVENTS     = false;
           };
         }
 
@@ -744,7 +751,9 @@
         clicktargets  = {};
 
         // our clicktargets
-        var list = document.getElementsByClassName('clicktarget');
+        var 
+          list      = document.getElementsByClassName('clicktarget'),
+          offset    = parallax.getBoundingClientRect().left;
 
         // When there's time, this can be expanded to a general solution
         // where we get the bounding client rect of the click target.
@@ -756,15 +765,28 @@
 
           clicktargets[list[i].id] = {
             element : list[i],
-            rect : list[i].getBoundingClientRect()
+            rect : list[i].getBoundingClientRect(),
+            position : {
+              left    : 0,
+              top     : 0,
+              right   : 0,
+              bottom  : 0
+              }
             };
 
           var
             target  = clicktargets[list[i].id];
 
-          console.log("clickTarget   : " + target.element.id + "(<" + target.element.nodeName.toLowerCase() + ">)" + " @ " + target.rect.left + ", " + target.rect.top + " (" + target.rect.right + ", " + target.rect.bottom + ")");
-        }
+          var
+            pos     = target.position;
 
+          pos.left   = Math.round(target.rect.left  - offset);
+          pos.right  = Math.round(target.rect.right - offset);
+          pos.top    = Math.round(target.rect.top);
+          pos.bottom = Math.round(target.rect.bottom);
+
+          console.log("clickTarget   : " + target.element.id + "(<" + target.element.nodeName.toLowerCase() + ">)" + " @ " + pos.left + ", " + pos.top + " (" + pos.right + ", " + pos.bottom + ")");
+        }
 
 
 
@@ -877,7 +899,7 @@
 
 
 
-      var initializetimer = function () {
+      var initializeTimer = function () {
         var
           count = stations.length;
 
@@ -941,7 +963,7 @@
       $('.recipe').bind('selectstart', function (e) { 
         return false; });
 
-    initializetimer();
+    initializeTimer();
     });
   });
 
