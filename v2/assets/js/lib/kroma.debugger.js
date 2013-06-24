@@ -17,7 +17,19 @@
         FORMAT : "json",  // "json", "gif"
         METHOD : "post",  // "post", "get"
         SERVER : "http://kromaviews.no:8080/dev/games/bama/srv/kroma.debug.logger.php"
+    },
+
+    CLIENT = {
+
+        // initial and default values
+        url           : window.location,
+        event         : "unknown",
+        userAgent     : new UserAgent(),
+        timestamp     : 0,
+        description   : ""
     };
+
+
 
   var
     HTMLDebugger = HTMLDebugger || function (options) {
@@ -85,6 +97,28 @@
       };
 
 
+    dbgr.DebugEvent = function (event, description) {
+      var
+        eventObject   = {
+          event         : event || CLIENT.event,
+          timestamp     : new Date().getTime(),
+          description   : description || CLIENT.description
+        };
+
+      for (var i in CLIENT) {
+        if(!!eventObject[i]) {
+          // dont' overwrite our own values
+          continue;
+        }
+
+        // copy properties from CLIENT object to our eventObject
+        eventObject[i] = CLIENT[i];
+      }
+      return eventObject;
+    };
+
+
+
 
       /**
        * _encodeAsGet
@@ -125,17 +159,17 @@
       dbgr._onResponse = function (e) {
         if (this.readyState != 4) return;
           if (this.status != 200 && this.status != 304) {
-              console.log('HTTP error: ' + this.status);
+              console.log('HTTP error: ' + this.status + " - " + this.statusText);
               return;
           }
 
         var 
           response = JSON.parse(this.responseText);
 
-        if(response.status=='success'){
+        if( response.OK == 1 ){
             console.log('Received response from logger service: ' + this.responseText);
         }else{
-            console.log('Error-response received from logger service: ' + this.status);
+            console.log('Error-response received from logger service: ' + this.status + " - " + response.OK, response);
         }
       };
 
@@ -157,12 +191,9 @@
           msg += HTMLDebugger.stacktrace(error);
         }
 
-        console.log(msg);
+        this.error(msg, error);
         return;
-        debugLog(msg);
       };
-
-
 
 
 
@@ -171,7 +202,7 @@
        */
 
       dbgr.error = function (line, obj) {
-        this._send({type: "error", message: "line", info: obj || false});
+        this._send({type: "error", message: line, info: obj || false});
       };
 
       dbgr.log = function (line, obj) {
@@ -179,7 +210,7 @@
       };
 
       dbgr.send = function (obj) {
-        this._send({type: "object", data: obj || false});
+        this._send({type: "object", data: obj || null});
       };
 
       dbgr.stacktrace = function(error) {

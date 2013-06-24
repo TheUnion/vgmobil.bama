@@ -9,8 +9,8 @@
       EVENT = {
           "start_interaction" : { id: 6260200, onEvent: false },
 
-          "arrive_station3"   : { id: 6260201, onEvent: false },
-          "arrive_station4"   : { id: 6260202, onEvent: function() { setPoster('assets/img/poster.jpg'); } },
+          "arrive_station3"   : { id: 6260201, onEvent: function() { setPoster('assets/img/poster.jpg'); } },
+          "arrive_station4"   : { id: 6260202, onEvent: false },
           "arrive_station6"   : { id: 6260203, onEvent: false },
           "arrive_station7"   : { id: 6260204, onEvent: function() { $('#parallax').parallaxSwipe.setEdge("right"); } },
 
@@ -97,16 +97,6 @@
       };
 
 
-
-      var sendLogData = function(message, extra) {
-        var
-          ajax = AJAX;
-
-        // ajax.send(message, extra);
-        message = message;
-      };
-
-
       var debugLog = function (line, obj) {
 
         // output to console
@@ -116,7 +106,14 @@
         if(DEBUG) {
           $('#log').append('<li class="line"><pre><code>' + line + '</code></pre></li>');
         }
-        sendLogData(line, obj);
+
+        // send to server is we have a Kroma Debugger object
+        if(!!HTMLDebugger) {
+          HTMLDebugger.send(line, obj);
+        }
+        else {
+          console.log("Kroma Debugger is not initialized.");
+        }
       };
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
@@ -208,10 +205,10 @@
           if(SESSION.HAS_CACHED_EVENTS) {
             for( var i = 0, count = events.length; i < count; i++ ) {
               console.log("registering delayed event: " + events[i].event + " (" + EVENT[events[i].event].id + ")");
-              setTimeout(registerEvent(EVENT[events[i].event].id), 200);
+              setTimeout(registerEvent, 200, EVENT[events[i].event].id);
               events[i].registered  = true;
             }
-            SESSION.HAS_CACHED_EVENTS     = false;
+            SESSION.HAS_CACHED_EVENTS = false;
           };
         }
 
@@ -362,17 +359,6 @@
       };
 
 
-
-
-/**
- *  HTMLVideo
- *  
- *  A dirt simple video controller for the HTML5 video element
- *
- * @param {string or videoElement} [img] The video element, or its id
- * @returns videoElement or null
- * 
- */
 
 
 /**
@@ -559,15 +545,17 @@
       },
 
       init : function () {
-        req.addEventListener("progress", updateProgress, false);
-        req.addEventListener("load", transferComplete, false);
-        req.addEventListener("loadend", loadEnd, false);
-        req.addEventListener("error", transferFailed, false);
-        req.addEventListener("abort", transferCanceled, false);
+        req.addEventListener("progress",  updateProgress, false);
+        req.addEventListener("load",      transferComplete, false);
+        req.addEventListener("loadend",   loadEnd, false);
+        req.addEventListener("error",     transferFailed, false);
+        req.addEventListener("abort",     transferCanceled, false);
       },
 
       getHeaderTime : function () {
-        return this.getResponseHeader("Last-Modified"); // A valid GMTString date or null
+
+        // returns a valid GMTString date or null
+        return this.getResponseHeader("Last-Modified"); 
       }
 
     }; 
@@ -673,7 +661,7 @@
           }
         }
 
-      return false;
+        return false;
       };
 
 
@@ -888,7 +876,7 @@
                   var 
                     stationx = Math.round($("#" + currentstation).position().left);
 
-                  console.log('Requesting position of ' + currentstation + " at " + stationx + ", offset: " + $("#" + currentstation).offset().left + ", position: " + $("#" + currentstation).position().left + ", startpos: " + startpos);
+                  // console.log('Requesting position of ' + currentstation + " at " + stationx + ", offset: " + $("#" + currentstation).offset().left + ", position: " + $("#" + currentstation).position().left + ", startpos: " + startpos);
                   $('#parallax').parallaxSwipe.requestPosition(-stationx);
                 }
               }
@@ -976,8 +964,6 @@
  */
 
 
-
-
 /**
  *  UserAgent()
  *  
@@ -991,63 +977,63 @@
       Browsers, OS, Platform, Versions, browser_name, browser_version, os, platform;
 
     Versions = {
-      Firefox: /firefox\/([\d\w\.\-]+)/i,
-      IE: /msie\s([\d\.]+[\d])/i,
-      Chrome: /chrome\/([\d\w\.\-]+)/i,
-      Safari: /version\/([\d\w\.\-]+)/i,
-      Ps3: /([\d\w\.\-]+)\)\s*$/i,
-      Psp: /([\d\w\.\-]+)\)?\s*$/i
+      Firefox   : /firefox\/([\d\w\.\-]+)/i,
+      IE        : /msie\s([\d\.]+[\d])/i,
+      Chrome    : /chrome\/([\d\w\.\-]+)/i,
+      Safari    : /version\/([\d\w\.\-]+)/i,
+      Ps3       : /([\d\w\.\-]+)\)\s*$/i,
+      Psp       : /([\d\w\.\-]+)\)?\s*$/i
     };
 
     Browsers = {
-      Konqueror: /konqueror/i,
-      Chrome: /chrome/i,
-      Safari: /safari/i,
-      IE: /msie/i,
-      Opera: /opera/i,
-      PS3: /playstation 3/i,
-      PSP: /playstation portable/i,
-      Firefox: /firefox/i
+      Konqueror : /konqueror/i,
+      Chrome    : /chrome/i,
+      Safari    : /safari/i,
+      IE        : /msie/i,
+      Opera     : /opera/i,
+      PS3       : /playstation 3/i,
+      PSP       : /playstation portable/i,
+      Firefox   : /firefox/i
     };
 
     OS = {
-      WindowsVista: /windows nt 6\.0/i,
-      Windows7: /windows nt 6\.1/i,
-      Windows8: /windows nt 6\.2/i,
-      Windows2003: /windows nt 5\.2/i,
-      WindowsXP: /windows nt 5\.1/i,
-      Windows2000: /windows nt 5\.0/i,
-      OSX: /os x (\d+)[._](\d+)/i,
-      Linux: /linux/i,
-      Wii: /wii/i,
-      PS3: /playstation 3/i,
-      PSP: /playstation portable/i,
-      Ipad: /\(iPad.*os (\d+)[._](\d+)/i,
-      Iphone: /\(iPhone.*os (\d+)[._](\d+)/i
+      WindowsVista  : /windows nt 6\.0/i,
+      Windows7      : /windows nt 6\.1/i,
+      Windows8      : /windows nt 6\.2/i,
+      Windows2003   : /windows nt 5\.2/i,
+      WindowsXP     : /windows nt 5\.1/i,
+      Windows2000   : /windows nt 5\.0/i,
+      OSX           : /os x (\d+)[._](\d+)/i,
+      Linux         : /linux/i,
+      Wii           : /wii/i,
+      PS3           : /playstation 3/i,
+      PSP           : /playstation portable/i,
+      Ipad          : /\(iPad.*os (\d+)[._](\d+)/i,
+      Iphone        : /\(iPhone.*os (\d+)[._](\d+)/i
     };
 
     Platform = {
-      Windows: /windows/i,
-      Mac: /macintosh/i,
-      Linux: /linux/i,
-      Wii: /wii/i,
-      Playstation: /playstation/i,
-      Ipad: /ipad/i,
-      Ipod: /ipod/i,
-      Iphone: /iphone/i,
-      Android: /android/i,
-      Blackberry: /blackberry/i
+      Windows       : /windows/i,
+      Mac           : /macintosh/i,
+      Linux         : /linux/i,
+      Wii           : /wii/i,
+      Playstation   : /playstation/i,
+      Ipad          : /ipad/i,
+      Ipod          : /ipod/i,
+      Iphone        : /iphone/i,
+      Android       : /android/i,
+      Blackberry    : /blackberry/i
     };
 
     function UserAgent(source) {
       if (source == null) {
         source = navigator.userAgent;
       }
-      this.source           = source.replace(/^\s*/, '').replace(/\s*$/, '');
-      this.browser_name     = browser_name(this.source);
-      this.browser_version  = browser_version(this.source);
-      this.os               = os(this.source);
-      this.platform         = platform(this.source);
+      this.source = source.replace(/^\s*/, '').replace(/\s*$/, '');
+      this.browser_name = browser_name(this.source);
+      this.browser_version = browser_version(this.source);
+      this.os = os(this.source);
+      this.platform = platform(this.source);
     }
 
     browser_name = function(string) {
@@ -1171,7 +1157,61 @@
           return 'unknown';
       }
     };
-
     return UserAgent;
   })();
+
+
+
+    var onError = function (e) {
+      console.log("error loading script " + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src);
+    };
+
+    var onSuccess = function () {
+      console.log("loaded script " + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src);
+    };
+
+    var requireScript = function ( file, async, defer, success, failure ) {
+      var
+        cursor  = document.getElementsByTagName ("head")[0] || document.documentElement,
+        path    = file,
+        script  = document.createElement('script'),
+        async   = async || false,
+        defer   = defer || false;
+
+      if(async) {
+        // we don't want to set async to false
+        script.async = true;
+      }
+
+      if(defer) {
+        // we don't want to set defer to false
+        script.defer = true;
+      }
+
+      script.src        = file;
+      script.self       = script;
+      script.success    = success || false;
+      script.failure    = failure || false;
+
+
+      script.onload = function () {
+        if(this.success) {
+          this.success.call();
+        }
+      };
+
+      script.onerror = function (err) {
+        if(this.failure) {
+          this.failure.call(err);
+        }
+      };
+
+      return cursor.insertBefore(script, cursor.firstChild);
+    };
+
+  // include script synchronously
+  requireScript ("assets/js/lib/kroma.debugger.js", false, false, onSuccess, onError);
+
+
+
 

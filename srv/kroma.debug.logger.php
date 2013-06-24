@@ -5,7 +5,6 @@
    *  debug.logger: a q&d error logger
    * 
    */
-  
 
   error_reporting(E_ERROR | E_WARNING | E_PARSE & E_NOTICE);
 
@@ -15,13 +14,15 @@
   define('LOG_FILE',  "debug.log");
   define('LOG_PATH',  "/var/log/kroma/");
 
+  define('REDIS_DEBUG_DB', 15);
   define('REDIS_SOCK', '/var/run/redis/redis.sock');
 
 
   $RESPONSE_FORMAT = null;
   $REQUEST_FORMAT  = isset($_REQUEST['format']) ? strtolower($_REQUEST['format']) : "json";
 
-  $reply = array( "debug" => array( "headers" => apache_request_headers(), "request" => array(), "response" => array() ) );
+  $request  = null;
+  $reply    = array( "debug" => array( "headers" => apache_request_headers(), "request" => array() ) );
 
 
   if(!$REQUEST_FORMAT) {
@@ -65,7 +66,12 @@
    */
 
   function decodeJSON () {
-    return json_decode( file_get_contents('php://input'), TRUE );
+    global $reply;
+
+    $message = json_decode( file_get_contents('php://input'), TRUE );
+
+    $reply['request'] = $message;
+    return $message;
   }
 
 
@@ -86,10 +92,8 @@
     switch ($format) {
       case 'json':
         return decodeJSON();
-        break;
       default:
         return decodeREQUEST();
-        break;
     }
   }
 
@@ -103,7 +107,7 @@
    */
 
   function insertLogEntry($entry) {
-   //write to log in json format
+    //write to log in json format
     file_put_contents( LOG_PATH . LOG_FILE, json_encode( $entry, JSON_PRETTY_PRINT ), FILE_APPEND );
   }
 
@@ -117,13 +121,17 @@
    */
 
   function publishLogEntry($entry) {
-    $redis = new Redis(REDIS_SOCK);
+    if( false === ($redis = connectToRedis())) {
+      return false;
+    }
+    $redis->publish($chan, $msg);
+
   }
+
 
   function sendResponse ($reply) {
     print(json_encode($reply, JSON_PRETTY_PRINT));
   }
-
 
 
   function publish($channel, $message=false) {
@@ -142,7 +150,7 @@
   }
 
 
-  function connectToRedis( $timeout = 5, $db = PI_APP ){
+  function connectToRedis( $timeout = 5, $db = REDIS_DEBUG_DB ){
     global $reply, $debug;
     $redis = new Redis();
     try{ 
@@ -162,7 +170,6 @@
 
 
 
-
   /**
    *  main()
    *
@@ -173,7 +180,10 @@
   insertLogEntry($logEntry);
   publishLogEntry($logEntry);
 
-  sendResponse($reply);
+  $reply['OK'] = 1;
 
+  $reply['request'] = $request;
+
+  sendResponse($reply);
 
 ?>

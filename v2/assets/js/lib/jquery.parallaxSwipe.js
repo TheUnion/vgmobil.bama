@@ -93,7 +93,7 @@
           if(Math.abs(_velocity) <= 4) {
             sliderLT = Math.round(REQUESTED_POSITION);
             _velocity = 0;
-            console.log("We have reached position " + REQUESTED_POSITION);
+            // console.log("We have reached position " + REQUESTED_POSITION);
             REQUESTED_POSITION = false;
           }
           plugin.css(edge,sliderLT);
@@ -307,7 +307,6 @@
 
   this.parallaxSwipe.requestPosition = function (position) {
     REQUESTED_POSITION = Math.round(position);
-    console.log("REQUESTED_POSITION: " + REQUESTED_POSITION);
   }
 
 
