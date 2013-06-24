@@ -468,27 +468,27 @@
 
 
         // a dirty little gollum of a hack
-        if( (clickpos>=4780) && (clickpos<=5000) ) {
-          if((click.clientY>30) && (click.clientY<90)){
+        if( (clickpos>=(4606 + 175) ) && (clickpos<=(4606 + 175 + 215)) ) {
+          if((click.clientY>45) && (click.clientY<110)){
             flipFarmer();
             return;
           }
         }
         // it'ss hideousss
-        else if( (clickpos>=6340) && (clickpos<=6560) ) {
+        else if( (clickpos>=(6180 + 160)) && (clickpos<=(6180 + 160 + 215)) ) {
           if((click.clientY>30) && (click.clientY<90)){
             flipLise();
             return;
           }
         }
         // we could probably come up with something more general, but not in the time available
-        else if( (clickpos>=11050 && (clickpos<=11300) )) {
+        else if( (clickpos>=(10924 + 85)) && (clickpos<=(10924 + 85 + 250)) ) {
           if((click.clientY>40) && (click.clientY<95)){
             onEvent({event: "click_link1"});
             openLink(link1);
             return;
           }
-          else if((click.clientY>(100) && (click.clientY<((155))))){
+          else if( (click.clientY>(100) && (click.clientY<(155))) ){
             onEvent({event: "click_link2"});
             openLink(link2);
             return;
@@ -496,7 +496,7 @@
         }
         // click on video
         else if( (clickpos>=(9224 + 106) && (clickpos<=(9224 + 106 + 263)) )) {
-          if(click.clientY>66 && click.clientY<178){
+          if(click.clientY>27 && click.clientY<178){
             clickVideo();
             return;
           }

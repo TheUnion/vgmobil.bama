@@ -485,16 +485,15 @@
           flipFarmer();
         }
 
-
         // a dirty little gollum of a hack
-        if( (clickpos>=(4606 + 280)) && (clickpos<=(4606 + 280 + 125)) ) {
+        if( (clickpos>=(4606 + 260)) && (clickpos<=(4606 + 260 + 125)) ) {
           if((click.clientY>230) && (click.clientY<275)){
             flipFarmer();
             return;
           }
         }
         // it'ss hideousss
-        else if( (clickpos>=(6180 + 300)) && (clickpos<=(6180 + 300 + 125)) ) {
+        else if( (clickpos>=(6180 + 200)) && (clickpos<=(6180 + 200 + 125)) ) {
           if((click.clientY>240) && (click.clientY<285)){
             flipLise();
             return;
@@ -514,7 +513,7 @@
           }
         }
         // click on video
-        else if( (clickpos>=(9224 + 118) && (clickpos<=(9224 + 118 + 416)) )) {
+        else if( (clickpos>=(9224 + 68) && (clickpos<=(9224 + 68 + 416)) )) {
           if((click.clientY>(86) && (click.clientY<((86 + 216))))){
             console.log('click on video: ' + link2.href);
             clickVideo();

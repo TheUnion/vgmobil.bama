@@ -481,21 +481,21 @@
 
 
         // a dirty little gollum of a hack
-        if( (clickpos>=4780) && (clickpos<=5000) ) {
-          if((click.clientY>30) && (click.clientY<90)){
+        if( (clickpos>=4606 + 170) && (clickpos<=4606 + 170 + 215) ) {
+          if((click.clientY>45) && (click.clientY<95)){
             flipFarmer();
             return;
           }
         }
         // it'ss hideousss
-        else if( (clickpos>=6340) && (clickpos<=6560) ) {
-          if((click.clientY>30) && (click.clientY<90)){
+        else if( (clickpos>=6180 + 160) && (clickpos<=6180 + 160 + 215) ) {
+          if((click.clientY>35) && (click.clientY<85)){
             flipLise();
             return;
           }
         }
         // we could probably come up with something more general, but not in the time available
-        else if( (clickpos>=11050 && (clickpos<=11300) )) {
+        else if( (clickpos>=10924 + 90 )  && (clickpos<=10924 + 90 + 250) ) {
           if((click.clientY>40) && (click.clientY<95)){
             onEvent({event: "click_link1"});
             openLink(link1);

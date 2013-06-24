@@ -10,39 +10,69 @@
    * 
    */
 
-   var 
+  var 
 
-    OPTIONS = {},
+    OPTIONS = {
+  
+        FORMAT : "json",  // "json", "gif"
+        METHOD : "post",  // "post", "get"
+        SERVER : "http://kromaviews.no:8080/dev/games/bama/srv/kroma.debug.logger.php"
+    };
+
+  var
     HTMLDebugger = HTMLDebugger || function (options) {
   
       var 
-        dbgr = {};
+        dbgr = {},
+        START_SESSION = new Date().getTime();
 
-      dbgr._FORMAT  = "json";
-      dbgr._METHOD  = "post";
-      dbgr._SERVER  = "http://kromaviews.no:8080/dev/games/kroma/srv/kroma.debug.logger.php";
+      dbgr._OPTIONS = {};
 
-      dbgr._img     = new Image();
+      /**  Private / protected section
+       *
+       */
+
+      for (var idx in options) {
+        dbgr._OPTIONS[idx] = options[idx];
+      }
+
+      dbgr._img = new Image();
 
 
-      dbgr.error = function (line, obj) {
-        _sendData({type: "error", message: "line", info: obj || false});
+      dbgr._sendJSON = function(data) {
+        var
+          xhr   = new XMLHttpRequest(),
+          json  = JSON.stringify(data);
+
+        xhr.onload = this._onResponse;
+        xhr.open("POST", this._OPTIONS.SERVER, true);
+        xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+        xhr.setRequestHeader("Content-length", json.length);
+        xhr.setRequestHeader("Connection", "close");
+        xhr.send(json);
       };
 
-      dbgr.log = function (line, obj) {
-        _sendData({type: "log", message: line, info: obj || false});
+      dbgr._sessionTime = function () {
+        return this.START_SESSION - new Date().getTime();
       };
 
-      dbgr.stacktrace = function(error) {
-          return error.stack || "No stack trace available.";
-      };
+      dbgr._sendREQUEST = function(data) {
+        var
+          msg = this._encodeAsGet(data);
 
+        console.log("Sending GET request: " + this._OPTIONS.SERVER + "?" + msg);
+
+        //send request for GIF beacon
+        this._img.src = this._OPTIONS.SERVER + "?" + msg;
+      };
 
 
       dbgr._send = function(data, method) {
         var
-          method = method || false;
-        switch( strtolower(method)) {
+          // set given request method, or use default
+          method = method || this._OPTIONS.METHOD;
+
+        switch(method.toLowerCase()) {
           case "json" : 
             this._sendJSON(data);
             break;
@@ -85,48 +115,82 @@
       };
 
 
+
+
+      /**
+       *  Internal callbacks and event handlers
+       *
+       */
+
       dbgr._onResponse = function (e) {
         if (this.readyState != 4) return;
           if (this.status != 200 && this.status != 304) {
-              console.log('HTTP error: ' + req.status);
+              console.log('HTTP error: ' + this.status);
               return;
           }
 
-          data.resp = JSON.parse(this.responseText);
-          if(data.resp.status=='success'){
-              console.log('Received response from logger service: ' + this.responseText);
-          }else{
-              console.log('Error-response received from logger service: ' + this.status);
-          }
+        var 
+          response = JSON.parse(this.responseText);
+
+        if(response.status=='success'){
+            console.log('Received response from logger service: ' + this.responseText);
+        }else{
+            console.log('Error-response received from logger service: ' + this.status);
+        }
       };
 
 
-      dbgr._sendJSON = function(data) {
+      dbgr._onError = function (error) {
         var
-          xhr   = new XMLttpRequest(),
-          json  = JSON.stringify(data);
+          msg = (typeof error.message === "string") ? error.message : false;
 
-        xhr.onload = this._onResponse;
-        xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
-        xhr.setRequestHeader("Content-length", json.length);
-        xhr.setRequestHeader("Connection", "close");
+        if(!!msg) {
+          //display file and line no. where error occurred
+          msg += error.fileName || "";
+          msg +=  " ";
+          msg += error.lineNumber || "";
+          msg +=  " - ";
+        }
 
-        xhr.open("POST", this._SERVER, true);
-        xhr.send(json);
+        if(DEBUG) {
+          // show stack trace
+          msg += HTMLDebugger.stacktrace(error);
+        }
+
+        console.log(msg);
+        return;
+        debugLog(msg);
       };
 
 
-      dbgr._sendREQUEST = function(data) {
-        var
-          msg = this._encodeAsGet(data);
 
-        console.log("Sending GET request: " + this._SERVER + "?" + msg);
 
-        //send request for GIF beacon
-        this._img.src = this._SERVER + "?" + msg;
+
+      /**  Public / published section
+       *
+       */
+
+      dbgr.error = function (line, obj) {
+        this._send({type: "error", message: "line", info: obj || false});
       };
 
+      dbgr.log = function (line, obj) {
+        this._send({type: "log", message: line, info: obj || false});
+      };
+
+      dbgr.send = function (obj) {
+        this._send({type: "object", data: obj || false});
+      };
+
+      dbgr.stacktrace = function(error) {
+          return error.stack || "No stack trace available.";
+      };
+
+      window.onerror = this._onerror;
+
+      console.log("Starting KROMA HTMLDebugger.");
       return dbgr;
+
     }(OPTIONS);
 
 /**    END HTMLDebugger     */

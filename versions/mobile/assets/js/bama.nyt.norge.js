@@ -7,18 +7,6 @@
       VIDEO_CONTROLLER = null;
 
     $(function() {
-
-      window.onerror = logError;
-
-      var logError = function (error) {
-        var
-          msg = error.message;
-
-        for ( var key in error ) {
-          msg += key + " : " + error[key] + "\n";
-        }
-        alert(msg);
-      };
  
 
       var changeStartScreenAnimation = function (animation, delay, repeat, time) {
@@ -72,7 +60,7 @@
       };
 
       var isAndroid = function () {
-        return navigator.userAgent.toLowerCase().indexOf("android") > -1; //&& ua.indexOf("mobile");
+        return navigator.userAgent.toLowerCase().indexOf("android") > -1;
       };
 
       var openLink = function (link)  {
@@ -641,13 +629,13 @@
       var flipLise = function() {
         if(!LISE_FLIPPED) {
           onEvent({event: "click_lise"});
-          $('#lise_tips').animate({ top : 500, opacity: 0}, 325, 'linear');
+          $('#lise_tips').animate({ top : 300, opacity: 0}, 325, 'linear');
           $('#lise_recipe').animate({ top : 0, opacity: 1}, 325, 'linear');
         }
         else {
           onEvent({event: "close_lise"});
           $('#lise_tips').animate({ top : 40, opacity: 1}, 325, 'linear');
-          $('#lise_recipe').animate({ top : -500, opacity: 0}, 325, 'linear');
+          $('#lise_recipe').animate({ top : -300, opacity: 0}, 325, 'linear');
         }
         LISE_FLIPPED = !LISE_FLIPPED;
       };
@@ -656,13 +644,13 @@
       var flipFarmer = function() {
         if(!FARMER_FLIPPED) {
           onEvent({event: "click_farmer"});
-          $('#farmer_tips').animate({ top : 500, opacity: 0}, 325, 'linear');
+          $('#farmer_tips').animate({ top : 300, opacity: 0}, 325, 'linear');
           $('#farmer_recipe').animate({ top : 0, opacity: 1}, 325, 'linear');
         }
         else {
-          onEvent({event: "click_farmer"});
+          onEvent({event: "close_farmer"});
           $('#farmer_tips').animate({ top : 40, opacity: 1}, 325, 'linear');
-          $('#farmer_recipe').animate({ top : -500, opacity: 0}, 325, 'linear');
+          $('#farmer_recipe').animate({ top : -300, opacity: 0}, 325, 'linear');
         }
         FARMER_FLIPPED = !FARMER_FLIPPED;
       };

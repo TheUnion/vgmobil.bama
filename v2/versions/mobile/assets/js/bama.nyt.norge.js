@@ -8,7 +8,7 @@
 
     var 
       // activate debugging
-      DEBUG = false,
+      DEBUG = true,
 
       // define analytics events
       // events are automatically sent to tracking server
@@ -46,7 +46,7 @@
 
       if(DEBUG) {
         // load debugger
-        requireScript("../../assets/js/lib/kroma.debugger.js", false, false, function(success) {}, function(error) {});
+        requireScript("../../assets/js/lib/kroma.debugger.js", false, false, function(success) {console.log("loaded: " + this.url);}, function(error) {console.log("Error loading: " + this.url);});
       }
 
     $(document).bind("dragstart", function() { return false; });
@@ -64,47 +64,6 @@
      */
 
     $(function() {
-
-      var stacktrace = function(error) {
-        return error.stack || "No stack trace available.";
-      };
-
-
-      window.onerror = function(message, url, line_num) {
-       
-        // Standard error information
-        var error = "<br /> JS Error: " + message + " from " + url + ":" + line_num;
-        error += "<br /> URL: " + document.URL;
-        
-        var user_agent = new UserAgent();
-        error += "<br /> Browser: " + user_agent.browser_name + " " + user_agent.browser_version + " | OS: " + user_agent.os + " | Platform: " + user_agent.platform;
-
-        debugLog(error);    
-        return false;
-      };
-
-
-      var logException = function (error) {
-        var
-          msg = error.message || false;
-
-        if(!!msg) {
-          //display file and line no. where error occurred
-          msg += error.fileName || "";
-          msg +=  " ";
-          msg += error.lineNumber || "";
-          msg +=  " - ";
-        }
-
-        if(DEBUG) {
-          // show stack trace
-          msg += stacktrace(error);
-        }
-
-        console.log(msg);
-        return;
-        debugLog(msg);
-      };
 
 
       var debugLog = function (line, obj) {

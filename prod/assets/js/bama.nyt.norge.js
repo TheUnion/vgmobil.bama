@@ -180,12 +180,8 @@
         logError(e);
       }
 
-
-
         events.push(eventObject);
-
         console.log("Event triggered: " + eventObject.event);
-
       };
 
 
@@ -478,14 +474,14 @@
 
 
         // a dirty little gollum of a hack
-        if( (clickpos>=(4606 + 280)) && (clickpos<=(4606 + 280 + 125)) ) {
+        if( (clickpos>=(4606 + 260)) && (clickpos<=(4606 + 280 + 125)) ) {
           if((click.clientY>230) && (click.clientY<275)){
             flipFarmer();
             return;
           }
         }
         // it'ss hideousss
-        else if( (clickpos>=(6180 + 300)) && (clickpos<=(6180 + 300 + 125)) ) {
+        else if( (clickpos>=(6180 + 200)) && (clickpos<=(6180 + 300 + 125)) ) {
           if((click.clientY>240) && (click.clientY<285)){
             flipLise();
             return;

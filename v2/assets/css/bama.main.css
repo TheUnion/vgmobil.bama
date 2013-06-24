@@ -907,6 +907,12 @@
   }
 
 
+  .btn.klikkbar {
+    color             : #fff;
+    background-color  : #3b8f1d;
+  }
+
+
 
   #video1_container {
     -webkit-user-select : default;
@@ -1013,7 +1019,9 @@
 
 
   .clicktarget {
-    pointer-events: auto;
+    color             : #fff;
+    background-color  : #3b8f1d;
+    pointer-events    : auto;
   }
 
 

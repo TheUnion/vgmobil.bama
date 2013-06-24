@@ -157,9 +157,18 @@
       <div id="lise_recipe" class="center recipe clicktarget">
         <img src="assets/img/btn_close.svg" class="btn_close" width="44px" height="44px" />
         <div class="recipe">
-          <span class="recipe_title">FRUKTSPYD</span><br />
-          <p class="recipe_small">
-            Del plommer i to og fjern steinene. Skjær epler i pene båter. For å hindre at eplebåter blir brune kan du gni snittflatene med litt sitron eller lime. Stikk fruktbiter, jordbær, bringebær og moreller på trepinner. Server fruktspydene liggende eller stående. Prøv også kombinasjonen små søte tomater, bringebær og jordbær!
+          <span class="recipe_title">Sommersalat med jordbær</span><br />
+          <p class="recipe_small"> 
+            3 sopp, kuttet i tynne skiver
+            5 reddiker, kuttet i tynne skiver
+            1 pose baby leaf mix
+            1/2 kurv ferske norske jordbær, renset og delt i to
+            1/3 agurk, kuttet i biter
+            Balsamico-dressing
+            <br /> 
+            Fres soppen og reddiken i en varm panne til de får en lett brunfarge.
+            Bland så baby leaf mix, jordbær, agurk samt reddiken og soppen i en passe
+            stor bolle. Ringle litt balsamico-dressing over til slutt.
         </p>
         </div>
       </div>
@@ -213,19 +222,14 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste salater. Og 
         script.src        = file;
 
 
-        script.onload = function () {
-          if(this.success) {
-            this.success.call();
-          }
-        };
+        script.onload = success || function () {
+          console.log("Loaded script: " + this.url);
+          };
 
 
-        script.onerror = function (err) {
-          console.log('error loading script ' + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.url, err);
-          if(this.failure) {
-            this.failure.call(err);
-          }
-        };
+        script.onerror = failure || function (err) {
+            console.log('Error loading script ' + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.url, err);
+          };
 
         var
           node = cursor.insertBefore(script, cursor.firstChild);

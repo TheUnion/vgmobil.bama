@@ -1,26 +1,27 @@
 <?php
 
+
   /**
    *  debug.logger: a q&d error logger
    * 
    */
 
-
+  error_reporting(E_ERROR | E_WARNING | E_PARSE & E_NOTICE);
 
   define('JSON', 1);
   define('GET',  2);
 
-
-
-  $REDIS = new Redis();
+  define('LOG_FILE',  "debug.log");
+  define('LOG_PATH',  "/var/log/kroma/");
 
   $RESPONSE_FORMAT = null;
   $REQUEST_FORMAT  = isset($_REQUEST['format']) ? strtolower($_REQUEST['format']) : "json";
 
+  $reply = array( "debug" => array( "headers" => apache_request_headers(), "request" => array(), "response" => array() ) );
+
 
   if(!$REQUEST_FORMAT) {
     //detect format, if not explicitly set
-    $headers = apache_request_headers();
 
     foreach ($headers as $header => $value) {
       echo "$header: $value <br />\n";
@@ -36,16 +37,7 @@
   }
 
 
-
-  if(!isset($_REQUEST['error'])) {
-    die(json_encode(array('OK' => 0, 'Status' => $_REQUEST['error'])));
-  }
-
-  //write to log in json format
-  file_put_contents($log, json_encode($_REQUEST, JSON_PRETTY_PRINT));
-
-
-  //which return format is requested ?
+   //which return format is requested ?
   switch($REQUEST_FORMAT) {
 
     case JSON : 
@@ -68,8 +60,6 @@
    * 
    */
 
-
-
   function decodeJSON () {
     return json_decode( file_get_contents('php://input'), TRUE );
   }
@@ -83,11 +73,9 @@
   /**
    * decodeLogEntry()
    *
-   *
    * @param string format "json" or "gif"
    *
    * @return array containing request variables
-   * 
    */
 
   function decodeLogEntry($format) {
@@ -103,36 +91,47 @@
 
 
   /**
-   * decodeLogEntry()
-   *
+   * insertLogEntry()
    *
    * @param string format "json" or "gif"
    *
-   * @return array containing request variables
-   * 
+   * @return boolean indicating success or failure
    */
 
-  function insertLogEntry($format) {
-    
+  function insertLogEntry($entry) {
+   //write to log in json format
+    file_put_contents( LOG_PATH . LOG_FILE, json_encode( $entry, JSON_PRETTY_PRINT ), FILE_APPEND );
   }
 
 
   /**
-   * decodeLogEntry()
-   *
+   * publishLogEntry()
    *
    * @param string format "json" or "gif"
    *
-   * @return array containing request variables
-   * 
+   * @return boolean indicating success or failure
    */
 
-  function publishLogEntry($format) {
-    
+  function publishLogEntry($entry) {
+    // $REDIS = new Redis();
+  }
+
+  function sendResponse ($reply) {
+    print(json_encode($reply, JSON_PRETTY_PRINT));
   }
 
 
+  /**
+   *  main()
+   *
+   */
+
   $logEntry = decodeLogEntry($REQUEST_FORMAT);
+
+  insertLogEntry($logEntry);
+  publishLogEntry($logEntry);
+
+  sendResponse($reply);
 
 
 ?>
