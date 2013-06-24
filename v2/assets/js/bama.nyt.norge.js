@@ -3,6 +3,37 @@
    $(document).bind("dragstart", function() { return false; });
 
     var 
+
+      // define analytics events
+      // events are automatically sent to tracking server
+      EVENT = {
+          "start_interaction" : { id: 6260200, onEvent: false },
+
+          "arrive_station3"   : { id: 6260201, onEvent: false },
+          "arrive_station4"   : { id: 6260202, onEvent: function() { setPoster('assets/img/poster.jpg'); } },
+          "arrive_station6"   : { id: 6260203, onEvent: false },
+          "arrive_station7"   : { id: 6260204, onEvent: function() { $('#parallax').parallaxSwipe.setEdge("right"); } },
+
+          "leave_station3"    : { id: 6260205, onEvent: false },
+          "leave_station4"    : { id: 6260206, onEvent: false },
+          "leave_station6"    : { id: 6260207, onEvent: false },
+          "leave_station7"    : { id: 6260208, onEvent: false },
+
+          "click_lise"        : { id: 6260209, onEvent: false },
+          "click_farmer"      : { id: 6260210, onEvent: false },
+          "close_lise"        : { id: 6260213, onEvent: false },
+          "close_farmer"      : { id: 6260214, onEvent: false },
+
+          "click_link1"       : { id: 6260211, onEvent: function() { console.log("Opening link1"); } },
+          "click_link2"       : { id: 6260212, onEvent: function() { console.log("Opening link2"); } },
+
+          "video_play"        : { id: 6260215, onEvent: false },
+          "video_pause"       : { id: 6260216, onEvent: false },
+          "video_finish"      : { id: 6260220, onEvent: false }
+      },
+
+      HAS_CACHED_EVENTS = false,
+
       INITIALIZED       = false,
       VIDEO_CONTROLLER  = null,
       
@@ -151,114 +182,65 @@
       // this is where we catch all of our events, and where we send all trackable events
       var onEvent = function (eventObject) {
         var 
+          e             = EVENT[eventObject.event] || false,
           registerEvent = (typeof p62602Event ==="function") ? p62602Event : false;
 
 
+        eventObject.registered = false;
         updateLazyloaders(eventObject.event);
+
+        // does our analytics reporting function exist ?
+        if(!registerEvent) {
+          HAS_CACHED_EVENTS       = true;
+          eventObject.registered  = false;
+          events.push(eventObject);
+          console.log("Analytics script not loaded, buffering event: " + eventObject.event);
+          return;
+        }
+        else {
+          if(HAS_CACHED_EVENTS) {
+            for( var i = 0, count = events.length; i < count; i++ ) {
+              console.log("registering delayed event: " + events[i].event + " (" + EVENT[events[i].event].id + ")");
+              setTimeout(registerEvent(EVENT[events[i].event].id), 200);
+              events[i].registered  = true;
+            }
+            HAS_CACHED_EVENTS     = false;
+          };
+        }
+
 
         if(DEBUG) {
 
           debugLog("[EVENT] " + eventObject.event);
-        // console.log("Event triggered: " + eventObject.event);
+          // WE ARE DISABLING THE TRACKING HERE, 
+          // BECAUSE WE DON'T WANT THE DEV VERSION 
+          // TO POLLUTE THE ANALYTICS OF THE LIVE VERSION
+          // 
+          // RE-ENABLE BEFORE PUBLISHING BY COMMENTING OUT
+          // THE RETURN STATEMENT IN THE LINE BELOW
+          return;
         }
 
+        try {
 
-            // WE ARE DISABLING THE TRACKING HERE, 
-            // BECAUSE WE DON'T WANT THE DEV VERSION 
-            // TO POLLUTE THE ANALYTICS OF THE LIVE VERSION
-            // 
-            // RE-ENABLE BEFORE PUBLISHING BY COMMENTING OUT
-            // THE RETURN STATEMENT IN THE LINE BELOW
+          if(!EVENT[eventObject.event]) {
+            console.log("Unknown event : " + eventObject.event);
             return;
+          }
 
+          registerEvent(e.id);
 
+          if( typeof e.onEvent === "function" ) {
+            e.onEvent.call();
+          }
 
-
-      try {
-
-        /*
-        This entire section should be rewritten as a case statement
-         */
-        if(eventObject.event.indexOf("start_interaction") === 0) {
-          registerEvent(6260200); 
         }
-        
-        if(eventObject.event.indexOf("arrive_station3") === 0) {
-          registerEvent(6260201); 
-        }
-        
-        if(eventObject.event.indexOf("arrive_station4") === 0) {
-
-          setPoster('assets/img/poster.jpg')
-          registerEvent(6260202); 
-        }
-        
-        if(eventObject.event.indexOf("arrive_station6") === 0) {
-          registerEvent(6260203); 
-        }
-        
-        if(eventObject.event.indexOf("arrive_station7") === 0) {
-
-          $('#parallax').parallaxSwipe.setEdge("right");
-          registerEvent(6260204); 
-        }
-        
-        if(eventObject.event.indexOf("leave_station3") === 0) {
-          registerEvent(6260205); 
-        }
-        
-        if(eventObject.event.indexOf("leave_station4") === 0) {
-          registerEvent(6260206); 
-        }
-        
-        if(eventObject.event.indexOf("leave_station6") === 0) {
-          registerEvent(6260207); 
-        }
-        
-        if(eventObject.event.indexOf("leave_station7") === 0) {
-          registerEvent(6260208); 
+        catch(e) {
+          debugLog("Exception in function onEvent()", e);
         }
 
-        if(eventObject.event.indexOf("click_lise") === 0) {
-          registerEvent(6260209); 
-        }
-        if(eventObject.event.indexOf("click_farmer") === 0) {
-          registerEvent(6260210); 
-        }
-
-        if(eventObject.event.indexOf("click_link1") === 0) {
-          console.log("Opening link1");
-          registerEvent(6260211); 
-        }
-        if(eventObject.event.indexOf("click_link2") === 0) {
-          console.log("Opening link2");
-          registerEvent(6260212); 
-        }
-
-        if(eventObject.event.indexOf("close_lise") === 0) {
-          registerEvent(6260213); 
-        }
-        if(eventObject.event.indexOf("close_farmer") === 0) {
-          registerEvent(6260214); 
-        }
-
-        if(eventObject.event.indexOf("video_play") === 0 || eventObject.event.indexOf("video_resume") === 0) {
-          registerEvent(6260215); 
-        }
-
-        if(eventObject.event.indexOf("video_pause") === 0) {
-          registerEvent(6260216); 
-        }
-
-        if(eventObject.event.indexOf("video_finish") === 0) {
-          registerEvent(6260220); 
-        }
-      }
-      catch(e) {
-        logError(e);
-      }
-
-       events.push(eventObject);
+        eventObject.registered = true;
+        events.push(eventObject);
       };
 
 
@@ -636,10 +618,6 @@
       var getClickedElement = function (click) {
 
         var
-          target        = null,
-          sceneLeft     = scene.getBoundingClientRect().left,
-          parallaxLeft  = parallax.getBoundingClientRect().left;
-
           clickpos      = Math.abs(click.offsetLeft + startpos) + click.clientX;
 
 
@@ -768,31 +746,24 @@
         // our clicktargets
         var list = document.getElementsByClassName('clicktarget');
 
-        // when there's time, this can be expanded to a general solution
+        // When there's time, this can be expanded to a general solution
         // where we get the bounding client rect of the click target.
-        // this is a way to have guaranteed clickable elements no matter  
-        // what. Even if the event is captured by enemy code, we can re-fire it
+        // This is a way to have guaranteed clickable elements no matter  
+        // what. Even if the click event is captured by enemy code, we can re-fire it
         // programmatically
 
         for(var i = 0, count = list.length; i < count; i++) {
+
           clicktargets[list[i].id] = {
             element : list[i],
-            offset : $(list[i]).offset(),
-            position : $(list[i]).position(),
-            width : list[i].offsetWidth,
-            height : list[i].offsetHeight,
-            boundingRect : list[i].getBoundingClientRect()
-            }
+            rect : list[i].getBoundingClientRect()
+            };
 
           var
-            rect    = clicktargets[list[i].id].boundingRect,
             target  = clicktargets[list[i].id];
 
-          console.log("clickTarget   : " + list[i].id + " @ " + rect.left + ", " + rect.top + " (" + rect.right + ", " + rect.bottom + ")");
-          console.log("position      : " + list[i].id + " @ " + target.position.left + ", " + target.position.top);
-          console.log("offset        : " + list[i].id + " @ " + target.offset.left + ", " + target.offset.top);
-          console.log("width, height : " + list[i].id + " @ " + target.width + ", " + target.height);
-          }
+          console.log("clickTarget   : " + target.element.id + "(<" + target.element.nodeName.toLowerCase() + ">)" + " @ " + target.rect.left + ", " + target.rect.top + " (" + target.rect.right + ", " + target.rect.bottom + ")");
+        }
 
 
 

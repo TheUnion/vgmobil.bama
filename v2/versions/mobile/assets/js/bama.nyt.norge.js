@@ -37,6 +37,7 @@
           "video_pause"       : { id: 6260116, onEvent: false },
           "video_finish"      : { id: 6260120, onEvent: false }
       },
+      HAS_CACHED_EVENTS = false,
 
       INITIALIZED       = false,
       VIDEO_CONTROLLER  = null,
