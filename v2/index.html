@@ -123,7 +123,7 @@
           <div id="lise_hello" class="interactive">
             <div id="lise_tips" class="sprite lazyload ondemand" data-load-event="arrive_station4">
               <div id="lise_tekst" class="snakkeboble center"><span class="bold">Hei</span>, jeg heter Lise! Her har du en oppskrift med jordbær fra meg.
-              <br /> <div class="btn clicktarget">Trykk her!</div>
+              <br /> <div class="btn klikkbar">Trykk her!</div>
               </div>
               <div class="btm"></div>
             </div>
@@ -135,8 +135,8 @@
 
         <div id="station7" class="station lazyload ondemand" data-load-event="arrive_station6">
           <div id="final_sign" class="lazyload ondemand" data-load-event="arrive_station6">
-            <span id="link1" class="btn clicktarget"><a class="btn" target="_blank" href="http://www.bama.no/norsk/index.html">Trykk for oppskrifter</a></span><br />
-            <span id="link2" class="btn clicktarget"><a class="btn" target="_blank" href="http://www.bama.no/norsk/sesong/juli.html">Trykk for sesong</a> </span>
+            <span id="link1" class="btn"><a class="btn klikkbar" target="_blank" href="http://www.bama.no/norsk/index.html">Trykk for oppskrifter</a></span><br />
+            <span id="link2" class="btn"><a class="btn klikkbar" target="_blank" href="http://www.bama.no/norsk/sesong/juli.html">Trykk for sesong</a> </span>
           </div>
           <div id="stop_sign" class="lazyload ondemand" data-load-event="arrive_station6"></div>
           
@@ -217,7 +217,6 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste jordbærer. 
 
   </div>
 
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 
   <script>
 
@@ -266,7 +265,8 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste jordbærer. 
           }
         };
 
-        return cursor.insertBefore(script, cursor.firstChild);
+        // return inserted script node
+        return cursor.insertBefore(script, cursor.firstChild); 
       };
 
     // include script synchronously
@@ -274,8 +274,9 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste jordbærer. 
 
   </script>
 
-  <script src="assets/js/lib/idle.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
   <script async src="assets/js/lib/jquery.parallaxSwipe.js"></script>
+  <script src="assets/js/lib/idle.min.js"></script>
   <script async src="assets/js/bama.nyt.norge.js"></script>
 
 

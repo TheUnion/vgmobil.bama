@@ -47,7 +47,8 @@
 
       if(DEBUG) {
         // load debugger
-        requireScript("../../assets/js/lib/kroma.debugger.js", false, false, function(success) {console.log("loaded: " + this.url);}, function(error) {console.log("Error loading: " + this.url);});
+        requireScript("../../assets/js/lib/kroma.debugger.js?cb=" + Math.round(Math.random()*100000), false, false, function(success) {console.log("loaded: " + this.url);}, function(error) {console.log("Error loading: " + this.url);});
+        requireScript("../../assets/js/lib/idle.js?cb=" + Math.round(Math.random()*100000), false, false, function(success) {console.log("loaded: " + this.url);}, function(error) {console.log("Error loading: " + this.url);});
       }
 
     $(document).bind("dragstart", function() { return false; });
