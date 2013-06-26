@@ -8,7 +8,7 @@
 
     var 
       // activate debugging
-      DEBUG = true,
+      DEBUG = false,
 
       // define analytics events
       // events are automatically sent to tracking server
@@ -76,10 +76,10 @@
         // append to our own debug log
         if(DEBUG) {
           $('#log').append('<li class="line"><pre><code>' + line + '</code></pre></li>');
+          if(typeof HTMLDebugger.send === "function") {
+            HTMLDebugger.send(line, !!obj ? JSON.stringify(obj) : null);
+          }
         }
-
-        HTMLDebugger.send(line, !!obj ? JSON.stringify(obj) : null);
-        //  __sendLogData(line, !!obj ? JSON.stringify(obj) : null);
       };
 
 

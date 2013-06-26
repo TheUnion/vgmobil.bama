@@ -302,7 +302,7 @@
         var
           self = this;
 
-        console.log("This : " + this, this);
+        // console.log("This : " + this, this);
 
         this.SESSION.info = {
           animationMethod : this.getAnimationMethod(),
@@ -390,7 +390,7 @@
           return false;
         }
 
-        this._logToConsole("dbgr.log: ", JSON.stringify(data));
+        // this._logToConsole("dbgr.log: ", JSON.stringify(data));
 
         switch(method.toLowerCase()) {
           case "json" : 
@@ -476,11 +476,11 @@
             return;
         }
 
-        var 
+        var
           response = JSON.parse(this.responseText);
 
         if( response.OK == 1 ) {
-            console.log('Received response from logger service: ' + this.responseText);
+            // console.log('Received response from logger service: ' + this.responseText);
         } else{
             console.log('Error-response received from logger service: ' + this.status + " - " + response.OK, response);
         }

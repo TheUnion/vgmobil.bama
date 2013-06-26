@@ -228,6 +228,23 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste jordbærer. 
         console.log("loaded script " + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src);
       };
 
+
+      /**
+       * requireScript
+       *
+       * Simple function to load a script into the DOM
+       * 
+       * @param  string     file      src of script
+       * @param  boolean    async     load asynchronously
+       * @param  boolean    defer     load deferred
+       * @param  callback   success   callback on load
+       * @param  callback   failure   callback on error
+       *
+       * @author Johan Telstad
+       * 
+       */
+
+
       var requireScript = function ( file, async, defer, success, failure ) {
         var
           cursor  = document.getElementsByTagName ("head")[0] || document.documentElement,

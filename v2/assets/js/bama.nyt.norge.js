@@ -103,7 +103,7 @@
         !!obj ? console.log(line, obj) : console.log(line);
 
         // send to server is we have a Kroma Debugger object
-        if(!!HTMLDebugger) {
+        if(typeof HTMLDebugger.log === "function") {
           HTMLDebugger.log(line, obj);
         }
         else {
