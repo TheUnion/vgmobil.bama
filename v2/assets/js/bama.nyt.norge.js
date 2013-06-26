@@ -102,17 +102,12 @@
         // output to console
         !!obj ? console.log(line, obj) : console.log(line);
 
-        // append to our own debug log
-        if(DEBUG) {
-          $('#log').append('<li class="line"><pre><code>' + line + '</code></pre></li>');
-        }
-
         // send to server is we have a Kroma Debugger object
         if(!!HTMLDebugger) {
-          HTMLDebugger.send(line, obj);
+          HTMLDebugger.log(line, obj);
         }
         else {
-          console.log("Kroma Debugger is not initialized.");
+          console.log("Error in function debugLog(): Kroma Debugger is not initialized.");
         }
       };
 

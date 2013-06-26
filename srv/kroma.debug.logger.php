@@ -1,5 +1,6 @@
 <?php
 
+  $session = session_start();
 
   /**
    *  debug.logger: a q&d error logger
@@ -15,6 +16,7 @@
   define('LOG_PATH',  "/var/log/kroma/");
 
   define('REDIS_DEBUG_DB', 15);
+  define('REDIS_DEBUG_CHANNEL', 15);
   define('REDIS_SOCK', '/var/run/redis/redis.sock');
 
 
@@ -23,6 +25,21 @@
 
   $request  = null;
   $reply    = array( "debug" => array( "headers" => apache_request_headers(), "request" => array() ) );
+
+  $reply['debug']['env'] = $_SERVER;
+
+  $now = $_SERVER['REQUEST_TIME_FLOAT'];
+
+  if(!isset($_SESSION['id'])) {
+    $_SESSION['id']     = strval($now);
+  }
+
+
+  if(isset($_SESSION['last_event'])) {
+    $_SESSION['previous_event'] = $_SESSION['last_event'];
+  }
+
+  $_SESSION['last_event'] = $now;
 
 
   if(!$REQUEST_FORMAT) {
@@ -68,10 +85,9 @@
   function decodeJSON () {
     global $reply;
 
-    $message = json_decode( file_get_contents('php://input'), TRUE );
-
-    $reply['request'] = $message;
-    return $message;
+    $message = file_get_contents('php://input');
+    $reply['debug']['request'] = $message;
+    return json_encode($message, true);
   }
 
 
@@ -181,8 +197,6 @@
   publishLogEntry($logEntry);
 
   $reply['OK'] = 1;
-
-  $reply['request'] = $request;
 
   sendResponse($reply);
 

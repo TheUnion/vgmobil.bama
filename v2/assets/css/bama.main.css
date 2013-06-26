@@ -8,13 +8,56 @@
  *
  */
 
+/*
+
+Sticky Footer by Ryan Fait
+http://ryanfait.com/
+
+*/
 
   body {
     margin       : 0;
     padding      : 0;
   	background   : rgb(230, 250, 250);
   	color        : #4e4e4e;
+    height: 100%;
   }
+
+  .wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -500px; /* the bottom margin is the negative value of the footer's height */
+  }
+
+  .footer, .push {
+    height: 500px; /* .push must be the same height as .footer */
+    clear: both;
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+
+
+  .console {
+    font-size : 14px;
+    border    : none;
+    padding   : 0px 0px 0px 10px;
+    width     : 350px;
+  }
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*  temp elements for development */
@@ -53,7 +96,7 @@
     font-family       : monospace;
     background-color  : #272822;
     font-weight       : 400;
-    font-size         : 12px;
+    font-size         : 14px;
     color             : #f8f8f2;
   }
 

@@ -10,6 +10,8 @@
 
 <body>
 
+<div class="wrapper">
+
   <div class="container" onselectstart="return false;">
     <img id="logo" class="hires" src="assets/img/bama_logo.svg" />
     <div id="parallax">
@@ -213,6 +215,8 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste jordbærer. 
     </div>
   </div>
 
+  </div>
+
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 
   <script>
@@ -270,17 +274,26 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste jordbærer. 
 
   </script>
 
+  <script src="assets/js/lib/idle.min.js"></script>
   <script async src="assets/js/lib/jquery.parallaxSwipe.js"></script>
   <script async src="assets/js/bama.nyt.norge.js"></script>
 
+
+  <div class="push"></div>
+</div>
+<div class="footer code">
   <div id="position_data">position</div>
   <div id="debuginfo">debuginfo</div>
     
   <!-- A quick-and-dirty console-like window on devices -->
-  <div id="debugconsole" class="console">
+  <div id="debugconsole" class="console code">
+    
+    <textarea id="console" class="console code"></textarea>
+
     <!-- log lines -->
     <ul id="log" class="log"></ul>
   </div>
+</div>
 
 </body>
 </html>
