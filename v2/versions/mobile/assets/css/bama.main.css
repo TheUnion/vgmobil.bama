@@ -486,7 +486,7 @@
     font-weight         : 700;
     top                 : 184px;
     width               : 213px;
-    left                : 128px;
+    left                : 828px;
     height              : 72px;
     position            : absolute;
   }
@@ -588,10 +588,10 @@
     background-image    : url('../img/fence.png');
     background-repeat   : repeat-x;
     background-origin   : content-box;
-    background-position : bottom;
-    top                 : 118px;
-    left                : 148px;
-    width               : 320px;
+    background-position : bottom left;
+    top                 : 134px;
+    left                : 150px;
+    width               : 322px;
     height              : 100px;
   }
 

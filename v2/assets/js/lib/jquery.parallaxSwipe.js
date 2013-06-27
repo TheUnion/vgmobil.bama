@@ -30,7 +30,7 @@
   var TOTAL_TIME      = 0;
 
   var ANIM_METHOD     = false;
-  var DEBUG           = true;
+  var DEBUG           = DEBUG || false;
   var USER_AGENT      = navigator.userAgent;
 
   var STATISTICS      = {};
@@ -207,8 +207,8 @@
 
     debugdata += "sliderLT is " + sliderLT + "<br />_velocity is " + _velocity + "<br />REQUESTED_POSITION is " + REQUESTED_POSITION + "<br />bounce is " + bouncing;
 
+    
     $('#position_data').html(debugdata);
-
     updateDebugInfo();
     }
   };

@@ -4,12 +4,18 @@
 
     var 
 
+      // activate debugging
+      DEBUG             = false,
+
+      //dump stack trace on errors
+      DEBUG_STACKTRACE  = true,
+
       // define analytics events
       // events are automatically sent to tracking server as they occur
       EVENT = {
           "start_interaction" : { id: 6260200, onEvent: false },
 
-          "arrive_station3"   : { id: 6260201, onEvent: function() { setPoster('assets/img/poster.jpg'); } },
+          "arrive_station3"   : { id: 6260201, onEvent: function(setPoster) { setPoster('assets/img/poster.jpg'); } },
           "arrive_station4"   : { id: 6260202, onEvent: false },
           "arrive_station6"   : { id: 6260203, onEvent: false },
           "arrive_station7"   : { id: 6260204, onEvent: function() { $('#parallax').parallaxSwipe.setEdge("right"); } },
@@ -24,8 +30,8 @@
           "close_lise"        : { id: 6260213, onEvent: false },
           "close_farmer"      : { id: 6260214, onEvent: false },
 
-          "click_link1"       : { id: 6260211, onEvent: function() { console.log("Opening link1"); } },
-          "click_link2"       : { id: 6260212, onEvent: function() { console.log("Opening link2"); } },
+          "click_link1"       : { id: 6260211, onEvent: false },
+          "click_link2"       : { id: 6260212, onEvent: false },
 
           "video_play"        : { id: 6260215, onEvent: false },
           "video_pause"       : { id: 6260216, onEvent: false },
@@ -42,14 +48,8 @@
         INITIALIZED       : false
       },
 
-      VIDEO_CONTROLLER  = null,
+      VIDEO_CONTROLLER  = null;
       
-      // activate debugging
-      DEBUG             = true,
-
-      //dump stack trace on errors
-      DEBUG_STACKTRACE  = true;
-
 
     $(function() {
 
@@ -230,7 +230,7 @@
           registerEvent(e.id);
 
           if( typeof e.onEvent === "function" ) {
-            e.onEvent.call();
+            e.onEvent.call(null, setPoster);
           }
 
         }
@@ -584,7 +584,7 @@
  * 
  */   var fakeClick = function (event, anchorObj) {
 
-        console.log("Faking a click");
+        // console.log("Faking a click");
       
         if (anchorObj.click) {
           anchorObj.click()
@@ -637,11 +637,13 @@
         // we could probably come up with something more general, but not in the time available
         else if( (clickpos>=7650 + 174 && (clickpos<=7650 + 170 + 232) )) {
           if((click.clientY>230) && (click.clientY<282)){
+            // console.log("link1: ", link1)
             openLink(link1);
             onEvent({event: "click_link1"});
             return;
           }
           else if((click.clientY>(286) && (click.clientY<((332))))){
+            // console.log("link2: ", link2)
             openLink(link2);
             onEvent({event: "click_link2"});
             return;
@@ -650,7 +652,7 @@
         // click on video
         else if( (clickpos>=(3072 + 65) && (clickpos<=(3072 + 65 + 416)) )) {
           if((click.clientY>(86) && (click.clientY<((86 + 236))))){ //allow 20px for controls, video is 216px tall
-            console.log('click on video: ' + link2.href);
+            // console.log('click on video: ' + link2.href);
             clickVideo();
             return;
           }

@@ -16,7 +16,7 @@
           "start_interaction" : { id: 6260100, onEvent: false },
 
           "arrive_station3"   : { id: 6260101, onEvent: false },
-          "arrive_station4"   : { id: 6260102, onEvent: function() { setPoster('assets/img/poster.jpg'); } },
+          "arrive_station3"   : { id: 6260102, onEvent: function(setPoster) { setPoster('assets/img/poster.jpg'); } },
           "arrive_station6"   : { id: 6260103, onEvent: false },
           "arrive_station7"   : { id: 6260104, onEvent: function() { $('#parallax').parallaxSwipe.setEdge("right"); } },
 
@@ -76,7 +76,7 @@
         // append to our own debug log
         if(DEBUG) {
           $('#log').append('<li class="line"><pre><code>' + line + '</code></pre></li>');
-          if(typeof HTMLDebugger.send === "function") {
+          if(typeof HTMLDebugger === "object") {
             HTMLDebugger.send(line, !!obj ? JSON.stringify(obj) : null);
           }
         }
@@ -190,7 +190,7 @@
           registerEvent(e.id);
 
           if(e.onEvent) {
-            e.onEvent.call();
+            e.onEvent.call(null, setPoster);
           }
 
         }
@@ -980,7 +980,7 @@
         }
         else {
           onEvent({event: "close_lise"});
-          $('#lise_tips').animate({ top : 40, opacity: 1}, 325, 'linear');
+          $('#lise_tips').animate({ top : 0, opacity: 1}, 325, 'linear');
           $('#lise_recipe').animate({ top : -300, opacity: 0}, 325, 'linear');
         }
         LISE_FLIPPED = !LISE_FLIPPED;
