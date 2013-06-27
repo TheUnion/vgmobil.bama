@@ -705,8 +705,6 @@
         TOLERANCE         = 100,
         SWIPE_TOLERANCE   = 60,
 
-        //store triggers as they occur
-        triggers          = [],
         events            = [],
         LAZY_LOADERS      = null;
         ONDEMAND_LOADERS  = null; 
@@ -896,6 +894,7 @@
           });
           count = stations.length;
         }
+        console.log("Starting timer...");
         timer = setInterval(progresstimer, UPDATE_INTERVAL);
         
         //start default animation loop for start screen
