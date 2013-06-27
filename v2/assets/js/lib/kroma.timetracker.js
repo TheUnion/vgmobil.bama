@@ -497,6 +497,14 @@
           return error.stack || "No stack trace available.";
       };
 
+
+      tracker.run = function(interval) {
+        var
+          interval = interval || 15000;
+
+        
+      };
+
       window.onerror = this._onError;
 
       console.log("Starting KROMA TimeTracker.");
@@ -555,4 +563,3 @@
 
 
   var timeTracker = TimeTracker();
-  

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />  
+  <title>Bama - Nyt Norge </title>
+  <link href='http://fonts.googleapis.com/css?family=Abel:400,700' rel='stylesheet' type='text/css'>  
+  <link href="assets/css/bama.main.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="container" onselectstart="return false;">
+
+    <img id="logo" class="hires" src="assets/img/bama_logo.svg" />
+    
+    <div id="parallax">
+      <div class="panel">    
+        <div class="content">
+
+        </div>
+      </div>
+    </div>
+  </div> 
+
+  <div class="container" onselectstart="return false;">
+    <div id="layer1" class="parallax_layer">
+      <div class="panel">
+      
+      </div>
+    </div>
+  </div>
+
+  <div class="container" onselectstart="return false;">
+    <div id="layer2" class="parallax_layer lazyload ondemand" data-load-event="start_interaction"> <!-- middle layer #2 -->
+      <div class="panel">
+      </div>
+    </div>
+  </div>
+
+  <div class="container" onselectstart="return false;">
+    <div id="layer3" class="parallax_layer lazyload ondemand" data-load-event="start_interaction">  <!-- middle layer #1 -->
+      <div class="panel">
+      </div>
+    </div>
+  </div>
+
+  <div class="container" onselectstart="return false;">
+    <div id="layer4" class="parallax_layer"> <!-- front layer #2 -->
+      <div class="panel">
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container" onselectstart="return false;">
+    <div id="layer5" class="parallax_layer lazyload ondemand" data-load-event="start_interaction"> <!-- our scene layer -->
+      <div class="panel">
+        <div id="start">
+          <div id="flag">
+            <!-- <img src="http://content.screencast.com/users/fg-a/folders/world-flags/media/db7cc8e6-00d9-49d2-86dc-fa4ba0fbe3da/animated-norway-flag.gif" /> -->
+            <img class="hires" src="assets/img/flag.png" />
+          </div>
+
+          <div class="arrow animated continuous hint"><img class="hires" src="assets/img/arrow.png" /></div>
+          
+          <div id="foreground"><img src="assets/img/hill_front1.png" alt="" /></div>
+
+          <div id="intro_text" class="sprite">
+            <span class="verybig blue">Kjør bilen med fingeren!</span>
+            <span class="big gray regular">
+              <p class="air_above"> Opplev de norske salatene<br /> - for nå er de her!</p>
+            </span>
+            </div>
+          </div>
+        </div>
+
+
+        <div id="station1" class="station">
+          <div id="muni_sign" class="lazyload ondemand" data-load-event="start_interaction"><span id="muni_sign_title">Frosta</span></div>
+        </div>
+
+        <div id="station2" class="station">
+          <div id="farm_sign" class="lazyload ondemand" data-load-event="start_interaction">
+            <span id="farm_sign_title">Bondegård</span>
+          </div>
+        </div>
+
+        <div id="station3" class="station lazyload ondemand" data-load-event="start_interaction">
+          <!-- <img id="barn" class="sprite hires" src="assets/img/barn.png"> -->
+          <div class="arrow small animated continuous hint"><img class="hires" src="assets/img/arrow.png" /></div>
+          <div id="barn" class="sprite lazyload ondemand" data-load-event="start_interaction"></div>
+          
+          <div id="farmer" class="sprite lazyload ondemand" data-load-event="start_interaction"></div>
+          
+          <div id="farmer_hello">
+            <div id="farmer_tips" class="sprite clicktarget lazyload ondemand" data-load-event="start_interaction">
+              <!-- <img id="farmer_large" src="assets/img/farmer_large.png" /> -->
+              <!-- <img id="close_button" src="assets/img/close_grey.png" /> -->
+              <div id="farmer_tekst" class="snakkeboble center"><span class="bold">Hei</span>, vil du vite hvorfor norske salater er de beste?
+              <br /> <div class="btn">Vær så god!</div>
+              </div>
+              <div class="btm"></div>
+            </div>
+          </div>
+        </div>
+
+
+        <div id="station4" class="station">
+          <div class="arrow small animated continuous hint"><img class="hires" src="assets/img/arrow.png" /></div>
+          <div id="lise_hello" class="interactive">
+            <div id="lise_tips" class="sprite clicktarget lazyload ondemand" data-load-event="arrive_station3">
+              <!-- <img id="lise_large" src="assets/img/lise_large.png" /> -->
+              <!-- <img id="close_button" src="assets/img/close_grey.png" /> -->
+              <div id="lise_tekst" class="snakkeboble center"><span class="bold">Hei</span>, her har du en god oppskrift på salat fra meg.
+              <br /> <div class="btn">Vær så god!</div>
+              </div>
+              <div class="btm"></div>
+            </div>
+
+
+          </div>
+
+          <div id="tractor" class="sprite hires lazyload ondemand" data-load-event="arrive_station3"></div>
+          <div id="lise" class="face sprite lazyload ondemand" data-load-event="arrive_station3"></div>
+        </div>
+
+        <div id="station5" class="station lazyload ondemand" data-load-event="arrive_station4">
+          <div class="drive_in_sign center">Nå kommer<br />salatene!</div>
+        </div>
+
+        <div id="station6" class="station lazyload ondemand" data-load-event="arrive_station5">
+          <div class="arrow small animated continuous hint"><img class="hires stretchfill" src="assets/img/arrow.png" /></div>
+          <div id="video1_container">
+            <video id="video1" class="interactive" width="416" height="234" controls preload="none">
+              <source src="assets/video/video1.webm" type="video/webm">
+              <source src="assets/video/video1.mp4" type="video/mp4">
+              <source src="assets/video/video1.ogv" type="video/theora">
+              Your browser does not support the video tag. 
+              You're using Internet Explorer, probably.
+            </video>
+          </div>
+
+        </div>
+
+
+        <div id="station7" class="station lazyload ondemand" data-load-event="arrive_station6">
+          <div id="final_sign" class="lazyload ondemand" data-load-event="arrive_station6">
+            <span class="btn clicktarget"><a id="link1" class="btn" target="_blank" href="http://www.bama.no/norsk/oppskrift/salat_gronn.html">Oppskrifter på salat</a></span><br />
+            <span class="btn clicktarget"><a id="link2" class="btn" target="_blank" href="http://www.bama.no/norsk/sesong/juni.html">Dette er i sesong nå</a> </span>
+          </div>
+          
+        <!-- this is the div containing the road tiles -->
+        </div>
+        <div id="road" class="road">
+        </div>
+
+      </div>
+    </div>
+
+
+
+  <div class="container" onselectstart="return false;">  <!-- -->
+    <div id="layer6"> <!-- fg_road.png layer -->
+      <div class="panel">
+        <div class="content">
+        </div>
+      </div>
+      </div>
+  </div>
+
+  <div class="container" onselectstart="return false;">
+    <div id="layer_player" class="parallax_layer interactive">
+      <img id="car" class="hires animated" src="assets/img/car.png" width="283" height="126" />
+
+
+      <div id="lise_recipe" class="center recipe clicktarget">
+        <div id="lise_salat" class="lazyload ondemand" data-load-event="arrive_station3"></div> 
+
+        <svg version="1.1" id="Layer_1" class="close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+           width="44px" height="44px" stroke="#ffffff" fill="#ffffff" viewBox="0 0 44 44" style="enable-background:new 0 0 44 44;" xml:space="preserve">
+          <path d="M21.936,1.501c11.299,0,20.492,9.193,20.492,20.493c0,11.299-9.192,20.492-20.492,20.492
+            c-11.3,0-20.493-9.192-20.493-20.492C1.443,10.694,10.636,1.501,21.936,1.501 M21.936,0.106c-12.089,0-21.887,9.798-21.887,21.887
+            c0,12.086,9.798,21.886,21.887,21.886c12.086,0,21.886-9.8,21.886-21.886C43.822,9.905,34.022,0.106,21.936,0.106L21.936,0.106z"/>
+
+          <line style="fill:none;stroke: #ffffff; stroke-width:1.3944;stroke-linecap:round;stroke-miterlimit:10;" x1="11.882" y1="11.766" x2="31.867" y2="31.75"/>
+          <line style="fill:none;stroke: #ffffff; stroke-width:1.3944;stroke-linecap:round;stroke-miterlimit:10;" x1="31.867" y1="11.766" x2="11.882" y2="31.75"/>
+        </svg>
+
+        <div class="recipe" style="width=580px; font-size: 22px; color: #555; padding-left: 40px; padding-right: 40px">
+          <span class="recipe_title" style="font-size: 20px;">LUN SOPPSALAT MED VALNØTTER OG RUCCULA</span><br />
+          <p class="recipe_small">
+Stek renset, delt, assortert sopp i litt olje i en stor stekepanne. Grovhakk noen valnøtter og rist dem gylne i en tørr stekepanne. 
+ Bland sammen stekt sopp, valnøtter, finsnittet sjalottløk, gressløk og bladpersille. Krydre med salt og pepper. Bland inn ruccula og olivenolje. Topp med tynne skiver parmesan.
+        </p>
+        </div>
+      </div>
+
+      <div id="farmer_recipe" class="center recipe clicktarget">
+       <svg version="1.1" id="Layer_2" class="close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+           width="44px" height="44px" stroke="#534741" fill="#534741" viewBox="0 0 44 44" style="enable-background:new 0 0 44 44;" xml:space="preserve">
+          <path d="M21.936,1.501c11.299,0,20.492,9.193,20.492,20.493c0,11.299-9.192,20.492-20.492,20.492
+            c-11.3,0-20.493-9.192-20.493-20.492C1.443,10.694,10.636,1.501,21.936,1.501 M21.936,0.106c-12.089,0-21.887,9.798-21.887,21.887
+            c0,12.086,9.798,21.886,21.887,21.886c12.086,0,21.886-9.8,21.886-21.886C43.822,9.905,34.022,0.106,21.936,0.106L21.936,0.106z"/>
+
+          <line style="fill:none;stroke: #534741; stroke-width:1.3944;stroke-linecap:round;stroke-miterlimit:10;" x1="11.882" y1="11.766" x2="31.867" y2="31.75"/>
+          <line style="fill:none;stroke: #534741; stroke-width:1.3944;stroke-linecap:round;stroke-miterlimit:10;" x1="31.867" y1="11.766" x2="11.882" y2="31.75"/>
+        </svg>
+        
+        <div id="farmer_salat" class="lazyload ondemand" data-load-event="arrive_station3"></div> 
+        
+        <div class="recipe" style="width=580px; font-size: 22px; color: #555; padding-left: 40px; padding-right: 40px">
+          <span class="recipe_title">SALATDYRKING I NORGE</span><br />
+          <span class="recipe_small"><p>
+Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste salater. Og siden det er kort avstand mellom deg og meg vil du få denne salaten i butikken veldig raskt. En crispy salat smaker ekstra godt. Så husk å se etter de ferskeste salatene!</p>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+
+  <!-- <script
+src="http://pliing.se/PliingAd/AdJs?app=no_vg_bama_tracking_tablet&id=1&no=[randomNo]"></script> -->
+  <script type="text/javascript" language="javascript">$.getScript("http://pliing.se/PliingAd/AdJs?app=no_vg_bama_tracking_tablet&id=1&no=" +new Date().getTime());</script>  
+  <script src="assets/js/lib/jquery.parallaxSwipe.js"></script>
+  <!--script src="assets/js/lib/jquery.flip.js"></script-->
+  <script async src="assets/js/bama.nyt.norge.js"></script>
+
+
+  <div id="position_data">no position</div>
+
+  <span id="debug_trigger"></span><br />
+  <p><span id="debug_info"></span></p>
+  <div id="debugoutput"></div>
+
+
+</body>
+</html>
