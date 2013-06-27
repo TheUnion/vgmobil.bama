@@ -1211,9 +1211,8 @@ $(document).ready(function () {
       return cursor.insertBefore(script, cursor.firstChild);
     };
 
-  // include script synchronously
+  // include script, synchronously
   requireScript ("assets/js/lib/kroma.debugger.js", false, false, onSuccess, onError);
-
 
 
 
