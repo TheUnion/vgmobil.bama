@@ -1,6 +1,6 @@
-  $(document).ready(function () {
+$(document).ready(function () {
 
-   $(document).bind("dragstart", function() { return false; });
+  $(document).bind("dragstart", function() { return false; });
 
     var 
 
@@ -168,17 +168,17 @@
       var openLink = function (link)  {
         if(isAndroid()) {
           // Android won't accept our fake-click hack
-          console.log("Opening link the android way: " + link.href);
+          // console.log("Opening link the android way: " + link.href);
           window.open(link.href);
         }
         else {
-          console.log("Opening link the fake-click way: " + link.href);
+          // console.log("Opening link the fake-click way: " + link.href);
           fakeClick(null, link);        
         }
       };
 
 
-      // this is where we catch all of our events, and where we send all trackable events
+      // this is where we catch all of our events, and where we send all trackable events to the analytics server
       var onEvent = function (eventObject) {
         var 
           e             = EVENT[eventObject.event] || false,
@@ -291,12 +291,15 @@
           LAZY_LOADERS[i].classList.add(LAZY_LOADERS[i].id);
         }
 
+
+        // initializeTimer();
         setInitialized(true);
 
         var
           userEvent = { event: 'start_interaction', message: 'First swipe detected.', target: null, time: (new Date()).getTime()};
 
         onEvent(userEvent);
+
       };
 
 
@@ -629,7 +632,7 @@
         }
         // it'ss hideousss
         else if( (clickpos>=(6180 + 300)) && (clickpos<=(6180 + 300 + 125)) ) {
-          if((click.clientY>240) && (click.clientY<285)){
+          if((click.clientY>230) && (click.clientY<275)){
             flipLise();
             return;
           }
@@ -731,6 +734,7 @@
         link2             = document.getElementById('link2');
 
 
+        triggers      = {};
         clicktargets  = {};
 
         // our clicktargets
@@ -817,6 +821,7 @@
        */
 
       var progresstimer = function (e) {
+
         var
           i, x, y     = 0,
           time        = (new Date()).getTime(),
@@ -881,12 +886,14 @@
       };
 
 
-
       var initializeTimer = function () {
         var
           count = stations.length;
 
+        console.log("Starting timer...");
+
         startpos = parallax.getBoundingClientRect().left;
+
 
         if(!count) {
           $('.station').each(function (key, value){
@@ -894,7 +901,6 @@
           });
           count = stations.length;
         }
-        console.log("Starting timer...");
         timer = setInterval(progresstimer, UPDATE_INTERVAL);
         
         //start default animation loop for start screen

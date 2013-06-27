@@ -775,6 +775,8 @@ http://ryanfait.com/
   }
 
 
+
+
   #lise_tips {
     top       : 50px;
     left      : 248px;
@@ -805,10 +807,9 @@ http://ryanfait.com/
 
 
   #lise_text {
-    padding             : 16px;
-    top                 : 90px;
+    padding-top     : 10px;
+    padding-bottom  : 0px;
   }
-
 
   #lise {
     position  : absolute;
