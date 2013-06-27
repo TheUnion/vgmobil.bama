@@ -8,9 +8,7 @@
 
     $(function() {
 
-
       window.onerror = logError;
-
 
       var logError = function (error) {
         var
@@ -48,7 +46,6 @@
         var
           animation = animation || false;
 
-//        car.classList.remove('animated');
         if(animation) {
           car.classList.remove(animation);
         }
@@ -99,6 +96,7 @@
         updateLazyloaders(eventObject.event);
 
       try {
+
         if(eventObject.event.indexOf("start_interaction") === 0) {
           p62602Event(6260200); 
         }
@@ -118,8 +116,6 @@
         }
         
         if(eventObject.event.indexOf("arrive_station7") === 0) {
-
-          $('#parallax').parallaxSwipe.setEdge("right");
           p62602Event(6260204); 
         }
         
@@ -171,6 +167,14 @@
           p62602Event(6260216); 
         }
 
+        if(eventObject.event.indexOf("event_idle") === 0) {
+          p62602Event(6260217); 
+        }
+
+        if(eventObject.event.indexOf("event_wake") === 0) {
+          p62602Event(6260218); 
+        }
+
         if(eventObject.event.indexOf("video_finish") === 0) {
           p62602Event(6260220); 
         }
@@ -180,10 +184,7 @@
         logError(e);
       }
 
-
-
         events.push(eventObject);
-
         console.log("Event triggered: " + eventObject.event);
 
       };
@@ -295,7 +296,7 @@
           }
         }
         
-        VIDEO_CONTROLLER.stop();
+        VIDEO_CONTROLLER.pause();
         return true;
       };
 
@@ -330,29 +331,36 @@
               }, false);
 
 
-          videoController.element = video;
+            video.addEventListener("play", function(e) {
+              onEvent({event: "video_play"});
+              }, false);
 
-          videoController.onended = function(e) {
-                onEvent({event: "video_finished"});
-              }
+
+            video.addEventListener("pause", function(e) {
+              onEvent({event: "video_stop"});
+              }, false);
+
+            video.addEventListener("ended", function(e) {
+              onEvent({event: "video_finished"});
+              }, false);
+
+
+          videoController.element = video;
 
           videoController.play = function(resume) {
               video.play();
-              onEvent({event: resume ? "video_resume" : "video_play"});
           };
 
           videoController.pause = function() {
               video.pause();
-              onEvent({event: 'video_pause'});
           };
 
           videoController.stop = function() {
               if(video.playing) {
                 video.pause();
-  //              video.currentTime = 0;
-                onEvent({event: 'video_stop'});
               }
           };
+
 
           videoController.togglePause = function() {
             if (video.paused) {
@@ -410,6 +418,7 @@
 
         return videoController;
       };
+
 
 
 
@@ -476,16 +485,15 @@
           flipFarmer();
         }
 
-
         // a dirty little gollum of a hack
-        if( (clickpos>=(4606 + 280)) && (clickpos<=(4606 + 280 + 125)) ) {
+        if( (clickpos>=(4606 + 260)) && (clickpos<=(4606 + 260 + 125)) ) {
           if((click.clientY>230) && (click.clientY<275)){
             flipFarmer();
             return;
           }
         }
         // it'ss hideousss
-        else if( (clickpos>=(6180 + 300)) && (clickpos<=(6180 + 300 + 125)) ) {
+        else if( (clickpos>=(6180 + 200)) && (clickpos<=(6180 + 200 + 125)) ) {
           if((click.clientY>240) && (click.clientY<285)){
             flipLise();
             return;
@@ -505,7 +513,7 @@
           }
         }
         // click on video
-        else if( (clickpos>=(9224 + 118) && (clickpos<=(9224 + 118 + 416)) )) {
+        else if( (clickpos>=(9224 + 68) && (clickpos<=(9224 + 68 + 416)) )) {
           if((click.clientY>(86) && (click.clientY<((86 + 216))))){
             console.log('click on video: ' + link2.href);
             clickVideo();
@@ -546,7 +554,7 @@
         currentpos        = 0,
         sessionstart      = null,
         UPDATE_INTERVAL   = 100, //millisec
-        STATION_MARGIN    = 400, // delta for when station becomes visible
+        STATION_MARGIN    = 416, // delta for when station becomes visible
 
         STATION_SPEED     = 0.75, // when approaching station
         ROAD_SPEED        = 0.9, // when leaving station
@@ -641,7 +649,7 @@
           $('#farmer_recipe').animate({ top : 0, opacity: 1}, 325, 'linear');
         }
         else {
-          onEvent({event: "click_farmer"});
+          onEvent({event: "close_farmer"});
           $('#farmer_tips').animate({ top : 40, opacity: 1}, 325, 'linear');
           $('#farmer_recipe').animate({ top : -500, opacity: 0}, 325, 'linear');
         }
@@ -678,6 +686,12 @@
               console.log("Interaction detected, preloading initiated");
             }
           }
+
+          if(currentpos < -10924) {
+
+            $('#parallax').parallaxSwipe.requestPosition(-10924);
+          }
+
           // for..in normally not acceptable, but ok with this few elements
           var counter = 0, startAtIndex = 3;
           for (var key in stations) {
@@ -693,9 +707,8 @@
               if(!triggers[key]) {
                 triggers[key] = true;
               }
-              if(Math.abs(x) > (STATION_MARGIN + 250)) {
+              if(Math.abs(x) > (STATION_MARGIN)) {
                 if( (currentstation === key) ) {
-                  console.log ("x is: " + x);
                   $('#parallax').parallaxSwipe.setSpeed(ROAD_SPEED, ROAD_DECAY, ROAD_MOUSE_DECAY);
                   var
                     userEvent = { event: 'leave_' + key, message: 'leaving station ' + key, target: currentstation, time: time};
@@ -713,10 +726,12 @@
                     continue;
                   }
 
-                  var 
-                    stationx = Math.round($("#" + currentstation).position().left);
 
+                  var 
+                    stationx = Math.round($("#" + currentstation).position().left),
+                    direction = 
                   console.log('Requesting position of ' + currentstation + " at " + stationx + ", offset: " + $("#" + currentstation).offset().left + ", position: " + $("#" + currentstation).position().left + ", startpos: " + startpos);
+
                   $('#parallax').parallaxSwipe.requestPosition(-stationx);
                 }
               }
