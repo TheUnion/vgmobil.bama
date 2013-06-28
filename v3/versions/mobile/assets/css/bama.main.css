@@ -232,10 +232,10 @@
   }
 
   .layer2 {
-    background-image     : url('../img/hill_middle_layer2.png');
-    background-repeat    : repeat-x; 
+    background-image     : url('../img/hill_middle_layer2.png'), url('../img/airplane.png');
+    background-repeat    : repeat-x, no-repeat; 
     background-origin    : content-box;
-    background-position  : 0px 140px;
+    background-position  : 0px 140px, 500px 64px;
   }
 
 
@@ -251,20 +251,20 @@
 
 
   .layer3 {
-    background-image     :  url('../img/birds.png'), 
+    background-image     : 
                             url('../img/hill_middle_layer1_top1.png'), 
-                            url('../img/hill_middle_layer1_top3.png'),
+                            url('../img/hill_middle_layer1_top2.png'),
                             url('../img/hill_middle_layer1_top4.png'), 
-                            url('../img/hill_middle_layer1_top5_cows.png'),
+                            url('../img/hill_middle_layer1_top5.png'),
                             url('../img/hill_middle_layer1.png');
-    background-position  :  1000px  62px,
+    background-position  : 
                              780px  72px,
                             1436px  72px,
                             2064px  68px,
                             2756px  72px,
                                0px 144px;
     background-origin    : content-box;    
-    background-repeat    : no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, repeat-x;    
+    background-repeat    : no-repeat, no-repeat, no-repeat, no-repeat, repeat-x;    
   }
 
 
@@ -289,26 +289,21 @@
 
 
   .layer5 {
-    background-image      : url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+    background-image      : url('../img/hill_front1.png'),
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
-                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
-                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
-                            url('../img/hill_front1.png'), url('../img/hill_front2.png');
+                            url('../img/hill_front1.png');
     background-position   :     0px 127px,   768px 127px,   
                              1536px 127px,  2304px 127px,   
                              3072px 127px,  3840px 127px,   
                              4608px 127px,  5376px 127px,   
                              6144px 127px,  6912px 127px,
                              7680px 127px,  8448px 127px,   
-                             9216px 127px,  9984px 127px,   
-                            10752px 127px, 11520px 127px,   
-                            12288px 127px, 13056px 127px,   
-                            13824px 127px, 14592px 127px;
+                             9216px 127px,  9984px 127px;
     background-repeat     : no-repeat;
     background-origin     : content-box;
   }
@@ -584,29 +579,17 @@
 
 
 
-  #fence {
-    background-image    : url('../img/fence.png');
-    background-repeat   : repeat-x;
-    background-origin   : content-box;
-    background-position : bottom left;
-    top                 : 134px;
-    left                : 150px;
-    width               : 322px;
-    height              : 100px;
-  }
-
-
-  #outbuilding {
+  #firewood {
     position            : absolute;
-    width               : 492px; /* + (fence posts * post width) (12 * 19 == 228) */
-    height              : 249px;
-    top                 : -14px;
+    width               : 272px;
+    height              : 108px;
+    top                 : 132px;
     left                : 0px;
   }
 
 
-  .outbuilding {
-    background-image    : url('../img/stabbur.png');
+  .firewood {
+    background-image    : url('../img/ved.png');
     background-position : top left;
     background-repeat   : no-repeat;
     background-origin   : content-box;
@@ -633,19 +616,19 @@
   }
 
 
-  #stand {
+  #cases {
     position  : absolute;
-    left      : 0px;
-    top       : 40px;
+    left      : 12px;
+    top       : 134px;
   }
 
 
- .stand {
-    background-image    : url('../img/stand.png');
+ .cases {
+    background-image    : url('../img/cases.png');
     background-origin   : content-box;
     background-position : top left;
-    width               : 222px;
-    height              : 198px;
+    width               : 199px;
+    height              : 109px;
   }
 
 
@@ -724,7 +707,7 @@
 
   #lise {
     position  : absolute;
-    top       : 102px;    
+    top       : 116px;    
     left      : 376px;    
     z-index   : 102;
     width     : 77px;
@@ -814,7 +797,9 @@
     font-size           : 18px;
     line-height         : 18px;
     color               : #555;
-    padding             : 8px;
+    padding-top         : 4px;
+    padding-left        : 8px;
+    padding-right       : 8px;
     height              : auto;
     width               : 200px;
     margin-right        : auto;

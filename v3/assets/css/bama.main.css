@@ -299,7 +299,7 @@ http://ryanfait.com/
   }
 
   .layer2 {
-    background-image     : url('../img/hill_middle_layer2.png'), url('../img/cloud1.png'), url('../img/birds.png');
+    background-image     : url('../img/hill_middle_layer2.png'), url('../img/cloud1.png'), url('../img/airplane.png');
     background-repeat    : repeat-x, no-repeat, no-repeat; 
     background-origin    : content-box;
     background-position  : 0px 320px, 600px 64px, 800px 160px;
@@ -320,9 +320,9 @@ http://ryanfait.com/
   .layer3 {
     background-image     :  url('../img/cloud2.png'), 
                             url('../img/hill_middle_layer1_top1.png'), 
-                            url('../img/hill_middle_layer1_top3.png'), 
+                            url('../img/hill_middle_layer1_top2.png'), 
                             url('../img/hill_middle_layer1_top4.png'), 
-                            url('../img/hill_middle_layer1_top5_cows.png'),
+                            url('../img/hill_middle_layer1_top5.png'),
                             url('../img/hill_middle_layer1.png');
     background-position  :  1000px 62px,
                              780px 256px,
@@ -368,34 +368,29 @@ http://ryanfait.com/
 
 
   .lazystart {
-    background-image      : url('../img/hill_front1.png'), url('../img/hill_front1.png'); 
-    background-repeat     : no-repeat;
+    background-image      : url('../img/hill_front1.png'); 
+    background-repeat     : repeat-x;
     background-origin     : content-box;
-    background-position   : 0px 311px, 768px 311px;   
+    background-position   : bottom left;   
   }
 
 
   .layer5 {
-    background-image      : url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+    background-image      : url('../img/hill_front1.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
                             url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
-                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
-                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
-                            url('../img/hill_front1.png'), url('../img/hill_front2.png');
+                            url('../img/hill_front1.png');
     background-position   :     0px 311px,   768px 311px,   
                              1536px 311px,  2304px 311px,   
                              3072px 311px,  3840px 311px,   
                              4608px 311px,  5376px 311px,   
                              6144px 311px,  6912px 311px,
                              7680px 311px,  8448px 311px,   
-                             9216px 311px,  9984px 311px,   
-                            10752px 311px, 11520px 311px,   
-                            12288px 311px, 13056px 311px,   
-                            13824px 311px, 14592px 311px;
+                             9216px 311px,  9984px 311px;   
     background-repeat     : no-repeat;
     background-origin     : content-box;
   }
@@ -670,29 +665,17 @@ http://ryanfait.com/
 
 
 
-  #fence {
-    background-image    : url('../img/fence.png');
-    background-repeat   : repeat-x;
-    background-origin   : content-box;
-    background-position : bottom;
-    top                 : 318px;
-    left                : 148px;
-    width               : 320px;
-    height              : 100px;
-  }
-
-
-  #outbuilding {
+  #firewood {
     position            : absolute;
-    width               : 492px; /* + (fence posts * post width) (12 * 19 == 228) */
-    height              : 249px;
-    top                 : 169px;
-    left                : 0px;
+    width               : 272px; /* + (fence posts * post width) (12 * 19 == 228) */
+    height              : 108px;
+    top                 : 324px;
+    left                : 64px;
   }
 
 
-  .outbuilding {
-    background-image    : url('../img/stabbur.png');
+  .firewood {
+    background-image    : url('../img/ved.png');
     background-position : top left;
     background-repeat   : no-repeat;
     background-origin   : content-box;
@@ -720,17 +703,17 @@ http://ryanfait.com/
     height                : 127px;
   }
 
-  #stand {
+  #cases {
     position  : absolute;
-    left      : 0px;
-    top       : 220px;
-    width     : 269px;
-    height    : 198px;
+    left      : 12px;
+    top       : 316px;
+    width     : 199px;
+    height    : 109px;
   }
 
 
-  .stand {
-    background-image    : url('../img/stand.png');
+  .cases {
+    background-image    : url('../img/cases.png');
     background-origin   : content-box;
     background-position : top left;
     width               : 269px;
