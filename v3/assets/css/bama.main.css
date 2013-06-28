@@ -1,0 +1,1307 @@
+/**
+ *  Basic setup. 
+ *
+ *
+ * 
+ *  We are assuming an iframe, obviously.
+ *  Otherwise we would never touch the basic tags.
+ *
+ */
+
+/*
+
+Sticky Footer by Ryan Fait
+http://ryanfait.com/
+
+*/
+
+  body {
+    margin       : 0;
+    padding      : 0;
+  	background   : rgb(230, 250, 250);
+  	color        : #4e4e4e;
+    height: 100%;
+  }
+
+  .wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -500px; /* the bottom margin is the negative value of the footer's height */
+  }
+
+  .footer, .push {
+    height: 500px; /* .push must be the same height as .footer */
+    clear: both;
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+
+
+  .console {
+    font-size : 14px;
+    border    : none;
+    padding   : 0px 0px 0px 10px;
+    width     : 350px;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  temp elements for development */
+
+  #debuginfo {
+    float   : left;
+  }
+
+  #debugconsole {
+    color             : #f8f8f2;
+    background-color  : #272822;
+    float             : right;
+    top               : 0px;
+    width             : 600px;
+    text-align        : left;
+    margin            : 6px;
+    padding           : 0;
+  }
+
+
+  .console {
+    background-color  : #272822;
+    color             : #f8f8f2;
+  }
+
+
+  .log {
+    padding         : 0;
+    margin          : 0;
+    list-style-type : none;
+    line-height     : 1em;
+  }
+
+
+  .code {
+    font-family       : monospace;
+    background-color  : #272822;
+    font-weight       : 400;
+    font-size         : 14px;
+    color             : #f8f8f2;
+  }
+
+
+/* monokai */
+  .code.comment  { color: #75715e; }
+  .code.keyword  { color: #f92672; }
+  .code.default  { color: #f8f8f2; }
+  .code.reserved { color: #66D9EF; }
+  .code.number   { color: #AE81FF; }
+  .code.string   { color: #e6db74; }
+
+
+  /* The ugly */
+
+  .hwaccel {  
+    /* Supposedly this forces activation of HW-acceleration on iOS Safari */
+    -webkit-transform: translateZ(0); 
+  }
+
+
+  @media 
+    (-webkit-min-device-pixel-ratio: 2), 
+    (min-resolution: 192dppx) { 
+      /* Retina-specific stuff here */
+  }
+
+
+
+  /**
+   *  Our classes
+   *
+   */
+
+  .parallax_layer {
+    
+    /*  Group all the parallax layers with this class */
+    -webkit-user-select  : none;
+       -moz-user-select  : none;
+            user-select  : none;
+    pointer-events       : none;
+  }
+
+
+  .para {
+    position : relative;
+    width    : 280px;
+    padding  : 10px;
+  }
+
+ 
+  .container {
+    position          : absolute;
+    left              : 0px; 
+    right             : 0px; 
+    margin            : 0px auto 0px auto; 
+    padding           : 0px;
+    top               : 0px;
+    width             : 580px;
+    height            : 500px;
+    background        : transparent;
+    overflow          : hidden;
+    cursor            : auto;
+  }
+
+
+  .panel {
+    float            : left;
+    margin           : 0px;
+    padding          : 0px;
+    width            : 12000px;
+    background       : transparent;
+  }
+
+
+
+  /**
+   *  Text, layout styles
+   *
+   */
+
+  .center {
+    text-align    : center;
+    margin-right  : auto;
+    margin-left   : auto;
+  }
+
+  .uppercase {
+    text-transform : uppercase; 
+  }
+
+
+  .air_above {
+    margin-top  : 16px;
+  }
+
+  .verybig {
+    color         : #555;
+    text-align    : center;
+    font-size     : 40px;
+    line-height   : 36px;
+  }
+
+  .big {
+    text-align  : center;
+    font-size   : 34px;
+    line-height : 32px;
+  }
+
+  .gray {
+    color   : #4e4e4e;
+  }
+
+
+  .red {
+    color   : #d42;
+  }
+
+
+  .blue {
+    color   : #014289;
+  }
+
+
+  .medium {
+    font-size   : 24px;
+    line-height : 28px;
+  }
+
+  .bold {
+    font-weight   : 700;
+  }
+
+  .regular {
+    font-weight   : 400;
+  }
+
+  .horizontal {
+    position  : relative;
+    padding   : 0;
+    margin    : 0;
+    float     : left;
+    display   : inline-block;
+    overflow  : hidden;
+    top       : 320px;
+    width     : 665px;
+  }
+
+  .stretchfill {
+    width       : 100%;
+    height      : 100%;
+  }
+
+
+
+/*
+  .mirror {
+      -webkit-transform: matrix(-1, 0, 0, 1, 0, 0);
+         -moz-transform: matrix(-1, 0, 0, 1, 0, 0);
+           -o-transform: matrix(-1, 0, 0, 1, 0, 0);
+              transform: matrix(-1, 0, 0, 1, 0, 0);
+  }
+*/
+
+
+/**
+ *  Parallax layers
+ *
+ */
+
+  #parallax {
+  	-webkit-user-select  : none;
+  	-moz-user-select     : none;
+  	position             : absolute;
+    height               : 500px;
+    width                : 12000px;
+  	cursor               : move;
+    z-index              : 500;
+  }
+
+  #layer1 {
+  	-webkit-user-select  : none;
+  	-moz-user-select     : none;
+  	position             : absolute;
+    height               : 500px;
+    background           : transparent url('../img/sky_bg.png') repeat-x;
+    pointer-events       : none;
+    z-index              : 1;
+  }
+
+  #layer2 {
+  	-webkit-user-select  : none;
+  	-moz-user-select     : none;
+         user-select     : none;
+
+    pointer-events       : none;
+    position             : absolute;
+    height               : 500px;
+    z-index              : 2;
+  }
+
+  .layer2 {
+    background-image     : url('../img/hill_middle_layer2.png'), url('../img/cloud1.png'), url('../img/birds.png');
+    background-repeat    : repeat-x, no-repeat, no-repeat; 
+    background-origin    : content-box;
+    background-position  : 0px 320px, 600px 64px, 800px 160px;
+  }
+
+
+  #layer3 {
+    -webkit-user-select  : none;
+    -moz-user-select     : none;
+    pointer-events       : none;
+    position             : absolute;
+    height               : 500px;
+    z-index              : 3;
+
+  }
+
+
+  .layer3 {
+    background-image     :  url('../img/cloud2.png'), 
+                            url('../img/hill_middle_layer1_top1.png'), 
+                            url('../img/hill_middle_layer1_top3.png'), 
+                            url('../img/hill_middle_layer1_top4.png'), 
+                            url('../img/hill_middle_layer1_top5_cows.png'),
+                            url('../img/hill_middle_layer1.png');
+    background-position  :  1000px 62px,
+                             780px 256px,
+                            1440px 256px,
+                            2064px 252px,
+                            2756px 256px,
+                            0px 326px;
+    background-origin    : content-box;    
+    background-repeat    : no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, repeat-x;    
+  }
+
+
+  #layer4 {
+    -webkit-user-select  : none;
+    -moz-user-select     : none;
+    pointer-events       : none;
+
+    position             : absolute;
+    height               : 500px;
+    z-index              : 4;
+  }
+
+
+
+
+  #foreground {
+    position  : absolute;
+    top       : 311px;
+    left      : 0px;
+  }
+
+
+  #layer5 {
+
+  /*  This is our main layer, the one where everything happens  */    
+    -webkit-user-select   : auto;
+    -moz-user-select      : auto;
+    pointer-events        : auto;
+    position              : absolute;
+    height                : 500px;
+    z-index               : 5;
+  }
+
+
+  .lazystart {
+    background-image      : url('../img/hill_front1.png'), url('../img/hill_front1.png'); 
+    background-repeat     : no-repeat;
+    background-origin     : content-box;
+    background-position   : 0px 311px, 768px 311px;   
+  }
+
+
+  .layer5 {
+    background-image      : url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png'), 
+                            url('../img/hill_front1.png'), url('../img/hill_front2.png');
+    background-position   :     0px 311px,   768px 311px,   
+                             1536px 311px,  2304px 311px,   
+                             3072px 311px,  3840px 311px,   
+                             4608px 311px,  5376px 311px,   
+                             6144px 311px,  6912px 311px,
+                             7680px 311px,  8448px 311px,   
+                             9216px 311px,  9984px 311px,   
+                            10752px 311px, 11520px 311px,   
+                            12288px 311px, 13056px 311px,   
+                            13824px 311px, 14592px 311px;
+    background-repeat     : no-repeat;
+    background-origin     : content-box;
+  }
+
+
+  #layer6 {
+    -webkit-user-select : none;
+    -moz-user-select    : none;
+    position            : absolute;
+    top                 : 10px;
+    left                : 900px;
+    width               : 580px;
+    height              : 500px;
+    pointer-events      : none;
+    z-index             : 1000;
+  }
+
+
+
+/**
+ *  sprites and scene/gfx elements
+ *
+ */
+
+  #intro_text {
+    color         : #4e4e4e;
+    font-family   : Abel, sans-serif;
+    font-weight   : 400;
+    text-align    : center;
+    margin-left   : auto;
+    margin-right  : auto;
+    left          : 32px;
+    top           : 128px;
+    width         : 90%;
+  }
+
+
+  .arrow {
+    position      : absolute;
+    top           : 216px;
+    left          : 468px;
+    width         : 96px;
+    height        : 62px;
+  }
+
+
+  .arrow.small {
+    position      : absolute;
+    top           : 160px;
+    left          : 496px;
+    width         : 48px;
+    height        : 31px;
+  }
+
+
+  .recipe {
+    pointer-events      : auto;
+    font-family         : Abel, Helvetica, sans-serif;
+    color               : #333;
+    width               : 480px;
+    font-weight         : 700;
+    font-size           : 22px;
+    text-align          : left;
+    background-color    : #f7eee7;
+    z-index             : 12001;
+  }
+
+
+  .close {
+    position  : absolute;
+    top       : 24px;
+    left      : 516px;
+    width     : 44px;
+    height    : 44px;
+  }
+
+
+  .grey {
+    color   : #534741;
+    stroke  : #534741;
+    fill    : #534741;
+  }
+
+
+  .white {
+    color   : #ffffff;
+    stroke  : #ffffff;
+    fill    : #ffffff;
+  }
+
+
+  .recipe_title {
+    color           : #333;
+    text-align      : center;
+    font-size       : 26px;
+    font-weight     : 700;
+    width           : 480px;
+    margin-left     : 12px;
+    text-transform  : uppercase;
+    margin-top      : 40px;
+    padding-bottom  : 8px;
+    border-bottom   : solid 1px #333;   
+  }
+
+
+  .recipe_small {
+    margin-top      : 20px;
+    margin-right    : auto;
+    margin-left     : auto;
+    padding         : 12px;
+    color           : #555;
+    font-family     : Abel, sans-serif;
+    text-align      : left;
+    font-size       : 22px;
+    font-weight     : 400;
+  }
+
+
+  .sprite {
+    position          : absolute;
+    background-repeat : no-repeat;
+  }
+
+  .gfx {
+    position  : absolute;
+  }
+
+
+  #progress {
+    margin          : 0;
+    padding         : 0;
+    z-index         : 300;
+    pointer-events  : none;
+  }
+
+
+  #muni_sign {
+    position            : absolute;
+    overflow            : visible;
+    left                : 200px;
+    top                 : 347px;
+    width               : 132px;
+    height              : 71px;
+
+    color               : white;
+    font-family         : Arial, sans-serif;
+    font-weight         : 700;
+    font-size           : 16px;
+  }
+
+
+  .muni_sign {
+    background-image    : url('../img/kommunevapen.png'), url('../img/kommuneskilt.png');
+    background-repeat   : no-repeat;
+    background-origin   : content-box;
+    background-position : 6px 4px, top center;
+  }
+
+
+  #muni_sign_title {
+    position  : absolute;
+    top       : 6px;
+    left      : 40px;
+  }
+
+
+  #farm_sign {
+    overflow            : visible;
+    color               : #4c2b0c;
+    padding             : 4px;
+    font-family         : Abel, Helvetica, Arial, sans-serif;
+    font-size           : 12px;
+    font-weight         : 700;
+    top                 : 367px;
+    width               : 213px;
+    left                : 828px;
+    height              : 94px;
+    position            : absolute;
+  }
+
+
+  .farm_sign {
+    background          : transparent url('../img/wood_sign_arrow.png') no-repeat;
+    background-position : top left;
+    background-origin   : content-box;
+    }
+
+
+  #farm_sign_title {
+    font-family   : Helvetica, Arial, sans-serif;
+    font-weight   : 700;
+    color         : #4c2b0c;
+    position      : absolute;
+    top           : 6px;
+    left          : 12px;
+  }
+
+
+
+
+  .drive_in_sign {
+    color           : #000;
+    font-family     : "Arial Black", Arial, sans-serif;
+    font-weight     : 700;
+    font-size       : 12px;
+    line-height     : 18px; 
+    text-transform  : uppercase;
+  
+    /*  We use the following to place text within a specific region of the bg image */
+    position        : absolute;
+    left            : 34px;
+    top             : 140px;
+    width           : 106px;
+    height          : auto;
+  }
+
+
+
+
+  #stop_sign {
+    position            : absolute;
+    overflow            : hidden;
+    top                 : 265px;
+    left                : 480px;
+    width               : 58px;
+    height              : 153px;
+  }
+
+
+  .stop_sign {
+    background : transparent url('../img/stop.png') no-repeat;
+  }
+
+
+  #final_sign {
+    overflow            : visible;
+    color               : #4c2b0c;
+    padding             : 4px;
+    font-family         : Abel, Helvetica, Arial, sans-serif;
+    font-size           : 24px;
+    text-align          : center;
+    line-height         : 54px;
+    font-weight         : 700;
+    top                 : 212px;
+    width               : 253px;
+    left                : 128px;
+    height              : 204px;
+    margin-left         : 40px;
+    margin-right        : auto;
+    position            : absolute;
+  }
+
+
+
+  .final_sign {
+    background-image    : url('../img/wood_sign_big.png');
+    background-position : top left;
+    background-origin   : content-box;
+    background-repeat   : no-repeat;
+  }
+
+
+
+  #final_sign_title {
+    font-family   : Helvetica, Arial, sans-serif;
+    font-weight   : 700;
+    color         : #4c2b0c;
+    position      : absolute;
+    top           : 6px;
+    left          : 12px;
+  }
+
+
+
+  #fence {
+    background-image    : url('../img/fence.png');
+    background-repeat   : repeat-x;
+    background-origin   : content-box;
+    background-position : bottom;
+    top                 : 318px;
+    left                : 148px;
+    width               : 320px;
+    height              : 100px;
+  }
+
+
+  #outbuilding {
+    position            : absolute;
+    width               : 492px; /* + (fence posts * post width) (12 * 19 == 228) */
+    height              : 249px;
+    top                 : 169px;
+    left                : 0px;
+  }
+
+
+  .outbuilding {
+    background-image    : url('../img/stabbur.png');
+    background-position : top left;
+    background-repeat   : no-repeat;
+    background-origin   : content-box;
+  }
+
+
+
+
+  #farmer {
+    position  : absolute;
+    top       : 302px;
+    left      : 432px;
+    width     : 73px;
+    height    : 127px;
+    z-index   : 102;
+  }
+
+  .farmer {
+    background-image      : url('../img/farmer_small.png');
+    background-origin     : content-box;
+    background-position   : 0px 0px;
+    top                   : 302px;
+    left                  : 432px;
+    width                 : 73px;
+    height                : 127px;
+  }
+
+  #stand {
+    position  : absolute;
+    left      : 0px;
+    top       : 220px;
+    width     : 269px;
+    height    : 198px;
+  }
+
+
+  .stand {
+    background-image    : url('../img/stand.png');
+    background-origin   : content-box;
+    background-position : top left;
+    width               : 269px;
+    height              : 198px;
+  }
+
+  
+  #farmer_tips {
+    top       : 40px;
+    left      : 228px;
+    width     : 246px;
+    height    : 112px;
+
+    z-index   : 10000;
+    overflow  : visible;
+  }
+
+  .farmer_tips {
+    background-image      : url('../img/farmer_large.png');
+    background-repeat     : no-repeat;
+    background-position   : 0px 0px;
+    background-origin     : content-box;
+    width                 : 246px;
+    height                : 112px;
+  }
+
+
+  #farmer_recipe {
+    position    : absolute;
+    top         : -500px;
+    left        : 0;
+    height      : 500px;
+    width       : 100%;
+    opacity     : 0;
+    z-index     : 10000;
+  }
+
+
+  #farmer_text {
+    padding       : 16px;
+    top           : 90px;
+  }
+
+
+
+
+  #lise_tips {
+    top       : 50px;
+    left      : 248px;
+    width     : 246px;
+    height    : 112px;
+    z-index   : 10000;
+    overflow  : visible;
+  }
+
+
+  .lise_tips {
+    background-image    : url('../img/lise_large.png');
+    background-repeat   : no-repeat;
+    background-position : 0px 0px;
+    background-origin   : content-box;
+  }
+
+
+  #lise_recipe {
+    position    : absolute;
+    top         : -500px;
+    left        : 0;
+    width       : 580px;
+    height      : 500px;
+    opacity     : 0;
+    z-index     : 10000;
+  }
+
+
+  #lise_text {
+    padding-top     : 10px;
+    padding-bottom  : 0px;
+  }
+
+  #lise {
+    position  : absolute;
+    top       : 302px;    
+    left      : 432px;    
+    width     : 77px;
+    height    : 126px;
+    z-index   : 102;
+  }
+
+
+  .lise {
+    position  : absolute;
+    top       : 302px;    
+    left      : 432px;    
+    width     : 77px;
+    height    : 126px;
+    z-index   : 102;
+
+    background-image    : url('../img/lise_small.png');
+    background-position : top left;
+    background-origin   : content-box;
+  }
+
+
+  #farmer_salat {
+    top       : 0px;
+    left      : 0px;
+    width     : 580px;
+    height    : 145px;
+  }
+
+
+  .farmer_salat {
+    background-image    : url('../img/salat_tips.jpg');
+    background-origin   : content-box;
+    background-position : top left;
+    width               : 580px;
+    height              : 145px;
+  }
+
+
+
+  #lise_recipe_card {
+    top       : 0px;
+    left      : 0px;
+    width     : 580px;
+    height    : 145px;
+  }
+
+
+  .lise_recipe_card {
+    background-image    : url('../img/oppskrift_1160x290.jpg');
+    background-origin   : content-box;
+    background-position : top left;
+    width               : 580px;
+    height              : 145px;
+  }
+
+
+  #drivein_sign {
+    color           : #000;
+    font-family     : Arial, sans-serif;
+    font-weight     : 900;
+    font-size       : 13px;
+    line-height     : 18px;
+    text-transform  : uppercase;
+    position        : absolute;
+    top             : 168px;
+    left            : 760px;
+  }
+
+
+  .callout {
+    height: auto;
+  }
+
+
+  .btm {
+    background    : transparent url('../img/pop_up_btm.png') no-repeat;
+    position      : absolute;
+    top           : 226px;
+    left          : 0;
+    width         : 410px;
+    height        : 68px;
+    overflow      : hidden;
+  }
+
+
+  .clean {
+    margin    : 0;
+    padding   : 0;
+    clear     : left;
+  }
+
+
+  .snakkeboble {
+    position      : absolute;
+    display       : block;
+    color         : #333;
+    font-family   : Abel, Futura, Helvetica, sans-serif;
+    font-weight   : 400;
+    font-size     : 18px;
+    padding       : 4px;
+    text-align    : center;
+    top           : 110px;
+    height        : 108px;
+    width         : 220px;
+    border-style  : solid solid none solid;
+    border-width  : 1px;
+    border-color  : #928c85;
+    background    : #eee;
+
+    -webkit-transition: all 0.6s ease-in-out;
+       -moz-transition: all 0.6s ease-in-out;
+        -ms-transition: all 0.6s ease-in-out;
+         -o-transition: all 0.6s ease-in-out;
+            transition: all 0.6s ease-in-out;
+  }
+
+
+  .btn {
+    pointer-events      : auto;
+    text-decoration     : none;
+    text-align          : center;
+    font-weight         : 700;
+    font-size           : 18px;
+    color               : white;
+    padding             : 4px 12px 4px 12px;
+    width               : 96px;
+    margin-right        : auto;
+    margin-left         : auto;
+    margin-top          : 12px;
+    cursor              : pointer;
+    -moz-border-radius  : 6px;
+      -o-border-radius  : 6px;
+         border-radius  : 6px;
+  }
+
+
+  .btn.klikkbar {
+    color             : #fff;
+    background-color  : #3b8f1d;
+  }
+
+
+
+  #video1_container {
+    -webkit-user-select : default;
+       -moz-user-select : default;
+            user-select : default;
+    pointer-events      : auto;
+
+    position            : absolute; 
+    display             : block; 
+    margin              : 0px auto 0px auto; 
+    padding             : 0;
+    top                 : 78px;
+    left                : 66px; 
+    width               : 416px;
+    height              : 234px;   
+    overflow            : hidden;
+    background          : transparent; 
+    z-index             : 1001;
+  }
+
+
+  #video1 {
+    position            : absolute;
+    z-index             : 1002;
+    margin              : 0;
+    padding             : 0;
+    top                 : 0;
+    left                : 0;
+    width               : 416px;
+    height              : 234px;   
+    
+    cursor              : auto;
+    pointer-events      : auto;
+    -webkit-user-select : auto;
+       -moz-user-select : auto;
+            user-select : auto;
+    z-index             : 1002;
+  }
+
+
+  .road {
+    position              : absolute; 
+    background-image      : url('../img/road.png');
+    background-repeat     : repeat-x;
+    background-position   : top left;
+    top                   : 428px; 
+    height                : 71px;
+    width                 : 100%;
+    z-index               : 91;
+  }
+
+
+  #layer_player {
+    -webkit-user-select  : none;
+    -moz-user-select     : none;
+    pointer-events       : none;
+    position             : absolute;
+    height               : 500px;
+    z-index              : 100;
+  }
+
+
+
+  #player {
+    position             : absolute;
+    background           : transparent;
+    background-position  : bottom left;
+    background-origin    : content-box;
+    z-index              : 101;
+  }
+
+
+  #car {
+    -webkit-perspective           : 1000;
+    -webkit-backface-visibility   : hidden;   
+    position                      : absolute;
+    top                           : 364px;
+    left                          : 150px;
+    background                    : transparent;
+    z-index                       : 110;
+  }
+
+
+  #flag {
+    position             : absolute;
+    width                : 54px;
+    height               : 36px;
+    left                 : 263px;
+    top                  : 72px;
+    z-index              : 90;
+  }
+
+
+  #logo {
+    position             : absolute;
+    width                : 192px;
+    height               : 34px;
+    left                 : 356px;
+    top                  : 0;
+    z-index              : 90;
+    margin               : 16px;
+    cursor               : auto; 
+  }
+
+
+  .clicktarget {
+    color             : #fff;
+    pointer-events    : auto;
+  }
+
+
+  .station {
+
+    overflow    : visible;
+    color       : navy;
+    /* show where our stations begin */
+    /*border-left : dotted 1px #fff;*/
+    font-size   : 72px;
+    font-weight : bold;
+    z-index     : 100;
+  }
+
+
+  #start {
+    position        : absolute;
+    top             : 0px;
+    left            : 0px;
+    width           : 580px;
+    height          : 428px;
+    background      : transparent; 
+  }
+
+
+  #station1 {    
+    position      : absolute;
+    top           : 10px;
+    left          : 1600px;
+    width         : 580px;
+    height        : 500px;
+  }
+
+
+  #station2 {    
+    position      : absolute;
+    top           : 180px;
+    left          : 2360px;
+    width         : 580px;
+    height        : 500px;
+  }
+
+
+  /* When we set bg image in a class with the same name as the id, we can load images on demand
+     by adding the class to the div. Activate this function by adding class "lazyload" to the div 
+     Make sure you do not override any background-properties in the # definition
+     */
+
+  .station2 {
+    background-image    : url('../img/drive_in_sign.png');
+    background-position : left top;
+    background-origin   : content-box;
+    background-repeat   : no-repeat;  
+  }
+
+
+  #station3 {
+    position            : absolute;
+    top                 : 10px;
+    left                : 3072px;
+    width               : 580px;
+    height              : 500px;
+    padding             : 0;
+    margin              : 0;
+  }
+
+  /* class for lazyloading of bg images */
+  .station3 {
+    background-image    : url('../img/drive_in_screen.png');
+    background-position : 0px 72px;
+    background-origin   : content-box;
+    background-repeat   : no-repeat;  
+  }
+
+
+  #station4 {
+    position      : absolute;
+    top           : 10px;
+    left          : 4606px;
+    width         : 580px;
+    height        : 500px;
+    background    : transparent; 
+  }
+
+
+  #station6 {
+    position      : absolute;
+    top           : 10px;
+    left          : 6180px;
+    width         : 580px;
+    height        : 500px;
+    background    : transparent; 
+  }
+
+
+  #station7 {
+    position            : absolute;
+    top                 : 10px;
+    left                : 7650px;
+    width               : 580px;
+    height              : 500px;
+    background          : transparent;
+  }
+
+
+
+/**
+ *  Properties
+ *  
+ */
+
+  .unselectable {
+      -webkit-user-select: none;
+       -khtml-user-select: none;
+         -moz-user-select: none;
+              user-select: none;
+  }
+
+
+
+  /**
+   * Behaviours, animations and transitions
+   * 
+   */
+
+
+  .animated {
+    transition: 0.1667s;
+  }
+
+
+  .continuous {
+    -webkit-animation-iteration-count: infinite;
+       -moz-animation-iteration-count: infinite;
+        -ms-animation-iteration-count: infinite;
+         -o-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+  }
+
+
+
+  /**
+   * Animations 
+   * 
+   */
+
+
+  @-webkit-keyframes hint {
+     0%, 100% {-webkit-transform: translateX(0);}
+    50% {-webkit-transform: translateX(10px);}
+  }
+
+  @-moz-keyframes hint {
+     0%, 100% {-moz-transform: translateX(0);}
+    50% {-moz-transform: translateX(10px);}
+  }
+
+  @-o-keyframes hint {
+     0%, 100% {-o-transform: translateX(0);}
+    50% {-o-transform: translateX(10px);}
+  }
+  @keyframes hint {
+     0%, 100% {transform: translateX(0);}
+    50% {transform: translateX(10px);}
+  }
+
+
+  .hint {
+   -webkit-animation    : hint 0.5s ease-in-out infinite;
+       -moz-animation   : hint 0.5s ease-in-out infinite;
+         -o-animation   : hint 0.5s ease-in-out infinite;
+            animation   : hint 0.5s ease-in-out infinite;
+  }
+
+
+  @-webkit-keyframes arrow {
+      50%  {left: 8px;}
+      100% {left: 16px;}
+  }
+  ​
+
+  @-moz-keyframes arrow {
+       0%   {left: 0px;}
+      50%  {left: 8px;}
+      100% {left: 16px;}
+  }
+
+  @keyframes arrow {
+       0%   {left: 0px;}
+      50%  {left: 8px;}
+      100% {left: 16px;}
+  }
+
+
+  @-webkit-keyframes bounce {
+     0%, 20%, 50%, 80%, 100% {-webkit-transform: translateX(0);}
+    40% {-webkit-transform: translateY(-4px);}
+    60% {-webkit-transform: translateY(-9px);}
+  }
+
+  @-moz-keyframes bounce {
+     0%, 20%, 50%, 80%, 100% {-moz-transform: translateY(0);}
+    40% {-moz-transform: translateY(-4px);}
+    60% {-moz-transform: translateY(-9px);}
+  }
+
+  @-o-keyframes bounce {
+     0%, 20%, 50%, 80%, 100% {-o-transform: translateY(0);}
+    40% {-o-transform: translateY(-4px);}
+    60% {-o-transform: translateY(-9px);}
+  }
+  @keyframes bounce {
+     0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-4px);}
+    60% {transform: translateY(-9px);}
+  }
+
+
+  .bounce {
+   -webkit-animation    : bounce 0.5s ease-in infinite;
+       -moz-animation   : bounce 0.5s ease-in infinite;
+         -o-animation   : bounce 0.5s ease-in infinite;
+            animation   : bounce 0.5s ease-in infinite;
+  }
+
+
+
+  .driving.fast {
+
+    -webkit-transform: skewX(165deg) scaleY(1.2) translateY(-10px);
+       -moz-transform: skewX(165deg) scaleY(1.2) translateY(-10px);
+         -o-transform: skewX(165deg) scaleY(1.2) translateY(-10px);
+            transform: skewX(165deg) scaleY(1.2) translateY(-10px);
+
+    -webkit-animation    : slide 0.4s ease-in;
+       -moz-animation    : slide 0.4s ease-in;
+         -o-animation    : slide 0.4s ease-in;
+            animation    : slide 0.4s ease-in;
+  }
+
+ 
