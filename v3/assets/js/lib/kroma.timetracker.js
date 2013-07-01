@@ -89,31 +89,29 @@
           return;
         }
 
-        console.log("TimeTracker: " + VGTouchTimeTracker.SESSION.TIME.total);
+        // send to server every [REPORT_INTERVAL] seconds, incl. at zero
+        if( (self.SESSION.TIME.active % self._options.REPORT_INTERVAL) === 0) {
+          console.log("Tracking active time: " + self.SESSION.TIME.active + "/" + self.SESSION.TIME.total + " sec");
+          self.update();
+        }
+        // else {
+        //   console.log("NOT updating server: " + (self.SESSION.TIME.total % self._options.REPORT_INTERVAL) );
+        // }
 
-        // send to server every [REPORT_INTERVAL] seconds
-        if( (VGTouchTimeTracker.SESSION.TIME.total % VGTouchTimeTracker._options.REPORT_INTERVAL) === 0) {
-          console.log("Update server: " + VGTouchTimeTracker.SESSION.TIME.total + " sec");
-          VGTouchTimeTracker.update();
+        self.SESSION.TIME.total++;
+
+        if(self.SESSION.IS_VISIBLE) {
+          self.SESSION.TIME.visible++;
         }
         else {
-          // console.log("NOT updating server: " + (VGTouchTimeTracker.SESSION.TIME.total % VGTouchTimeTracker._options.REPORT_INTERVAL) );
+          self.SESSION.TIME.hidden++;
         }
 
-        VGTouchTimeTracker.SESSION.TIME.total++;
-
-        if(VGTouchTimeTracker.SESSION.IS_VISIBLE) {
-          VGTouchTimeTracker.SESSION.TIME.visible++;
+        if(self.SESSION.IS_IDLE) {
+          self.SESSION.TIME.idle++;
         }
         else {
-          VGTouchTimeTracker.SESSION.TIME.hidden++;
-        }
-
-        if(VGTouchTimeTracker.SESSION.IS_IDLE) {
-          VGTouchTimeTracker.SESSION.TIME.idle++;
-        }
-        else {
-          VGTouchTimeTracker.SESSION.TIME.active++;
+          self.SESSION.TIME.active++;
         }
       };
 
@@ -143,21 +141,16 @@
         document.addEventListener("blur",  this.__onHidden, false);
 
 
-
         inputfunctions = "mousedown keydown";
         if ('ontouchstart' in window) {
           inputfunctions += " " + touchstart;
         }
 
-        window.addEventListener('mousedown keydown touchstart', this.onActivity, false); 
-
-
+        window.addEventListener(inputfunctions, this.onActivity, false); 
 
         for (var idx in options) {
           this._options[idx] = options[idx];
         }
-
-
 
         this._img = new Image();
         this.SESSION.initialized = true;
@@ -214,9 +207,6 @@
           return false;
         }
 
-
-        console.log("sending data object to logging server.");
-
         switch(method.toLowerCase()) {
           case "json" : 
             this._sendJSON(data);
@@ -253,7 +243,7 @@
           if( response.OK == 1 ) {
               // console.log('Received response from logger service: ' + this.responseText);
           } else{
-              console.log('Error-response received from logger service: ' + this.status + " - " + response.OK, response);
+              console.log('Error-response received from logger service: ' + this.status + "; OK: " + response.OK, response);
           }
         }
         catch (e) {
@@ -329,6 +319,9 @@
           this.IS_VISIBLE = visibility;
         }
 
+        if (!this.IS_VISIBLE) {
+          VGTouchTimeTracker.SESSION.IS_IDLE = true;
+        }
       };
 
 
@@ -379,7 +372,6 @@
 
       tracker.update = function () {
         // send as event type "time"
-        console.log("logging session time to server ... ", this.SESSION);
         this.send(this.SESSION, "time");
       };
 
@@ -398,7 +390,6 @@
           this._timer = false;
         }
         this._timer = setInterval(this.__onTimer, interval);
-        console.log("setting interval " + interval + " for function __onTimer: " + this._timer);
       };
 
       window.onerror = this._onError;

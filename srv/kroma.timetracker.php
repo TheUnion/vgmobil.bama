@@ -3,7 +3,6 @@
   $session = session_start();
 
 
-
   // activate debugging
   define('DEBUG', true);
 
@@ -14,15 +13,6 @@
   $debug    = array();
 
   $EVENT    = array();
-
-
-  $EVENT['ip'] = $_SERVER['HTTP_REFERER'];
- 
-  $EVENT['session'] = $_REQUEST['START_TIME'];
-
-  $EVENT['event']   = $_REQUEST['event'];
-  $EVENT['value']   = $_REQUEST[ $EVENT['event']];
-
 
   $mysqli = new mysqli($db['host'],$db['user'],$db['password'],$db['db']);
 
@@ -54,7 +44,7 @@
   $now = $_SERVER['REQUEST_TIME_FLOAT'];
 
   if(!isset($_SESSION['id'])) {
-    $_SESSION['id']     = strval($now);
+    $_SESSION['id']     = intval( str_replace( ".", "", strval($now) ) );
   }
 
 
@@ -86,6 +76,7 @@
   switch($REQUEST_FORMAT) {
 
     case JSON : 
+        header('Access-Control-Allow-Origin: *');
         header("Content-Type: application/json; charset: UTF-8;");
         break;
 
@@ -94,6 +85,7 @@
         break;
 
     default: 
+        header('Access-Control-Allow-Origin: *');
         header("Content-Type: application/json; charset: UTF-8;");
         break;
   }
@@ -109,8 +101,11 @@
     global $reply;
 
     $message = file_get_contents('php://input');
-    $reply['debug']['request'] = $message;
-    return json_encode($message, true);
+
+    if(DEBUG) {
+      $reply['debug']['request'] = $message;
+    }
+    return json_decode($message, true);
   }
 
 
@@ -151,31 +146,48 @@
 
     $mysqli = new mysqli($db['host'],$db['user'],$db['password'],$db['db']);
 
-    if(mysqli_connect_errno()){
+    if($mysqli->connect_errno){
       $reply['OK'] = 0;
-      $reply['message'] = mysqli_connect_error();
+      $reply['message'] = $mysqli->connect_error;
       return false;
     }
 
-    $fields = implode(",", array_keys($row));
-    $values = implode("','", $row);
+    if (false === ($mysqli->select_db($db['db']))) {
+      $reply['OK'] = 0;
+      $reply['message'] = "Unable to select db: " . $db['db'] . "(" . $mysqli->errno . ": " . $mysqli->error . ")";
+      return false;
+    }
+
+    $debug[] = "";
+
+    foreach ($entry as $key => $value) {
+      if (is_array($value)) {
+
+      }
+    }
+
+    $fields = 'event,' . implode(",", array_keys($entry['data']));
+    $values = "{$entry['event']}','" . implode("','", $entry['data']);
 
     if(count($fields)!==count($values)){
       $reply['OK']      = 0;
-      $reply['message'] = 'Number of fields and values do not match in addToCache()';
-      $debug[]          = 'ERROR! Number of fields and values do not match in addToCache()';
+      $reply['message'] = 'Number of fields and values do not match in insertLogEntry()';
+      $debug[]          = 'ERROR! Number of fields and values do not match in insertLogEntry()';
     }
 
 
     $query    = "INSERT INTO " . $db['table'] . " ($fields) 
                   VALUES('$values');";
-    $debug[]   = 'Running query: ' . $query;
+    $debug[]   = 'Running query: '. $query;
 
     if( FALSE === $mysqli->query($query) ){
-      $reply['OK'] = 0;
+
+      $reply['OK']      = 0;
       $reply['message'] = $mysqli->error; 
-      $debug[] = 'ERROR! Something went wrong when inserting into cache.'; 
+
+      $debug[] = 'ERROR! Something went wrong when inserting into MySQL db ' . $db['db'] . ", table " . $db['table'];
       $debug[] = 'MySQL error: ' . $mysqli->error; 
+
       return false;
     }
     else{
@@ -207,18 +219,21 @@
   }
 
 
-  function publish($channel = "srv.debug", $message = false) {
+  function publish($channel = REDIS_DEBUG_CHANNEL, $message = false) {
+    global
+      $reply;
 
-    if($redis){
+    if( false !== ($redis = connectToRedis()) ){
       if(!$message) {
-        // we were invoked with only one param, so assume it's a message for default channel
+        // we were invoked with only one param, so assume it's a message for our default channel
         $message = $channel;
-        $channel =  "srv.debug";
+        $channel =  REDIS_DEBUG_CHANNEL;
       }
-      $this->redis->publish($channel, $message);
+      $redis->publish($channel, $message);
     }
     else {
-      $this->say("We have no redis object in function publish()\n");
+      $reply['OK'] = 0;
+      $reply['message'] = "We were unable to connect to redis in function publish()\n";
     }
   }
 
@@ -252,8 +267,16 @@
   insertLogEntry($logEntry);
   publishLogEntry($logEntry);
 
-  $reply['OK'] = 1;
+  if(!isset($reply['OK'])) {
+    $reply['OK'] = 1;
+  }
 
+  if(DEBUG) {
+    $reply['debug']['log'] = $debug;
+  }
+
+  //  $reply['debug']['phpsession'] = $_SESSION;
   sendResponse($reply);
 
 ?>
+
