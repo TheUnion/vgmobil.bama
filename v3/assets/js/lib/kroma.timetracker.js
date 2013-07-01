@@ -14,9 +14,9 @@
         FORMAT          : "json",  // "json", "gif"
         METHOD          : "post",  // "post", "get"
         SERVER          : "http://kromaviews.no:8080/dev/games/bama/srv/kroma.timetracker.php",
-        REPORT_INTERVAL : 15000,
-        TIMER_INTERVAL  : 1000,
-        IDLE_TIMEOUT    : 60
+        TIMER_INTERVAL  : 1000, // millisec
+        REPORT_INTERVAL : 15,   // sec
+        IDLE_TIMEOUT    : 60    // sec
     },
 
     CLIENT = {
@@ -36,13 +36,14 @@
           __console     : document.getElementById('console') || false,
 
           _options      : {},
+          _timer        : false,
 
           SESSION       : {
             start       : new Date().getTime(),
             initialized : false,
             EVENTS      : [],
             IS_IDLE     : false,
-            IS_VISIBLE  : false,
+            IS_VISIBLE  : true,
             TIME      : {
               total   : 0,
               idle    : 0,
@@ -57,7 +58,6 @@
       /**  Private / protected section
        *
        */
-
 
 
       tracker.__onWindowMessage = function (msg) {
@@ -81,27 +81,47 @@
       };
 
       tracker.__onTimer = function () {
-        VGTouchTimeTracker.SESSION.TIME.total ++;
-        
-        if(VGTouchTimeTracker.SESSION.IS_VISIBLE) {
-          VGTouchTimeTracker.SESSION.TIME.visible ++;
+        var
+          self = VGTouchTimeTracker || false;
+
+        if(!self) {
+          console.log("No TimeTracker object!")
+          return;
+        }
+
+        console.log("TimeTracker: " + VGTouchTimeTracker.SESSION.TIME.total);
+
+        // send to server every [REPORT_INTERVAL] seconds
+        if( (VGTouchTimeTracker.SESSION.TIME.total % VGTouchTimeTracker._options.REPORT_INTERVAL) === 0) {
+          console.log("Update server: " + VGTouchTimeTracker.SESSION.TIME.total + " sec");
+          VGTouchTimeTracker.update();
         }
         else {
-          VGTouchTimeTracker.SESSION.TIME.hidden ++;
+          // console.log("NOT updating server: " + (VGTouchTimeTracker.SESSION.TIME.total % VGTouchTimeTracker._options.REPORT_INTERVAL) );
+        }
+
+        VGTouchTimeTracker.SESSION.TIME.total++;
+
+        if(VGTouchTimeTracker.SESSION.IS_VISIBLE) {
+          VGTouchTimeTracker.SESSION.TIME.visible++;
+        }
+        else {
+          VGTouchTimeTracker.SESSION.TIME.hidden++;
         }
 
         if(VGTouchTimeTracker.SESSION.IS_IDLE) {
-          VGTouchTimeTracker.SESSION.TIME.idle ++;
+          VGTouchTimeTracker.SESSION.TIME.idle++;
         }
         else {
-          VGTouchTimeTracker.SESSION.TIME.active ++;
+          VGTouchTimeTracker.SESSION.TIME.active++;
         }
       };
 
 
       tracker.__init = function (options) {
         var
-          self = this;
+          self = this,
+          inputfunctions = "";
 
 
         if (this.SESSION.initialized === true) {
@@ -115,24 +135,35 @@
           url             : window.location
         };
 
-       
 
         document.addEventListener("message", this.__onWindowMessage, false);        
-        document.addEventListener("focus", this.__onVisible, false);        
-        document.addEventListener("blur", this.__onHidden, false);        
+
+        // this will probably not work from within an iframe, though ..
+        document.addEventListener("focus", this.__onVisible, false);
+        document.addEventListener("blur",  this.__onHidden, false);
+
+
+
+        inputfunctions = "mousedown keydown";
+        if ('ontouchstart' in window) {
+          inputfunctions += " " + touchstart;
+        }
+
+        window.addEventListener('mousedown keydown touchstart', this.onActivity, false); 
+
 
 
         for (var idx in options) {
           this._options[idx] = options[idx];
         }
 
-        this._timer = setInterval(this.__onTimer, this._options.TIMER_INTERVAL);
 
 
         this._img = new Image();
         this.SESSION.initialized = true;
         return true;
       };
+
 
       tracker._sendJSON = function(data) {
         var
@@ -152,28 +183,6 @@
         xhr.send(json);
       };
 
-
-      tracker.getAnimationMethod = function(){ 
-        var
-          result = ( 
-            window.requestAnimationFrame    || window.webkitRequestAnimationFrame || 
-            window.mozRequestAnimationFrame || 
-            window.msRequestAnimationFrame  || function(callback) { window.setTimeout(callback, 1000 / 60); }
-          );
-
-        return result.name || "window.setTimeout";
-      };
-
-
-      tracker.setVisible = function (visibility) {
-        var
-          visibility = visibility || true;
-
-        if( this.IS_VISIBLE !== visibility ) {
-          this.IS_VISIBLE = visibility;
-        }
-
-      };
 
       tracker._sessionTime = function () {
         return this.START_SESSION - new Date().getTime();
@@ -196,7 +205,7 @@
           method = method || this._options.METHOD;
 
         if( typeof data !=="object" ) {
-          console.log("Wrong parameter type '" + typeof(data) + "', expected an object.");
+          console.log("Wrong parameter type '" + typeof(data) + "', expected 'object'.");
           return false;
         }
 
@@ -204,6 +213,9 @@
           console.log("NOT sending empty data object to logging server.");
           return false;
         }
+
+
+        console.log("sending data object to logging server.");
 
         switch(method.toLowerCase()) {
           case "json" : 
@@ -234,13 +246,18 @@
             return;
         }
 
-        var
-          response = JSON.parse(this.responseText);
+        try {
+          var
+            response = JSON.parse(this.responseText);
 
-        if( response.OK == 1 ) {
-            // console.log('Received response from logger service: ' + this.responseText);
-        } else{
-            console.log('Error-response received from logger service: ' + this.status + " - " + response.OK, response);
+          if( response.OK == 1 ) {
+              // console.log('Received response from logger service: ' + this.responseText);
+          } else{
+              console.log('Error-response received from logger service: ' + this.status + " - " + response.OK, response);
+          }
+        }
+        catch (e) {
+          console.log("Error: ", e);
         }
       };
 
@@ -272,7 +289,7 @@
         if(this.__console) {
           console.log("console.nodeName: " + this.__console.nodeName);
           console.log("console.nodeType: " + this.__console.nodeType);
-          this.__console.value += line + ( (!!obj) ? JSON.stringify(obj) : "");
+          this.__console.value += line + ( (obj!=="undefined") ? JSON.stringify(obj) : "");
         }
         else {
           console.log("No __console element!");
@@ -291,18 +308,42 @@
        *
        */
 
-      tracker.onActivity = function (e) {
+
+      tracker.getAnimationMethod = function(){ 
         var
-          previousEventTime = this.PREV_EVENT;
+          result = ( 
+            window.requestAnimationFrame    || window.webkitRequestAnimationFrame || 
+            window.mozRequestAnimationFrame || 
+            window.msRequestAnimationFrame  || function(callback) { window.setTimeout(callback, 1000 / 60); }
+          );
 
-        this.EVENTS.push(e);
-        this.PREV_EVENT = new Date().getTime();
-
-        if ( (this.PREV_EVENT - previousEventTime) > this.IDLE_TIMEOUT ) {
-          this.__onIdleEnd(e);
-        }
+        return result.name || "window.setTimeout";
       };
 
+
+      tracker.setVisible = function (visibility) {
+        var
+          visibility = visibility || true;
+
+        if( this.IS_VISIBLE !== visibility ) {
+          this.IS_VISIBLE = visibility;
+        }
+
+      };
+
+
+      tracker.onActivity = function (e) {
+        var
+          self = VGTouchTimeTracker;
+        var  
+          previousEventTime = self.PREV_EVENT || new Date().getTime();
+
+        self.PREV_EVENT = new Date().getTime();
+
+        if ( (self.PREV_EVENT - previousEventTime) > (self.IDLE_TIMEOUT * 1000) ) {
+          self.__onIdleEnd(e);
+        }
+      };
 
 
       tracker.setSessionVariable = function (name, value, section) {
@@ -317,9 +358,9 @@
           }
           this.SESSION[section][name] = value;
         }
-
         // console.log("Setting session var " + name + " to " + value +  (section ? " in section " + section + "." : ".") );
       };
+
 
       tracker.error = function (line, obj) {
         this._send({event: "error", message: line, data: obj || false});
@@ -329,8 +370,17 @@
         this._send({event: "log", message: line, data: obj || false});
       };
 
-      tracker.send = function (obj) {
-        this._send({event: "data", data: obj || null});
+      tracker.send = function (obj, evt) {
+        var
+          evt = evt || "data";
+
+        this._send({event: evt, data: obj || null});
+      };
+
+      tracker.update = function () {
+        // send as event type "time"
+        console.log("logging session time to server ... ", this.SESSION);
+        this.send(this.SESSION, "time");
       };
 
       tracker.stacktrace = function(error) {
@@ -340,9 +390,15 @@
 
       tracker.run = function(interval) {
         var
-          interval = interval || 15000;
+          interval = interval || 1000;
 
-        
+        if(this._timer!==false) {
+          console.log("clearing interval: " + this._timer);
+          clearInterval(this._timer);
+          this._timer = false;
+        }
+        this._timer = setInterval(this.__onTimer, interval);
+        console.log("setting interval " + interval + " for function __onTimer: " + this._timer);
       };
 
       window.onerror = this._onError;
@@ -351,7 +407,6 @@
 
       // call init function
       tracker.__init(options);
-      tracker.run();
       return tracker;
 
     }(OPTIONS);

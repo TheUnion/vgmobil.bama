@@ -14,13 +14,13 @@ $(document).ready(function () {
       // events are automatically sent to tracking server as they occur
       EVENT = {
           "start_interaction" : { id: 6260200, onEvent: function() { 
-              if(typeof KromaTimeTracker !== "object") { 
-                console.log("KromaTimeTracker is undefined!");
+              if(typeof VGTouchTimeTracker !== "object") { 
+                console.log("VGTouchTimeTracker is undefined!");
                 return false;
               }   
-              console.log("KromaTimeTracker: ", KromaTimeTracker); 
-              KromaTimeTracker.run(KTT_OPTIONS); 
-            } 
+              console.log("VGTouchTimeTracker: ", VGTouchTimeTracker);
+              VGTouchTimeTracker.run();
+            }
           },
 
           "arrive_station3"   : { id: 6260201, onEvent: function(setPoster) { setPoster('assets/img/poster.jpg'); } },
@@ -112,11 +112,11 @@ $(document).ready(function () {
         !!obj ? console.log(line, obj) : console.log(line);
 
         // send to server is we have a Kroma Debugger object
-        if(typeof HTMLDebugger.log === "function") {
+        if(typeof HTMLDebugger === "object") {
           HTMLDebugger.log(line, obj);
         }
         else {
-          console.log("Error in function debugLog(): Kroma Debugger is not initialized.");
+          console.log("Error in function debugLog(): Kroma HTMLDebugger is not initialized.");
         }
       };
 
@@ -385,10 +385,11 @@ $(document).ready(function () {
           var 
             video           = typeof elem === "string" ? document.getElementById(elem) : elem,
             videoController = {},
-            loadedMetaData  = false;
+            loadedMetaData  = false,
+            self            = this;
 
             video.addEventListener("loadedmetadata", function() {
-                this.loadedMetaData = true;
+                self.loadedMetaData = true;
               }, false);
 
             video.addEventListener("error", function(error) {
@@ -485,93 +486,6 @@ $(document).ready(function () {
       };
 
 
-
-/**
- *  AJAX helper
- *
- *  A light-weight HTML5 AJAX helper object
- *
- *  Just to keep it DRY
- * 
- */
-
-
-    var AJAX = {
-
-      req : new XMLHttpRequest(),
-
-
-      __execute : function (msg, obj) {
-        var
-          req     = this.req || XMLHttpRequest(),
-          request = null,
-          url     = "http://www.kromaviews.no:8080/dev/"
-
-        // request = { message: msg, extra: obj };
-
-        // req.open("GET", url, true);
-
-        // req.send();
-
-
-      // console.log(msg)
-
-
-      },
-
-
-      send : function (message, object) {
-  
-        this.__execute(message, object);
-      },
-
-      // progress on transfers from the server to the client (downloads)
-      updateProgress : function(e) {
-        if (e.lengthComputable) {
-          var percentComplete = e.loaded / e.total;
-          // ...
-        } else {
-          // Unable to compute progress information since the total size is unknown
-        }
-      },
-
-      transferComplete : function(e) {
-        console.log("The transfer is complete.");
-      },
-
-      transferFailed : function(e) {
-        console.log("An error occurred while transferring the file.");
-      },
-
-      transferCanceled : function(e) {
-        console.log("The transfer has been canceled by the user.");
-      },
-
-      loadEnd : function(e) {
-        console.log("The transfer finished (although we don't know if it succeeded or not).");
-      },
-
-      init : function () {
-        req.addEventListener("progress",  updateProgress, false);
-        req.addEventListener("load",      transferComplete, false);
-        req.addEventListener("loadend",   loadEnd, false);
-        req.addEventListener("error",     transferFailed, false);
-        req.addEventListener("abort",     transferCanceled, false);
-      },
-
-      getHeaderTime : function () {
-
-        // returns a valid GMTString date or null
-        return this.getResponseHeader("Last-Modified"); 
-      }
-
-    }; 
-
-
-/*  --------------------  END OF AJAX helper  ----------------------*/
-
-
-
       var hitTest = function (target, click) {
         var 
           clickpos  = Math.abs(click.offsetLeft + startpos) + click.clientX,
@@ -585,16 +499,18 @@ $(document).ready(function () {
 
 
 
-/**
- * fakeClick : trigger a click event on a   <a href target>   -> a workaround for creating new windows from javascript 
- * without bothering the popup blocking thingsies
- *
- * This method was created by <http://stackoverflow.com/users/45433/crescent-fresh>
- * <http://stackoverflow.com/questions/1421584/how-can-i-simulate-a-click-to-an-anchor-tag/1421968#1421968>
- *
- * To call programmatically, probably just fakeClick(null, <a>)
- * 
- */   var fakeClick = function (event, anchorObj) {
+    /**
+     * fakeClick : trigger a click event on a   <a href target>   -> a workaround for creating new windows from javascript 
+     * without bothering the popup blocking thingsies
+     *
+     * This method was created by <http://stackoverflow.com/users/45433/crescent-fresh>
+     * <http://stackoverflow.com/questions/1421584/how-can-i-simulate-a-click-to-an-anchor-tag/1421968#1421968>
+     *
+     * To call programmatically, probably just fakeClick(null, <a>)
+     * 
+     */   
+    
+      var fakeClick = function (event, anchorObj) {
 
         // console.log("Faking a click");
       
@@ -614,8 +530,6 @@ $(document).ready(function () {
         }
       };
 
-
-/*-----------------------------------------------------------------------------------------------*/
 
       var getClickedElement = function (click) {
 
@@ -649,13 +563,11 @@ $(document).ready(function () {
         // we could probably come up with something more general, but not in the time available
         else if( (clickpos>=7650 + 174 && (clickpos<=7650 + 170 + 232) )) {
           if((click.clientY>230) && (click.clientY<282)){
-            // console.log("link1: ", link1)
             openLink(link1);
             onEvent({event: "click_link1"});
             return;
           }
           else if((click.clientY>(286) && (click.clientY<((332))))){
-            // console.log("link2: ", link2)
             openLink(link2);
             onEvent({event: "click_link2"});
             return;
@@ -664,7 +576,6 @@ $(document).ready(function () {
         // click on video
         else if( (clickpos>=(3072 + 65) && (clickpos<=(3072 + 65 + 416)) )) {
           if((click.clientY>(86) && (click.clientY<((86 + 236))))){ //allow 20px for controls, video is 216px tall
-            // console.log('click on video: ' + link2.href);
             clickVideo();
             return;
           }
@@ -677,14 +588,8 @@ $(document).ready(function () {
       var onClicked = function(click) {
         var
           result = getClickedElement(click);
+        return result;
       };
-
-
-      var enableSwipe = function () {
-        $("#parallax").parallaxSwipe.SWIPE_ENABLED = true;          
-      };
-
-
 
 
 
@@ -1173,12 +1078,12 @@ $(document).ready(function () {
 
 
 
-    var onError = function (e) {
-      console.log("error loading script " + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src);
+    var onError = function (err) {
+      console.log("error loading script " + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.fileName);
     };
 
     var onSuccess = function () {
-      console.log("loaded script " + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src);
+      console.log("loaded script " + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.fileName);
     };
 
     var requireScript = function ( file, async, defer, success, failure ) {
@@ -1190,16 +1095,17 @@ $(document).ready(function () {
         defer   = defer || false;
 
       if(async) {
-        // we don't want to set async to false
+        // you don't set "async" to false, you either set it or no
         script.async = true;
       }
 
       if(defer) {
-        // we don't want to set defer to false
+        // you don't set "defer" to false, you either set it or no
         script.defer = true;
       }
 
       script.src        = file;
+      script.fileName   = file;
       script.self       = script;
       script.success    = success || false;
       script.failure    = failure || false;
@@ -1207,21 +1113,24 @@ $(document).ready(function () {
 
       script.onload = function () {
         if(this.success) {
-          this.success.call();
+          this.success.apply(this);
         }
       };
 
       script.onerror = function (err) {
         if(this.failure) {
-          this.failure.call(err);
+          this.failure.apply(this, err);
         }
       };
 
       return cursor.insertBefore(script, cursor.firstChild);
     };
 
-  // include script, synchronously
-  requireScript ("assets/js/lib/kroma.debugger.js", false, false, onSuccess, onError);
 
+  // load our time tracker
+  requireScript ("assets/js/lib/kroma.timetracker.js", false, false, onSuccess, onError);
+
+  // load html debugger, not async & not deferred
+  requireScript ("assets/js/lib/kroma.debugger.js", false, false, onSuccess, onError);
 
 

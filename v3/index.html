@@ -223,14 +223,6 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste jordbærer. 
 
   <script>
 
-      var onError = function (e) {
-        console.log("error loading script " + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src);
-      };
-
-      var onSuccess = function () {
-        console.log("loaded script " + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src);
-      };
-
 
       /**
        * requireScript
@@ -243,51 +235,60 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste jordbærer. 
        * @param  callback   success   callback on load
        * @param  callback   failure   callback on error
        *
-       * @author Johan Telstad
+       * @author Johan Telstad  <jt@enfield.no>
        * 
        */
 
 
-      var requireScript = function ( file, async, defer, success, failure ) {
-        var
-          cursor  = document.getElementsByTagName ("head")[0] || document.documentElement,
-          path    = file,
-          script  = document.createElement('script'),
-          async   = async || false,
-          defer   = defer || false;
+    var onError = function (err) {
+      console.log("error loading script " + (this.async!=="undefined" ? "asynchronously, " : "synchronously, ") + (this.defer!=="undefined" ? "deferred: " : "not deferred: ") + this.fileName, err);
+    };
 
-        if(async) {
-          // we don't want to set async to false
-          script.async = true;
+    var onSuccess = function () {
+      console.log("loaded script " + (this.async!=="undefined" ? "asynchronously, " : "synchronously, ") + (this.defer!=="undefined" ? "deferred: " : "not deferred: ") + this.fileName);
+    };
+
+    var requireScript = function ( file, async, defer, success, failure ) {
+      var
+        cursor  = document.getElementsByTagName ("head")[0] || document.documentElement,
+        path    = file,
+        script  = document.createElement('script'),
+        async   = async || false,
+        defer   = defer || false;
+
+      if(async) {
+        // you don't set "async" to false, you either set it or no
+        script.async = true;
+      }
+
+      if(defer) {
+        // you don't set "defer" to false, you either set it or no
+        script.defer = true;
+      }
+
+      script.src        = file;
+      script.fileName   = file;
+      script.self       = script;
+      script.success    = success || false;
+      script.failure    = failure || false;
+
+
+      script.onload = function () {
+        if(this.success) {
+          this.success.apply(this);
         }
-
-        if(defer) {
-          // we don't want to set defer to false
-          script.defer = true;
-        }
-
-        script.src        = file;
-        script.self       = script;
-        script.success    = success || false;
-        script.failure    = failure || false;
-
-
-        script.onload = function () {
-          if(this.success) {
-            this.success.call();
-          }
-        };
-
-        script.onerror = function (err) {
-          console.log('error loading script ' + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src, err);
-          if(this.failure) {
-            this.failure.call(err);
-          }
-        };
-
-        // return inserted script node
-        return cursor.insertBefore(script, cursor.firstChild); 
       };
+
+      script.onerror = function (err) {
+        if(this.failure) {
+          this.failure.apply(this, err);
+        }
+      };
+
+      return cursor.insertBefore(script, cursor.firstChild);
+    };
+
+
 
     // include script synchronously
     requireScript ("http://pliing.se/PliingAd/AdJs?app=no_vg_bama_tracking_tablet&id=1&no=" +new Date().getTime(), false, false, onSuccess, onError);
@@ -296,10 +297,8 @@ Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste jordbærer. 
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
   <script async src="assets/js/lib/jquery.parallaxSwipe.js"></script>
-  <!-- <script src="assets/js/lib/idle.min.js"></script> -->
   <script async src="assets/js/bama.nyt.norge.js"></script>
-  <script async defer src="assets/js/lib/kroma.timetracker.js"></script>
-
+  <!--script async defer src="assets/js/lib/kroma.timetracker.js"></script-->
 
   <div class="push"></div>
 </div>
