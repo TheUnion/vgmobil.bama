@@ -1,210 +1,22 @@
   /**
-   *  TimeTracker
+   *  VGTouchTimeTracker
    *
-   *  Logs time spent in ad
+   *  Logs active/idle time in HTML creatives
    *
    *  @author Johan Telstad, jt@enfield.no
    * 
    */
 
 
-  UserAgent = (function() {
-    var 
-      Browsers, OS, Platform, Versions, browser_name, browser_version, os, platform;
-
-    Versions = {
-      Firefox   : /firefox\/([\d\w\.\-]+)/i,
-      IE        : /msie\s([\d\.]+[\d])/i,
-      Chrome    : /chrome\/([\d\w\.\-]+)/i,
-      Safari    : /version\/([\d\w\.\-]+)/i,
-      Ps3       : /([\d\w\.\-]+)\)\s*$/i,
-      Psp       : /([\d\w\.\-]+)\)?\s*$/i
-    };
-
-    Browsers = {
-      Konqueror : /konqueror/i,
-      Chrome    : /chrome/i,
-      Safari    : /safari/i,
-      IE        : /msie/i,
-      Opera     : /opera/i,
-      PS3       : /playstation 3/i,
-      PSP       : /playstation portable/i,
-      Firefox   : /firefox/i
-    };
-
-    OS = {
-      WindowsVista  : /windows nt 6\.0/i,
-      Windows7      : /windows nt 6\.1/i,
-      Windows8      : /windows nt 6\.2/i,
-      Windows2003   : /windows nt 5\.2/i,
-      WindowsXP     : /windows nt 5\.1/i,
-      Windows2000   : /windows nt 5\.0/i,
-      OSX           : /os x (\d+)[._](\d+)/i,
-      Linux         : /linux/i,
-      Wii           : /wii/i,
-      PS3           : /playstation 3/i,
-      PSP           : /playstation portable/i,
-      Ipad          : /\(iPad.*os (\d+)[._](\d+)/i,
-      Iphone        : /\(iPhone.*os (\d+)[._](\d+)/i
-    };
-
-    Platform = {
-      Windows       : /windows/i,
-      Mac           : /macintosh/i,
-      Linux         : /linux/i,
-      Wii           : /wii/i,
-      Playstation   : /playstation/i,
-      Ipad          : /ipad/i,
-      Ipod          : /ipod/i,
-      Iphone        : /iphone/i,
-      Android       : /android/i,
-      Blackberry    : /blackberry/i
-    };
-
-    function UserAgent(source) {
-      if (source == null) {
-        source = navigator.userAgent;
-      }
-      this.source = source.replace(/^\s*/, '').replace(/\s*$/, '');
-      this.browser_name = browser_name(this.source);
-      this.browser_version = browser_version(this.source);
-      this.os = os(this.source);
-      this.platform = platform(this.source);
-    }
-
-    browser_name = function(string) {
-      switch (true) {
-        case Browsers.Konqueror.test(string):
-          return 'konqueror';
-        case Browsers.Chrome.test(string):
-          return 'chrome';
-        case Browsers.Safari.test(string):
-          return 'safari';
-        case Browsers.IE.test(string):
-          return 'ie';
-        case Browsers.Opera.test(string):
-          return 'opera';
-        case Browsers.PS3.test(string):
-          return 'ps3';
-        case Browsers.PSP.test(string):
-          return 'psp';
-        case Browsers.Firefox.test(string):
-          return 'firefox';
-        default:
-          return 'unknown';
-      }
-    };
-
-    browser_version = function(string) {
-      var regex;
-      switch (browser_name(string)) {
-        case 'chrome':
-          if (Versions.Chrome.test(string)) {
-            return RegExp.$1;
-          }
-          break;
-        case 'safari':
-          if (Versions.Safari.test(string)) {
-            return RegExp.$1;
-          }
-          break;
-        case 'firefox':
-          if (Versions.Firefox.test(string)) {
-            return RegExp.$1;
-          }
-          break;
-        case 'ie':
-          if (Versions.IE.test(string)) {
-            return RegExp.$1;
-          }
-          break;
-        case 'ps3':
-          if (Versions.Ps3.test(string)) {
-            return RegExp.$1;
-          }
-          break;
-        case 'psp':
-          if (Versions.Psp.test(string)) {
-            return RegExp.$1;
-          }
-          break;
-        default:
-          regex = /#{name}[\/ ]([\d\w\.\-]+)/i;
-          if (regex.test(string)) {
-            return RegExp.$1;
-          }
-      }
-    };
-
-    os = function(string) {
-      switch (true) {
-        case OS.WindowsVista.test(string):
-          return 'Windows Vista';
-        case OS.Windows7.test(string):
-          return 'Windows 7';
-        case OS.Windows2003.test(string):
-          return 'Windows 2003';
-        case OS.WindowsXP.test(string):
-          return 'Windows XP';
-        case OS.Windows2000.test(string):
-          return 'Windows 2000';
-        case OS.Linux.test(string):
-          return 'Linux';
-        case OS.Wii.test(string):
-          return 'Wii';
-        case OS.PS3.test(string):
-          return 'Playstation';
-        case OS.PSP.test(string):
-          return 'Playstation';
-        case OS.OSX.test(string):
-          return string.match(OS.OSX)[0].replace('_', '.');
-        case OS.Ipad.test(string):
-          return string.match(OS.Ipad)[0].replace('_', '.');
-        case OS.Iphone.test(string):
-          return string.match(OS.Iphone)[0].replace('_', '.');
-        default:
-          return 'unknown';
-      }
-    };
-
-    platform = function(string) {
-      switch (true) {
-        case Platform.Windows.test(string):
-          return "Microsoft Windows";
-        case Platform.Mac.test(string):
-          return "Apple Mac";
-        case Platform.Android.test(string):
-          return "Android";
-        case Platform.Blackberry.test(string):
-          return "Blackberry";
-        case Platform.Linux.test(string):
-          return "Linux";
-        case Platform.Wii.test(string):
-          return "Wii";
-        case Platform.Playstation.test(string):
-          return "Playstation";
-        case Platform.Ipad.test(string):
-          return "iPad";
-        case Platform.Ipod.test(string):
-          return "iPod";
-        case Platform.Iphone.test(string):
-          return "iPhone";
-        default:
-          return 'unknown';
-      }
-    };
-    return UserAgent;
-  })();
-
-
-
-
   var 
     OPTIONS = {
   
-        FORMAT : "json",  // "json", "gif"
-        METHOD : "post",  // "post", "get"
-        SERVER : "http://kromaviews.no:8080/dev/games/bama/srv/kroma.debug.logger.php"
+        FORMAT          : "json",  // "json", "gif"
+        METHOD          : "post",  // "post", "get"
+        SERVER          : "http://kromaviews.no:8080/dev/games/bama/srv/kroma.timetracker.php",
+        REPORT_INTERVAL : 15000,
+        TIMER_INTERVAL  : 1000,
+        IDLE_TIMEOUT    : 60
     },
 
     CLIENT = {
@@ -212,13 +24,12 @@
         // initial and default values
         url           : window.location,
         event         : "unknown",
-        userAgent     : UserAgent(),
         timestamp     : 0,
         description   : ""
     };
 
 
-    TimeTracker = function (options) {
+    VGTouchTimeTracker = function (options) {
 
       var 
         tracker          = {
@@ -247,72 +58,79 @@
        *
        */
 
+
+
       tracker.__onWindowMessage = function (msg) {
-        TimeTracker.log( msg.origin + " posted message: " + msg.data );
+        VGTouchTimeTracker.log( msg.origin + " posted message: " + msg.data );
       };
 
       tracker.__onIdleStart = function () {
-        TimeTracker.SESSION.IS_IDLE = true;
+        VGTouchTimeTracker.SESSION.IS_IDLE = true;
       };
 
       tracker.__onIdleEnd = function () {
-        TimeTracker.SESSION.IS_IDLE = false;
+        VGTouchTimeTracker.SESSION.IS_IDLE = false;
       };
 
       tracker.__onVisible = function () {
-        TimeTracker.SESSION.IS_VISIBLE = true;
+        VGTouchTimeTracker.SESSION.IS_VISIBLE = true;
       };
 
       tracker.__onHidden = function () {
-        TimeTracker.SESSION.IS_VISIBLE = false;
+        VGTouchTimeTracker.SESSION.IS_VISIBLE = false;
       };
 
       tracker.__onTimer = function () {
-        TimeTracker.SESSION.TIME.total ++;
+        VGTouchTimeTracker.SESSION.TIME.total ++;
         
-        if(TimeTracker.SESSION.IS_VISIBLE) {
-          TimeTracker.SESSION.TIME.visible ++;
+        if(VGTouchTimeTracker.SESSION.IS_VISIBLE) {
+          VGTouchTimeTracker.SESSION.TIME.visible ++;
         }
         else {
-          TimeTracker.SESSION.TIME.hidden ++;
+          VGTouchTimeTracker.SESSION.TIME.hidden ++;
         }
 
-        if(TimeTracker.SESSION.IS_IDLE) {
-          TimeTracker.SESSION.TIME.idle ++;
+        if(VGTouchTimeTracker.SESSION.IS_IDLE) {
+          VGTouchTimeTracker.SESSION.TIME.idle ++;
         }
         else {
-          TimeTracker.SESSION.TIME.active ++;
+          VGTouchTimeTracker.SESSION.TIME.active ++;
         }
       };
+
 
       tracker.__init = function (options) {
         var
           self = this;
 
-        // console.log("This : " + this, this);
+
+        if (this.SESSION.initialized === true) {
+          console.log("Trying to __init() tracker object, but it is already initialized. This should never happen.");
+          return false;
+        }
+
 
         this.SESSION.info = {
           animationMethod : this.getAnimationMethod(),
           url             : window.location
         };
 
-        // this._idleDetector = Idle({
-        //     onHidden    : this.__onHidden,
-        //     onVisible   : this.__onVisible,
-        //     onAway      : this.__onIdleStart,
-        //     onAwayBack  : this.__onIdleEnd,
-        //     awayTimeout : 120 * 1000 // idle after 120 seconds of inactivity
-        //   }).start();
-        this.SESSION.initialized = true;
+       
 
         document.addEventListener("message", this.__onWindowMessage, false);        
+        document.addEventListener("focus", this.__onVisible, false);        
+        document.addEventListener("blur", this.__onHidden, false);        
 
-        this._timer = setInterval(this.__onTimer, 1000);
 
         for (var idx in options) {
-          tracker._options[idx] = options[idx];
+          this._options[idx] = options[idx];
         }
-        tracker._img = new Image();
+
+        this._timer = setInterval(this.__onTimer, this._options.TIMER_INTERVAL);
+
+
+        this._img = new Image();
+        this.SESSION.initialized = true;
         return true;
       };
 
@@ -343,9 +161,19 @@
             window.msRequestAnimationFrame  || function(callback) { window.setTimeout(callback, 1000 / 60); }
           );
 
-        return result.name || result;
+        return result.name || "window.setTimeout";
       };
 
+
+      tracker.setVisible = function (visibility) {
+        var
+          visibility = visibility || true;
+
+        if( this.IS_VISIBLE !== visibility ) {
+          this.IS_VISIBLE = visibility;
+        }
+
+      };
 
       tracker._sessionTime = function () {
         return this.START_SESSION - new Date().getTime();
@@ -353,12 +181,12 @@
 
       tracker._sendREQUEST = function(data) {
         var
-          msg = this._encodeAsGet(data);
+          requestUri = this._encodeAsGet(data);
 
-        console.log("Sending GET request: " + this._options.SERVER + "?" + msg);
+        console.log("Sending GET request: " + this._options.SERVER + "?" + requestUri);
 
-        //send request for GIF beacon
-        this._img.src = this._options.SERVER + "?" + msg;
+        // request GIF beacon
+        this._img.src = this._options.SERVER + "?" + requestUri;
       };
 
 
@@ -376,8 +204,6 @@
           console.log("NOT sending empty data object to logging server.");
           return false;
         }
-
-        // this._logToConsole("tracker.log: ", JSON.stringify(data));
 
         switch(method.toLowerCase()) {
           case "json" : 
@@ -433,7 +259,7 @@
 
         if(DEBUG) {
           // show stack trace
-          msg += TimeTracker.stacktrace(error);
+          msg += VGTouchTimeTracker.stacktrace(error);
         }
 
         this.error(msg, error);
@@ -464,6 +290,20 @@
       /**  Public / published section
        *
        */
+
+      tracker.onActivity = function (e) {
+        var
+          previousEventTime = this.PREV_EVENT;
+
+        this.EVENTS.push(e);
+        this.PREV_EVENT = new Date().getTime();
+
+        if ( (this.PREV_EVENT - previousEventTime) > this.IDLE_TIMEOUT ) {
+          this.__onIdleEnd(e);
+        }
+      };
+
+
 
       tracker.setSessionVariable = function (name, value, section) {
         var
@@ -507,59 +347,17 @@
 
       window.onerror = this._onError;
 
-      console.log("Starting KROMA TimeTracker.");
+      console.log("Starting VGTouchTimeTracker.");
 
       // call init function
       tracker.__init(options);
+      tracker.run();
       return tracker;
 
     }(OPTIONS);
 
 
 
-  /**    END TimeTracker     */
+  /**    END VGTouchTimeTracker     */
 
 
-  /**
-   *  Histogram
-   *
-   *  Keep a data series which counts the incidence of individual numbers
-   *  Not suited for large data sets, or sparse indices
-   */
-
-
-  var 
-    Histogram = Histogram || function (OPTIONS) {
-      var
-        _series   = [],
-        _options  = {},
-        _sumtotal = 0;
-
-
-      function addDataPoint(idx, count) {
-        if (idx >= this._series.length) {
-          this._series.length = (idx + 1);
-        }
-        this._sumtotal    += count;
-        this._series[idx] += count;
-      }
-
-      function getData() {
-        return this._series;
-      }
-
-      function toString() {
-        return JSON.stringify(this._series);
-      }
-
-      function getDataPoint(idx) {
-        if (idx >= this._series.length) {
-          return false;
-        }
-        return this._series[idx];
-      }
-
-    }();
-
-
-  var timeTracker = TimeTracker();

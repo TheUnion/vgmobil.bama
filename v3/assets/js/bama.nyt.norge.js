@@ -13,7 +13,15 @@ $(document).ready(function () {
       // define analytics events
       // events are automatically sent to tracking server as they occur
       EVENT = {
-          "start_interaction" : { id: 6260200, onEvent: false },
+          "start_interaction" : { id: 6260200, onEvent: function() { 
+              if(typeof KromaTimeTracker !== "object") { 
+                console.log("KromaTimeTracker is undefined!");
+                return false;
+              }   
+              console.log("KromaTimeTracker: ", KromaTimeTracker); 
+              KromaTimeTracker.run(KTT_OPTIONS); 
+            } 
+          },
 
           "arrive_station3"   : { id: 6260201, onEvent: function(setPoster) { setPoster('assets/img/poster.jpg'); } },
           "arrive_station4"   : { id: 6260202, onEvent: false },

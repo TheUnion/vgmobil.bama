@@ -4,10 +4,25 @@
 
 
 
+  // activate debugging
+  define('DEBUG', true);
+
+
   $db       = array('host' => 'localhost', 'db' => 'debuglog', 'password' => '1234tsXX', 'user' => 'debugger', 'table' => 'logs.vgmobil');
   $reply    = array();
   $request  = array();
   $debug    = array();
+
+  $EVENT    = array();
+
+
+  $EVENT['ip'] = $_SERVER['HTTP_REFERER'];
+ 
+  $EVENT['session'] = $_REQUEST['START_TIME'];
+
+  $EVENT['event']   = $_REQUEST['event'];
+  $EVENT['value']   = $_REQUEST[ $EVENT['event']];
+
 
   $mysqli = new mysqli($db['host'],$db['user'],$db['password'],$db['db']);
 
@@ -29,9 +44,12 @@
   $REQUEST_FORMAT  = isset($_REQUEST['format']) ? strtolower($_REQUEST['format']) : "json";
 
   $request  = null;
-  $reply    = array( "debug" => array( "headers" => apache_request_headers(), "request" => array() ) );
 
-  $reply['debug']['env'] = $_SERVER;
+  if(DEBUG) {
+    $reply = array( "debug" => array( "headers" => apache_request_headers(), "request" => array() ) );
+    $reply['debug']['env'] = $_SERVER;
+  }
+
 
   $now = $_SERVER['REQUEST_TIME_FLOAT'];
 
@@ -127,6 +145,7 @@
    * @return boolean indicating success or failure
    */
 
+
   function insertLogEntry($entry) {
     global $db, $reply, $request, $debug;
 
@@ -148,11 +167,11 @@
     }
 
 
-    $query    = "INSERT INTO cache ($fields) 
+    $query    = "INSERT INTO " . $db['table'] . " ($fields) 
                   VALUES('$values');";
     $debug[]   = 'Running query: ' . $query;
 
-    if(FALSE===$mysqli->query($query)){
+    if( FALSE === $mysqli->query($query) ){
       $reply['OK'] = 0;
       $reply['message'] = $mysqli->error; 
       $debug[] = 'ERROR! Something went wrong when inserting into cache.'; 
@@ -166,12 +185,6 @@
   }
 
   
-    // $mysqli = mysqli_connect()
-
-    //write to log in json format
-    file_put_contents( LOG_PATH . LOG_FILE, json_encode( $entry, JSON_PRETTY_PRINT ), FILE_APPEND );
-  }
-
 
   /**
    * publishLogEntry()
@@ -186,7 +199,6 @@
       return false;
     }
     $redis->publish($chan, $msg);
-
   }
 
 
@@ -195,13 +207,13 @@
   }
 
 
-  function publish($channel, $message=false) {
+  function publish($channel = "srv.debug", $message = false) {
 
-    if($this->redis){
+    if($redis){
       if(!$message) {
         // we were invoked with only one param, so assume it's a message for default channel
         $message = $channel;
-        $channel = $this->channel;
+        $channel =  "srv.debug";
       }
       $this->redis->publish($channel, $message);
     }
@@ -215,7 +227,6 @@
     global $reply, $debug;
     $redis = new Redis();
     try{ 
-//      if(false===($redis->connect('127.0.0.1', 6379, $timeout))){
       if(false===($redis->connect(REDIS_SOCK))){
         $debug[] = 'Unable to connect to Redis';
         return false;
