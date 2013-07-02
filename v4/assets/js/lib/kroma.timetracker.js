@@ -37,19 +37,19 @@
 
           _options      : {},
           _timer        : false,
+          PREV_EVENT    : new Date().getTime(),
 
-          SESSION       : {
-            start       : new Date().getTime(),
-            initialized : false,
-            EVENTS      : [],
-            IS_IDLE     : false,
-            IS_VISIBLE  : true,
-            TIME      : {
-              total   : 0,
-              idle    : 0,
-              active  : 0,
-              visible : 0,
-              hidden  : 0
+          SESSION         : {
+            start         : new Date().getTime(),
+            initialized   : false,
+            IS_IDLE       : false,
+            IS_VISIBLE    : true,
+            TIME        : {
+              total     : 0,
+              idle      : 0,
+              active    : 0,
+              visible   : 0,
+              hidden    : 0
             }
           }
         };
@@ -59,6 +59,10 @@
        *
        */
 
+
+      tracker.__getLastEventTime = function () {
+        return this.SESSION.lastEventTime;
+      };
 
       tracker.__onWindowMessage = function (msg) {
         VGTouchTimeTracker.log( msg.origin + " posted message: " + msg.data );
