@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />  
+  <title>Bama - Rygge</title>
+  <link href='http://fonts.googleapis.com/css?family=Abel:400,700' rel='stylesheet' type='text/css'>  
+  <link href="assets/css/bama.main.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<div class="wrapper">
+
+  <div class="container" onselectstart="return false;">
+    <img id="logo" class="hires" src="assets/img/bama_logo.svg" />
+    <div id="parallax">
+      <div class="panel">    
+        <div class="content">
+        </div>
+      </div>
+    </div>
+  </div> 
+
+  <div class="container" onselectstart="return false;">
+    <div id="layer1" class="parallax_layer">
+      <div class="panel">
+      
+      </div>
+    </div>
+  </div>
+
+  <div class="container" onselectstart="return false;">
+    <div id="layer2" class="parallax_layer lazyload ondemand" data-load-event="start_interaction"> <!-- middle layer #2 -->
+      <div class="panel">
+      </div>
+    </div>
+  </div>
+
+  <div class="container" onselectstart="return false;">
+    <div id="layer3" class="parallax_layer lazyload ondemand" data-load-event="start_interaction">  <!-- middle layer #1 -->
+      <div class="panel">
+      </div>
+    </div>
+  </div>
+
+  <div class="container" onselectstart="return false;">
+    <div id="layer4" class="parallax_layer"> <!-- front layer #2 -->
+      <div class="panel">
+      </div>
+    </div>
+  </div>
+
+  <div class="container" onselectstart="return false;">
+    <div id="layer5" class="parallax_layer lazyload ondemand" data-load-event="start_interaction"> <!-- our scene layer -->
+      <div class="panel">
+        <div id="start">
+          <div id="flag">
+            <!-- <img src="http://content.screencast.com/users/fg-a/folders/world-flags/media/db7cc8e6-00d9-49d2-86dc-fa4ba0fbe3da/animated-norway-flag.gif" /> -->
+            <img class="hires" src="assets/img/flag.png" />
+          </div>
+
+          <div class="arrow animated continuous hint"><img class="stretchfill" src="assets/img/finger.png" /></div>
+          
+          <div id="foreground"><img src="assets/img/hill_front1.png" alt="" /></div>
+
+          <div id="intro_text" class="sprite">
+            <span class="verybig uppercase">Nå er rotgrønnsakene<br />på sitt beste!</span>
+            <span class="big gray regular">
+              <p class="air_above">Kjør bilen med fingeren<br />og finn ut hvorfor!</p>
+            </span>
+          </div>
+        </div>
+
+        <div id="station1" class="station lazyload ondemand" data-load-event="start_interaction">
+          <div id="muni_sign" class="muni_sign lazyload ondemand" data-load-event="start_interaction"><span id="muni_sign_title">Rygge</span></div>
+        </div>
+
+        <div id="station2" class="station lazyload ondemand" data-load-event="start_interaction">
+          <div class="drive_in_sign center">Rot-<br />grønnsaker!</div>
+        </div>
+
+        <div id="station3" class="station lazyload ondemand" data-load-event="start_interaction">
+          <div class="arrow small animated continuous hint"><img class="stretchfill" src="assets/img/finger.png" /></div>
+          <div id="video1_container">
+            <video id="video1" class="interactive clicktarget" width="416" height="234" preload="none" controls>
+              <source src="assets/video/video1.webm" type="video/webm">
+              <source src="assets/video/video1.mp4" type="video/mp4">
+              <source src="assets/video/video1.ogv" type="video/theora">
+              Your browser does not support the video tag. 
+              You're using Internet Explorer, probably.
+            </video>
+          </div>
+
+          <div id="farm_sign" class="lazyload ondemand" data-load-event="start_interaction">
+            <span id="farm_sign_title">Bondegård</span>
+          </div>
+        </div>
+
+        <div id="station4" class="station">
+          <!-- <img id="firewood" class="sprite hires" src="assets/img/firewood.png"> -->
+          <div class="arrow small animated continuous hint"><img class="stretchfill" src="assets/img/finger.png" /></div>
+          <div id="fence" class="sprite lazyload ondemand" data-load-event="arrive_station3"></div>
+          <div id="firewood" class="sprite lazyload ondemand" data-load-event="arrive_station3"></div>
+
+          <div id="farmer" class="sprite lazyload ondemand" data-load-event="arrive_station3"></div>
+          
+          <div id="farmer_hello">
+            <div id="farmer_tips" class="sprite lazyload ondemand" data-load-event="arrive_station3">
+              <!-- <img id="farmer_large" src="assets/img/farmer_large.png" /> -->
+              <!-- <img id="close_button" src="assets/img/close_grey.png" /> -->
+              <div id="farmer_tekst" class="snakkeboble center" style="padding-top: 12px; padding-bottom: 0px; height: 104px">
+                <span class="bold">Rotgrønnsakene</span> kan brukes til nesten alt. Koke, steke, bake, glasere, som puré, som stuing, i supper...
+              </div>
+              <div class="btm"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="station6" class="station lazyload ondemand" data-load-event="arrive_station4">
+          <div class="arrow small animated continuous hint"><img class="stretchfill" src="assets/img/finger.png" /></div>
+          <div id="lise_hello" class="interactive">
+            <div id="lise_tips" class="sprite lazyload ondemand" data-load-event="arrive_station4">
+              <div id="lise_text" class="snakkeboble center">
+                <span class="bold">Hei</span>, jeg heter Lise. Her har du en oppskrift med rotgrønnsaker.
+              <div class="btn klikkbar">Trykk her!</div>
+              </div>
+              <div class="btm"></div>
+            </div>
+          </div>
+
+          <div id="cases" class="sprite lazyload ondemand" data-load-event="arrive_station4"></div>
+          <div id="lise" class="face sprite lazyload ondemand" data-load-event="arrive_station4"></div>
+        </div>
+
+        <div id="station7" class="station lazyload ondemand" data-load-event="arrive_station6">
+          <div id="final_sign" class="lazyload ondemand" data-load-event="arrive_station6">
+            <span class="btn"><a id="link1" class="btn klikkbar" target="_blank" href="http://www.bama.no/norsk/index.html">Trykk for oppskrifter</a></span><br />
+            <span class="btn"><a id="link2" class="btn klikkbar" target="_blank" href="http://www.bama.no/norsk/sesong/juli.html">Trykk for sesong</a> </span>
+          </div>
+          <div id="stop_sign" class="lazyload ondemand" data-load-event="arrive_station6"></div>
+          
+        <!-- this is the div containing the road tiles -->
+        </div>
+        <div id="road" class="road">
+        </div>
+
+      </div>
+    </div>
+
+
+
+  <div class="container" onselectstart="return false;">  <!-- -->
+    <div id="layer6"> <!-- fg_road.png layer -->
+      <div class="panel">
+        <div class="content">
+        </div>
+      </div>
+      </div>
+  </div>
+
+  <div class="container" onselectstart="return false;">
+    <div id="layer_player" class="parallax_layer interactive">
+      <img id="car" class="animated" src="assets/img/car.png" width="283" height="126" />
+
+      <div id="lise_recipe" class="center recipe">
+        <div id="lise_recipe_card" class="lazyload ondemand" data-load-event="arrive_station4"></div> 
+
+        <svg version="1.1" id="Layer_1" class="close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+           width="44px" height="44px" stroke="#534741" fill="#534741" viewBox="0 0 44 44" style="enable-background:new 0 0 44 44;" xml:space="preserve">
+          <path d="M21.936,1.501c11.299,0,20.492,9.193,20.492,20.493c0,11.299-9.192,20.492-20.492,20.492
+            c-11.3,0-20.493-9.192-20.493-20.492C1.443,10.694,10.636,1.501,21.936,1.501 M21.936,0.106c-12.089,0-21.887,9.798-21.887,21.887
+            c0,12.086,9.798,21.886,21.887,21.886c12.086,0,21.886-9.8,21.886-21.886C43.822,9.905,34.022,0.106,21.936,0.106L21.936,0.106z"/>
+
+          <line style="fill:none;stroke: #534741; stroke-width:1.3944;stroke-linecap:round;stroke-miterlimit:10;" x1="11.882" y1="11.766" x2="31.867" y2="31.75"/>
+          <line style="fill:none;stroke: #534741; stroke-width:1.3944;stroke-linecap:round;stroke-miterlimit:10;" x1="31.867" y1="11.766" x2="11.882" y2="31.75"/>
+        </svg>
+
+        <div class="recipe" style="width=580px; font-size: 22px; color: #555; padding-left: 40px; padding-right: 40px">
+          <span class="recipe_title" style="font-size: 20px;">Sommersalat med jordbær</span><br />
+          <p class="recipe_small"> 
+            3 sopp i skiver, 5 reddiker i skiver, 1 pose baby leaf mix, 1/2 kurv ferske norske jordbær delt i to, 1/3 agurk i biter, balsamico-dressing.
+            <br /> <br />
+              Fres soppen og reddiken i en varm panne til de får en lett brunfarge. Bland så baby leaf mix, jordbær, agurk samt reddiken og soppen i en passe stor bolle. Hell litt balsamico-dressing over til slutt.
+           <!--  3 sopp, kuttet i tynne skiver
+            5 reddiker, kuttet i tynne skiver
+            1 pose baby leaf mix
+            1/2 kurv ferske norske jordbær, renset og delt i to
+            1/3 agurk, kuttet i biter
+            Balsamico-dressing
+            <br /> 
+            Fres soppen og reddiken i en varm panne til de får en lett brunfarge.
+            Bland så baby leaf mix, jordbær, agurk samt reddiken og soppen i en passe
+            stor bolle. Ringle litt balsamico-dressing over til slutt. -->
+          </p>
+        </div>
+      </div>
+
+      <div id="farmer_recipe" class="center recipe">
+       <svg version="1.1" id="Layer_2" class="close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+           width="44px" height="44px" stroke="#534741" fill="#534741" viewBox="0 0 44 44" style="enable-background:new 0 0 44 44;" xml:space="preserve">
+          <path d="M21.936,1.501c11.299,0,20.492,9.193,20.492,20.493c0,11.299-9.192,20.492-20.492,20.492
+            c-11.3,0-20.493-9.192-20.493-20.492C1.443,10.694,10.636,1.501,21.936,1.501 M21.936,0.106c-12.089,0-21.887,9.798-21.887,21.887
+            c0,12.086,9.798,21.886,21.887,21.886c12.086,0,21.886-9.8,21.886-21.886C43.822,9.905,34.022,0.106,21.936,0.106L21.936,0.106z"/>
+          <line style="fill:none;stroke: #534741; stroke-width:1.3944;stroke-linecap:round;stroke-miterlimit:10;" x1="11.882" y1="11.766" x2="31.867" y2="31.75"/>
+          <line style="fill:none;stroke: #534741; stroke-width:1.3944;stroke-linecap:round;stroke-miterlimit:10;" x1="31.867" y1="11.766" x2="11.882" y2="31.75"/>
+        </svg>
+        
+        <div id="farmer_jordbær" class="lazyload ondemand" data-load-event="arrive_station3"></div> 
+        
+        <div class="recipe" style="width=580px; font-size: 22px; color: #555; padding-left: 40px; padding-right: 40px">
+          <span class="recipe_title">jordbærDYRKING I NORGE</span><br />
+          <span class="recipe_small"><p>
+Klimaet i Norge er perfekt for å dyrke frem de reneste og sunneste jordbærer. Og siden det er kort avstand mellom deg og meg vil du få denne jordbæren i butikken veldig raskt. En crispy jordbær smaker ekstra godt. Så husk å se etter de ferskeste jordbærene!</p>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+
+  <script>
+
+
+      /**
+       * requireScript
+       *
+       * Simple function to load a script into the DOM
+       * 
+       * @param  string     file      src of script
+       * @param  boolean    async     load asynchronously
+       * @param  boolean    defer     load deferred
+       * @param  callback   success   callback on load
+       * @param  callback   failure   callback on error
+       *
+       * @author Johan Telstad  <jt@enfield.no>
+       * 
+       */
+
+
+    var onError = function (err) {
+      console.log("error loading script " + (this.async!=="undefined" ? "asynchronously, " : "synchronously, ") + (this.defer!=="undefined" ? "deferred: " : "not deferred: ") + this.fileName, err);
+    };
+
+    var onSuccess = function () {
+      console.log("loaded script " + (this.async!=="undefined" ? "asynchronously, " : "synchronously, ") + (this.defer!=="undefined" ? "deferred: " : "not deferred: ") + this.fileName);
+    };
+
+    var requireScript = function ( file, async, defer, success, failure ) {
+      var
+        cursor  = document.getElementsByTagName ("head")[0] || document.documentElement,
+        path    = file,
+        script  = document.createElement('script'),
+        async   = async || false,
+        defer   = defer || false;
+
+      if(async) {
+        // you don't set "async" to false, you either set it or no
+        script.async = true;
+      }
+
+      if(defer) {
+        // you don't set "defer" to false, you either set it or no
+        script.defer = true;
+      }
+
+      script.src        = file;
+      script.fileName   = file;
+      script.self       = script;
+      script.success    = success || false;
+      script.failure    = failure || false;
+
+
+      script.onload = function () {
+        if(this.success) {
+          this.success.apply(this);
+        }
+      };
+
+      script.onerror = function (err) {
+        if(this.failure) {
+          this.failure.apply(this, err);
+        }
+      };
+
+      return cursor.insertBefore(script, cursor.firstChild);
+    };
+
+
+
+    // include script synchronously
+    requireScript ("http://pliing.se/PliingAd/AdJs?app=no_vg_bama_tracking_tablet&id=1&no=" +new Date().getTime(), false, false, onSuccess, onError);
+
+  </script>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
+  <script async src="assets/js/lib/jquery.parallaxSwipe.js"></script>
+  <script async src="assets/js/bama.nyt.norge.js"></script>
+  <!--script async defer src="assets/js/lib/kroma.timetracker.js"></script-->
+
+  <div class="push"></div>
+</div>
+<div class="footer code">
+  <div id="position_data">position</div>
+  <div id="debuginfo">debuginfo</div>
+    
+  <!-- A quick-and-dirty console-like window on devices -->
+  <div id="debugconsole" class="console code">
+    
+    <textarea id="console" class="console code"></textarea>
+
+    <!-- log lines -->
+    <ul id="log" class="log"></ul>
+  </div>
+</div>
+
+</body>
+</html>
