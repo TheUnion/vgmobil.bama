@@ -7,7 +7,7 @@
   define('DEBUG', true);
 
 
-  $db       = array('host' => 'localhost', 'db' => 'debuglog', 'password' => '1234tsXX', 'user' => 'debugger', 'table' => 'logs.vgmobil');
+  $db       = array('host' => 'localhost', 'db' => 'timetracker', 'password' => '1234tsXX', 'user' => 'debugger', 'table' => 'logs.vgmobil');
   $reply    = array();
   $request  = array();
   $debug    = array();
@@ -87,7 +87,6 @@
     default: 
         header('Access-Control-Allow-Origin: *');
         header("Content-Type: application/json; charset: UTF-8;");
-        break;
   }
 
 
@@ -133,7 +132,7 @@
 
 
   /**
-   * insertLogEntry()
+   * updateLogEntry()
    *
    * @param string format "json" or "gif"
    *
@@ -141,7 +140,7 @@
    */
 
 
-  function insertLogEntry($entry) {
+  function updateLogEntry($entry) {
     global $db, $reply, $request, $debug;
 
     $mysqli = new mysqli($db['host'],$db['user'],$db['password'],$db['db']);
@@ -152,32 +151,17 @@
       return false;
     }
 
-    if (false === ($mysqli->select_db($db['db']))) {
-      $reply['OK'] = 0;
-      $reply['message'] = "Unable to select db: " . $db['db'] . "(" . $mysqli->errno . ": " . $mysqli->error . ")";
-      return false;
-    }
+    $fields = 'session_id, event, total_time, active_time, idle_time, user_agent';
 
-    $debug[] = "";
-
-    foreach ($entry as $key => $value) {
-      if (is_array($value)) {
-
-      }
-    }
-
-    $fields = 'event,' . implode(",", array_keys($entry['data']));
-    $values = "{$entry['event']}','" . implode("','", $entry['data']);
-
-    if(count($fields)!==count($values)){
-      $reply['OK']      = 0;
-      $reply['message'] = 'Number of fields and values do not match in insertLogEntry()';
-      $debug[]          = 'ERROR! Number of fields and values do not match in insertLogEntry()';
-    }
+    // do not add quotes around the whole string, we do that in the query
+    // this is simply an adaptation that lets us easily use implode() on arrays
+    $values = "{$entry['data']['start']}','{$entry['event']}', '{$entry['data']['TIME']['total']}', '{$entry['data']['TIME']['active']}', '{$entry['data']['TIME']['idle']}', '" . $mysqli->real_escape_string($_SERVER['HTTP_USER_AGENT']);
 
 
-    $query    = "INSERT INTO " . $db['table'] . " ($fields) 
-                  VALUES('$values');";
+    $query    = "INSERT INTO `" . $db['db'] . "`.`" . $db['table'] . "` ($fields) 
+                  VALUES('$values')
+                  ON DUPLICATE KEY UPDATE total_time=" . $entry['data']['TIME']['total'] . ", active_time=" . $entry['data']['TIME']['active'] . ", idle_time=" . $entry['data']['TIME']['idle'] . ";";
+
     $debug[]   = 'Running query: '. $query;
 
     if( FALSE === $mysqli->query($query) ){
@@ -264,7 +248,8 @@
 
   $logEntry = decodeLogEntry($REQUEST_FORMAT);
 
-  insertLogEntry($logEntry);
+
+  $db_result = updateLogEntry($logEntry);
   publishLogEntry($logEntry);
 
   if(!isset($reply['OK'])) {
@@ -272,7 +257,8 @@
   }
 
   if(DEBUG) {
-    $reply['debug']['log'] = $debug;
+    $reply['debug']['log']        = $debug;
+    $reply['debug']['db_result']  = $db_result;
   }
 
   //  $reply['debug']['phpsession'] = $_SESSION;
