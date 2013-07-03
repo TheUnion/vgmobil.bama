@@ -367,6 +367,11 @@ http://ryanfait.com/
   }
 
 
+/*
+  extra class to make sure we have an image at the start screen
+
+ */
+
   .lazystart {
     background-image      : url('../img/hill_front1.png'); 
     background-repeat     : repeat-x;
@@ -587,8 +592,6 @@ http://ryanfait.com/
     top           : 6px;
     left          : 12px;
   }
-
-
 
 
   .drive_in_sign {

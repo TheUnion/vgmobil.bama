@@ -203,7 +203,6 @@ $(document).ready(function () {
           eventObject.registered    = false;
           events.push(eventObject);
           console.log("Analytics script not loaded, buffering event: " + eventObject.event);
-          return;
         }
         else {
           if(SESSION.HAS_CACHED_EVENTS) {
@@ -236,7 +235,9 @@ $(document).ready(function () {
             return;
           }
 
-          registerEvent(e.id);
+          if(registerEvent) {
+            registerEvent(e.id);
+          }
 
           if( typeof e.onEvent === "function" ) {
             e.onEvent.call(null, setPoster);

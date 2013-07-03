@@ -37,6 +37,8 @@
 
           _options      : {},
           _timer        : false,
+
+          IDLE_TICKER   : 0,
           PREV_EVENT    : new Date().getTime(),
 
           SESSION         : {
@@ -65,23 +67,42 @@
       };
 
       tracker.__onWindowMessage = function (msg) {
+        // receive messages through the postMessage API   -  works in iframe as well
         VGTouchTimeTracker.log( msg.origin + " posted message: " + msg.data );
       };
 
       tracker.__onIdleStart = function () {
-        VGTouchTimeTracker.SESSION.IS_IDLE = true;
+        var
+          self = VGTouchTimeTracker;
+
+        self.SESSION.TIME.active  -= self._options.IDLE_TIMEOUT;
+        self.SESSION.TIME.idle    += self._options.IDLE_TIMEOUT;
+        self.SESSION.IS_IDLE = true;
       };
 
       tracker.__onIdleEnd = function () {
-        VGTouchTimeTracker.SESSION.IS_IDLE = false;
+        self.SESSION.IS_IDLE = false;
       };
 
+
+      // tab activated
       tracker.__onVisible = function () {
-        VGTouchTimeTracker.SESSION.IS_VISIBLE = true;
+        var
+          self = VGTouchTimeTracker;
+        // is session started
+        if(self.SESSION.initialized) {
+          self.SESSION.IS_IDLE = false;
+        }
+          self.SESSION.IS_VISIBLE = true;
       };
 
+      // tab deactivated
       tracker.__onHidden = function () {
-        VGTouchTimeTracker.SESSION.IS_VISIBLE = false;
+        var
+          self = VGTouchTimeTracker;
+
+        self.SESSION.IS_IDLE    = true;
+        self.SESSION.IS_VISIBLE = false;
       };
 
       tracker.__onTimer = function () {
@@ -94,12 +115,12 @@
         }
 
         // send to server every [REPORT_INTERVAL] seconds, incl. at zero
-        if( (self.SESSION.TIME.active % self._options.REPORT_INTERVAL) === 0) {
-          console.log("Tracking active time: " + self.SESSION.TIME.active + "/" + self.SESSION.TIME.total + " sec");
+        if( (self.SESSION.TIME.total % self._options.REPORT_INTERVAL) === 0) {
+          console.log("Tracking active time: " + self.SESSION.TIME.active + "/" + self.SESSION.TIME.total + " (every " + self._options.REPORT_INTERVAL + " sec");
           self.update();
         }
         // else {
-        //   console.log("NOT updating server: " + (self.SESSION.TIME.total % self._options.REPORT_INTERVAL) );
+        //   console.log("NOT updating server: " + (self.SESSION.TIME.total % self._options.REPORT_INTERVAL) + " @ interval: " + self._options.REPORT_INTERVAL);
         // }
 
         self.SESSION.TIME.total++;
@@ -159,8 +180,8 @@
         this._img = new Image();
         this.SESSION.initialized = true;
         return true;
-      };
-
+      }
+      
 
       tracker._sendJSON = function(data) {
         var
@@ -184,6 +205,7 @@
       tracker._sessionTime = function () {
         return this.START_SESSION - new Date().getTime();
       };
+
 
       tracker._sendREQUEST = function(data) {
         var
@@ -337,7 +359,7 @@
 
         self.PREV_EVENT = new Date().getTime();
 
-        if ( (self.PREV_EVENT - previousEventTime) > (self.IDLE_TIMEOUT * 1000) ) {
+        if ( (self.PREV_EVENT - previousEventTime) > (self._options.IDLE_TIMEOUT * 1000) ) {
           self.__onIdleEnd(e);
         }
       };
@@ -393,7 +415,8 @@
           clearInterval(this._timer);
           this._timer = false;
         }
-        this._timer = setInterval(this.__onTimer, interval);
+        this._timer     = setInterval(this.__onTimer, interval);
+        this._idletimer = setInterval(this.__idleTimer, 1000);
       };
 
       window.onerror = this._onError;
