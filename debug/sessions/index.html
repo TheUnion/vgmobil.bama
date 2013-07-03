@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>VG Mobil: Bama - Nyt Norge</title>
+</head>
+<body>
+
+<div>
+  <table id="report">
+    <thead class="tableheader">
+      <tr id="reportheaders"><td>Session id</td><td>Active</td><td>Idle</td><td>Visible</td><td>Hidden</td><td>IP</td><td>Start</td></tr>
+    </thead>
+    <tbody id="reportbody" class="tablebody">
+      <!-- <tr><td>123544536</td><td>120</td><td>120</td><td>120</td><td>120</td><td>122.5364.654.4</td><td>15:54 03.07.2013</td></tr> -->
+    </tbody>
+  </table>
+
+  <table id="sessions">
+    <thead class="tableheader">
+      <tr id="sessionheaders"><td>Session id</td><td>Active</td><td>Idle</td><td>Visible</td><td>Hidden</td><td>IP</td><td>Start</td></tr>
+    </thead>
+    <tbody id="sessionbody" class="tablebody">
+      <tr><td>123544536</td><td>120</td><td>120</td><td>120</td><td>120</td><td>122.5364.654.4</td><td>15:54 03.07.2013</td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div id="console">
+
+</div>
+
+<script>
+ 
+  var 
+    DataSet = {
+
+      __updates   : [],
+      __summary   : document.getElementById('reportbody') || false,
+      __sessions  : document.getElementById('sessionbody') || false,
+      __rowElems  : null,
+      __rows      : [],
+      __rowIndex  : {},
+
+      __updateTable : function () {
+        if (!this.__table) { 
+          return false;
+        }
+      },
+
+      __refreshTable : function () {
+        if (!this.__table) { 
+          return false;
+        }
+
+      },
+
+
+      __init : function (options) {
+
+        // returns a live list of DOM elements, which updates as the DOM changes (i.e. no need to call more than once)
+        this.__rowElems = this.__table.getElementsByTagName('tr');
+        return true;
+      },
+
+
+      updateRow : function (row) {
+        var
+          row     = (typeof row === "string") ? (JSON.parse(row) || false) : (row || false),
+          rowElem = (this.__rowIndex["r"+row.id]) ? this.__rowIndex["r"+row.id]['element'] : false,
+          cells   = null;
+
+        if(!rowElem) {
+          return this.addRow(row);
+        }
+
+        cells = rowElem.element.getElementsByTagName('td');
+
+        var
+          cellCount = cells.length;
+
+        for (var i = 0; i<cellCount; i++) {
+          console.log(cells[i]);
+        }
+        return true;
+      },
+
+
+      _addRow : function (row) {
+        var
+          cell      = null,
+          fragment  = document.createDocumentFragment();
+
+        for( var idx in row.data ) {
+          if(idx==="element") {
+            continue;
+          }
+          cell = document.createElement('td');
+          cell.appendChild(document.createTextNode(row.data[idx]));
+          fragment.appendChild(cell);
+        }
+
+        this.__table.appendChild(fragment);
+
+        // add all td's in one fell swoop
+        console.log("row is : ", row);
+        // row.element.appendChild(fragment);
+      },
+
+
+      addRow  : function (row) {
+        var
+          row = (typeof row === "string") ? (JSON.parse(row) || false) : (row || false);
+
+        if( typeof row !== "object" ) {
+          return false;
+        }
+
+        if(this.__rowIndex["r" + row.id]) {
+          return this.updateRow(row);
+        }
+
+        this.__rowIndex["r" + row.id] = this.__rows.push(row)-1;
+        this._addRow(row);
+      },
+
+      deleteRow : function (idx) {
+        var 
+          i     = this.__rows.length,
+          rows  = this.__rows;
+
+        if(typeof idx !== "number") {
+          return false;
+        }
+
+        while (i--) {
+          if (rows[i] == idx) { 
+            rows = rows.splice(i, 1);
+            return true;
+          }
+        }
+
+        return false;
+      },
+
+      findRow : function (search) {
+
+      },
+
+      run : function (options) {
+        return this.__init(options);
+      }
+
+    };
+  </script>
+
+  <script>
+
+
+    function connectionOpen(open) {
+      var
+        msg   = open ? "Active connection to server." : "Connection dropped, trying to reopen.",
+        event = open ? "open" : "error",
+        term  = document.getElementById('console') || false;
+
+        if(!term) {
+          console.log("Error: No console div");
+          return;
+        }
+
+        onMessage({event: event, data: { message: msg}});
+        console.log("EventSource " + event + ": ", msg);
+        term.innerHTML += "EventSource " + event + ": " + msg + '<br />';
+    }
+
+
+    function updateConnections(event) {
+      connections.innerHTML = event.data;
+    }
+
+
+    function updateRequests(event) {
+      requests.innerHTML = event.data;
+    }
+
+
+    function onData(e) {
+      var
+        chunk = (typeof e.data === "object") ? e.data : JSON.parse(e.data);
+      
+      // onMessage(e);
+      DataSet.addRow(chunk);
+    }
+
+
+    function onMessage(e) {
+      var 
+        term  = document.getElementById('console') || false,
+        json  = typeof e.data === "object" ? e.data : JSON.parse(e.data);
+
+      if(!term) {
+        console.log("Error: No console div");
+        return;
+      }
+
+      console.log("event: " + json.event);
+      console.log("data : " + JSON.stringify(json.data));
+      term.innerHTML += "[" + json.event + "] " + JSON.stringify(json.data) + '<br />';
+    };
+
+
+    function onReportData(e) {
+      console.log("onReportData: ", e.data);
+    }
+
+
+    var 
+      source  = new EventSource('../../srv/kroma.pubsub.listener.sse.php'),
+      term    = document.getElementById('console') || false;
+
+
+    source.addEventListener('open', function () { connectionOpen(true); }, false);
+    source.addEventListener('error', function () { connectionOpen(false); }, false);
+    source.addEventListener('connections', updateConnections, false);
+    source.addEventListener('requests', updateRequests, false);
+    source.addEventListener('time', function (e) { console.log("time: " + e.data); }, false);
+    source.addEventListener('data', onData, false);
+    source.addEventListener('report', onReportData, false);
+    source.addEventListener('message', onMessage, false);
+    source.addEventListener('update', function(e) {
+      var data = JSON.parse(e.data);
+      console.log('data is now ', data);
+    }, false);
+
+
+  </script>
+</body>
+</html>
+

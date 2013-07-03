@@ -78,6 +78,7 @@
         self.SESSION.TIME.active  -= self._options.IDLE_TIMEOUT;
         self.SESSION.TIME.idle    += self._options.IDLE_TIMEOUT;
         self.SESSION.IS_IDLE = true;
+        console.log('Now idling ...');
       };
 
       tracker.__onIdleEnd = function () {
@@ -137,7 +138,13 @@
         }
         else {
           self.SESSION.TIME.active++;
+          // check if we have passed the idle timeout limit
+          if( (new Date().getTime() - self.PREV_EVENT) > (self._options.IDLE_TIMEOUT*1000)) {
+            console.log("IDLING !!");
+            self.__onIdleStart();
+          }
         }
+
       };
 
 
@@ -377,7 +384,6 @@
           }
           this.SESSION[section][name] = value;
         }
-        // console.log("Setting session var " + name + " to " + value +  (section ? " in section " + section + "." : ".") );
       };
 
 
@@ -397,7 +403,7 @@
       };
 
       tracker.update = function () {
-        // send as event type "time"
+        // send session object with event type "time"
         this.send(this.SESSION, "time");
       };
 
@@ -415,8 +421,7 @@
           clearInterval(this._timer);
           this._timer = false;
         }
-        this._timer     = setInterval(this.__onTimer, interval);
-        this._idletimer = setInterval(this.__idleTimer, 1000);
+        this._timer = setInterval(this.__onTimer, interval);
       };
 
       window.onerror = this._onError;
