@@ -2,14 +2,16 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>VG Mobil: Bama - Nyt Norge</title>
+  <title>Views: VGMobil.Bama -> Nyt Norge</title>
+  <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
 </head>
 <body>
 
 <div>
   <table id="report">
     <thead class="tableheader">
-      <tr id="reportheaders"><td>Session id</td><td>Active</td><td>Idle</td><td>Visible</td><td>Hidden</td><td>IP</td><td>Start</td></tr>
+      <tr id="reportheaders">
+      </tr>
     </thead>
     <tbody id="reportbody" class="tablebody">
       <!-- <tr><td>123544536</td><td>120</td><td>120</td><td>120</td><td>120</td><td>122.5364.654.4</td><td>15:54 03.07.2013</td></tr> -->
@@ -18,10 +20,9 @@
 
   <table id="sessions">
     <thead class="tableheader">
-      <tr id="sessionheaders"><td>Session id</td><td>Active</td><td>Idle</td><td>Visible</td><td>Hidden</td><td>IP</td><td>Start</td></tr>
+      <tr id="sessionheaders"></tr>
     </thead>
     <tbody id="sessionbody" class="tablebody">
-      <tr><td>123544536</td><td>120</td><td>120</td><td>120</td><td>120</td><td>122.5364.654.4</td><td>15:54 03.07.2013</td></tr>
     </tbody>
   </table>
 </div>
@@ -42,15 +43,50 @@
       __rowElems  : null,
       __rows      : [],
       __rowIndex  : {},
+      _hasHeaders : false,
+
 
       __updateTable : function () {
-        if (!this.__table) { 
+        if (!this.__summary) { 
           return false;
         }
+
       },
 
       __refreshTable : function () {
-        if (!this.__table) { 
+        if (!this.__summary) { 
+          return false;
+        }
+
+      },
+
+
+      __setHeaders : function (obj) {
+        var
+          headerRow = document.getElementById('sessionheaders') || false,
+          tdList    = document.createDocumentFragment(),
+          cell      = null;
+
+        if(!headerRow) {
+          console.log("No sessionheaders table row found");
+          return false;
+        }
+
+        for(var key in obj) {
+          cell = document.createElement('td');
+          cell.appendChild(document.createTextNode(key));
+          tdList.appendChild(cell);
+          console.log("Adding header: " + key);
+        }
+
+        // append any TDs
+        if(tdList.childNodes.length >0) {
+          console.log("Adding " + tdList.childNodes.length + " TDs");
+          headerRow.appendChild(tdList);
+          return true;
+        }
+        else {
+          console.log("No TDs added to headers");
           return false;
         }
 
@@ -60,7 +96,7 @@
       __init : function (options) {
 
         // returns a live list of DOM elements, which updates as the DOM changes (i.e. no need to call more than once)
-        this.__rowElems = this.__table.getElementsByTagName('tr');
+        this.__rowElems = this.__summary.getElementsByTagName('tr');
         return true;
       },
 
@@ -68,11 +104,20 @@
       updateRow : function (row) {
         var
           row     = (typeof row === "string") ? (JSON.parse(row) || false) : (row || false),
-          rowElem = (this.__rowIndex["r"+row.id]) ? this.__rowIndex["r"+row.id]['element'] : false,
+          rowElem = (this.__rowIndex["r"+row.start]) ? this.__rowIndex["r"+row.start]['element'] : false,
           cells   = null;
 
+        if(row) {
+          console.log("Converting row to object: ", row);
+          row = this.__rowToObject(row);
+          console.log("After conversion: ", row);
+
+          rowElem = (this.__rowIndex["r"+row.start]) ? this.__rowIndex["r"+row.start]['element'] : false;
+        }
+
         if(!rowElem) {
-          return this.addRow(row);
+          console.log("NEW session: " + "r"+row.start);
+          return this._addRow(row);
         }
 
         cells = rowElem.element.getElementsByTagName('td');
@@ -87,25 +132,51 @@
       },
 
 
+      __rowToObject : function (row) {
+        var
+          result = {};
+
+        for (var key in row) {
+          if ( (typeof row[key] === "object")  && (typeof result[key] === "undefined") ) {
+              var 
+                deep = this.__rowToObject(row[key]);
+              for(var idx in deep) {
+                result[idx] = deep[idx];
+              }
+          }
+          else {
+            result[key] = row[key];
+          }
+        }
+        return result;
+      },
+
+
       _addRow : function (row) {
         var
           cell      = null,
+          trow      = document.createElement('tr'),
           fragment  = document.createDocumentFragment();
 
-        for( var idx in row.data ) {
+        for( var idx in row ) {
           if(idx==="element") {
             continue;
           }
           cell = document.createElement('td');
-          cell.appendChild(document.createTextNode(row.data[idx]));
-          fragment.appendChild(cell);
+          cell.appendChild(document.createTextNode(row[idx]));
+          trow.appendChild(cell);
         }
 
-        this.__table.appendChild(fragment);
+        if( !this._hasHeaders && (trow.childNodes.length > 0) ) {
+          console.log("Setting headers: " + trow.childNodes.length);
+          this._hasHeaders = this.__setHeaders(row);
+        }
+        else {
+          console.log("NOT setting headers: " + this._hasHeaders + ", " + trow.length);
+        }
 
-        // add all td's in one fell swoop
-        console.log("row is : ", row);
-        // row.element.appendChild(fragment);
+        fragment.appendChild(trow);
+        this.__sessions.appendChild(fragment);
       },
 
 
@@ -113,17 +184,27 @@
         var
           row = (typeof row === "string") ? (JSON.parse(row) || false) : (row || false);
 
+
+
+        if(row) {
+          row = this.__rowToObject(row);
+        }
+
         if( typeof row !== "object" ) {
+          console.log("row is not an object: " + row);
           return false;
         }
 
-        if(this.__rowIndex["r" + row.id]) {
+        if(this.__rowIndex["r" + row.start]) {
+          console.log("Row r" + row.start + " already exists, updating ...");
+
           return this.updateRow(row);
         }
 
-        this.__rowIndex["r" + row.id] = this.__rows.push(row)-1;
+        this.__rowIndex["r" + row.start] = this.__rows.push(row)-1;
         this._addRow(row);
       },
+
 
       deleteRow : function (idx) {
         var 
@@ -144,9 +225,11 @@
         return false;
       },
 
+
       findRow : function (search) {
 
       },
+
 
       run : function (options) {
         return this.__init(options);

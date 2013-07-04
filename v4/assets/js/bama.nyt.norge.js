@@ -873,13 +873,6 @@ $(document).ready(function () {
   });
 
 
-/**
- *  DEBUG 
- *
- *  debug functions and helpers
- * 
- */
-
 
 /**
  *  UserAgent()
@@ -1129,9 +1122,10 @@ $(document).ready(function () {
 
 
   // load our time tracker
-  requireScript ("assets/js/lib/kroma.timetracker.js", false, false, onSuccess, onError);
+  requireScript ("assets/js/lib/kroma.timetracker.min.js", false, false, onSuccess, onError);
 
   // load html debugger, not async & not deferred
+
   requireScript ("assets/js/lib/kroma.debugger.js", false, false, onSuccess, onError);
 
 

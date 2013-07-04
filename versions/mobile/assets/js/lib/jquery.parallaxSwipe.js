@@ -21,6 +21,47 @@
   var leftEdge  = true;
   var rightEdge = false;
   var REQUESTED_POSITION = false;
+  var FRAME_RATE      = 0;
+  var FRAME_COUNT     = 0;
+  var FRAMES_TOTAL    = 0;
+  var FPS             = 0;
+  var SECONDS         = 0;
+  var START_TIME      = new Date().getTime();
+  var TOTAL_TIME      = 0;
+
+  var ANIM_METHOD     = false;
+  var DEBUG           = true;
+  var USER_AGENT      = navigator.userAgent;
+
+
+  var updateDebugInfo = function () {
+    var
+      result    = "",
+      infopanel = document.getElementById('debuginfo');
+
+    FRAME_COUNT++;
+    TOTAL_TIME  = new Date().getTime() - START_TIME;
+
+    if(SECONDS < Math.floor(TOTAL_TIME/1000)) {
+      SECONDS++;
+      FRAMES_TOTAL += FRAME_COUNT;
+      FRAME_RATE = FRAME_COUNT;
+      FRAME_COUNT = 0;
+
+      FPS = FRAMES_TOTAL/(TOTAL_TIME/1000);
+    }
+
+
+    result += " ANIM_METHOD: " + ANIM_METHOD  + "<br />";
+    result += "  FRAME_RATE: " + FRAME_RATE + "<br />";
+    result += "         FPS: " + (Math.round(FPS*100)/100)  + "<br />";
+    result += "        TIME: " + SECONDS + " sec<br />";
+
+    if(!!infopanel) {
+      infopanel.innerHTML = '<pre>' + result + '</pre>';
+    }
+  };
+
 
 
   var sliderW = parseInt(panel.css('width'),10) * panel.length;
@@ -28,7 +69,12 @@
 
   plugin.css(edge,0);
 
+
+
   this.parallaxSwipe.getSize = function(i){ if (sliderW>'') { return sliderW; } else { return sliderH; }};
+
+
+
 
 
 
@@ -42,10 +88,30 @@
       oldSliderLT = sliderLT,
       debugdata = '';
 
+      // have we requested a specific position? I.e. to stop at a station or at either end
+      if(!!REQUESTED_POSITION) {
+        
+        _velocity = 0.5 * (REQUESTED_POSITION - sliderLT);
+
+          sliderLT = Math.round(sliderLT + _velocity);
+          if(Math.abs(_velocity) <= 4) {
+            sliderLT = Math.round(REQUESTED_POSITION);
+            //_velocity = 0;
+            console.log("We have reached position " + REQUESTED_POSITION);
+            REQUESTED_POSITION = false;
+          }
+          plugin.css(edge,sliderLT);
+          if (o.LAYER.length>0) {
+            $.each(o.LAYER, function(index, value) {
+              $('#layer'+(index+1)).css(edge,sliderLT/value);
+            });
+          }
+          return;      
+        }
+
 
     // this is our animation loop, so escape early if there's nothing to do
     if (_mouseDown && !REQUESTED_POSITION && (sliderLT > -10924)) {
-      console.log("sliderLT:" + sliderLT);
       _velocity *= o.MOUSEDOWN_DECAY;
     } else {
       _velocity *= o.DECAY;
@@ -54,34 +120,34 @@
 
     if (!_mouseDown) {
      
-      // have we requested a specific position? I.e. to stop at a station or at either end
-      if(!!REQUESTED_POSITION) {
+      // // have we requested a specific position? I.e. to stop at a station or at either end
+      // if(!!REQUESTED_POSITION) {
         
-        _velocity = 0.2 * (REQUESTED_POSITION - sliderLT);
+      //   _velocity = 0.5 * (REQUESTED_POSITION - sliderLT);
 
-        if((sliderLT - _velocity) < -REQUESTED_POSITION){
+      //   if((sliderLT - _velocity) < -REQUESTED_POSITION){
 
-          sliderLT = Math.round(sliderLT + _velocity);
-          if(Math.abs(_velocity) <= 5) {
-            sliderLT = Math.round(REQUESTED_POSITION);
-            _velocity = 0;
-            console.log("We have reached position " + REQUESTED_POSITION);
-            REQUESTED_POSITION = false;
-          }
+      //     sliderLT = Math.round(sliderLT + _velocity);
+      //     if(Math.abs(_velocity) <= 4) {
+      //       sliderLT = Math.round(REQUESTED_POSITION);
+      //       _velocity = 0;
+      //       console.log("We have reached position " + REQUESTED_POSITION);
+      //       REQUESTED_POSITION = false;
+      //     }
 
-          plugin.css(edge,sliderLT);
-          if (o.LAYER.length>0) {
+      //     plugin.css(edge,sliderLT);
+      //     if (o.LAYER.length>0) {
            
-            $.each(o.LAYER, function(index, value) {
-              $('#layer'+(index+1)).css(edge,sliderLT/value);
-            });
-          }
-          return;      
-        }
-      }
-      else {
+      //       $.each(o.LAYER, function(index, value) {
+      //         $('#layer'+(index+1)).css(edge,sliderLT/value);
+      //       });
+      //     }
+      //     return;      
+      //   }
+      // }
+      // else {
 
-      }
+      // }
 
       //swipe left
       if (sliderLT > ( 0 - _velocity ))  {
@@ -94,7 +160,10 @@
         }
         return;
       } 
-      else if (sliderLT + sliderLen < VIEWPORT) {
+      else if (sliderLT + sliderLen < -10924) {
+
+        sliderLT  = -10924;
+        //_velocity = 0;
 
         bouncing  = (VIEWPORT - sliderLen - sliderLT) * o.BOUNCE_SPRING;
       } 
@@ -118,7 +187,7 @@
         }
       } else {
 
-        var 
+        var
           delta = Math.round(_velocity + bouncing);
 
         plugin.css(edge,sliderLT + delta); //swipe right
@@ -131,16 +200,32 @@
         }
       }
 
+
+
+
     debugdata += "sliderLT is " + sliderLT + "<br />_velocity is " + _velocity + "<br />REQUESTED_POSITION is " + REQUESTED_POSITION + "<br />bounce is " + bouncing;
+
     $('#position_data').html(debugdata);
+
+
+    updateDebugInfo();
     }
   };
 
 
   window.requestAnimFrame = function(){ 
-    return ( window.requestAnimationFrame || window.webkitRequestAnimationFrame || 
-    window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || 
-    function(callback){ window.setTimeout(callback, 1000 / 60); } );
+    var
+      result = ( 
+        window.requestAnimationFrame    || window.webkitRequestAnimationFrame || 
+        window.mozRequestAnimationFrame || window.oRequestAnimationFrame      || 
+        window.msRequestAnimationFrame  || function(callback) { window.setTimeout(callback, 1000 / 60); }
+      );
+
+    if(DEBUG) {
+      ANIM_METHOD = result.name || result;
+    }
+
+    return result;
   }();
 
 
@@ -167,7 +252,7 @@
           e = window.event; 
         }
       if (elm.setCapture) {
-        //elm.setCapture(); //if dragged outside of div
+        elm.setCapture(); //if dragged outside of div
       } else {
         window.addEventListener('mousemove', touchMove, false);
         window.addEventListener('mouseup', touchEnd, false);
@@ -185,6 +270,9 @@
       if(_mouseDownLT == 0) { 
         leftEdge = true; 
       } else if ( _mouseDownLT <= -10924) {
+        if ( _mouseDownLT < -10924) {
+          _velocity = -0.3;
+        }
         rightEdge = true;
         } else {
           leftEdge = false;
@@ -205,7 +293,7 @@
 
 
   this.parallaxSwipe.stop = function() { 
-    _velocity = 0;
+//    _velocity = 0;
   };
 
 
@@ -243,9 +331,9 @@
   var touchMove=function(e) { //mouse move
 
     var tevent = e;
-   
-    if (_mouseDown) {
 
+
+    if (_mouseDown) {
       if (hasTouch) { 
        //e.preventDefault(); 
         tevent = event.touches[0]; 
@@ -264,7 +352,6 @@
        var deltaY = VerticalXY - _lastVerticalDownXY;
 
        if ( isHorizontalSwipe(deltaX,deltaY) ) {
-
            e.preventDefault(); 
 
       // consoleVar is the css value for the left parameter
@@ -272,15 +359,15 @@
 
       // If you are in the left edge and swipe left the layers won't move, or if you are swiping to the left 
       // from a different position than the edge it will also stop the movement of layers same for the right
-
       if (leftEdge && consoleVar>0 || (consoleVar>0)) {
         rightEdge = false;
       } else if (rightEdge && consoleVar <-10924 || ( consoleVar< -10924)) {
+        console.log("consoleVar: " + consoleVar + ", deltaX: " + deltaX);
         leftEdge = false;
         }
         else {
           if(MouseXY -_mouseDownXY > 10924) {
-            // mouseXY = mouseXY - (10924 - (MouseXY -_mouseDownXY));
+            MouseXY = MouseXY - (10924 - (MouseXY -_mouseDownXY));
           }
           plugin.css(edge, _mouseDownLT + (MouseXY - _mouseDownXY));
           if (o.LAYER.length>0) {
