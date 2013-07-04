@@ -22,7 +22,7 @@
     CLIENT = {
 
         // initial and default values
-        url           : window.location,
+        url           : window.location.href,
         event         : "unknown",
         timestamp     : 0,
         description   : ""
@@ -37,13 +37,16 @@
 
           _options      : {},
           _timer        : false,
-          PREV_EVENT    : new Date().getTime(),
 
+  
           SESSION         : {
             start         : new Date().getTime(),
             initialized   : false,
             IS_IDLE       : false,
             IS_VISIBLE    : true,
+            IDLE_TICKER   : 0,
+            PREV_EVENT    : new Date().getTime(),
+
             TIME        : {
               total     : 0,
               idle      : 0,
@@ -61,27 +64,48 @@
 
 
       tracker.__getLastEventTime = function () {
-        return this.SESSION.lastEventTime;
+        return this.SESSION.PREV_EVENT;
       };
 
       tracker.__onWindowMessage = function (msg) {
+        // receive messages through the postMessage API   -  works in iframe as well
         VGTouchTimeTracker.log( msg.origin + " posted message: " + msg.data );
       };
 
       tracker.__onIdleStart = function () {
-        VGTouchTimeTracker.SESSION.IS_IDLE = true;
+        var
+          self = VGTouchTimeTracker;
+
+
+        self.SESSION.TIME.active  -= self.SESSION.IDLE_TICKER;
+        self.SESSION.TIME.idle    += self.SESSION.IDLE_TICKER;
+        self.SESSION.IS_IDLE = true;
+        console.log('Now idling ... ' + self.SESSION.IDLE_TICKER);
       };
 
       tracker.__onIdleEnd = function () {
-        VGTouchTimeTracker.SESSION.IS_IDLE = false;
+        self.SESSION.IS_IDLE = false;
       };
 
+
+      // tab activated
       tracker.__onVisible = function () {
-        VGTouchTimeTracker.SESSION.IS_VISIBLE = true;
+        var
+          self = VGTouchTimeTracker;
+        // is session started
+        if(self.SESSION.initialized) {
+          self.SESSION.IS_IDLE = false;
+        }
+          self.SESSION.IS_VISIBLE = true;
       };
 
+      // tab deactivated
       tracker.__onHidden = function () {
-        VGTouchTimeTracker.SESSION.IS_VISIBLE = false;
+        var
+          self = VGTouchTimeTracker;
+
+        self.SESSION.IS_IDLE    = true;
+        self.SESSION.IS_VISIBLE = false;
       };
 
       tracker.__onTimer = function () {
@@ -92,15 +116,6 @@
           console.log("No TimeTracker object!")
           return;
         }
-
-        // send to server every [REPORT_INTERVAL] seconds, incl. at zero
-        if( (self.SESSION.TIME.active % self._options.REPORT_INTERVAL) === 0) {
-          console.log("Tracking active time: " + self.SESSION.TIME.active + "/" + self.SESSION.TIME.total + " sec");
-          self.update();
-        }
-        // else {
-        //   console.log("NOT updating server: " + (self.SESSION.TIME.total % self._options.REPORT_INTERVAL) );
-        // }
 
         self.SESSION.TIME.total++;
 
@@ -114,9 +129,29 @@
         if(self.SESSION.IS_IDLE) {
           self.SESSION.TIME.idle++;
         }
+        // NOT idle
         else {
-          self.SESSION.TIME.active++;
+
+          if(self.SESSION.IS_VISIBLE) {
+
+            self.SESSION.TIME.active++;
+            self.SESSION.IDLE_TICKER++;
+
+            // check if we have passed the idle timeout limit
+            if( self.SESSION.IDLE_TICKER >= self._options.IDLE_TIMEOUT ) {
+              console.log("IDLING after timeout: " + self.SESSION.IDLE_TICKER);
+              self.SESSION.IS_IDLE = true;
+              self.__onIdleStart();
+            }
+          }
         }
+
+        // send to server every [REPORT_INTERVAL] seconds, incl. at zero
+        if( (self.SESSION.TIME.total % self._options.REPORT_INTERVAL) === 0) {
+          console.log("Tracking active time: " + self.SESSION.TIME.active + "/" + self.SESSION.TIME.total);
+          self.update();
+        }
+
       };
 
 
@@ -134,7 +169,7 @@
 
         this.SESSION.info = {
           animationMethod : this.getAnimationMethod(),
-          url             : window.location
+          url             : CLIENT.url
         };
 
 
@@ -159,8 +194,8 @@
         this._img = new Image();
         this.SESSION.initialized = true;
         return true;
-      };
-
+      }
+      
 
       tracker._sendJSON = function(data) {
         var
@@ -184,6 +219,7 @@
       tracker._sessionTime = function () {
         return this.START_SESSION - new Date().getTime();
       };
+
 
       tracker._sendREQUEST = function(data) {
         var
@@ -333,13 +369,11 @@
         var
           self = VGTouchTimeTracker;
         var  
-          previousEventTime = self.PREV_EVENT || new Date().getTime();
-
-        self.PREV_EVENT = new Date().getTime();
-
-        if ( (self.PREV_EVENT - previousEventTime) > (self.IDLE_TIMEOUT * 1000) ) {
-          self.__onIdleEnd(e);
-        }
+          previousEventTime = self.SESSION.PREV_EVENT || new Date().getTime();
+          
+        self.SESSION.PREV_EVENT   = new Date().getTime();
+        self.SESSION.IDLE_TICKER  = 0;
+        self.SESSION.IS_IDLE      = false;
       };
 
 
@@ -355,7 +389,6 @@
           }
           this.SESSION[section][name] = value;
         }
-        // console.log("Setting session var " + name + " to " + value +  (section ? " in section " + section + "." : ".") );
       };
 
 
@@ -375,7 +408,7 @@
       };
 
       tracker.update = function () {
-        // send as event type "time"
+        // send session object with event type "time"
         this.send(this.SESSION, "time");
       };
 
@@ -405,7 +438,6 @@
       return tracker;
 
     }(OPTIONS);
-
 
 
   /**    END VGTouchTimeTracker     */

@@ -4,7 +4,7 @@
 
 
   // activate debugging
-  define('DEBUG', true);
+  define('DEBUG', false);
 
 
   $db       = array('host' => 'localhost', 'db' => 'timetracker', 'password' => '1234tsXX', 'user' => 'debugger', 'table' => 'logs.vgmobil');
@@ -13,9 +13,6 @@
   $debug    = array();
 
   $EVENT    = array();
-
-  $mysqli = new mysqli($db['host'],$db['user'],$db['password'],$db['db']);
-
 
   error_reporting(E_ERROR | E_PARSE & E_NOTICE);
 
@@ -109,7 +106,7 @@
 
 
   function decodeREQUEST () {
-    return json_encode($_REQUEST, JSON_PRETTY_PRINT);
+    return json_encode($_REQUEST, true);
   }
 
 
@@ -151,12 +148,11 @@
       return false;
     }
 
-    $fields = 'session_id, event, total_time, active_time, idle_time, user_agent';
+    $fields = 'session_id, event, total_time, active_time, idle_time, user_agent, ip';
 
     // do not add quotes around the whole string, we do that in the query
     // this is simply an adaptation that lets us easily use implode() on arrays
-    $values = "{$entry['data']['start']}','{$entry['event']}', '{$entry['data']['TIME']['total']}', '{$entry['data']['TIME']['active']}', '{$entry['data']['TIME']['idle']}', '" . $mysqli->real_escape_string($_SERVER['HTTP_USER_AGENT']);
-
+    $values = "{$entry['data']['start']}','{$entry['event']}', '{$entry['data']['TIME']['total']}', '{$entry['data']['TIME']['active']}', '{$entry['data']['TIME']['idle']}', '" . $mysqli->real_escape_string($_SERVER['HTTP_USER_AGENT']) . "', '" . $mysqli->real_escape_string($_SERVER['REMOTE_ADDR']);
 
     $query    = "INSERT INTO `" . $db['db'] . "`.`" . $db['table'] . "` ($fields) 
                   VALUES('$values')
@@ -194,12 +190,12 @@
     if( false === ($redis = connectToRedis())) {
       return false;
     }
-    $redis->publish($chan, $msg);
+    $redis->publish(REDIS_DEBUG_CHANNEL, json_encode($entry));
   }
 
 
   function sendResponse ($reply) {
-    print(json_encode($reply, JSON_PRETTY_PRINT));
+    print(json_encode($reply));
   }
 
 
@@ -248,6 +244,7 @@
 
   $logEntry = decodeLogEntry($REQUEST_FORMAT);
 
+  $logEntry['ip'] = $_SERVER['REMOTE_ADDR'];
 
   $db_result = updateLogEntry($logEntry);
   publishLogEntry($logEntry);

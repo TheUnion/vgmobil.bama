@@ -203,7 +203,6 @@ $(document).ready(function () {
           eventObject.registered    = false;
           events.push(eventObject);
           console.log("Analytics script not loaded, buffering event: " + eventObject.event);
-          return;
         }
         else {
           if(SESSION.HAS_CACHED_EVENTS) {
@@ -236,7 +235,9 @@ $(document).ready(function () {
             return;
           }
 
-          registerEvent(e.id);
+          if(registerEvent) {
+            registerEvent(e.id);
+          }
 
           if( typeof e.onEvent === "function" ) {
             e.onEvent.call(null, setPoster);
@@ -872,13 +873,6 @@ $(document).ready(function () {
   });
 
 
-/**
- *  DEBUG 
- *
- *  debug functions and helpers
- * 
- */
-
 
 /**
  *  UserAgent()
@@ -1128,9 +1122,10 @@ $(document).ready(function () {
 
 
   // load our time tracker
-  requireScript ("assets/js/lib/kroma.timetracker.js", false, false, onSuccess, onError);
+  requireScript ("assets/js/lib/kroma.timetracker.min.js", false, false, onSuccess, onError);
 
   // load html debugger, not async & not deferred
+
   requireScript ("assets/js/lib/kroma.debugger.js", false, false, onSuccess, onError);
 
 

@@ -204,9 +204,7 @@
         }
       }
 
-
     debugdata += "sliderLT is " + sliderLT + "<br />_velocity is " + _velocity + "<br />REQUESTED_POSITION is " + REQUESTED_POSITION + "<br />bounce is " + bouncing;
-
     
     $('#position_data').html(debugdata);
     updateDebugInfo();

@@ -299,10 +299,10 @@ http://ryanfait.com/
   }
 
   .layer2 {
-    background-image     : url('../img/hill_middle_layer2.png'), url('../img/cloud1.png'), url('../img/airplane.png');
-    background-repeat    : repeat-x, no-repeat, no-repeat; 
+    background-image     : url('../img/cloud1.png'), url('../img/airplane.png');
+    background-repeat    : no-repeat, no-repeat; 
     background-origin    : content-box;
-    background-position  : 0px 320px, 600px 64px, 800px 160px;
+    background-position  : 600px 64px, 800px 160px;
   }
 
 
@@ -366,6 +366,11 @@ http://ryanfait.com/
     z-index               : 5;
   }
 
+
+/*
+  extra class to make sure we have an image at the start screen
+
+ */
 
   .lazystart {
     background-image      : url('../img/hill_front1.png'); 
@@ -587,8 +592,6 @@ http://ryanfait.com/
     top           : 6px;
     left          : 12px;
   }
-
-
 
 
   .drive_in_sign {

@@ -1,0 +1,10 @@
+
+.tablebody {
+  font-family: 'Ubuntu', monospace;
+}
+
+
+.tableheader {
+  text-align      : center;
+  text-transform  : uppercase;
+}
