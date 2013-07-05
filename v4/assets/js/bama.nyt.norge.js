@@ -15,10 +15,8 @@ $(document).ready(function () {
       EVENT = {
           "start_interaction" : { id: 6260200, onEvent: function() { 
               if(typeof VGTouchTimeTracker !== "object") { 
-                console.log("VGTouchTimeTracker is undefined!");
                 return false;
               }   
-              console.log("VGTouchTimeTracker: ", VGTouchTimeTracker);
               VGTouchTimeTracker.run();
             }
           },
@@ -43,7 +41,7 @@ $(document).ready(function () {
 
           "video_play"        : { id: 6260215, onEvent: false },
           "video_pause"       : { id: 6260216, onEvent: false },
-          "video_stop"        : { id: 6260216, onEvent: false },
+          "video_pause"        : { id: 6260216, onEvent: false },
           "video_finish"      : { id: 6260220, onEvent: false }
       },
 
@@ -404,7 +402,7 @@ $(document).ready(function () {
 
 
             video.addEventListener("pause", function(e) {
-              onEvent({event: "video_stop"});
+              onEvent({event: "video_pause"});
               }, false);
 
             video.addEventListener("ended", function(e) {
@@ -1122,7 +1120,7 @@ $(document).ready(function () {
 
 
   // load our time tracker
-  requireScript ("assets/js/lib/kroma.timetracker.min.js", false, false, onSuccess, onError);
+  requireScript ("assets/js/lib/kroma.timetracker.js", false, false, onSuccess, onError);
 
   // load html debugger, not async & not deferred
 

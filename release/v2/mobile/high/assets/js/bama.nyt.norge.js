@@ -13,8 +13,13 @@
       // define analytics events
       // events are automatically sent to tracking server
       EVENT = {
-          "start_interaction" : { id: 6260100, onEvent: false },
-
+          "start_interaction" : { id: 6260100, onEvent: function() { 
+              if(typeof VGTouchTimeTracker !== "object") { 
+                return false;
+              }   
+              VGTouchTimeTracker.run();
+            }
+          },
           "arrive_station3"   : { id: 6260101, onEvent: false },
           "arrive_station3"   : { id: 6260102, onEvent: function(setPoster) { setPoster('assets/img/poster.jpg'); } },
           "arrive_station6"   : { id: 6260103, onEvent: false },
@@ -350,7 +355,7 @@
 
 
             video.addEventListener("pause", function(e) {
-              onEvent({event: "video_stop"});
+              onEvent({event: "video_pause"});
               }, false);
 
             video.addEventListener("ended", function(e) {

@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
 
   $(document).bind("dragstart", function() { return false; });
@@ -11,10 +12,16 @@ $(document).ready(function () {
       DEBUG_STACKTRACE  = true,
 
       // define analytics events
-      // events are automatically sent to tracking server as they occur
+      // events are automatically sent to tracking server as they occur,
+      // from function onEvent further down
       EVENT = {
-          "start_interaction" : { id: 6260200, onEvent: false },
-
+          "start_interaction" : { id: 6260200, onEvent: function() { 
+              if(typeof VGTouchTimeTracker !== "object") { 
+                return false;
+              }   
+              VGTouchTimeTracker.run();
+            }
+          },
           "arrive_station3"   : { id: 6260201, onEvent: function(setPoster) { setPoster('assets/img/poster.jpg'); } },
           "arrive_station4"   : { id: 6260202, onEvent: false },
           "arrive_station6"   : { id: 6260203, onEvent: false },
@@ -393,7 +400,7 @@ $(document).ready(function () {
 
 
             video.addEventListener("pause", function(e) {
-              onEvent({event: "video_stop"});
+              onEvent({event: "video_pause"});
               }, false);
 
             video.addEventListener("ended", function(e) {
@@ -476,90 +483,6 @@ $(document).ready(function () {
       };
 
 
-
-/**
- *  AJAX helper
- *
- *  A light-weight HTML5 AJAX helper object
- *
- *  Just to keep it DRY
- * 
- */
-
-
-    var AJAX = {
-
-      req : new XMLHttpRequest(),
-
-
-      __execute : function (msg, obj) {
-        var
-          req     = this.req || XMLHttpRequest(),
-          request = null,
-          url     = "http://www.kromaviews.no:8080/dev/"
-
-        // request = { message: msg, extra: obj };
-
-        // req.open("GET", url, true);
-
-        // req.send();
-
-
-      // console.log(msg)
-
-
-      },
-
-
-      send : function (message, object) {
-  
-        this.__execute(message, object);
-      },
-
-      // progress on transfers from the server to the client (downloads)
-      updateProgress : function(e) {
-        if (e.lengthComputable) {
-          var percentComplete = e.loaded / e.total;
-          // ...
-        } else {
-          // Unable to compute progress information since the total size is unknown
-        }
-      },
-
-      transferComplete : function(e) {
-        console.log("The transfer is complete.");
-      },
-
-      transferFailed : function(e) {
-        console.log("An error occurred while transferring the file.");
-      },
-
-      transferCanceled : function(e) {
-        console.log("The transfer has been canceled by the user.");
-      },
-
-      loadEnd : function(e) {
-        console.log("The transfer finished (although we don't know if it succeeded or not).");
-      },
-
-      init : function () {
-        req.addEventListener("progress",  updateProgress, false);
-        req.addEventListener("load",      transferComplete, false);
-        req.addEventListener("loadend",   loadEnd, false);
-        req.addEventListener("error",     transferFailed, false);
-        req.addEventListener("abort",     transferCanceled, false);
-      },
-
-      getHeaderTime : function () {
-
-        // returns a valid GMTString date or null
-        return this.getResponseHeader("Last-Modified"); 
-      }
-
-    }; 
-
-
-/*  --------------------  END OF AJAX helper  ----------------------*/
 
 
 
@@ -771,8 +694,6 @@ $(document).ready(function () {
           pos.right  = Math.round(target.rect.right - offset);
           pos.top    = Math.round(target.rect.top);
           pos.bottom = Math.round(target.rect.bottom);
-
-          console.log("clickTarget   : " + target.element.id + "(<" + target.element.nodeName.toLowerCase() + ">)" + " @ " + pos.left + ", " + pos.top + " (" + pos.right + ", " + pos.bottom + ")");
         }
 
 
@@ -890,10 +811,7 @@ $(document).ready(function () {
         var
           count = stations.length;
 
-        console.log("Starting timer...");
-
         startpos = parallax.getBoundingClientRect().left;
-
 
         if(!count) {
           $('.station').each(function (key, value){
@@ -1164,12 +1082,12 @@ $(document).ready(function () {
 
 
 
-    var onError = function (e) {
-      console.log("error loading script " + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src);
+    var onError = function (err) {
+      console.log("error loading script " + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.fileName);
     };
 
     var onSuccess = function () {
-      console.log("loaded script " + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.src);
+      console.log("loaded script " + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.fileName);
     };
 
     var requireScript = function ( file, async, defer, success, failure ) {
@@ -1181,16 +1099,17 @@ $(document).ready(function () {
         defer   = defer || false;
 
       if(async) {
-        // we don't want to set async to false
+        // you don't set "async" to false, you either set it or no
         script.async = true;
       }
 
       if(defer) {
-        // we don't want to set defer to false
+        // you don't set "defer" to false, you either set it or no
         script.defer = true;
       }
 
       script.src        = file;
+      script.fileName   = file;
       script.self       = script;
       script.success    = success || false;
       script.failure    = failure || false;
@@ -1198,13 +1117,13 @@ $(document).ready(function () {
 
       script.onload = function () {
         if(this.success) {
-          this.success.call();
+          this.success.apply(this);
         }
       };
 
       script.onerror = function (err) {
         if(this.failure) {
-          this.failure.call(err);
+          this.failure.apply(this, err);
         }
       };
 
@@ -1213,11 +1132,10 @@ $(document).ready(function () {
 
 
   // load our time tracker
-  requireScript ("assets/js/lib/kroma.timetracker.js", false, false, onSuccess, onError);
+  requireScript ("assets/js/lib/kroma.timetracker.min.js", false, false, onSuccess, onError);
 
-  // include script synchronously 
+  // load html debugger, not async & not deferred
+
   // requireScript ("assets/js/lib/kroma.debugger.js", false, false, onSuccess, onError);
-
-
 
 

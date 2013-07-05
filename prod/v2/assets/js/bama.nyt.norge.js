@@ -393,7 +393,7 @@ $(document).ready(function () {
 
 
             video.addEventListener("pause", function(e) {
-              onEvent({event: "video_stop"});
+              onEvent({event: "video_pause"});
               }, false);
 
             video.addEventListener("ended", function(e) {

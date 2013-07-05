@@ -41,21 +41,6 @@ http://ryanfait.com/
 
 
 
-  .console {
-    font-size : 14px;
-    border    : none;
-    padding   : 0px 0px 0px 10px;
-    width     : 350px;
-  }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -77,8 +62,11 @@ http://ryanfait.com/
     padding           : 0;
   }
 
-
   .console {
+    font-size : 14px;
+    border    : none;
+    padding   : 0px 0px 0px 10px;
+    width     : 350px;
     background-color  : #272822;
     color             : #f8f8f2;
   }
@@ -194,7 +182,6 @@ http://ryanfait.com/
   }
 
   .verybig {
-    color         : #555;
     text-align    : center;
     font-size     : 40px;
     line-height   : 36px;
@@ -299,7 +286,7 @@ http://ryanfait.com/
   }
 
   .layer2 {
-    background-image     : url('../img/cloud1.png'), url('../img/airplane.png');
+    background-image     : url('../img/cloud1.png'), url('../img/cloud2.png');
     background-repeat    : no-repeat, no-repeat; 
     background-origin    : content-box;
     background-position  : 600px 64px, 800px 160px;
@@ -322,16 +309,14 @@ http://ryanfait.com/
                             url('../img/hill_middle_layer1_top1.png'), 
                             url('../img/hill_middle_layer1_top2.png'), 
                             url('../img/hill_middle_layer1_top4.png'), 
-                            url('../img/hill_middle_layer1_top5.png'),
                             url('../img/hill_middle_layer1.png');
     background-position  :  1000px 62px,
-                             780px 256px,
-                            1440px 256px,
-                            2064px 252px,
-                            2756px 256px,
-                            0px 326px;
+                             780px 242px,
+                            1440px 242px,
+                            2064px 238px,
+                            0px 312px;
     background-origin    : content-box;    
-    background-repeat    : no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, repeat-x;    
+    background-repeat    : no-repeat, no-repeat, no-repeat, no-repeat, repeat-x;    
   }
 
 
@@ -667,18 +652,33 @@ http://ryanfait.com/
   }
 
 
-
-  #firewood {
-    position            : absolute;
-    width               : 272px; /* + (fence posts * post width) (12 * 19 == 228) */
-    height              : 108px;
-    top                 : 324px;
-    left                : 64px;
+  #fence {
+    top                 : 318px;
+    left                : 148px;
+    width               : 320px;
+    height              : 100px;
   }
 
 
-  .firewood {
-    background-image    : url('../img/ved.png');
+  .fence {
+    background-image    : url('../img/fence.png');
+    background-repeat   : repeat-x;
+    background-origin   : content-box;
+    background-position : bottom;
+  }
+
+
+  #horse {
+    position            : absolute;
+    width               : 272px; /* + (fence posts * post width) (12 * 19 == 228) */
+    height              : 160px;
+    top                 : 256px;
+    left                : 80px;
+  }
+
+
+  .horse {
+    background-image    : url('../img/horse.png');
     background-position : top left;
     background-repeat   : no-repeat;
     background-origin   : content-box;
@@ -706,21 +706,19 @@ http://ryanfait.com/
     height                : 127px;
   }
 
-  #cases {
+  #appletree {
     position  : absolute;
     left      : 12px;
-    top       : 316px;
-    width     : 199px;
-    height    : 109px;
+    top       : 176px;
+    width     : 269px;
+    height    : 240px;
   }
 
 
-  .cases {
-    background-image    : url('../img/cases.png');
+  .appletree {
+    background-image    : url('../img/bicycle.png'), url('../img/appletree.png');
     background-origin   : content-box;
-    background-position : top left;
-    width               : 269px;
-    height              : 198px;
+    background-position : 8px 150px, 60px 0px;
   }
 
   

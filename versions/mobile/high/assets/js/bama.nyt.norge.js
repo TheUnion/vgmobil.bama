@@ -285,7 +285,7 @@
           videoController.stop = function() {
               video.pause();
               video.currentTime = 0;
-              onEvent({event: 'video_stop'});
+              onEvent({event: 'video_pause'});
           };
 
 

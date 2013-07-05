@@ -148,11 +148,11 @@
       return false;
     }
 
-    $fields = 'session_id, event, total_time, active_time, idle_time, user_agent, ip';
+    $fields = 'session_id, event, total_time, active_time, idle_time, user_agent, ip, url';
 
-    // do not add quotes around the whole string, we do that in the query
+    // do not add quotes around the whole string, we do that when building the query
     // this is simply an adaptation that lets us easily use implode() on arrays
-    $values = "{$entry['data']['start']}','{$entry['event']}', '{$entry['data']['TIME']['total']}', '{$entry['data']['TIME']['active']}', '{$entry['data']['TIME']['idle']}', '" . $mysqli->real_escape_string($_SERVER['HTTP_USER_AGENT']) . "', '" . $mysqli->real_escape_string($_SERVER['REMOTE_ADDR']);
+    $values = "{$entry['data']['start']}','{$entry['event']}', '{$entry['data']['TIME']['total']}', '{$entry['data']['TIME']['active']}', '{$entry['data']['TIME']['idle']}', '" . $mysqli->real_escape_string($_SERVER['HTTP_USER_AGENT']) . "', '" . $mysqli->real_escape_string($_SERVER['REMOTE_ADDR']) . "', '" . $mysqli->real_escape_string($_SERVER['HTTP_REFERER']);
 
     $query    = "INSERT INTO `" . $db['db'] . "`.`" . $db['table'] . "` ($fields) 
                   VALUES('$values')

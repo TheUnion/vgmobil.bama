@@ -43,7 +43,7 @@ $(document).ready(function () {
 
           "video_play"        : { id: 6260215, onEvent: false },
           "video_pause"       : { id: 6260216, onEvent: false },
-          "video_stop"        : { id: 6260216, onEvent: false },
+          "video_pause"        : { id: 6260216, onEvent: false },
           "video_finish"      : { id: 6260220, onEvent: false }
       },
 
@@ -403,7 +403,7 @@ $(document).ready(function () {
 
 
             video.addEventListener("pause", function(e) {
-              onEvent({event: "video_stop"});
+              onEvent({event: "video_pause"});
               }, false);
 
             video.addEventListener("ended", function(e) {
