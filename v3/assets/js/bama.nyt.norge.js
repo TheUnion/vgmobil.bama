@@ -171,7 +171,7 @@ $(document).ready(function () {
       };
 
       var isAndroid = function () {
-        return navigator.userAgent.toLowerCase().indexOf("android") > -1; //&& ua.indexOf("mobile");
+        return navigator.userAgent.toLowerCase().indexOf("android") > -1; 
       };
 
       var openLink = function (link)  {
@@ -202,7 +202,7 @@ $(document).ready(function () {
           SESSION.HAS_CACHED_EVENTS = true;
           eventObject.registered    = false;
           events.push(eventObject);
-          console.log("Analytics script not loaded, buffering event: " + eventObject.event);
+          // console.log("Analytics script not loaded, buffering event: " + eventObject.event);
           return;
         }
         else {
@@ -407,7 +407,7 @@ $(document).ready(function () {
               }, false);
 
             video.addEventListener("ended", function(e) {
-              onEvent({event: "video_finished"});
+              onEvent({event: "video_finish"});
               }, false);
 
 
@@ -657,10 +657,7 @@ $(document).ready(function () {
           offset    = parallax.getBoundingClientRect().left;
 
         // When there's time, this can be expanded to a general solution
-        // where we get the bounding client rect of the click target.
-        // This is a way to have guaranteed clickable elements no matter  
-        // what. Even if the click event is captured by enemy code, we can re-fire it
-        // programmatically
+        // where we get the bounding client rect of each click target.
 
         for(var i = 0, count = list.length; i < count; i++) {
 
@@ -753,7 +750,7 @@ $(document).ready(function () {
           if(currentpos > SWIPE_TOLERANCE) {
             if(!initialized()) {
               startSession();
-              console.log("Interaction detected, preloading resources ..");
+              // console.log("Interaction detected, preloading resources ..");
             }
           }
           // for..in normally not acceptable, but ok with this few elements
@@ -804,7 +801,7 @@ $(document).ready(function () {
         var
           count = stations.length;
 
-        console.log("Starting timer...");
+        // console.log("Starting timer...");
 
         startpos = parallax.getBoundingClientRect().left;
 
@@ -1131,6 +1128,6 @@ $(document).ready(function () {
   requireScript ("assets/js/lib/kroma.timetracker.js", false, false, onSuccess, onError);
 
   // load html debugger, not async & not deferred
-  requireScript ("assets/js/lib/kroma.debugger.js", false, false, onSuccess, onError);
+  // requireScript ("assets/js/lib/kroma.debugger.js", false, false, onSuccess, onError);
 
 

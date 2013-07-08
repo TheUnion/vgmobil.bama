@@ -8,13 +8,6 @@
  *
  */
 
-/*
-
-Sticky Footer by Ryan Fait
-http://ryanfait.com/
-
-*/
-
   body {
     margin       : 0;
     padding      : 0;
@@ -96,6 +89,8 @@ http://ryanfait.com/
   .code.reserved { color: #66D9EF; }
   .code.number   { color: #AE81FF; }
   .code.string   { color: #e6db74; }
+
+
 
 
   /* The ugly */
@@ -250,7 +245,7 @@ http://ryanfait.com/
 
 
 /**
- *  Parallax layers
+ *  Parallax container + layers
  *
  */
 

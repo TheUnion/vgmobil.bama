@@ -1,5 +1,9 @@
 <?php
 
+  header("Access-Control-Allow-Origin: *");
+  header("Access-Control-Allow-Methods: PUT, GET, POST, DELETE, OPTIONS");
+  header("Access-Control-Allow-Headers: *");
+
   $session = session_start();
 
 
@@ -28,7 +32,7 @@
 
 
   $RESPONSE_FORMAT = null;
-  $REQUEST_FORMAT  = isset($_REQUEST['format']) ? strtolower($_REQUEST['format']) : "json";
+  $REQUEST_FORMAT  = JSON;
 
   $request  = null;
 
@@ -106,7 +110,7 @@
 
 
   function decodeREQUEST () {
-    return json_encode($_REQUEST, true);
+    return $_REQUEST;
   }
 
 
@@ -122,8 +126,10 @@
     switch ($format) {
       case 'json':
         return decodeJSON();
-      default:
+      case 'get':
         return decodeREQUEST();
+      default:
+        return decodeJSON();
     }
   }
 
@@ -139,6 +145,17 @@
 
   function updateLogEntry($entry) {
     global $db, $reply, $request, $debug;
+
+
+    if( !isset($entry['data'])){
+
+      $reply['OK']      = 0;
+      $reply['message'] = "No data received: " . print_r($entry, true); 
+      return false;
+    }
+
+
+
 
     $mysqli = new mysqli($db['host'],$db['user'],$db['password'],$db['db']);
 
@@ -258,8 +275,9 @@
     $reply['debug']['db_result']  = $db_result;
   }
 
-  //  $reply['debug']['phpsession'] = $_SESSION;
   sendResponse($reply);
+
+  file_put_contents(LOG_PATH.LOG_FILE, json_encode($reply, JSON_PRETTY_PRINT), FILE_APPEND);
 
 ?>
 

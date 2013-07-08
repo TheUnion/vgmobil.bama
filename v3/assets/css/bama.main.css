@@ -299,7 +299,7 @@ http://ryanfait.com/
   }
 
   .layer2 {
-    background-image     : url('../img/hill_middle_layer2.png'), url('../img/cloud1.png'), url('../img/airplane.png');
+    background-image     : url('../img/hill_middle_layer2.png'), url('../img/cloud1.png'), url('../img/cloud2.png');
     background-repeat    : repeat-x, no-repeat, no-repeat; 
     background-origin    : content-box;
     background-position  : 0px 320px, 600px 64px, 800px 160px;
@@ -318,13 +318,13 @@ http://ryanfait.com/
 
 
   .layer3 {
-    background-image     :  url('../img/cloud2.png'), 
+    background-image     :  url('../img/airplane.png'), 
                             url('../img/hill_middle_layer1_top1.png'), 
                             url('../img/hill_middle_layer1_top2.png'), 
                             url('../img/hill_middle_layer1_top4.png'), 
                             url('../img/hill_middle_layer1_top5.png'),
                             url('../img/hill_middle_layer1.png');
-    background-position  :  1000px 62px,
+    background-position  :  1500px 82px,
                              780px 256px,
                             1440px 256px,
                             2064px 252px,

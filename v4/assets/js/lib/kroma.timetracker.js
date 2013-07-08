@@ -225,8 +225,9 @@
 
         xhr.onload = this._onResponse;
         xhr.open("POST", this._options.SERVER, true);
-        xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+        xhr.setRequestHeader('Content-type','text/plain; charset=utf-8');
         xhr.setRequestHeader("Content-length", json.length);
+        xhr.setRequestHeader("Accept", "application/json");
         xhr.setRequestHeader("Connection", "close");
         xhr.send(json);
       };
@@ -391,7 +392,6 @@
         self.SESSION.IS_IDLE      = false;
 
         if(self.SESSION.expired) {
-          // console.log("restarting expired session: " + self.SESSION.start);
           self.run();
         }
       };

@@ -329,7 +329,7 @@
               }, false);
 
             video.addEventListener("ended", function(e) {
-              onEvent({event: "video_finished"});
+              onEvent({event: "video_finish"});
               }, false);
 
 

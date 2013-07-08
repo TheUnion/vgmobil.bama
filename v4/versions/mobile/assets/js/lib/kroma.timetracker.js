@@ -1,109 +1,225 @@
   /**
-   *  KROMA TimeTracker
+   *  VGTouchTimeTracker
    *
-   *  We wish to log time spent interacting with the ad
+   *  Logs active/idle time in HTML creatives
    *
    *  @author Johan Telstad, jt@enfield.no
    * 
    */
 
-  var 
 
+  var 
     OPTIONS = {
   
-        FORMAT    : "json",  // "json", "gif"
-        METHOD    : "post",  // "post", "get"
-        INTERVAL  : 15000,
-        SERVER    : "http://kromaviews.no:8080/dev/games/bama/srv/kroma.timetracker.php"
+        FORMAT          : "json",  // "json", "gif"
+        METHOD          : "post",  // "post", "get"
+        SERVER          : "http://kromaviews.no:8080/dev/games/bama/srv/kroma.timetracker.php",
+        TIMER_INTERVAL  : 1000, // millisec
+        REPORT_INTERVAL : 15,   // sec
+        MAX_DURATION    : 5,    // min
+        IDLE_TIMEOUT    : 60,    // sec
+        SESSION_TIMEOUT : 120    // sec
     },
 
     CLIENT = {
 
         // initial and default values
-        url           : window.location,
+        url           : window.location.href,
         event         : "unknown",
-        userAgent     : UserAgent(),
-        device        : (function ( ) {
-          var 
-            ua = navigator.userAgent.toLowerCase();
-
-
-          if( ua.indexOf("mobile") >= 0 ) {
-            return "smartphone";
-          }
-
-          // Android
-          if( ua.indexOf("android") >= 0 ) {
-            if( ua.indexOf("mobile") >= 0 ) {
-              return "smartphone";
-            }
-            else {
-              return "tablet";
-            }
-          }
-
-          // Android
-          if( ua.indexOf("iphone") >= 0 ) {
-            return "smartphone";
-          }
-          else if( ua.indexOf("ipad") >= 0 ) {
-            return "tablet";
-          }
-
-        return "unknown";
-        })()
+        timestamp     : 0,
+        description   : ""
     };
 
 
+    VGTouchTimeTracker = function (options, client) {
 
-  var 
+      var 
+        tracker          = {
+          __console     : document.getElementById('console') || false,
 
-    TimeTracker = {
+          _options      : {},
+          _client       : {},
+          _timer        : false,
 
-      START_TIME    : new Date().getTime(),
-      ACTIVE_TIME   : 0,
-      IDLE_TIME     : 0,
-      TOTAL_TIME    : 0,
-      COUNTER       : 0,
+  
+          SESSION         : {
+            start         : new Date().getTime(),
+            initialized   : false,
+            expired       : false,
+            IS_IDLE       : false,
+            IS_VISIBLE    : true,
+            IDLE_TICKER   : 0,
+            PREV_EVENT    : new Date().getTime(),
 
-      INTERVAL      : 0,
-      SERVER        : null,
-      METHOD        : "post",
-      FORMAT        : "json",
+            TIME        : {
+              total     : 0,
+              idle      : 0,
+              active    : 0,
+              visible   : 0,
+              hidden    : 0
+            }
+          }
+        };
 
 
-      __init : function (options) {
-        this.INTERVAL = options.INTERVAL || 30000;
+      /**  Private / protected section
+       *
+       */
 
 
-      },
+      tracker.__getLastEventTime = function () {
+        return this.SESSION.PREV_EVENT;
+      };
 
+      tracker.__onWindowMessage = function (msg) {
+        // receive messages through the postMessage API   -  works in iframe as well
+        VGTouchTimeTracker.log( msg.origin + " posted message: " + msg.data );
+      };
 
-      _send : function (evt, value) {
+      tracker.__onIdleStart = function () {
         var
-          eventObject = {
-            event : evt,
-            value : value,
-            url   : CLIENT['url'] || "no URL",
-            browser_name : CLIENT.UserAgent.browser_name,
-            browser_version : CLIENT.UserAgent.browser_version,
-            os : CLIENT.UserAgent.os,
-            platform : CLIENT.UserAgent.platform,
-            device : CLIENT.DEVICE
-          };
-
-        this._sendJSON(eventObject);
-
-      },
+          self = VGTouchTimeTracker;
 
 
-      _sendJSON = function(data) {
+        // console.log('Now idling ... ' + self.SESSION.TIME.active + "/" + self.SESSION.TIME.total);
+
+        if( self.SESSION.TIME.active >= self.SESSION.IDLE_TICKER ) {
+          self.SESSION.TIME.active  -= self.SESSION.IDLE_TICKER;
+          self.SESSION.TIME.idle    += self.SESSION.IDLE_TICKER;
+        }
+        self.SESSION.IS_IDLE = true;
+        // console.log('After correcting for idle time ... ' + self.SESSION.TIME.active + "/" + self.SESSION.TIME.total);
+      };
+
+      tracker.__onIdleEnd = function () {
+        self.SESSION.IS_IDLE = false;
+      };
+
+
+      // tab activated
+      tracker.__onVisible = function () {
+        var
+          self = VGTouchTimeTracker;
+        // is session started
+        if(self.SESSION.initialized) {
+          self.SESSION.IS_IDLE = false;
+        }
+          self.SESSION.IS_VISIBLE = true;
+      };
+
+      // tab deactivated
+      tracker.__onHidden = function () {
+        var
+          self = VGTouchTimeTracker;
+
+        self.SESSION.IS_IDLE    = true;
+        self.SESSION.IS_VISIBLE = false;
+      };
+
+
+      tracker.__onTimer = function () {
+        var
+          self = VGTouchTimeTracker || false;
+
+        if(!self) {
+          // console.log("No TimeTracker object!")
+          return;
+        }
+
+        // send to server every [REPORT_INTERVAL] seconds, incl. at zero
+        if( ((self.SESSION.TIME.total) % self._options.REPORT_INTERVAL) === 0) {
+          // console.log("Tracking active time: " + self.SESSION.TIME.active + "/" + self.SESSION.TIME.total);
+          self.update();
+        }
+
+        self.SESSION.IDLE_TICKER++;
+        self.SESSION.TIME.total++;
+
+
+        if(self.SESSION.IS_VISIBLE) {
+          self.SESSION.TIME.visible++;
+        }
+        else {
+          self.SESSION.TIME.hidden++;
+        }
+
+        if(self.SESSION.IS_IDLE) {
+          self.SESSION.TIME.idle++;
+          if( Math.round( (new Date().getTime() - self.SESSION.PREV_EVENT)/1000) >= self._options.SESSION_TIMEOUT) {
+            // session expired, so stop tracker
+            self.stop();
+          }
+        }
+        // NOT idle
+        else {
+
+          if(self.SESSION.IS_VISIBLE) {
+
+            self.SESSION.TIME.active++;
+
+            // check if we have passed the idle timeout limit
+            if( self.SESSION.IDLE_TICKER >= self._options.IDLE_TIMEOUT ) {
+              // console.log("IDLING after timeout: " + self.SESSION.IDLE_TICKER);
+              self.SESSION.IS_IDLE = true;
+              self.__onIdleStart();
+            }
+          }
+        }
+
+      };
+
+
+      tracker.__init = function (options, client) {
+        var
+          self = this,
+          inputfunctions = "";
+
+
+        if (this.SESSION.initialized === true) {
+          // console.log("Trying to __init() tracker object, but it is already initialized. This should never happen.");
+          return false;
+        }
+
+
+        this.SESSION.info = {
+          animationMethod : this.getAnimationMethod(),
+          url             : client.url
+        };
+
+
+        document.addEventListener("message", this.__onWindowMessage, false);        
+
+        // this will probably not work from within an iframe, though ..
+        document.addEventListener("focus", this.__onVisible, false);
+        document.addEventListener("blur",  this.__onHidden, false);
+
+
+        inputfunctions = ["mousedown","keydown"];
+        if ('ontouchstart' in window) {
+          inputfunctions.push("touchstart");
+        }
+
+        for(var i=0; i<inputfunctions.length;i++) {
+          window.addEventListener(inputfunctions[i], this.onActivity, false); 
+        }
+
+        for (var idx in options) {
+          this._options[idx] = options[idx];
+        }
+
+        this._img = new Image();
+        this.SESSION.initialized = true;
+        return true;
+      }
+      
+
+      tracker._sendJSON = function(data) {
         var
           xhr   = new XMLHttpRequest(),
           json  = JSON.stringify(data);
 
         if(data.length === 0) {
-          console.log("NOT sending empty data object to logging server.");
+          // console.log("NOT sending empty data object to logging server.");
           return false;
         }
 
@@ -113,236 +229,248 @@
         xhr.setRequestHeader("Content-length", json.length);
         xhr.setRequestHeader("Connection", "close");
         xhr.send(json);
-      },
+      };
 
 
-      _ontimer : function (tracker) {
-        
-        if(tracker !== "object") {
-          console.log("ERROR in TimeTracker._ontimer(): tracker is not an object!");
+      tracker._sessionTime = function () {
+        return this.START_SESSION - new Date().getTime();
+      };
+
+
+      tracker._sendREQUEST = function(data) {
+        var
+          requestUri = this._encodeAsGet(data);
+
+        // console.log("Sending GET request: " + this._options.SERVER + "?" + requestUri);
+
+        // request GIF beacon
+        this._img.src = this._options.SERVER + "?" + requestUri;
+      };
+
+
+      tracker._send = function(data, method) {
+        var
+          // set given request method, or use default
+          method = method || this._options.METHOD;
+
+        if( typeof data !=="object" ) {
+          // console.log("Wrong parameter type '" + typeof(data) + "', expected 'object'.");
+          return false;
+        }
+
+        if( data.length === 0 ) {
+          // console.log("NOT sending empty data object to logging server.");
+          return false;
+        }
+
+        switch(method.toLowerCase()) {
+          case "json" : 
+            this._sendJSON(data);
+            break;
+          case "get" : 
+            this._sendREQUEST(data);
+            break;
+          default : 
+            this._sendJSON(data);
+        }
+      };
+
+
+      /**
+       *  Internal callbacks and event handlers
+       *
+       */
+
+      tracker._onResponse = function (e) {
+
+        if (this.readyState != 4) {
           return;
         }
 
-        tracker.TOTAL_TIME = new Date().getTime() - tracker.START_TIME;
+        if (this.status != 200 && this.status != 304) {
+            tracker.log('HTTP error: ' + this.status + " - " + this.statusText);
+            return;
+        }
 
+        try {
+          var
+            response = JSON.parse(this.responseText);
+
+          if( response.OK == 1 ) {
+              console.log('Received response from logger service: ' + this.responseText);
+          } else{
+              // console.log('Error-response received from logger service: ' + this.status + "; OK: " + response.OK, response);
+          }
+        }
+        catch (e) {
+          // console.log("Error: ", e);
+        }
+      };
+
+
+      tracker._onError = function (error) {
         var
-          timeSpent = tracker.COUNTER * tracker.INTERVAL,
-          eventName = 'time';
+          msg = (typeof error.message === "string") ?  error.message : false;
 
-        tracker.COUNTER++;
-        tracker._send(eventName, timeSpent);
-      },
+        if(msg) {
+          //display file and line no. where error occurred
+          msg += "\n" + error.fileName || "";
+          msg +=  ":";
+          msg += error.lineNumber || "";
+          msg +=  " - ";
+        }
+
+        if(DEBUG) {
+          // show stack trace
+          msg += VGTouchTimeTracker.stacktrace(error);
+        }
+
+        this.error(msg, error);
+        return;
+      };
 
 
-      run : function (options) {
-        this.__init();
-        setInterval(this._ontimer, options.INTERVAL, this);
-      }
+      tracker._logToConsole = function (line, obj) {
 
-    };
+        if(this.__console) {
+          // console.log("console.nodeName: " + this.__console.nodeName);
+          // console.log("console.nodeType: " + this.__console.nodeType);
+          this.__console.value += line + ( (obj!=="undefined") ? JSON.stringify(obj) : "");
+        }
+        else {
+          // console.log("No __console element!");
+        }
+
+        if(!!window.console) {
+          return;
+        }
+
+        (!!obj) ? console.log(line, obj) : console.log(line);
+        return true;
+      };
 
 
-  // start tracker
-  TimeTracker.run(OPTIONS);
+      /**  Public / published section
+       *
+       */
 
 
+      tracker.getAnimationMethod = function(){ 
+        var
+          result = ( 
+            window.requestAnimationFrame    || window.webkitRequestAnimationFrame || 
+            window.mozRequestAnimationFrame || 
+            window.msRequestAnimationFrame  || function(callback) { window.setTimeout(callback, 1000 / 60); }
+          );
 
-/**
- *  UserAgent()
- *  
- *  https://github.com/caseyohara/user-agent/
- */
+        return result.name || "window.setTimeout";
+      };
 
-  var UserAgent;
 
-  UserAgent = (function() {
-    var 
-      Browsers, OS, Platform, Versions, browser_name, browser_version, os, platform;
+      tracker.setVisible = function (visibility) {
+        var
+          visibility = visibility || true;
 
-    Versions = {
-      Firefox   : /firefox\/([\d\w\.\-]+)/i,
-      IE        : /msie\s([\d\.]+[\d])/i,
-      Chrome    : /chrome\/([\d\w\.\-]+)/i,
-      Safari    : /version\/([\d\w\.\-]+)/i,
-      Ps3       : /([\d\w\.\-]+)\)\s*$/i,
-      Psp       : /([\d\w\.\-]+)\)?\s*$/i
-    };
+        if( this.IS_VISIBLE !== visibility ) {
+          this.IS_VISIBLE = visibility;
+        }
 
-    Browsers = {
-      Konqueror : /konqueror/i,
-      Chrome    : /chrome/i,
-      Safari    : /safari/i,
-      IE        : /msie/i,
-      Opera     : /opera/i,
-      PS3       : /playstation 3/i,
-      PSP       : /playstation portable/i,
-      Firefox   : /firefox/i
-    };
+        // Cannot be active, if ad is not visible
+        if (!this.IS_VISIBLE) {
+          VGTouchTimeTracker.SESSION.IS_IDLE = true;
+        }
+      };
 
-    OS = {
-      WindowsVista  : /windows nt 6\.0/i,
-      Windows7      : /windows nt 6\.1/i,
-      Windows8      : /windows nt 6\.2/i,
-      Windows2003   : /windows nt 5\.2/i,
-      WindowsXP     : /windows nt 5\.1/i,
-      Windows2000   : /windows nt 5\.0/i,
-      OSX           : /os x (\d+)[._](\d+)/i,
-      Linux         : /linux/i,
-      Wii           : /wii/i,
-      PS3           : /playstation 3/i,
-      PSP           : /playstation portable/i,
-      Ipad          : /\(iPad.*os (\d+)[._](\d+)/i,
-      Iphone        : /\(iPhone.*os (\d+)[._](\d+)/i
-    };
 
-    Platform = {
-      Windows       : /windows/i,
-      Mac           : /macintosh/i,
-      Linux         : /linux/i,
-      Wii           : /wii/i,
-      Playstation   : /playstation/i,
-      Ipad          : /ipad/i,
-      Ipod          : /ipod/i,
-      Iphone        : /iphone/i,
-      Android       : /android/i,
-      Blackberry    : /blackberry/i
-    };
+      tracker.onActivity = function (e) {
+        var
+          self = VGTouchTimeTracker;
+          
+        self.SESSION.PREV_EVENT   = new Date().getTime();
+        self.SESSION.IDLE_TICKER  = 0;
+        self.SESSION.IS_IDLE      = false;
 
-    function UserAgent(source) {
-      if (source == null) {
-        source = navigator.userAgent;
-      }
-      this.source = source.replace(/^\s*/, '').replace(/\s*$/, '');
-      this.browser_name = browser_name(this.source);
-      this.browser_version = browser_version(this.source);
-      this.os = os(this.source);
-      this.platform = platform(this.source);
-    }
+        if(self.SESSION.expired) {
+          // console.log("restarting expired session: " + self.SESSION.start);
+          self.run();
+        }
+      };
 
-    browser_name = function(string) {
-      switch (true) {
-        case Browsers.Konqueror.test(string):
-          return 'konqueror';
-        case Browsers.Chrome.test(string):
-          return 'chrome';
-        case Browsers.Safari.test(string):
-          return 'safari';
-        case Browsers.IE.test(string):
-          return 'ie';
-        case Browsers.Opera.test(string):
-          return 'opera';
-        case Browsers.PS3.test(string):
-          return 'ps3';
-        case Browsers.PSP.test(string):
-          return 'psp';
-        case Browsers.Firefox.test(string):
-          return 'firefox';
-        default:
-          return 'unknown';
-      }
-    };
 
-    browser_version = function(string) {
-      var regex;
-      switch (browser_name(string)) {
-        case 'chrome':
-          if (Versions.Chrome.test(string)) {
-            return RegExp.$1;
+      tracker.setSessionVariable = function (name, value, section) {
+        var
+          section = ( (typeof section === "string") && (section.length > 0) ) ? section : false;
+
+        if(!section) {
+          this.SESSION[name] = value;
+        } else {
+          if(!this.SESSION[section]) {
+            this.SESSION[section] = {};
           }
-          break;
-        case 'safari':
-          if (Versions.Safari.test(string)) {
-            return RegExp.$1;
-          }
-          break;
-        case 'firefox':
-          if (Versions.Firefox.test(string)) {
-            return RegExp.$1;
-          }
-          break;
-        case 'ie':
-          if (Versions.IE.test(string)) {
-            return RegExp.$1;
-          }
-          break;
-        case 'ps3':
-          if (Versions.Ps3.test(string)) {
-            return RegExp.$1;
-          }
-          break;
-        case 'psp':
-          if (Versions.Psp.test(string)) {
-            return RegExp.$1;
-          }
-          break;
-        default:
-          regex = /#{name}[\/ ]([\d\w\.\-]+)/i;
-          if (regex.test(string)) {
-            return RegExp.$1;
-          }
-      }
-    };
-
-    os = function(string) {
-      switch (true) {
-        case OS.WindowsVista.test(string):
-          return 'Windows Vista';
-        case OS.Windows7.test(string):
-          return 'Windows 7';
-        case OS.Windows2003.test(string):
-          return 'Windows 2003';
-        case OS.WindowsXP.test(string):
-          return 'Windows XP';
-        case OS.Windows2000.test(string):
-          return 'Windows 2000';
-        case OS.Linux.test(string):
-          return 'Linux';
-        case OS.Wii.test(string):
-          return 'Wii';
-        case OS.PS3.test(string):
-          return 'Playstation';
-        case OS.PSP.test(string):
-          return 'Playstation';
-        case OS.OSX.test(string):
-          return string.match(OS.OSX)[0].replace('_', '.');
-        case OS.Ipad.test(string):
-          return string.match(OS.Ipad)[0].replace('_', '.');
-        case OS.Iphone.test(string):
-          return string.match(OS.Iphone)[0].replace('_', '.');
-        default:
-          return 'unknown';
-      }
-    };
-
-    platform = function(string) {
-      switch (true) {
-        case Platform.Windows.test(string):
-          return "Microsoft Windows";
-        case Platform.Mac.test(string):
-          return "Apple Mac";
-        case Platform.Android.test(string):
-          return "Android";
-        case Platform.Blackberry.test(string):
-          return "Blackberry";
-        case Platform.Linux.test(string):
-          return "Linux";
-        case Platform.Wii.test(string):
-          return "Wii";
-        case Platform.Playstation.test(string):
-          return "Playstation";
-        case Platform.Ipad.test(string):
-          return "iPad";
-        case Platform.Ipod.test(string):
-          return "iPod";
-        case Platform.Iphone.test(string):
-          return "iPhone";
-        default:
-          return 'unknown';
-      }
-    };
-    return UserAgent;
-  })();
+          this.SESSION[section][name] = value;
+        }
+      };
 
 
+      tracker.error = function (line, obj) {
+        this._send({event: "error", message: line, data: obj || false});
+      };
+
+      tracker.log = function (line, obj) {
+        this._send({event: "log", message: line, data: obj || false});
+      };
+
+      tracker.send = function (obj, evt) {
+        var
+          evt = evt || "data";
+
+        this._send({event: evt, data: obj || null});
+      };
+
+      tracker.update = function () {
+        // send session object with event type "time"
+        this.send(this.SESSION, "time");
+      };
+
+      tracker.stacktrace = function(error) {
+          return error.stack || "No stack trace available.";
+      };
+
+
+      tracker.stop = function() {
+        if(this._timer!==false) {
+          this.SESSION.expired = true;
+          clearInterval(this._timer);
+          this._timer = false;
+        }
+      };
+
+
+      tracker.run = function(interval) {
+        var
+          interval = interval || 1000;
+
+        if(this._timer!==false) {
+          clearInterval(this._timer);
+          this._timer = false;
+        }
+
+        this.SESSION.expired = false;
+        // console.log("(re)starting time-tracker's timer");
+        this._timer = setInterval(this.__onTimer, interval);
+      };
+
+      window.onerror = this._onError;
+
+      // console.log("Starting VGTouchTimeTracker.");
+
+      // call init function
+      tracker.__init(options, client);
+      return tracker;
+
+    }(OPTIONS, CLIENT);
+
+
+  /**    END VGTouchTimeTracker     */
 
 

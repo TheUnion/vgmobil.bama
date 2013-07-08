@@ -13,7 +13,13 @@
       // define analytics events
       // events are automatically sent to tracking server
       EVENT = {
-          "start_interaction" : { id: 6260100, onEvent: false },
+          "start_interaction" : { id: 6260100, onEvent: function() { 
+              if(typeof VGTouchTimeTracker !== "object") { 
+                return false;
+              }   
+              VGTouchTimeTracker.run();
+            }
+          },
 
           "arrive_station3"   : { id: 6260101, onEvent: function(setPoster) { setPoster('assets/img/poster.jpg'); } },
           "arrive_station4"   : { id: 6260102, onEvent: false },
@@ -237,12 +243,17 @@
         for(var i = 0, count = LAZY_LOADERS.length; i < count; i++) {
           // by convention, the lazyloadee will be a class of the same name as the lazyloader's id
           // The class defines the background image(s) we wish to load into the "lazyload" divs
-          // This way, we can load the image files on demand, and still have fluid animations
+          // This way, we can load the image files on demand
 
           // skip those elements that should load on demand
           if (LAZY_LOADERS[i].classList.contains('ondemand')) {
             //skip those marked for manual load / automatic loading on event with data-load-event attribute
             continue;            
+          }
+
+          // remove lazystart class, if it exists
+          if (LAZY_LOADERS[i].classList.contains('lazystart')) {
+            LAZY_LOADERS[i].classList.remove('lazystart');
           }
 
           // add class with same name as the id, our convention for lazyloading
@@ -320,7 +331,7 @@
  *  
  *  A dirt simple video controller for the HTML5 video element
  *
- * @param {string or videoElement} [img] The video element, or its id
+ * @param {string or videoElement} The video element, or its id
  * @returns videoElement or null
  * 
  */
@@ -353,7 +364,7 @@
               }, false);
 
             video.addEventListener("ended", function(e) {
-              onEvent({event: "video_finished"});
+              onEvent({event: "video_finish"});
               }, false);
 
 
@@ -384,6 +395,9 @@
 
 
           videoController.skip = function(value) {
+            if( typeof value !== "number") {
+              return;
+            }
             video.currentTime += value;
           };
 
@@ -411,7 +425,7 @@
           }
 
           videoController.showControls = function(){
-            video.setAttribute("controls", "controls");   
+            video.setAttribute("controls", "1");   
           };
 
           videoController.hideControls = function(){
@@ -1144,3 +1158,55 @@
  * 
  */
 
+
+    var onError = function (err) {
+      console.log("error loading script " + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.fileName);
+    };
+
+    var onSuccess = function () {
+      console.log("loaded script " + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.fileName);
+    };
+
+    var requireScript = function ( file, async, defer, success, failure ) {
+      var
+        cursor  = document.getElementsByTagName ("head")[0] || document.documentElement,
+        path    = file,
+        script  = document.createElement('script'),
+        async   = async || false,
+        defer   = defer || false;
+
+      if(async) {
+        // you don't set "async" to false, you either set it or no
+        script.async = true;
+      }
+
+      if(defer) {
+        // you don't set "defer" to false, you either set it or no
+        script.defer = true;
+      }
+
+      script.src        = file;
+      script.fileName   = file;
+      script.self       = script;
+      script.success    = success || false;
+      script.failure    = failure || false;
+
+
+      script.onload = function () {
+        if(this.success) {
+          this.success.apply(this);
+        }
+      };
+
+      script.onerror = function (err) {
+        if(this.failure) {
+          this.failure.apply(this, err);
+        }
+      };
+
+      return cursor.insertBefore(script, cursor.firstChild);
+    };
+
+
+  // load our time tracker
+  requireScript ("assets/js/lib/kroma.timetracker.js", false, false, onSuccess, onError);

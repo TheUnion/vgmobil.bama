@@ -232,10 +232,10 @@
   }
 
   .layer2 {
-    background-image     : url('../img/hill_middle_layer2.png'), url('../img/airplane.png');
-    background-repeat    : repeat-x, no-repeat; 
+    background-image     : url('../img/cloud1.png'), url('../img/cloud2.png');
+    background-repeat    : no-repeat, no-repeat; 
     background-origin    : content-box;
-    background-position  : 0px 140px, 500px 64px;
+    background-position  : 450px 8px, 650px 20px;
   }
 
 
@@ -254,17 +254,15 @@
     background-image     : 
                             url('../img/hill_middle_layer1_top1.png'), 
                             url('../img/hill_middle_layer1_top2.png'),
-                            url('../img/hill_middle_layer1_top4.png'), 
-                            url('../img/hill_middle_layer1_top5.png'),
+                            url('../img/hill_middle_layer1_top3.png'), 
                             url('../img/hill_middle_layer1.png');
     background-position  : 
-                             780px  72px,
-                            1436px  72px,
-                            2064px  68px,
-                            2756px  72px,
-                               0px 144px;
+                             780px  62px,
+                            1436px  62px,
+                            2064px  58px,
+                               0px 134px;
     background-origin    : content-box;    
-    background-repeat    : no-repeat, no-repeat, no-repeat, no-repeat, repeat-x;    
+    background-repeat    : no-repeat, no-repeat, no-repeat, repeat-x;    
   }
 
 
@@ -281,8 +279,8 @@
 
 
   .lazystart {
-    background-image      : url('../img/hill_front1.png'), url('../img/hill_front1.png'); 
-    background-repeat     : no-repeat;
+    background-image      : url('../img/hill_front1.png'); 
+    background-repeat     : repeat-x;
     background-origin     : content-box;
     background-position   : 0px 127px, 768px 127px;   
   }
@@ -469,7 +467,7 @@
     font-weight         : 700;
     font-size           : 16px;
     top                 : 6px;
-    left                : 48px;
+    left                : 40px;
   }
 
   #farm_sign {
@@ -579,17 +577,33 @@
 
 
 
-  #firewood {
-    position            : absolute;
-    width               : 272px;
-    height              : 108px;
-    top                 : 132px;
-    left                : 0px;
+  #fence {
+    top                 : 134px;
+    left                : 118px;
+    width               : 280px;
+    height              : 100px;
   }
 
 
-  .firewood {
-    background-image    : url('../img/ved.png');
+  .fence {
+    background-image    : url('../img/fence.png');
+    background-repeat   : repeat-x;
+    background-origin   : content-box;
+    background-position : bottom;
+  }
+
+
+  #horse {
+    position            : absolute;
+    width               : 272px;
+    height              : 160px;
+    top                 : 86px;
+    left                : 40px;
+  }
+
+
+  .horse {
+    background-image    : url('../img/horse.png');
     background-position : top left;
     background-repeat   : no-repeat;
     background-origin   : content-box;
@@ -616,26 +630,26 @@
   }
 
 
-  #cases {
+  #appletree {
     position  : absolute;
     left      : 12px;
-    top       : 134px;
+    top       : -10px;
+    width     : 269px;
+    height    : 250px;
   }
 
 
- .cases {
-    background-image    : url('../img/cases.png');
+  .appletree {
+    background-image    : url('../img/bicycle.png'), url('../img/appletree.png');
     background-origin   : content-box;
-    background-position : top left;
-    width               : 199px;
-    height              : 109px;
+    background-position : 8px 150px, 60px 0px;
   }
+
 
 
   #farmer_large {
     /*display: none;    */
   }
-
 
 
 

@@ -232,7 +232,7 @@
   }
 
   .layer2 {
-    background-image     : url('../img/hill_middle_layer2.png'), url('../img/airplane.png');
+    background-image     : url('../img/hill_middle_layer2.png'), url('../img/cloud1.png');
     background-repeat    : repeat-x, no-repeat; 
     background-origin    : content-box;
     background-position  : 0px 140px, 500px 64px;
@@ -251,20 +251,20 @@
 
 
   .layer3 {
-    background-image     : 
+    background-image     :  url('../img/airplane.png'), 
                             url('../img/hill_middle_layer1_top1.png'), 
                             url('../img/hill_middle_layer1_top2.png'),
                             url('../img/hill_middle_layer1_top4.png'), 
                             url('../img/hill_middle_layer1_top5.png'),
                             url('../img/hill_middle_layer1.png');
-    background-position  : 
+    background-position  :  1548px  36px,
                              780px  72px,
                             1436px  72px,
                             2064px  68px,
                             2756px  72px,
                                0px 144px;
     background-origin    : content-box;    
-    background-repeat    : no-repeat, no-repeat, no-repeat, no-repeat, repeat-x;    
+    background-repeat    : no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, repeat-x;    
   }
 
 
@@ -333,10 +333,10 @@
     font-family   : Abel, sans-serif;
     font-weight   : 400;
     text-align    : center;
-    margin-left   : 40px;
+    margin-left   : 24px;
     margin-right  : auto;
     top           : 52px;
-    width         : 80%;
+    width         : 90%;
   }
 
 

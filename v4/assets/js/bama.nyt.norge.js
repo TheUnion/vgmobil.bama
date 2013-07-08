@@ -41,7 +41,6 @@ $(document).ready(function () {
 
           "video_play"        : { id: 6260215, onEvent: false },
           "video_pause"       : { id: 6260216, onEvent: false },
-          "video_pause"        : { id: 6260216, onEvent: false },
           "video_finish"      : { id: 6260220, onEvent: false }
       },
 
@@ -406,7 +405,7 @@ $(document).ready(function () {
               }, false);
 
             video.addEventListener("ended", function(e) {
-              onEvent({event: "video_finished"});
+              onEvent({event: "video_finish"});
               }, false);
 
 

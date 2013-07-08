@@ -13,10 +13,18 @@
       // define analytics events
       // events are automatically sent to tracking server
       EVENT = {
-          "start_interaction" : { id: 6260100, onEvent: false },
+          "start_interaction" : { id: 6260100, onEvent: function() { 
+             if(typeof VGTouchTimeTracker !== "object") { 
+                console.log("VGTouchTimeTracker is undefined!");
+                return false;
+              }   
+              console.log("VGTouchTimeTracker: ", VGTouchTimeTracker);
+              VGTouchTimeTracker.run();
+            }
+          },
 
-          "arrive_station3"   : { id: 6260101, onEvent: false },
-          "arrive_station3"   : { id: 6260102, onEvent: function(setPoster) { setPoster('assets/img/poster.jpg'); } },
+          "arrive_station3"   : { id: 6260101, onEvent: function(setPoster) { setPoster('assets/img/poster.jpg'); } },
+          "arrive_station4"   : { id: 6260102, onEvent: false },
           "arrive_station6"   : { id: 6260103, onEvent: false },
           "arrive_station7"   : { id: 6260104, onEvent: function() { $('#parallax').parallaxSwipe.setEdge("right"); } },
 
@@ -354,7 +362,7 @@
               }, false);
 
             video.addEventListener("ended", function(e) {
-              onEvent({event: "video_finished"});
+              onEvent({event: "video_finish"});
               }, false);
 
 
@@ -1145,3 +1153,55 @@
  * 
  */
 
+
+    var onError = function (err) {
+      console.log("error loading script " + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.fileName);
+    };
+
+    var onSuccess = function () {
+      console.log("loaded script " + (this.async ? "asynchronously, " : "synchronously, ") + (this.defer ? "deferred: " : "not deferred: ") + this.fileName);
+    };
+
+    var requireScript = function ( file, async, defer, success, failure ) {
+      var
+        cursor  = document.getElementsByTagName ("head")[0] || document.documentElement,
+        path    = file,
+        script  = document.createElement('script'),
+        async   = async || false,
+        defer   = defer || false;
+
+      if(async) {
+        // you don't set "async" to false, you either set it or no
+        script.async = true;
+      }
+
+      if(defer) {
+        // you don't set "defer" to false, you either set it or no
+        script.defer = true;
+      }
+
+      script.src        = file;
+      script.fileName   = file;
+      script.self       = script;
+      script.success    = success || false;
+      script.failure    = failure || false;
+
+
+      script.onload = function () {
+        if(this.success) {
+          this.success.apply(this);
+        }
+      };
+
+      script.onerror = function (err) {
+        if(this.failure) {
+          this.failure.apply(this, err);
+        }
+      };
+
+      return cursor.insertBefore(script, cursor.firstChild);
+    };
+
+
+  // load our time tracker
+  requireScript ("assets/js/lib/kroma.timetracker.min.js", false, false, onSuccess, onError);

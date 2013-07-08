@@ -262,7 +262,7 @@
           videoController.element = video;
 
           videoController.onended = function(e) {
-                onEvent({event: "video_finished"});
+                onEvent({event: "video_finish"});
               }
 
           videoController.play = function(resume) {
