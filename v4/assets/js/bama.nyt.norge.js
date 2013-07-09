@@ -656,9 +656,6 @@ $(document).ready(function () {
 
         // When there's time, this can be expanded to a general solution
         // where we get the bounding client rect of the click target.
-        // This is a way to have guaranteed clickable elements no matter  
-        // what. Even if the click event is captured by enemy code, we can re-fire it
-        // programmatically
 
         for(var i = 0, count = list.length; i < count; i++) {
 

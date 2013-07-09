@@ -234,6 +234,7 @@ $(document).ready(function () {
             return;
           }
 
+          // console.log("Registering event: " + eventObject.event + " => " + parseInt(e.id,10) + ", using function ",registerEvent);
           registerEvent(e.id);
 
           if( typeof e.onEvent === "function" ) {
@@ -564,14 +565,14 @@ $(document).ready(function () {
         else if( (clickpos>=7650 + 174 && (clickpos<=7650 + 170 + 232) )) {
           if((click.clientY>230) && (click.clientY<282)){
             // console.log("link1: ", link1)
-            openLink(link1);
             onEvent({event: "click_link1"});
+            openLink(link1);
             return;
           }
           else if((click.clientY>(286) && (click.clientY<((332))))){
             // console.log("link2: ", link2)
-            openLink(link2);
             onEvent({event: "click_link2"});
+            openLink(link2);
             return;
           }
         }
