@@ -9,10 +9,44 @@
   }
 
 
+  .tablebody {
+    font-family: 'Ubuntu Condensed', monospace;
+  }
+
+
+  .tableheader {
+    text-align      : center;
+    text-transform  : uppercase;
+  }
+
+
+  .dateline {
+    font-size: 28px;
+    font-weight: 700;
+  }
+
+
+  .date {
+    color: #999;
+  }
+
+
+  .animationMethod {
+    width: 64px;
+  }
+
+  .url {
+    width: 64px;
+  }
+
+  .ip {
+    width: 64px;
+  }
 
   .event {
-
+    font-style: italic;
   }
+
 
  .start {
 
@@ -62,99 +96,61 @@
 
   }
 
-  .animationMethod {
-    width: 64px;
+
+
+  @-webkit-keyframes updated {
+    from { background-color: green; }
+    to { background-color: inherit; }
   }
 
-  .url {
-    width: 64px;
+  @-moz-keyframes updated {
+    from { background-color: green; }
+    to { background-color: inherit; }
   }
 
-  .ip {
-    width: 64px;
+  @-o-keyframes updated {
+    from { background-color: green; }
+    to { background-color: inherit; }
+  }
+
+  @keyframes updated {
+    from { background-color: green; }
+    to { background-color: inherit; }
+  }
+
+  .updated {
+    -webkit-animation: updated 0.8s ; /* Safari 4+ */
+       -moz-animation: updated 0.8s ; /* Fx 5+ */
+         -o-animation: updated 0.8s ; /* Opera 12+ */
+            animation: updated 0.8s ; /* IE 10+ */
   }
 
 
 
+  @-webkit-keyframes added {
+    from { background-color: orange; }
+    to { background-color: inherit; }
+  }
 
+  @-moz-keyframes added {
+    from { background-color: orange; }
+    to { background-color: inherit; }
+  }
 
+  @-o-keyframes added {
+    from { background-color: orange; }
+    to { background-color: inherit; }
+  }
 
-.tablebody {
-  font-family: 'Ubuntu Condensed', monospace;
-}
+  @keyframes added {
+    from { background-color: orange; }
+    to { background-color: inherit; }
+  }
 
-
-.tableheader {
-  text-align      : center;
-  text-transform  : uppercase;
-}
-
-
-.flash {
-
-}
-
-
-.event {
-  color: red;
-  font-weight: 700;
-}
-
-
-
-@-webkit-keyframes updated {
-  from { background-color: green; }
-  to { background-color: inherit; }
-}
-
-@-moz-keyframes updated {
-  from { background-color: green; }
-  to { background-color: inherit; }
-}
-
-@-o-keyframes updated {
-  from { background-color: green; }
-  to { background-color: inherit; }
-}
-
-@keyframes updated {
-  from { background-color: green; }
-  to { background-color: inherit; }
-}
-
-.updated {
-  -webkit-animation: updated 0.8s ; /* Safari 4+ */
-     -moz-animation: updated 0.8s ; /* Fx 5+ */
-       -o-animation: updated 0.8s ; /* Opera 12+ */
-          animation: updated 0.8s ; /* IE 10+ */
-}
-
-
-
-@-webkit-keyframes added {
-  from { background-color: orange; }
-  to { background-color: inherit; }
-}
-
-@-moz-keyframes added {
-  from { background-color: orange; }
-  to { background-color: inherit; }
-}
-
-@-o-keyframes added {
-  from { background-color: orange; }
-  to { background-color: inherit; }
-}
-
-@keyframes added {
-  from { background-color: orange; }
-  to { background-color: inherit; }
-}
-
-.added {
-  -webkit-animation: added 0.8s ; /* Safari 4+ */
-     -moz-animation: added 0.8s ; /* Fx 5+ */
-       -o-animation: added 0.8s ; /* Opera 12+ */
-          animation: added 0.8s ; /* IE 10+ */
-}
+  .added {
+    -webkit-animation: added 0.8s ; /* Safari 4+ */
+       -moz-animation: added 0.8s ; /* Fx 5+ */
+         -o-animation: added 0.8s ; /* Opera 12+ */
+            animation: added 0.8s ; /* IE 10+ */
+  }
 
