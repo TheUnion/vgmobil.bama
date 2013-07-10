@@ -1,0 +1,1380 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"cloud",
+				"cloud2"
+			],
+			[
+				"SES",
+				"SESSION"
+			],
+			[
+				"SE",
+				"SESSION"
+			],
+			[
+				"SESS",
+				"SESSION_TIMEOUT"
+			],
+			[
+				"in",
+				"inputfunctions"
+			],
+			[
+				"appe",
+				"appendChild"
+			],
+			[
+				"__",
+				"__sessions"
+			],
+			[
+				"tr",
+				"trow"
+			],
+			[
+				"cre",
+				"createTextNode"
+			],
+			[
+				"repo",
+				"reportheaders"
+			],
+			[
+				"get",
+				"getElementById"
+			],
+			[
+				"__ro",
+				"__rowToObject"
+			],
+			[
+				"IDL",
+				"IDLE_TICKER"
+			],
+			[
+				"font",
+				"font-family"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"_",
+				"__table"
+			],
+			[
+				"upda",
+				"updateRow"
+			],
+			[
+				"id",
+				"idx"
+			],
+			[
+				"el",
+				"element"
+			],
+			[
+				"ca",
+				"catch"
+			],
+			[
+				"json",
+				"JSON"
+			],
+			[
+				"str_",
+				"str_replace"
+			],
+			[
+				"subsc",
+				"subscribeToChannel"
+			],
+			[
+				"me",
+				"message"
+			],
+			[
+				"pr",
+				"print"
+			],
+			[
+				"RED",
+				"REDIS_DEBUG_CHANNEL"
+			],
+			[
+				"time",
+				"timestamp"
+			],
+			[
+				"Kroma",
+				"KromaTimeTracker"
+			],
+			[
+				"br",
+				"browser_name"
+			],
+			[
+				"mysqli",
+				"mysqli_connect"
+			],
+			[
+				"padd",
+				"padding-left"
+			],
+			[
+				"no",
+				"no-repeat"
+			],
+			[
+				"ini",
+				"initializeTimer"
+			],
+			[
+				"progress",
+				"progresstimer"
+			],
+			[
+				"init",
+				"initialized"
+			],
+			[
+				"INTER",
+				"UPDATE_INTERVAL"
+			],
+			[
+				"progr",
+				"progresstimer"
+			],
+			[
+				"trigger",
+				"triggers"
+			],
+			[
+				"FRA",
+				"FRAME_RATE"
+			],
+			[
+				"FR",
+				"FRAME_RATE"
+			],
+			[
+				"option",
+				"options"
+			],
+			[
+				"IS",
+				"IS_VISIBLE"
+			],
+			[
+				"__on",
+				"__onIdleStart"
+			],
+			[
+				"options",
+				"OPTIONS"
+			],
+			[
+				"string",
+				"stringify"
+			],
+			[
+				"conn",
+				"connectToRedis"
+			],
+			[
+				"eve",
+				"eventObject"
+			],
+			[
+				"le",
+				"length"
+			],
+			[
+				"even",
+				"eventObject"
+			],
+			[
+				"pos",
+				"position"
+			],
+			[
+				"start",
+				"startpos"
+			],
+			[
+				"ev",
+				"event"
+			],
+			[
+				"register",
+				"registerEvent"
+			],
+			[
+				"event",
+				"eventObject"
+			],
+			[
+				"clicktarg",
+				"clicktargets"
+			],
+			[
+				"arra",
+				"array"
+			],
+			[
+				"LOG",
+				"LOG_PATH"
+			],
+			[
+				"erro",
+				"error_reporting"
+			],
+			[
+				"onE",
+				"_onerror"
+			],
+			[
+				"_SE",
+				"_SERVER"
+			],
+			[
+				"ME",
+				"_METHOD"
+			],
+			[
+				"res",
+				"responseText"
+			],
+			[
+				"_send",
+				"_sendREQUEST"
+			],
+			[
+				"def",
+				"default"
+			],
+			[
+				"regi",
+				"registerEvent"
+			],
+			[
+				"reg",
+				"registerEvent"
+			],
+			[
+				"JSON",
+				"JSON_PRETTY_PRINT"
+			],
+			[
+				"bou",
+				"boundingRect"
+			],
+			[
+				"TOT",
+				"TOTAL_IDLE_TIME"
+			],
+			[
+				"padding",
+				"padding-right"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"on",
+				"onError"
+			],
+			[
+				"re",
+				"require"
+			],
+			[
+				"backgr",
+				"background-origin"
+			],
+			[
+				"send",
+				"sendLogData"
+			],
+			[
+				"TO",
+				"TOTAL_TIME"
+			],
+			[
+				"mar",
+				"margin-left"
+			],
+			[
+				"marg",
+				"margin"
+			],
+			[
+				"pad",
+				"padding"
+			],
+			[
+				"use",
+				"userAgent"
+			],
+			[
+				"anima",
+				"animated"
+			],
+			[
+				"evn",
+				"eventObject"
+			],
+			[
+				"file",
+				"fileName"
+			],
+			[
+				"stac",
+				"stacktrace"
+			],
+			[
+				"debu",
+				"debugLog"
+			],
+			[
+				"strto",
+				"strtolower"
+			],
+			[
+				"video",
+				"videoController"
+			],
+			[
+				"loaded",
+				"loadedMetaData"
+			],
+			[
+				"delta",
+				"deltaX"
+			],
+			[
+				"con",
+				"consoleVar"
+			],
+			[
+				"log",
+				"logErrors"
+			],
+			[
+				"request",
+				"requestPosition"
+			],
+			[
+				"anim",
+				"animation"
+			],
+			[
+				"set",
+				"setTimeout"
+			],
+			[
+				"se",
+				"setInitialized"
+			],
+			[
+				"initi",
+				"initialized"
+			],
+			[
+				"tou",
+				"touchState"
+			],
+			[
+				"MOUS",
+				"MOUSE_DOWN"
+			],
+			[
+				"fa",
+				"fake-click"
+			],
+			[
+				"inti",
+				"initialized"
+			],
+			[
+				"er",
+				"error"
+			],
+			[
+				"bac",
+				"background-position"
+			],
+			[
+				"stop",
+				"stopVideo"
+			],
+			[
+				"clas",
+				"classList"
+			],
+			[
+				"margin",
+				"margin-left"
+			],
+			[
+				"para",
+				"parallax"
+			],
+			[
+				"ret",
+				"returns	@returns"
+			],
+			[
+				"hide",
+				"hideControls"
+			],
+			[
+				"vide",
+				"videoObject"
+			],
+			[
+				"station",
+				"station6"
+			],
+			[
+				"drive",
+				"drive_in_sign"
+			],
+			[
+				"stat",
+				"station5"
+			],
+			[
+				"link",
+				"link1"
+			],
+			[
+				"edg",
+				"rightEdge"
+			],
+			[
+				"la",
+				"lazyloaders"
+			],
+			[
+				"lay",
+				"layer2"
+			],
+			[
+				"boun",
+				"bouncing"
+			],
+			[
+				"sli",
+				"sliderLT"
+			],
+			[
+				"slid",
+				"sliderLen"
+			],
+			[
+				"slider",
+				"sliderLT"
+			],
+			[
+				"R",
+				"REQUESTED_POSITION"
+			],
+			[
+				"fon",
+				"font-family"
+			],
+			[
+				"slide",
+				"sliderLT"
+			],
+			[
+				"fli",
+				"flipLise"
+			],
+			[
+				"pos-",
+				"pos-a	position: absolute;"
+			],
+			[
+				"cli",
+				"clientY"
+			],
+			[
+				"scen",
+				"sceneLeft"
+			],
+			[
+				"par",
+				"parallaxLeft"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 13237,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "assets/css/bama.main.css",
+			"settings":
+			{
+				"buffer_size": 27767,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "versions/mobile/assets/css/bama.main.css",
+			"settings":
+			{
+				"buffer_size": 25890,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "versions/mobile/index.html",
+			"settings":
+			{
+				"buffer_size": 9825,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "versions/mobile/assets/js/bama.nyt.norge.js",
+			"settings":
+			{
+				"buffer_size": 35132,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "assets/js/bama.nyt.norge.js",
+			"settings":
+			{
+				"buffer_size": 34800,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/C/tcc.sublime-build",
+	"command_palette":
+	{
+		"height": 335.0,
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Contr",
+				"Package Control: Discover Packages"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 402.0
+	},
+	"console":
+	{
+		"height": 216.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/D/work/vgmobil/bama/release/v2/tablet/high/assets/js/bama.nyt.norge.js",
+		"/D/work/vgmobil/bama/v4/assets/js/bama.nyt.norge.min.js",
+		"/D/work/vgmobil/bama/v4/assets/js/bama.nyt.norge.js",
+		"/D/work/vgmobil/bama/v4/index.html",
+		"/D/work/vgmobil/bama/release/v2/tablet/high/index.html",
+		"/D/work/vgmobil/bama/v4/assets/css/bama.main.css",
+		"/D/work/vgmobil/bama/release/v2/tablet/high/assets/js/lib/kroma.timetracker.js",
+		"/D/work/vgmobil/bama/release/v2/tablet/high/assets/js/bama.nyt.norge.min.js",
+		"/D/work/vgmobil/bama/v2/assets/js/bama.nyt.norge.js",
+		"/D/work/vgmobil/bama/v2/assets/js/bama.nyt.norge.min.js",
+		"/D/work/vgmobil/bama/v2/versions/mobile/assets/js/bama.nyt.norge.fail.js",
+		"/D/work/vgmobil/bama/v2/versions/mobile/assets/js/bama.nyt.norge.js",
+		"/D/work/vgmobil/bama/v3/assets/js/bama.nyt.norge.js",
+		"/D/work/vgmobil/bama/v3/assets/js/bama.nyt.norge.min.js",
+		"/D/work/vgmobil/bama/v3/versions/mobile/assets/js/bama.nyt.norge.js",
+		"/D/work/vgmobil/bama/assets/js/bama.nyt.norge.debug.js",
+		"/D/work/vgmobil/bama/assets/js/bama.nyt.norge.js",
+		"/D/work/vgmobil/bama/assets/js/bama.nyt.norge.min.js",
+		"/D/work/vgmobil/bama/prod/assets/js/bama.nyt.norge.js",
+		"/D/work/vgmobil/bama/prod/v2/assets/js/bama.nyt.norge.js",
+		"/D/work/vgmobil/bama/prod/v2/assets/js/bama.nyt.norge.min.js",
+		"/D/work/vgmobil/bama/prod/v2/versions/mobile/assets/js/bama.nyt.norge.fail.js",
+		"/D/work/vgmobil/bama/prod/v2/versions/mobile/assets/js/bama.nyt.norge.js",
+		"/D/work/vgmobil/bama/prod/v2/versions/tablet/assets/js/bama.nyt.norge.js",
+		"/D/work/vgmobil/bama/prod/v2/versions/tablet/assets/js/bama.nyt.norge.min.js",
+		"/D/work/vgmobil/bama/prod/v3/assets/js/bama.nyt.norge.js",
+		"/D/work/vgmobil/bama/prod/v3/assets/js/bama.nyt.norge.min.js",
+		"/D/work/vgmobil/bama/prod/versions/mobile/assets/js/bama.nyt.norge.js",
+		"/D/work/vgmobil/bama/release/v2/mobile/high/assets/js/bama.nyt.norge.js",
+		"/D/work/vgmobil/bama/release/v2/mobile/high/assets/js/bama.nyt.norge.min.js",
+		"/D/work/vgmobil/bama/v4/versions/mobile/assets/js/bama.nyt.norge.js",
+		"/D/work/vgmobil/bama/versions/mobile/assets/js/bama.nyt.norge.debug.js",
+		"/D/work/vgmobil/bama/versions/mobile/assets/js/bama.nyt.norge.fail.js",
+		"/D/work/vgmobil/bama/versions/mobile/assets/js/bama.nyt.norge.js",
+		"/D/work/vgmobil/bama/versions/mobile/assets/js/nytnorge/bama.nyt.norge.js",
+		"/D/work/vgmobil/bama/versions/mobile/high/assets/bama.nyt.norge.js",
+		"/D/work/vgmobil/bama/versions/mobile/high/assets/js/bama.nyt.norge.js",
+		"/D/work/vgmobil/bama/versions/mobile/high/assets/js/bama.nyt.norge.stash.js",
+		"/D/work/vgmobil/bama/versions/tablet/high/assets/js/bama.nyt.norge.js",
+		"/C/Users/fillefrans/AppData/Roaming/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap",
+		"/D/work/vgmobil/bama/assets/css/bama.main.css",
+		"/D/work/vgmobil/bama/v4/assets/js/lib/kroma.timetracker.min.js",
+		"/D/work/vgmobil/bama/v2/assets/css/bama.main.css",
+		"/D/work/vgmobil/bama/v4/assets/js/lib/kroma.timetracker.js",
+		"/D/work/vgmobil/bama/release/v2/mobile/high/index.html",
+		"/D/work/vgmobil/bama/release/v2/tablet/high/assets/js/lib/kroma.timetracker.min.js",
+		"/D/work/vgmobil/bama/release/v2/mobile/high/assets/js/lib/kroma.timetracker.min.js",
+		"/D/work/vgmobil/bama/README.md",
+		"/D/work/vgmobil/bama/debug/sessions/assets/css/main.css",
+		"/D/work/vgmobil/bama/debug/sessions/index.html",
+		"/D/work/vgmobil/bama/release/v2/tablet/high/index.min.html",
+		"/D/work/vgmobil/bama/release/v2/tablet/index.html",
+		"/E/468x300/index.html",
+		"/C/Users/fillefrans/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/srv/kroma.pubsub.listener.sse.php",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/srv/kroma.timetracker.php",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/debug/sessions/index.html",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v4/versions/mobile/index.html",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v4/index.html",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v4/assets/js/bama.nyt.norge.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/debug/sessions/assets/css/main.css",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v4/assets/css/bama.main.css",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v4/assets/js/lib/jquery.parallaxSwipe.js",
+		"/C/Users/ballefrans/AppData/Local/Temp/kroma.pubsub.listener.sse-5.php",
+		"/C/Users/ballefrans/AppData/Local/Temp/kroma.pubsub.listener.sse-4.php",
+		"/C/Users/ballefrans/AppData/Local/Temp/kroma.pubsub.listener.sse-2.php",
+		"/C/Users/ballefrans/AppData/Local/Temp/kroma.pubsub.listener.sse-3.php",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v3/assets/js/bama.nyt.norge.js",
+		"/C/Users/ballefrans/AppData/Local/Temp/kroma.pubsub.listener.sse-1.php",
+		"/C/Users/ballefrans/AppData/Local/Temp/kroma.pubsub.listener.sse.php",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v3/versions/mobile/assets/css/bama.main.css",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v3/versions/mobile/index.html",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v3/versions/mobile/assets/js/lib/kroma.debugger.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v3/versions/mobile/assets/js/bama.nyt.norge.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/pi/srv/php/pi.util.functions.php",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/pi/srv/php/pi.config.php",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v3/assets/css/bama.main.css",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v3/index.html",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v2/versions/mobile/assets/js/bama.nyt.norge.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v2/versions/mobile/assets/css/bama.main.css",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v2/versions/mobile/index.html",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v2/index.html",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v2/assets/css/bama.main.css",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v2/assets/js/bama.nyt.norge.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/versions/mobile/assets/css/bama.main.css",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/versions/mobile/index.html",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v2/versions/tablet/assets/js/bama.nyt.norge.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v2/assets/js/lib/jquery.parallaxSwipe.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v2/assets/js/lib/kroma.debugger.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/prod/versions/mobile/iframe.html",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v2/assets/js/lib/idle.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v2/versions/mobile/assets/js/lib/kroma.debugger.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/srv/kroma.debug.logger.php",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/pi/srv/php/pi.session.php",
+		"/C/Users/ballefrans/AppData/Local/Opera/Opera/temporary_downloads/schema.log.php",
+		"/C/Users/ballefrans/AppData/Local/Temp/Temp1_mobile.bama.nyt.norge.js.zip/bama.nyt.norge.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/versions/mobile/assets/js/bama.nyt.norge.debug.js",
+		"/C/Users/ballefrans/AppData/Local/Temp/Temp1_bama.nyt.norge.js.zip/bama.nyt.norge.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/versions/mobile/assets/js/bama.nyt.norge.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/assets/js/bama.nyt.norge.js",
+		"/C/Users/ballefrans/AppData/Local/Temp/Temp1_tablet.bama.nyt.norge.js.zip/bama.nyt.norge.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/prod/assets/js/bama.nyt.norge.js",
+		"/D/vms/VBoxVmService.ini",
+		"/C/Users/ballefrans/AppData/Roaming/Microsoft/Windows/Recent/VBoxVmService.ini.lnk",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/kroma/README.md",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v2/doc/p62602script.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/prod/versions/mobile/assets/css/bama.main.css",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/assets/css/bama.main.css",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/index.html",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/pi/cli/assets/js/pi.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/pi/cli/assets/js/pi.app.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/pi/cli/assets/js/pi.core.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/v2/doc/Change stations.md",
+		"/C/Users/ballefrans/AppData/Local/Temp/fbtmp/richmedia.vg.no/2013/bama/norsk/salat/580x500/4/high/assets/js/bama.nyt.norge.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/pi/cli/assets/js/sample.geojson.json",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/fileeditor",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/.git/TAG_EDITMSG",
+		"/C/util/loadaliases.cmd",
+		"/C/Users/ballefrans/.gitconfig",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/vgmobil/mars/ford/kuga/prod/iframe.html",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/vgmobil/mars/ford/kuga/prod/index.html",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/prod/index.html",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/prod/versions/mobile/index.html",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/prod/versions/mobile/assets/js/bama.nyt.norge.js",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/versions/mobile/high/index.html",
+		"/D/Work/KROMA/KromaViews/dev-server/home/kroma/dev/www/games/bama/srv/logerror.php",
+		"/D/dev/config/id_rsa.pub",
+		"/D/dev/config/private_key.ppk"
+	],
+	"find":
+	{
+		"height": 45.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"D:\\work\\vgmobil\\bama\\,*.js",
+			"D:\\Work\\KROMA\\KromaViews\\dev-server\\home\\kroma\\dev\\games\\bama\\,*.js",
+			"D:\\Work\\KROMA\\KromaViews\\dev-server\\home\\kroma\\dev\\games\\bama\\v4\\",
+			"D:\\Work\\KROMA\\KromaViews\\dev-server\\home\\kroma\\dev\\games\\bama\\",
+			"D:\\Work\\KROMA\\KromaViews\\dev-server\\home\\kroma\\dev\\games\\bama\\v2",
+			"D:\\Work\\KROMA\\KromaViews\\dev-server\\home\\kroma\\",
+			"D:\\Work\\KROMA\\KromaViews\\dev-server\\home\\kroma\\dev\\www\\games\\bama",
+			"D:\\Work\\KROMA\\KromaViews\\dev-server\\home\\kroma\\dev\\www\\games\\*",
+			"D:\\Work\\KROMA\\KromaViews\\dev-server\\home\\kroma\\dev\\pi\\*js,D:\\Work\\KROMA\\KromaViews\\dev-server\\home\\kroma\\dev\\www\\games",
+			"D:\\Work\\KROMA\\KromaViews\\dev-server\\home\\kroma\\dev\\pi\\*js,D:\\Work\\KROMA\\KromaViews\\dev-server\\home\\kroma\\dev\\www\\pi",
+			"D:\\Work\\KROMA\\KromaViews\\dev-server\\home\\kroma\\dev\\pi\\",
+			"D:\\Work\\KROMA\\KromaViews\\dev-server\\home\\kroma\\scripts\\kromaviews\\php\\server\\",
+			"D:\\Work\\KROMA\\KromaViews\\dev-server\\home\\kroma\\scripts\\kromaviews\\php\\server\\*.php",
+			"D:\\Work\\KROMA\\KromaViews\\dev-server\\home\\kroma\\scripts\\kromaviews\\php\\server",
+			"D:\\dev\\lazarus",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"timetr",
+			".min",
+			"vgtou",
+			"video_stop",
+			"time",
+			"onActivity",
+			"256",
+			"VGTouchTimeTracker",
+			"time",
+			"hill_middle_layer1_top5",
+			"             ",
+			"            ",
+			"           ",
+			"             ",
+			"            ",
+			"cases",
+			"fence",
+			"firewood",
+			"hard",
+			"stop",
+			"onac",
+			"onActivity",
+			"onac",
+			"userage",
+			"idle",
+			"IDLE_TICKER",
+			"idle_tic",
+			"__onTimer",
+			"timer",
+			"IDLE_TICKER",
+			"self.IDLE_TICKER",
+			"SESSION.TIME.active",
+			"prev_eve",
+			"SESSION.TIME.active",
+			"prev_eve",
+			"self.PREV_EVENT",
+			"prev_eve",
+			"sethe",
+			"__summ",
+			"reportbod",
+			"__onIdleStart",
+			"onid",
+			"onact",
+			"url",
+			"__setHeaders",
+			"headers",
+			"__rowToObject",
+			"rowtoo",
+			"console.log(\"N",
+			"console.log(\"n",
+			"added ",
+			"\n        ",
+			"console.log(\"n",
+			"rowele",
+			"not ro",
+			"not rowel",
+			"rowelem",
+			"-=",
+			".__table",
+			"table",
+			"this._ta",
+			"this._",
+			"this.__ta",
+			"idlin",
+			"__onI",
+			"IDLE_TIMEOUT",
+			"setStartScreenAnimation",
+			"changest",
+			"isHorizontalSwipe",
+			"androi",
+			"oneve",
+			"updateLazyloaders",
+			"htmlv",
+			"120",
+			"rowinde",
+			"report",
+			":",
+			"\\",
+			"event",
+			"ondata",
+			"onda",
+			"JSON.stringify(msg",
+			"onmess",
+			"term.innerHTML",
+			"Event:",
+			"connectionOpen",
+			"VGTouchTimeTracker",
+			"self.ti",
+			"SESSION",
+			"active",
+			"\n    ",
+			"};\n",
+			"+ ",
+			"publishLogEntry",
+			"sendResponse",
+			"registerEvent",
+			"onMessage",
+			"onmess",
+			"0",
+			"echo",
+			"$entry",
+			"VGTouchTimeTracker",
+			"onact",
+			"last_eve",
+			"EVENT",
+			":",
+			"jordbær",
+			"rotgrønnsake",
+			"Rotgrønnsake",
+			"Rotgrønnsak",
+			"userag",
+			"useragent",
+			"__init",
+			"startSession",
+			"reply",
+			"CLIENT",
+			"CLIENT[",
+			"options",
+			"OPTIONS",
+			"db",
+			"opacity",
+			"lise",
+			"\n            ",
+			"fence",
+			"clou",
+			"cloud",
+			"layer5",
+			"stand"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"video_pause",
+			"epler",
+			"img ",
+			"station6",
+			"7650",
+			"jordbær",
+			"outbuilding",
+			"/enfield.no",
+			"Views",
+			"github.com/ballefrans",
+			"github.com/ballefrans/views",
+			"views",
+			"Views",
+			"id=\"btm\" class=\"lazyload ondemand\" data-load-event=\"start_interaction\"",
+			"salat_soppsalat",
+			"jquery.min.js",
+			"",
+			"poster.jpg",
+			"/cli/"
+		],
+		"reverse": false,
+		"show_context": false,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "index.html",
+					"settings":
+					{
+						"buffer_size": 13237,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9072,
+								9072
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4725.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "assets/css/bama.main.css",
+					"settings":
+					{
+						"buffer_size": 27767,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5463,
+								5463
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 7282.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "versions/mobile/assets/css/bama.main.css",
+					"settings":
+					{
+						"buffer_size": 25890,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4557,
+								4557
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 6000.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "versions/mobile/index.html",
+					"settings":
+					{
+						"buffer_size": 9825,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7055,
+								7055
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3675.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "versions/mobile/assets/js/bama.nyt.norge.js",
+					"settings":
+					{
+						"buffer_size": 35132,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								23165,
+								23168
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 19809.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "assets/js/bama.nyt.norge.js",
+					"settings":
+					{
+						"buffer_size": 34800,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								34659,
+								33063
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 26375.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 47.0
+	},
+	"input":
+	{
+		"height": 45.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 186.0
+	},
+	"replace":
+	{
+		"height": 80.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"versmob",
+				"versions/mobile/assets/css/bama.main.css"
+			],
+			[
+				"vers",
+				"versions/mobile/index.html"
+			],
+			[
+				"ind",
+				"index.html"
+			],
+			[
+				"",
+				"assets/css/bama.main.css"
+			],
+			[
+				"css",
+				"assets/css/bama.main.css"
+			],
+			[
+				".js",
+				"assets/js/bama.nyt.norge.js"
+			],
+			[
+				"bama.m",
+				"assets/css/bama.main.css"
+			],
+			[
+				"para",
+				"assets/js/lib/jquery.parallaxSwipe.js"
+			],
+			[
+				"js",
+				"assets/js/bama.nyt.norge.js"
+			],
+			[
+				"read",
+				"README.md"
+			],
+			[
+				"readm",
+				"README.md"
+			],
+			[
+				"bamcss",
+				"assets/css/bama.main.css"
+			],
+			[
+				"ani",
+				"assets/css/animate.css"
+			],
+			[
+				"ifram",
+				"iframe.html"
+			],
+			[
+				"bamacss",
+				"assets/css/bama.main.css"
+			],
+			[
+				"parasw",
+				"assets/js/lib/jquery.parallaxSwipe.js"
+			],
+			[
+				"anim",
+				"assets/css/animate.css"
+			],
+			[
+				"pajs",
+				"bama/assets/js/lib/parallaxSwipe/js/jquery.parallaxSwipe.js"
+			],
+			[
+				"inde",
+				"index.html"
+			],
+			[
+				"in",
+				"index.html"
+			],
+			[
+				"foif",
+				"ford_kuga_iframe.html"
+			],
+			[
+				"fo",
+				"ford_kuga_iframe.html"
+			],
+			[
+				"clien",
+				"public/test/client.html"
+			],
+			[
+				"head",
+				"public/assets/inc/header-main.html"
+			],
+			[
+				"we",
+				"server/websocket.server.php"
+			],
+			[
+				"conf",
+				"server/config/kromaviews.config.php"
+			],
+			[
+				"app",
+				"server/kromaviews.appserver.php"
+			],
+			[
+				"client",
+				"public/client.html"
+			],
+			[
+				"heama",
+				"public/assets/inc/header-main.html"
+			],
+			[
+				"timers",
+				"server/timers.class.php"
+			],
+			[
+				".css",
+				"public/assets/css/brand.css"
+			],
+			[
+				"index2",
+				"public/test/index2.html"
+			],
+			[
+				"headm",
+				"public/assets/inc/header-main.html"
+			],
+			[
+				"nav",
+				"public/assets/inc/nav.html"
+			],
+			[
+				"hema",
+				"public/assets/inc/header-main.html"
+			],
+			[
+				"kromaviews.report.controllers.js",
+				"public/assets/app/kromaviews.reports.controllers.js"
+			],
+			[
+				"view",
+				"public/views-report.php"
+			],
+			[
+				"viewsrepo",
+				"public/views-report.php"
+			],
+			[
+				"header",
+				"public/assets/inc/header-main.html"
+			],
+			[
+				"timer",
+				"server/timers.class.php"
+			],
+			[
+				"viin",
+				"public/views-index.php"
+			],
+			[
+				"confi",
+				"server/config/kromaviews.config.php"
+			],
+			[
+				"apps",
+				"server/kromaviews.appserver.php"
+			],
+			[
+				"func",
+				"server/utility/kromaviews.functions.php"
+			],
+			[
+				"extserv",
+				"public/externalservices/direktinfo.inc.php"
+			],
+			[
+				"query",
+				"public/query_externalservice.php"
+			],
+			[
+				"viewind",
+				"public/views-index.php"
+			],
+			[
+				"foot",
+				"public/assets/inc/footer.html"
+			],
+			[
+				"foor",
+				"public/assets/inc/footer-main.html"
+			],
+			[
+				"viewsinde",
+				"public/views-index.php"
+			],
+			[
+				"webserv",
+				"public/webservice/job/index.php"
+			],
+			[
+				"publiincheader",
+				"public/assets/inc/header-main.html"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/D/work/vgmobil/bama/srv/time-tracker.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 219.0,
+	"status_bar_visible": true
+}
