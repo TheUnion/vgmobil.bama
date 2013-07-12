@@ -20,8 +20,9 @@
               VGTouchTimeTracker.run();
             }
           },
-          "arrive_station3"   : { id: 6260101, onEvent: false },
-          "arrive_station3"   : { id: 6260102, onEvent: function(setPoster) { setPoster('assets/img/poster.jpg'); } },
+          "arrive_station3"   : { id: 6260101, onEvent: function(setPoster) { setPoster('assets/img/poster.jpg'); } },
+          "arrive_station4"   : { id: 6260102, onEvent: false },
+
           "arrive_station6"   : { id: 6260103, onEvent: false },
           "arrive_station7"   : { id: 6260104, onEvent: function() { $('#parallax').parallaxSwipe.setEdge("right"); } },
 
@@ -53,7 +54,6 @@
       if(DEBUG) {
         // load debugger
         requireScript("../../assets/js/lib/kroma.debugger.js?cb=" + Math.round(Math.random()*100000), false, false, function(success) {console.log("loaded: " + this.url);}, function(error) {console.log("Error loading: " + this.url);});
-        requireScript("../../assets/js/lib/idle.js?cb=" + Math.round(Math.random()*100000), false, false, function(success) {console.log("loaded: " + this.url);}, function(error) {console.log("Error loading: " + this.url);});
       }
 
     $(document).bind("dragstart", function() { return false; });

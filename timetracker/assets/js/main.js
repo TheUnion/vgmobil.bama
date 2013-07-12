@@ -3,6 +3,7 @@
 
     OPTIONS = {
       eventSource   : 'assets/php/kroma.pubsub.listener.sse.php'
+      filterEvents  : true
     };
 
 
@@ -263,8 +264,8 @@
       var
         chunk = (typeof e.data === "object") ? e.data : JSON.parse(e.data);
       
-      for (var key in chunk.data) {
-        console.log(key + ": " + chunk.data[key]);
+      for (var key in chunk.data.info) {
+        console.log(key + ": " + chunk.data.info[key]);
       }
       DataSet.addRow(chunk.data);
     }

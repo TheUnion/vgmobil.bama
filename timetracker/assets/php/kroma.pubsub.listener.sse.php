@@ -121,7 +121,7 @@
     if($REQ_URL) {
       // is this data for our url?
       if (strpos($message, $REQ_URL)=== false) {
-        return;
+        // return;
       }
     }
 
